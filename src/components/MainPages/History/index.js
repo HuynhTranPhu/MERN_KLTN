@@ -4,12 +4,11 @@ import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
 import { useDispatch, useSelector } from 'react-redux';
-import { historyGet,removeOrder,viewHistoryGet } from '../../../actions/orderActions';
+import { historyGet,viewHistoryGet } from '../../../actions/orderActions';
 import LoadingBox from '../../Config/LoadingBox';
 import MessageBox from '../../Config/MessageBox';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
-import { logout } from '../../../actions/userAction';
 
 const History = () => {
     const historyOrder = useSelector(state => state.historyOrder);
@@ -24,14 +23,7 @@ const History = () => {
     }
     
     useEffect(() => {
-
-        if(error){
-            dispatch(logout());
-        }
-        else{
             dispatch(historyGet(userInfo.newUser._id));
-        }
-        
         return () => {
             //
         };
@@ -83,34 +75,10 @@ const History = () => {
                                                 history.map(item=>
                                                 <tr key={item._id}>
                                                     <td>{item._id}</td>
-                                                    <td>{item.order_date.substring(0, 10)}</td>
-                                                    {/* <td>
-                                                        <div className="img">
-                                                            <Link to={"/product/"+item.product}>
-                                                                <img src={item.img} alt="Product" />
-                                                                </Link>
-                                                            <p><Link to ={"/product/" +item.product}> {item.name}</Link></p>
-                                                        </div>
-                                                    </td> */}
-                                                    {/* <td>${item.order_subtotal}</td> */}
-                                                    {/* <td>
-                                                        <div className="qty">
-                                                            
-                                                            <input type="text"
-                                                            value={item.count}  />
-                                                            
-                                                        </div>
-                                                    </td> */}
+                                                    <td>{item.order_date.substring(0, 10)}</td>  
                                                     <td><Link to= {"/view-history/"+ item._id} onClick={()=>HandelViewDetails(item._id)}>View Details</Link></td>
                                                     <td>${item.order_subtotal }</td>
                                                     <td>{item.paymentStatus}</td>
-                                                    {/* <td>
-                                                        <button  onClick ={() =>removeOrderHandler(item._id)}>
-                                                                <i className="fa fa-trash" />
-                                                        </button>
-                                                    </td> */}
-                                                    
-                                                
                                                 </tr>)
                                             }
                                             

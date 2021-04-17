@@ -6,10 +6,14 @@ import App from './App';
 import store from './Store/store';
 import reportWebVitals from './reportWebVitals';
 
+
+import {DataProvider} from './Socket'
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-    <App />
+      <DataProvider>
+        <App />
+      </DataProvider>
     </React.StrictMode>
   </Provider>
   ,

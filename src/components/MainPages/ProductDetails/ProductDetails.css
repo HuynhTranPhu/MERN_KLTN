@@ -249,4 +249,68 @@ background: #FF6F61;
 .danger{
     color:#a02020;
 }
-  
+/*Rating*/
+.rating i{
+    color: crimson;
+    margin: 5px 0;
+    padding-right: 5px;
+    cursor: pointer;
+}
+.rating .star{
+    position: relative;
+}
+.rating .star-1{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 115px;
+    overflow: hidden;
+}
+
+/***   Comment-reviews  ****/
+.comments h2{
+    text-align: left;
+}
+.reviews{
+    width: 115px;
+    margin: 10px 0;
+}
+.reviews input{
+    display: none;
+}
+.reviews label{
+    color: #999;
+    margin: 5px 0;
+    padding-right: 5px;
+    cursor: pointer;
+    float: right;
+}
+.reviews input:not(:checked) ~ label:hover,
+.reviews input:not(:checked) ~ label:hover ~ label{
+    color: crimson;
+}
+.reviews input:checked ~ label{
+    color: crimson;
+}
+
+
+
+/*form input*/
+.form_input{
+    margin: 10px 0;
+}
+.form_input input{
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    min-height: 40px;
+    outline: none;
+}
+.form_input button{
+    background: #333;
+    color: white;
+    padding: 10px 0;
+    width: 150px;
+    margin: 20px 0;
+} 

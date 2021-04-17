@@ -12,13 +12,14 @@ import {REMOVE_ORDER_REQUEST,
         HISTORY_REQUEST, VIEW_HISTORY_FAIL,
         VIEW_HISTORY_SUCCESS, 
         VIEW_HISTORY_REQUEST } from "../constants/orderContants";
-
+require ('dotenv').config();
+const url = process.env.REACT_APP_URL_CLIENT;
 const addOrder = (id_user,city,posteCode,address,phone,payment,shiping) => async (dispatch, getState) =>{
     console.log({id_user,city,posteCode,address,phone,payment,shiping});
     dispatch({type: ADD_ORDER_REQUEST, payload:{id_user,city,posteCode,address,phone,payment,shiping}});
     const { userLogin :{userInfo}}= getState();
     try{
-        const {data} = await Axios.post("https://backendheroku112.herokuapp.com/order/addorder", {id_user,city,posteCode,address,phone,payment,shiping},
+        const {data} = await Axios.post(`${url}/order/addorder`, {id_user,city,posteCode,address,phone,payment,shiping},
         {
             headers: {Authorization:`${userInfo.token}`},
         }
@@ -40,7 +41,7 @@ const historyGet = (id_user) => async (dispatch,getState) =>{
     const { userLogin :{userInfo}}= getState();
     try{
         dispatch({type: HISTORY_REQUEST, payload: id_user});
-        const {data} = await Axios.get("https://backendheroku112.herokuapp.com/order/getorder/" + id_user
+        const {data} = await Axios.get(`${url}/order/getorder/` + id_user
         ,{
             headers: {Authorization:`${userInfo.token}`},
         }
@@ -60,7 +61,7 @@ const viewHistoryGet = (id_order) => async (dispatch,getState) =>{
     const { userLogin :{userInfo}}= getState();
     try{
         dispatch({type: VIEW_HISTORY_REQUEST, payload: id_order});
-        const {data} = await Axios.get("https://backendheroku112.herokuapp.com/order/detail/" +id_order,
+        const {data} = await Axios.get(`${url}/order/detail/` +id_order,
         {
             headers: {Authorization:`${userInfo.token}`},
         }
@@ -79,7 +80,7 @@ const viewHistoryGet = (id_order) => async (dispatch,getState) =>{
 const removeOrder = (id_order) => async (dispatch) =>{
     try{
         dispatch({type: REMOVE_ORDER_REQUEST, payload:id_order});
-        const {data} = await Axios.put("https://backendheroku112.herokuapp.com/order/" +id_order);
+        const {data} = await Axios.put(`${url}/order/` +id_order);
         dispatch({type: REMOVE_ORDER_SUCCESS, payload:data});
         
     }catch(error){

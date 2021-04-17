@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Slider from "react-slick";
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,19 +14,34 @@ import BottomBar from '../../Common/BottomBar/index';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import { addCart } from '../../../actions/cartAction';
+import Rating from './rating';
+import FormInput from './FormInput';
+
+import {DataContext} from '../../../Socket'
+import { getComment } from '../../../actions/comment';
 
 
 
 function ProductDetailScreen(props){
     const params = useParams()
-    const [loading2,setLoading]=useState(false);
+    const [loading2,setLoading2]=useState(false);
     const productDetails = useSelector(state => state.productDetails);
-    const {product, loading, error } = productDetails;
-  
+    //const {product, loading, error } = productDetails;
+    
+
+    const state = useContext(DataContext)
+    const socket = state.socket
+
     let productList = useSelector(state => state.productList);
     let {products} = productList;
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo} = userLogin;
+
+
+
+    const [rating, setRating] = useState(0);
+    const [comments, setComments] = useState([])
+    const [loading, setLoading] = useState(false)
 
     // const addCartPost = useSelector(state => state.cartPost);
     // const {success} = addCartPost;
@@ -74,21 +89,27 @@ function ProductDetailScreen(props){
 
          const test = async()=>{
             await dispatch(listProducts());
-         setLoading(false)
+            setLoading2(false)
          }
       
        
             // console.log(props.match.params.id);
             if (products.length===0)
             {
-             setLoading(true)
+                setLoading2(true)
 
                 test(); 
                // dispatch(detailsProduct(props.match.params.id));
             }
      
     }, [products.length,loading2,params.id])
-    //console.log(detailProduct)
+    
+
+    useEffect(() => {
+        setLoading(true)
+        dispatch(getComment(params.id))
+    },[params.id])
+
     const prop = {width: 350, height: 292, zoomWidth: 350, zoomPosition :"original",img: `${detailProduct.img}`};
     const handleAddToCart = (id,name,price, image) =>{
         let a = {_id: id,
@@ -118,29 +139,22 @@ function ProductDetailScreen(props){
         <BottomBar  ></BottomBar>
        
         {loading2?<LoadingBox></LoadingBox>:  <div className="product-detail">
-                <div className="container-fluid">
-                    <div className="row">
+                <div className="container">
+                    <div className="row ">
                         <div className="col-lg-12">
-                            <div className="col-lg-10">
+                            <div className="col-lg-12">
                                 <div className="product-detail-top">
                                     <div className="row align-items-center">
-                                        <div className="col-md-4">
+                                        <div className="col-md-5">
                                             <div className="product-slider-single ">
                                                   <ReactImageZoom {...prop} /> 
                                                 {/* <img src={detailProduct.img} alt="Product" />   */}
                                             </div>
                                         </div>
-                                        <div className="col-md-7">
+                                        <div className="col-md-4">
                                             <div className="product-content">
                                                 <div className="title">
                                                     <h2>{detailProduct.name}</h2>
-                                                </div>
-                                                <div className="ratting">
-                                                    <i className="fa fa-star" />
-                                                    <i className="fa fa-star" />
-                                                    <i className="fa fa-star" />
-                                                    <i className="fa fa-star" />
-                                                    <i className="fa fa-star" />
                                                 </div>
                                                 <div className="price">
                                                     <h4>Price:</h4>
@@ -180,6 +194,13 @@ function ProductDetailScreen(props){
                                                         {detailProduct.color}
                                                     </div> 
                                                 </div>
+                                                <div className="p-color">
+                                                    <h4>Rating:</h4>
+                                                    <div className="btn-group btn-group-sm">
+                                                        {detailProduct.rating} Reviews
+                                                    </div>
+                                                    <Rating props={detailProduct}/> 
+                                                </div>
                                                 <div className="action">
                                                 {
                                                     detailProduct.quantity>0 && 
@@ -190,7 +211,40 @@ function ProductDetailScreen(props){
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row product-detail-bottom">
+                                <div className="comments">
+                                    <h2 className="app_title">
+                                            Reviews
+                                    </h2>
+
+                                    <div className="reviews">
+                                        <input type="radio" name="rate" id="rd-5" onChange={() => setRating(5)} />
+                                        <label htmlFor="rd-5" className="fas fa-star"></label>
+
+                                        <input type="radio" name="rate" id="rd-4" onChange={() => setRating(4)} />
+                                        <label htmlFor="rd-4" className="fas fa-star"></label>
+
+                                        <input type="radio" name="rate" id="rd-3" onChange={() => setRating(3)} />
+                                        <label htmlFor="rd-3" className="fas fa-star"></label>
+
+                                        <input type="radio" name="rate" id="rd-2" onChange={() => setRating(2)} />
+                                        <label htmlFor="rd-2" className="fas fa-star"></label>
+
+                                        <input type="radio" name="rate" id="rd-1" onChange={() => setRating(1)} />
+                                        <label htmlFor="rd-1" className="fas fa-star"></label>
+                                    </div>
+
+                                    <FormInput id={params.id} socket={socket}  rating={rating} />
+
+                                    {/* <div className="comments_list">
+                                        {
+                                            comments.map(comment => (
+                                                <CommentItem key={comment._id} comment={comment} socket={socket} />
+                                            ))
+                                        }
+                                    </div> */}
+
+                                </div>
+                                {/* <div className="row product-detail-bottom">
                                     <div className="col-lg-12">
                                         <ul className="nav nav-pills nav-justified">
                                         <li className="nav-item">
@@ -261,7 +315,7 @@ function ProductDetailScreen(props){
                                         </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="product">
                                 <div className="section-header">

@@ -33,6 +33,7 @@ function PlaceOrderScreen(props){
     const shippingPrice = itemsPrice > 100||itemsPrice===0 ? toPrice(0) : toPrice(10);
     const totalPrice = itemsPrice + shippingPrice ;
     //const paymentStatus= "pending";
+    console.log(cart.payment.paymentMethod);
     const dispatch = useDispatch();
     const placeOrderHandler = () =>{
         ///create order
@@ -42,7 +43,9 @@ function PlaceOrderScreen(props){
     }
     const tranSuccess = async(payment) => {
         if(payment.paid===true){
-            alert("You have successfully payment,please placed an order!")
+            dispatch(addOrder(userInfo.newUser._id,cart.shipping.city,
+                cart.shipping.postalCode,cart.shipping.address,
+                cart.shipping.numberPhone,cart.payment.paymentMethod, shippingPrice.toFixed(2)));
         } 
     }
     useEffect(()=>{
@@ -50,6 +53,7 @@ function PlaceOrderScreen(props){
             props.history.push('/order-success');
             dispatch({type:ORDER_RESET});
         }
+        console.log(cart.payment.paymentMethod);
     },[dispatch,props.history,success]);
     return<div>
         <TopBar/>
@@ -161,25 +165,24 @@ function PlaceOrderScreen(props){
                             ${totalPrice.toFixed(2)}
                         </div>
                     </li>
-                    <li>
-                        <button className="checkout-btn" disabled={cartItems.length===0} onClick={placeOrderHandler}>Place Order</button>
-                        
-                    </li>
+                   
                     {
-                        cart.payment.paymentMethod==="Paypal"&&
+                        cart.payment.paymentMethod==="Paypal"?
                         <li className="payPal">
                                 <PayPalButton   
                                 total={totalPrice.toFixed(2)}
                                 tranSuccess={tranSuccess}/>
+                        </li>:
+                         <li>
+                         <button className="checkout-btn" disabled={cartItems.length===0} 
+                         onClick={placeOrderHandler}>Place Order</button>
+                         
                         </li>
                     }
                     
                 </ul>   
             </div>
-   
         </div>
-
-        
         <FooterPage/>
         <ScrollToTopBtn />
         

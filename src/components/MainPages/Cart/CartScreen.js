@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom';
-import { addToCart, removeFromCart, decrease, increase, getCart, removeCart, increaseCart, decreaseCart
+import { addToCart, removeFromCart, decrease, increase, removeCart, increaseCart, decreaseCart
     // , addCart, removeCart 
 } from '../../../actions/cartAction';
 import TopBar from '../../Common/TopBar/TopBar';
@@ -12,23 +12,16 @@ import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 //import MessageBox from '../../Config/MessageBox';
 function CartScreen(props){
 
-    //const cartGet = useSelector(state => state.cartGet);
-    //const cart = useSelector(state => state.cartGet);
-    //console.log(cart);
-    //const {cartItems, loading, error } = cart;
-   // console.log(cartItems);
+    let productList = useSelector(state => state.productList);
+    let {products} = productList;
+
     const cart = useSelector(state => state.cart);
     const {cartItems} = cart;
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo} = userLogin;
 
-   // const cartDecrease = useSelector(state => state.decreaseCart);
-    //const  successDecrease = cartDecrease.success;
-    //console.log(successDecrease);
-   // const cartIncrease = useSelector(state => state.increaseCart);
-    //const  successIncrease = cartIncrease.success;
-    //const cartRemove = useSelector(state => state.removeCartPost);
-    //const  successRemove = cartRemove.success;
+    const [detailProduct, setDetailProduct] = useState([])
+ 
 
     const productId = props.match.params.id;
     const qty = props.location.search ? Number(props.location.search.split("=")[1]):1;
@@ -51,7 +44,10 @@ function CartScreen(props){
         //}
     }
     const increaseHandler = (productId) =>{
-        dispatch(increaseCart(userInfo.newUser._id,productId));
+        products.forEach(product => {
+            if(product._id === productId) setDetailProduct(product)
+        })
+            dispatch(increaseCart(userInfo.newUser._id,productId));
         //if(successIncrease){
             dispatch(increase(productId));
         //}
@@ -126,7 +122,7 @@ function CartScreen(props){
                                                             //onChange={(e)=> 
                                                             // dispatch(addToCart(item._id,Number(e.target.value))) } 
                                                             />
-                                                            <button className="btn-plus" onClick={()=> increaseHandler(item._id)}><i className="fa fa-plus" /></button>
+                                                            <button className="btn-plus" disabled={item.count===detailProduct.quantity} onClick={()=> increaseHandler(item._id)}><i className="fa fa-plus" /></button>
                                                         </div>
                                                     </td>
                                                     <td>${item.price * item.count}</td>

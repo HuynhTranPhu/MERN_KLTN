@@ -18,15 +18,15 @@ SEARCH_FAIL,
 PRODUCT_LIST_REQUEST_OF_PAGE
 } 
 from  '../constants/productConstants';
-//import apiUrl from '../components/Config/apiUrl/apiUrl';
 import axios from 'axios'
-
+require ('dotenv').config();
+const url = process.env.REACT_APP_URL_CLIENT;
 const listProductsOfPage = (pageNumber) => async (dispatch) =>{
     try{
         dispatch({type: PRODUCT_LIST_REQUEST_OF_PAGE});
          //const {data} =await axios.get("/api/products");
-         const {data} = await axios.get('https://backendheroku112.herokuapp.com/product/getproduct/'+ pageNumber);
-        console.log({data});
+         const {data} = await axios.get(`${url}/product/getproduct/`+ pageNumber);
+        //console.log({data});
         dispatch({type: PRODUCT_LIST_SUCCESS_OF_PAGE, payload: data});
         
     }  
@@ -40,7 +40,7 @@ const listProducts = () => async (dispatch) =>{
     try{
         dispatch({type: PRODUCT_LIST_REQUEST});
          //const {data} =await axios.get("/api/products");
-         const {data} = await axios.get('https://backendheroku112.herokuapp.com/product');
+         const {data} = await axios.get(`${url}/product`);
         //console.log({data});
         dispatch({type: PRODUCT_LIST_SUCCESS, payload: data});
         
@@ -58,8 +58,8 @@ const searchHeader = (value) => async (dispatch) =>{
     try{
         dispatch({type: SEARCH_REQUEST, payload: value});
          //const {data} =await axios.get("/api/products");
-         const {data} = await axios.get('https://backendheroku112.herokuapp.com/product/search/'+value);
-        console.log(data);
+         const {data} = await axios.get(`${url}/product/search/`+value);
+        //console.log(data);
         dispatch({type: SEARCH_SUCCESS, payload: data});
         
     }  
@@ -76,7 +76,7 @@ const listCategory = () => async (dispatch) =>{
     try{
         dispatch({type: CATEGORY_LIST_REQUEST});
          //const {data} =await axios.get("/api/products");
-         const {data} = await axios.get('https://backendheroku112.herokuapp.com/category');
+         const {data} = await axios.get(`${url}/category`);
         //console.log({data});
         dispatch({type: CATEGORY_LIST_SUCCESS, payload: data});
         
@@ -97,7 +97,7 @@ const listCategory = () => async (dispatch) =>{
 const detailsProduct = (productId) => async (dispatch) =>{
     try{
         dispatch({type: PRODUCT_DETAILS_REQUEST, payload: productId});
-        const {data} = await axios.get("https://backendheroku112.herokuapp.com/product/" + productId);
+        const {data} = await axios.get(`${url}/product/` + productId);
         dispatch({type: PRODUCT_DETAILS_SUCCESS, payload:data });
     }
     catch(error){

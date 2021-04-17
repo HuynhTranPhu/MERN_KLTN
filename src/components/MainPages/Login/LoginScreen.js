@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, loginFaceBook, loginGoogle } from '../../../actions/userAction';
 import LoadingBox from '../../Config/LoadingBox';
 import MessageBox from '../../Config/MessageBox';
-import config from '../../Config/index';
-
+//import config from '../../Config/index';
+require ('dotenv').config();
 //file config
-const gg = config.REACT_APP_GOOGLE_CLIENT;
-const fb = config.REACT_APP_FACEBOOK_CLIENT;
+const gg = process.env.REACT_APP_GOOGLE_CLIENT
+const fb = process.env.REACT_APP_FACEBOOK_CLIENT
 //console.log(gg);
 
 

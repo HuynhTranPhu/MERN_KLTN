@@ -3,6 +3,7 @@ import { cartGetReducer, cartPostReducer, cartReducer, decreaseCartReducer, incr
 import { historyReducer, orderPostReducer, removeOrderReducer, viewHistoryReducer } from './orderReducers';
 import { categoryListReducer, productDetailsReducer, productListReducer, searchHeaderReducer } from './productReducers';
 import { forgotPasswordReducer, userDetailsReducer, userLoginReducer, userRegisterReducer, userUpdatePasswordReducer, userUpdateProfileReducer } from './userReducers';
+import { getCommentReducer, updateRatingReducer } from './comment';
 
 
 const reducer = combineReducers({
@@ -12,6 +13,10 @@ const reducer = combineReducers({
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
+
+    updateRating: updateRatingReducer,
+    getComment: getCommentReducer,
+
     userDetails: userDetailsReducer,
     userUpdateProfile:userUpdateProfileReducer,
     userUpdatePassword:userUpdatePasswordReducer,

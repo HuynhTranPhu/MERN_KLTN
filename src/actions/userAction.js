@@ -32,16 +32,15 @@ import {
     USER_SIGNIN_GG_FAIL,
     USER_SIGNIN_GG_REQUEST} 
 from  '../constants/userConstant';
-import {CART_ADD_POST_REQUEST,
-        CART_ADD_POST_SUCCESS,
-        CART_ADD_POST_FAIL} from '../constants/cartConstants';
 
+require ('dotenv').config();
+const url = process.env.REACT_APP_URL_CLIENT;
 const login = (email,password) => async (dispatch) =>{
     dispatch({type: USER_SIGNIN_REQUEST, payload:{email, password}});
     try{
-        const {data} = await axios.post("https://backendheroku112.herokuapp.com/user/login", {email,password}
+        const {data} = await axios.post(`${url}/user/login`, {email,password}
        )
-       console.log(data);
+       //console.log(data);
         dispatch({type:USER_SIGNIN_SUCCESS,payload:data});
         //console.log(data);
       //  Cookie.set('userInfo', JSON.stringify(data));
@@ -57,12 +56,12 @@ const login = (email,password) => async (dispatch) =>{
 const loginFaceBook = (userID, accessToken) =>(dispatch) =>{
     dispatch({type: USER_SIGNIN_FB_REQUEST});
     try{
-        axios.post("/facebooklogin",{
+        axios.post(`${url}/facebooklogin`,{
             userID,
             accessToken
           })
           .then(res => {
-            console.log(res.data);
+            //console.log(res.data);
             dispatch({type:USER_SIGNIN_FB_SUCCESS,payload:res.data});
             Cookie.set('userInfo', JSON.stringify(res.data));
            //informParent();
@@ -79,11 +78,11 @@ const loginFaceBook = (userID, accessToken) =>(dispatch) =>{
 const loginGoogle = (tokenId) => async (dispatch) =>{
     dispatch({type: USER_SIGNIN_GG_REQUEST});
     try{
-        axios.post("/googlelogin", {
+        axios.post(`${url}/googlelogin`, {
           idToken: tokenId
         })
         .then(res => {
-          console.log(res.data);
+          //console.log(res.data);
           //informParent();
           dispatch({type:USER_SIGNIN_GG_SUCCESS,payload:res.data});
           Cookie.set('userInfo', JSON.stringify(res.data));
@@ -107,7 +106,7 @@ const logout = () =>(dispatch) =>{
 const register = (name, email, password, repassword) => async (dispatch) =>{
     dispatch({type: USER_REGISTER_REQUEST, payload:{name, email, password,repassword}});
         try{
-            const {data} = await axios.post("/user/register", {name, email,password,repassword});
+            const {data} = await axios.post(`${url}/user/register`, {name, email,password,repassword});
             dispatch({type:USER_REGISTER_SUCCESS,payload:data});
             Cookie.set('userInfo', JSON.stringify(data));
         }catch(error){
@@ -123,7 +122,7 @@ const detailsUser =(userId) => async (dispatch,getState)=>{
     dispatch({type: USER_DETAIL_REQUEST, payload: userId});
     const { userLogin :{userInfo}}= getState();
     try{    
-        const {data} = await axios.get("/user/"+userId
+        const {data} = await axios.get(`${url}/user/`+userId
         ,{
             headers: {Authorization:`${userInfo.token}`},
         }
@@ -143,7 +142,7 @@ const updateUserProfile =(email,name, id) =>async (dispatch,getState) =>{
     dispatch ({type:USER_UPDATE_PROFILE_REQUEST, payload:{email,name, id}});
     const {userLogin:{userInfo}} =getState();
     try{
-        const {data} = await axios.put("/user/updateinfor",{email,name, id}
+        const {data} = await axios.put(`${url}/user/updateinfor`,{email,name, id}
         ,{
             headers : {Authorization: `${userInfo.token}`},
         }
@@ -165,7 +164,7 @@ const updateUserPassword =(oldpassword, newpassword, id) =>async (dispatch,getSt
     dispatch ({type:USER_UPDATE_PASSWORD_REQUEST, payload:{oldpassword,newpassword, id}});
     const {userLogin:{userInfo}} =getState();
     try{
-        const {data} = await axios.put("/user/updatepassword",{oldpassword,newpassword, id}
+        const {data} = await axios.put(`${url}/user/updatepassword`,{oldpassword,newpassword, id}
         ,{
             headers : {Authorization: `${userInfo.token}`},
         }
@@ -183,27 +182,6 @@ const updateUserPassword =(oldpassword, newpassword, id) =>async (dispatch,getSt
         dispatch({type:USER_UPDATE_PASSWORD_FAIL, payload:message})
     }
 }
-///////////////User add to cart/////////////////////////////
-// const addCart =(product,cart) => async (dispatch,getState)=>{
-//     const { userLogin :{userInfo}}= getState();
-//     if(!userInfo) return alert("Please login to continue buying");
-//     try{    
-//         const {data} = await axios.post("/user/addcart", {product, cart}
-//         ,{
-//             headers: {Authorization:`${userInfo.token}`},
-//         }
-//         );
-//         dispatch({type: CART_ADD_POST_SUCCESS, payload:data});
-//         console.log(data);
-
-//     }catch(error){
-//         const message=
-//         error.response && error.response.data.message
-//         ? error.response.data.message
-//         : error.message;
-//         dispatch({type:CART_ADD_POST_FAIL, payload: message});
-//     }
-// }
 
 
 
@@ -225,7 +203,7 @@ export const setEmailForgotPassword = (email) => ({
 export const submitForgotPassword = (email) => async (dispatch, getState) => {
     let res
     try {
-        res = await axios.get('https://backendheroku112.herokuapp.com/user/request/forgotpassword/' +email)
+        res = await axios.get(`${url}/user/request/forgotpassword/` +email)
     }
     catch (err) {
         dispatch(forgotEmailFail())
@@ -237,7 +215,7 @@ export const submitForgotPassword = (email) => async (dispatch, getState) => {
 export const submitOTP = (otp) => async (dispatch, getState) => {
     let res
     try {
-        res = await axios.post('https://backendheroku112.herokuapp.com/user/verify/forgotpassword', {
+        res = await axios.post(`${url}/user/verify/forgotpassword`, {
             email: getState().forgotPassword.email,
             otp: otp,
         })
@@ -260,7 +238,7 @@ export const verifyOTPFAIL = () => ({
 export const submitEnterNewPassword = (newPassword) => async (dispatch, getState) => {
     let res
     try {
-        res = await axios.post('https://backendheroku112.herokuapp.com/user/forgotpassword', {
+        res = await axios.post(`${url}/user/forgotpassword`, {
             email: getState().forgotPassword.email,
             otp: getState().forgotPassword.otp,
             newPassword: newPassword

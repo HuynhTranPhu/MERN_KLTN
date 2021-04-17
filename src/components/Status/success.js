@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import TopBar from '../Common/TopBar/TopBar'
 import NavBar from '../Common/NavBar/index'
 import BottomBar from '../Common/BottomBar/index'
-import Footer from '../Common/Footer/Footer'
 const Success = () =>{
 	return (
 		<>
@@ -17,7 +16,6 @@ const Success = () =>{
 					<h2><Link to="/">Bring me back Home</Link></h2>
 				</div>
 			</div>
-			<Footer/>
 		</>
 		
 	)

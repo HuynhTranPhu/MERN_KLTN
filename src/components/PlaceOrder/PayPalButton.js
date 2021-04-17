@@ -1,9 +1,11 @@
-import React from 'react';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
-import config from '../Config/index';
+import React from 'react';
+require ('dotenv').config();
 
-const pp = config.REACT_APP_PP_CLIENT;
-console.log(pp);
+//import config from '../Config/index';
+
+const pp =  process.env.REACT_APP_PAYPAL_CLIENT;
+//console.log(pp);
 export default class PayPalButton extends React.Component {
     render() {
         const onSuccess = (payment) => {
@@ -36,6 +38,13 @@ export default class PayPalButton extends React.Component {
             sandbox:    pp,
             production: 'YOUR-PRODUCTION-APP-ID',
         }
+        let style = {
+            size: 'medium',
+            color: 'blue',
+            shape: 'rect',
+            label:'checkout',
+            tagline:false
+        }
         // In order to get production's app-ID, you will have to send your app to Paypal for approval first
         // For sandbox app-ID (after logging into your developer account, please locate the "REST API apps" section, click "Create App"):
         //   => https://developer.paypal.com/docs/classic/lifecycle/sb_credentials/
@@ -44,7 +53,14 @@ export default class PayPalButton extends React.Component {
  
         // NB. You can also have many Paypal express checkout buttons on page, just pass in the correct amount and they will work!
         return (
-            <PaypalExpressBtn env={env} client={client} currency={currency} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />
+            <PaypalExpressBtn env={env} 
+            client={client} 
+            currency={currency} 
+            total={total} 
+            onError={onError} 
+            onSuccess={onSuccess} 
+            onCancel={onCancel} 
+            style={style}/>
         );
     }
 }

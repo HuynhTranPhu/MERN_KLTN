@@ -31,15 +31,6 @@ function HomeScreen(props){
     const { userInfo} = userLogin;
     const dispatch = useDispatch();
 
- 
-    // const [cartIte,setcart] =useState(0);
-  
-    // const addtocartcount= ()=>{
-    //     const cartupdate = cartIte+1;
-    //     setcart(cartupdate)   
-    // }
- 
-
     const feature = [ {title:'Secure Payment',content:'You can chose payments', icon:'fab fa-cc-mastercard'},
                     {title:'Worldwide Delivery',content:'Delivery anywhere in the world',icon:'fa fa-truck'},
                     {title:'90 Days Return',content:'You can return orders in 90 days', icon:'fas fa-sync'},
@@ -59,17 +50,13 @@ function HomeScreen(props){
         if(!userInfo){
             props.history.push("/login");
         }else{
+            alert('This product is added to cart');
             dispatch(addCart(userInfo.newUser._id,carts));
-            // if(success){
             dispatch(addToCart(id,1));   
-            // }else{
-            //     alert('Something is wrong');
-            // }
+            
         }
     }
   
-    
-   
     useEffect(() => {
         dispatch(listProducts());
         
@@ -109,11 +96,6 @@ function HomeScreen(props){
             },
         ]
     };
-    // const handleAddToCart = (productId) =>{
-    //     // //  props.history.push("/cart/" + `${productId}` +"?qty=" + 1)
-    //     //  props.history.push(`/cart/${productId}?qty=1`)
-    //     // console.log(props);
-    // }
     return(
         loading?(
             <LoadingBox></LoadingBox>
@@ -310,53 +292,6 @@ function HomeScreen(props){
                       {/* </div> */}
                   </div>
               </div>
-              {/* <!-- Featured Product End -->           
-              
-              <!-- Recent Product Start --> */}
-              {/* <div className="recent-product product">
-                  <div className="container-fluid">
-                      <div className="section-header">
-                          <h1>Recent Product</h1>
-                      </div> */}
-                      {/* <div className="align-items-center"> */}
-                          {/* <Slider {...settings}>
-                            {
-                                products.map( (product) =>
-                                <div className="col-lg-12" key={product._id}>
-                                    <div className="product-item">
-                                        <div className="product-title">
-                                            <Link to={'/product-detail/' + product._id}>{product.name}</Link>
-                                            <div className="ratting">
-                                                <i className="fa fa-star"></i>
-                                                <i className="fa fa-star"></i>
-                                                <i className="fa fa-star"></i>
-                                                <i className="fa fa-star"></i>
-                                                <i className="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <div className="product-image">
-                                            {
-                                                <img src={product.img} alt="Product "/>
-                                            }  
-                                            <div className="product-action">
-                                                  <Link  to={'/product-detail/' + product._id}><i className="fas fa-eye"  ></i></Link>  
-                                            </div>
-                                        </div>
-                                        <div className="product-price">
-                                            <h3><span>$</span>{product.price}</h3>
-                                            {
-                                                product.count>0 && 
-                                                <a className="btn" onClick={()=>{ props.history.push(`/cart/${product._id}`)}}>
-                                                    <i className="fa fa-shopping-cart"></i>Add To Cart</a>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>  )
-                            } 
-                         </Slider>  */}
-                      {/* </div> */}
-                  {/* </div>
-              </div> */}
               <Review/>
               <FooterPage/>
               
