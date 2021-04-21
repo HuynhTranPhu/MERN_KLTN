@@ -19,13 +19,15 @@ import FormInput from './FormInput';
 
 import {DataContext} from '../../../Socket'
 import { getComment } from '../../../actions/comment';
+import CommentItem from './CommentItem/CommentItem';
+import { getData } from '../../utils/FetchDataComments';
 
 
 
 function ProductDetailScreen(props){
     const params = useParams()
     const [loading2,setLoading2]=useState(false);
-    const productDetails = useSelector(state => state.productDetails);
+    //const productDetails = useSelector(state => state.productDetails);
     //const {product, loading, error } = productDetails;
     
 
@@ -40,11 +42,31 @@ function ProductDetailScreen(props){
 
 
     const [rating, setRating] = useState(0);
+    const getComments = useSelector(state => state.getComments);
+    //const { comments } = getComments;
     const [comments, setComments] = useState([])
-    const [loading, setLoading] = useState(false)
-
+    //console.log(comments);
+    const [loading, setLoading] = useState(false);
     // const addCartPost = useSelector(state => state.cartPost);
     // const {success} = addCartPost;
+
+    // Realtime 
+    // Join room
+    useEffect(() => {
+        if(socket){
+            socket.emit('joinRoom', params.id)
+        }
+    },[socket, params.id])
+    useEffect(() => {
+        if(socket){
+            socket.on('sendCommentToClient', msg => {
+                setComments([msg, ...comments])
+                //dispatch(getComment(params.id));
+            })
+
+            return () => socket.off('sendCommentToClient')
+        } 
+    },[socket, comments])
 
     const [detailProduct, setDetailProduct] = useState([])
     const dispatch = useDispatch();
@@ -107,9 +129,14 @@ function ProductDetailScreen(props){
 
     useEffect(() => {
         setLoading(true)
-        dispatch(getComment(params.id))
+        getData(`/comment/${params.id}`)
+            .then(res => {
+                setComments(r => r = res.data.comments)
+                setLoading(false)
+            })
+            .catch(err => console.log(err.response.data.msg))
+           
     },[params.id])
-
     const prop = {width: 350, height: 292, zoomWidth: 350, zoomPosition :"original",img: `${detailProduct.img}`};
     const handleAddToCart = (id,name,price, image) =>{
         let a = {_id: id,
@@ -235,13 +262,13 @@ function ProductDetailScreen(props){
 
                                     <FormInput id={params.id} socket={socket}  rating={rating} />
 
-                                    {/* <div className="comments_list">
+                                    <div className="comments_list">
                                         {
-                                            comments.map(comment => (
+                                         comments.map(comment => (
                                                 <CommentItem key={comment._id} comment={comment} socket={socket} />
                                             ))
                                         }
-                                    </div> */}
+                                    </div>
 
                                 </div>
                                 {/* <div className="row product-detail-bottom">

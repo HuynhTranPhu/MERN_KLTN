@@ -13,12 +13,12 @@ function updateRatingReducer(state={}, action){
         default : return state;
     }
 }
-function getCommentReducer(state={comment:[]}, action){
+function getCommentReducer(state={comments:[]}, action){
     switch(action.type){
         case GET_COMMENT_REQUEST:
             return {loading : true};
         case GET_COMMENT_SUCCESS:
-            return {loading : false, comment: action.payload};
+            return {loading : false, comments: action.payload};
         case GET_COMMENT_FAIL:
             return {loading : false, error : action.payload};
         default : return state;

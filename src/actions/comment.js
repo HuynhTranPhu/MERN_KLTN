@@ -27,8 +27,8 @@ const getComment = (id) => async (dispatch) =>{
     dispatch({type: GET_COMMENT_REQUEST, payload:{id}});
         try{
             const {data} = await axios.get(`${url}/comment/${id}`);
-            dispatch({type:GET_COMMENT_SUCCESS,payload:data});
-            console.log(data)
+            dispatch({type:GET_COMMENT_SUCCESS,payload:data.comments});
+            //console.log(data)
         }catch(error){
             const message=
             error.response && error.response.data.message

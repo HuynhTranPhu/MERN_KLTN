@@ -15,7 +15,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
 
     updateRating: updateRatingReducer,
-    getComment: getCommentReducer,
+    getComments: getCommentReducer,
 
     userDetails: userDetailsReducer,
     userUpdateProfile:userUpdateProfileReducer,

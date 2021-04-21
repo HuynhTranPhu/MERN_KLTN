@@ -25,7 +25,7 @@ function FormInput({id, socket, rating}) {
         const content = contentRef.current.innerHTML
 
         if(!username.trim()) return alert('Not Empty!')
-        if(contentRef.current.textContent.trim().length < 20)
+        if(contentRef.current.textContent.trim().length < 10)
             return alert('Contents too short, must be at least 20 characters')
         
         const createdAt = new Date().toISOString()
