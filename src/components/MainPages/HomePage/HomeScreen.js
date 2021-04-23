@@ -259,13 +259,6 @@ function HomeScreen(props){
                                     <div className="product-item">
                                         <div className="product-title">
                                             <Link to={'/product-detail/' + product._id}>{product.name}</Link>
-                                            <div className="ratting">
-                                                <i className="fa fa-star"></i>
-                                                <i className="fa fa-star"></i>
-                                                <i className="fa fa-star"></i>
-                                                <i className="fa fa-star"></i>
-                                                <i className="fa fa-star"></i>
-                                            </div>
                                         </div>
                                         <div className="product-image">
                                             {

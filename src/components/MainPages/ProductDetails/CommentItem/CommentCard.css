@@ -1,12 +1,14 @@
 .comment_card{
-    border: 2px solid #ccc;
+    border: 1px solid #FF6F61;
     padding: 10px;
     margin: 15px 0;
     border-radius: 5px;
 }
 .comment_card h3{
     text-transform: capitalize;
-    color: darkblue;
+    color: black;
+    font-size: 1.1rem;
+    font-weight:bold;
 }
 .comment_card_row{
     display: flex;
@@ -14,6 +16,9 @@
     flex-wrap: wrap;
     margin: 5px 0;
     cursor: pointer;
+}
+.comment_card span{
+   color: blue;
 }
 .comment_card span{
     margin-right: 10px;
@@ -28,7 +33,7 @@
     flex-wrap: wrap;
 }
 .comment_card .nav_comment p{
-    color: darkblue;
+    color: red;
     padding-right: 10px;
     text-transform: capitalize;
     cursor: pointer;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Slider from "react-slick";
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,18 +18,14 @@ import Rating from './rating';
 import FormInput from './FormInput';
 
 import {DataContext} from '../../../Socket'
-import { getComment } from '../../../actions/comment';
 import CommentItem from './CommentItem/CommentItem';
 import { getData } from '../../utils/FetchDataComments';
 
-
+import Loading from '../../../images/loading.gif';
 
 function ProductDetailScreen(props){
     const params = useParams()
     const [loading2,setLoading2]=useState(false);
-    //const productDetails = useSelector(state => state.productDetails);
-    //const {product, loading, error } = productDetails;
-    
 
     const state = useContext(DataContext)
     const socket = state.socket
@@ -42,13 +38,13 @@ function ProductDetailScreen(props){
 
 
     const [rating, setRating] = useState(0);
-    const getComments = useSelector(state => state.getComments);
-    //const { comments } = getComments;
+    
     const [comments, setComments] = useState([])
-    //console.log(comments);
+    
     const [loading, setLoading] = useState(false);
-    // const addCartPost = useSelector(state => state.cartPost);
-    // const {success} = addCartPost;
+    
+    const [page, setPage] = useState(1)
+    const pageEnd = useRef()
 
     // Realtime 
     // Join room
@@ -65,6 +61,38 @@ function ProductDetailScreen(props){
             })
 
             return () => socket.off('sendCommentToClient')
+        } 
+    },[socket, comments])
+
+     // infiniti scroll
+     useEffect(() => {
+        const observer = new IntersectionObserver(entries => {
+            if(entries[0].isIntersecting){
+                setPage(prev => prev + 1)
+            }
+        },{
+            threshold: 0.1
+        })
+
+        observer.observe(pageEnd.current)
+    },[])
+
+    // Reply Comments
+    useEffect(() => {
+        if(socket){
+            socket.on('sendReplyCommentToClient', msg => {
+                const newArr = [...comments]
+                
+                newArr.forEach(cm => {
+                    if(cm._id === msg._id){
+                        cm.reply = msg.reply
+                    }
+                })
+
+                setComments(newArr)
+            })
+
+            return () => socket.off('sendReplyCommentToClient')
         } 
     },[socket, comments])
 
@@ -129,14 +157,14 @@ function ProductDetailScreen(props){
 
     useEffect(() => {
         setLoading(true)
-        getData(`/comment/${params.id}`)
+        getData(`/comment/${params.id}?limit=${page * 5}`)
             .then(res => {
                 setComments(r => r = res.data.comments)
                 setLoading(false)
             })
             .catch(err => console.log(err.response.data.msg))
            
-    },[params.id])
+    },[params.id, page])
     const prop = {width: 350, height: 292, zoomWidth: 350, zoomPosition :"original",img: `${detailProduct.img}`};
     const handleAddToCart = (id,name,price, image) =>{
         let a = {_id: id,
@@ -196,25 +224,6 @@ function ProductDetailScreen(props){
                                                         <span className="danger">Unavailable</span>
                                                     )}
                                                 </div>
-                                                {/* <div className="p-size">
-                                                    <h4>Size:</h4>
-                                                    <select
-                                                        // value={sort}
-                                                        // onChange={(e) => {
-                                                        // dispatch( sortProducts(
-                                                        //     filteredItems,
-                                                        //     e.target.value
-                                                        //     ));
-                                                        // }}
-                                                        >
-                                                            <option value="">Sort by</option>
-                                                            <option value="S">S</option>
-                                                            <option value="M">M</option>
-                                                            <option value="L">L</option>
-                                                            <option value="XL">XL</option>
-                                                            <option value="2XL">2XL</option>
-                                                    </select> 
-                                                </div> */}
                                                 <div className="p-color">
                                                     <h4>Color:</h4>
                                                     <div className="btn-group btn-group-sm">
@@ -222,11 +231,16 @@ function ProductDetailScreen(props){
                                                     </div> 
                                                 </div>
                                                 <div className="p-color">
-                                                    <h4>Rating:</h4>
+                                                    <h4>Review:</h4>
                                                     <div className="btn-group btn-group-sm">
                                                         {detailProduct.rating} Reviews
                                                     </div>
-                                                    <Rating props={detailProduct}/> 
+                                                </div>
+                                                <div className="p-rating p-color">
+                                                    <h4>Rating:</h4>
+                                                    <div>
+                                                    <Rating props={detailProduct}/>
+                                                    </div>  
                                                 </div>
                                                 <div className="action">
                                                 {
@@ -239,110 +253,57 @@ function ProductDetailScreen(props){
                                     </div>
                                 </div>
                                 <div className="comments">
-                                    <h2 className="app_title">
-                                            Reviews
-                                    </h2>
-
-                                    <div className="reviews">
-                                        <input type="radio" name="rate" id="rd-5" onChange={() => setRating(5)} />
-                                        <label htmlFor="rd-5" className="fas fa-star"></label>
-
-                                        <input type="radio" name="rate" id="rd-4" onChange={() => setRating(4)} />
-                                        <label htmlFor="rd-4" className="fas fa-star"></label>
-
-                                        <input type="radio" name="rate" id="rd-3" onChange={() => setRating(3)} />
-                                        <label htmlFor="rd-3" className="fas fa-star"></label>
-
-                                        <input type="radio" name="rate" id="rd-2" onChange={() => setRating(2)} />
-                                        <label htmlFor="rd-2" className="fas fa-star"></label>
-
-                                        <input type="radio" name="rate" id="rd-1" onChange={() => setRating(1)} />
-                                        <label htmlFor="rd-1" className="fas fa-star"></label>
-                                    </div>
-
-                                    <FormInput id={params.id} socket={socket}  rating={rating} />
+                                   
+                                    {
+                                        userInfo?(
+                                            <>
+                                             <h2 className="app_title">
+                                            Your Feedback
+                                            </h2>
+  
+                                            <div className="reviews">
+                                                <input type="radio" name="rate" id="rd-5" onChange={() => setRating(5)} />
+                                                <label htmlFor="rd-5" className="fas fa-star"></label>
+        
+                                                <input type="radio" name="rate" id="rd-4" onChange={() => setRating(4)} />
+                                                <label htmlFor="rd-4" className="fas fa-star"></label>
+        
+                                                <input type="radio" name="rate" id="rd-3" onChange={() => setRating(3)} />
+                                                <label htmlFor="rd-3" className="fas fa-star"></label>
+        
+                                                <input type="radio" name="rate" id="rd-2" onChange={() => setRating(2)} />
+                                                <label htmlFor="rd-2" className="fas fa-star"></label>
+        
+                                                <input type="radio" name="rate" id="rd-1" onChange={() => setRating(1)} />
+                                                <label htmlFor="rd-1" className="fas fa-star"></label>
+                                            </div>
+                                            <FormInput id={params.id} socket={socket}  rating={rating} />
+                                            </>
+                                           
+                                        )
+                                        :
+                                        <Link to="/login"className="danger">Please login to feedback</Link>
+                                    }
+                                    
 
                                     <div className="comments_list">
+                                        <h2 className="app_title">
+                                            All of Feedback
+                                        </h2>
                                         {
-                                         comments.map(comment => (
-                                                <CommentItem key={comment._id} comment={comment} socket={socket} />
-                                            ))
+                                        comments.length >0 ? comments.map(comment => (
+                                            <CommentItem key={comment._id} comment={comment} socket={socket} />
+                                        )): <p>Let 's enter the first feedback</p>
+                                         
                                         }
                                     </div>
 
                                 </div>
-                                {/* <div className="row product-detail-bottom">
-                                    <div className="col-lg-12">
-                                        <ul className="nav nav-pills nav-justified">
-                                        <li className="nav-item">
-                                            <a className="nav-link active" data-toggle="pill" href="#description">Description</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" data-toggle="pill" href="#specification">Specification</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" data-toggle="pill" href="#reviews">Reviews (1)</a>
-                                        </li>
-                                        </ul>
-                                        <div className="tab-content">
-                                        <div id="description" className="container tab-pane active">
-                                            <h4>Product description</h4>
-                                            <p>
-                                                {detailProduct.description}   
-                                            </p>
-                                        </div>
-                                        <div id="specification" className="container tab-pane fade">
-                                            <h4>Product specification</h4>
-                                            <ul>
-                                                <li>This is brand famous now </li>
-                                                <li>Multipurpose：Downhill Skiing, Snowboarding, Snowsports and other winter outdoor sports. </li>
-                                                <li>Professional water repellent coated, fluff lining and durable fabric 
-                                                    guarantees the best heat retention, Relaxed-fit style with quick-dry material. </li>
-                                            
-                                            </ul>
-                                        </div>
-                                        <div id="reviews" className="container tab-pane fade">
-                                            <div className="reviews-submitted">
-                                            <div className="reviewer">Kien Vu - <span>01 Jan 2021</span></div>
-                                            <div className="ratting">
-                                                <i className="fa fa-star" />
-                                                <i className="fa fa-star" />
-                                                <i className="fa fa-star" />
-                                                <i className="fa fa-star" />
-                                                <i className="fa fa-star" />
-                                            </div>
-                                            <p>
-                                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
-                                            </p>
-                                            </div>
-                                            <div className="reviews-submit">
-                                            <h4>Give your Review:</h4>
-                                            <div className="ratting">
-                                                <i className="far fa-star" />
-                                                <i className="far fa-star" />
-                                                <i className="far fa-star" />
-                                                <i className="far fa-star" />
-                                                <i className="far fa-star" />
-                                            </div>
-                                            <div className="row form">
-                                                <div className="col-sm-6">
-                                                <input type="text" placeholder="Name" />
-                                                </div>
-                                                <div className="col-sm-6">
-                                                <input type="email" placeholder="Email" />
-                                                </div>
-                                                <div className="col-sm-12">
-                                                <textarea placeholder="Review" defaultValue={""} />
-                                                </div>
-                                                <div className="col-sm-12">
-                                                <button>Submit</button>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div> */}
+                                {
+                                    loading && <div className="loading"><img src={Loading} alt=""/></div>
+                                }  
+                                <button ref={pageEnd} style={{opacity: 0}}>Load more</button> 
+                                
                             </div>
                             <div className="product">
                                 <div className="section-header">

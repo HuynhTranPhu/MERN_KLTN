@@ -1,24 +1,27 @@
 import React, {useRef, useEffect} from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateRating } from '../../../actions/comment'
 
-function FormInput({id, socket, rating}) {
+function FormInput({id, socket, rating, setReply, send, name}) {
     const nameRef = useRef()
     const contentRef = useRef()
 
+    const userLogin = useSelector((state) => state.userLogin);
+    const {userInfo} = userLogin;
+
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     if(name){
-    //         contentRef.current.innerHTML = `
-    //             <a href="#!"
-    //                 style="color: crimson;
-    //                 font-weight: 600;
-    //                 text-transform: capitalize;"
-    //             >${name}: </a>
-    //         `
-    //     }
-    // },[name])
+    useEffect(() => {
+        if(name){
+            contentRef.current.innerHTML = `
+                <a href="#!"
+                    style="color: #FF6F61;
+                    font-weight: 600;
+                    text-transform: capitalize;"
+                >${name}: </a>
+            `
+        }
+    },[name])
 
     const commentSubmit = () => {
         const username = nameRef.current.value
@@ -31,7 +34,7 @@ function FormInput({id, socket, rating}) {
         const createdAt = new Date().toISOString()
 
         socket.emit('createComment', {
-            username, content, product_id: id, createdAt, rating
+            username, content, product_id: id, createdAt, rating, send
         })
 
 
@@ -41,13 +44,13 @@ function FormInput({id, socket, rating}) {
 
         contentRef.current.innerHTML = ''
 
-        // if(setReply) setReply(false)
+        if(setReply) setReply(false)
     }
 
     return (
         <div className="form_input">
             <p>Name</p>
-            <input type="text" ref={nameRef} />
+            <input type="text" defaultValue={userInfo.newUser.name} ref={nameRef} />
 
             <p>Content</p>
             <div ref={contentRef} 

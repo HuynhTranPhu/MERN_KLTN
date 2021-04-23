@@ -249,6 +249,9 @@ background: #FF6F61;
 .danger{
     color:#a02020;
 }
+.p-rating{
+    display: flex;
+}
 /*Rating*/
 .rating i{
     color: crimson;
@@ -270,6 +273,9 @@ background: #FF6F61;
 /***   Comment-reviews  ****/
 .comments h2{
     text-align: left;
+}
+.app_title{
+    color: #FF6F61;
 }
 .reviews{
     width: 115px;
@@ -308,9 +314,10 @@ background: #FF6F61;
     outline: none;
 }
 .form_input button{
-    background: #333;
+    background: #FF6F61;
     color: white;
     padding: 10px 0;
     width: 150px;
     margin: 20px 0;
+    border: none;
 } 
