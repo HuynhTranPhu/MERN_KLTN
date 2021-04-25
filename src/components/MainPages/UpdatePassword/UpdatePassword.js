@@ -8,11 +8,11 @@ import { USER_UPDATE_PASSWORD_RESET } from '../../../constants/userConstant';
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
-import LoadingBox from '../../Config/LoadingBox';
-import MessageBox from '../../Config/MessageBox';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 //import {logout} from '../../../actions/userAction'
+
+import { toast } from 'react-toastify';
 
 export default function UpdatePasswordScreen(){
     const [oldpassword,setOldPassword] = useState('');
@@ -21,12 +21,9 @@ export default function UpdatePasswordScreen(){
 
     const userLogin = useSelector((state) => state.userLogin);
     const {userInfo} = userLogin;
-    // const userDetails = useSelector((state) => state.userDetails);
-    // const {loading, error, user} = userDetails;
+   
     const userUpdatePassword = useSelector((state) => state.userUpdatePassword);
-    const {success:successUpdate , 
-        error: errorUpdate, 
-        loading:loadingUpdate,}= userUpdatePassword;
+    const { error: errorUpdate}= userUpdatePassword;
     const dispatch = useDispatch();
    
     useEffect(() =>{
@@ -37,14 +34,19 @@ export default function UpdatePasswordScreen(){
     // }
     const submitHandler = (e) =>{
         e.preventDefault();
+        if(errorUpdate){
+            toast.error(errorUpdate);
+        }
         //dispatch update
         if(newpassword===""|| confirmPassword===""){
-            alert('newPassword or confirmPassword are not valid');
+            toast.error('New Password or Confirm Password are not valid');
         }
         else if(newpassword !== confirmPassword){
-            alert('Password and Confirm Password are not matched');
+            toast.error('Password and Confirm Password are not matched');
         }else{
             dispatch(updateUserPassword( oldpassword, newpassword, userInfo.newUser.id));
+            toast.success('Password Updated Successfully')
+
         }
        // Redirect("/logout/");
     }
@@ -60,9 +62,6 @@ export default function UpdatePasswordScreen(){
             </div>
             {
                     <>
-                    { loadingUpdate && <LoadingBox></LoadingBox>}
-                    {errorUpdate && (<MessageBox variant="danger">{errorUpdate}</MessageBox>)}
-                    {successUpdate &&(<MessageBox variant="success">Password Updated Successfully</MessageBox>) }
                         <div>
                             <label htmlFor="password">Password</label>
                             <input

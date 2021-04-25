@@ -6,7 +6,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import { useDispatch, useSelector } from 'react-redux';
 import { login, loginFaceBook, loginGoogle } from '../../../actions/userAction';
 import LoadingBox from '../../Config/LoadingBox';
-import MessageBox from '../../Config/MessageBox';
+import { toast } from 'react-toastify';
 //import config from '../../Config/index';
 require ('dotenv').config();
 //file config
@@ -23,12 +23,14 @@ function LoginScreen(props){
     const [password, setPassword] = useState('');
     const userLogin = useSelector(state => state.userLogin);
     const {loading, userInfo, error} = userLogin;
+    
     const dispatch = useDispatch();
 
     const redirect = props.location.search?props.location.search.split("=")[1]:'/';
     useEffect(() => {
         if(userInfo){
             props.history.push(redirect);
+            toast.success("Login is successfully");
         }
         return () => {
             //
@@ -38,6 +40,9 @@ function LoginScreen(props){
     const submitHandler =(e)=>{
         e.preventDefault();
         dispatch(login(email,password));
+        if(error){
+            toast.error(error);
+        }
     }
     // const sendGoogleToken = tokenId => {
     //     Axios
@@ -102,7 +107,7 @@ function LoginScreen(props){
                     </li>
                     <li>
                         {loading && <LoadingBox></LoadingBox>}
-                        {error && <MessageBox variant="danger">{error}</MessageBox>}
+                        {/* {error && toast.error(error)} */}
                     </li>
                     <li>
                         <label htmlFor="email">Email</label>

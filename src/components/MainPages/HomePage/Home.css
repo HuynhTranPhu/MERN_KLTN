@@ -326,3 +326,6 @@ content: "\f105";
 .product .slick-next:focus::before {
 color: #ffffff;
 }
+.image-product{
+  height: 400px;
+}

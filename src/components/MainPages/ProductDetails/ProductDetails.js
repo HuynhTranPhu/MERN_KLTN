@@ -319,16 +319,9 @@ function ProductDetailScreen(props){
                                                 <div className="product-item">
                                                     <div className="product-title">
                                                     <Link to={"/product-detail/"+ pr._id}>{pr.name}</Link>
-                                                    <div className="ratting">
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                    </div>
                                                     </div>
                                                     <div className="product-image">
-                                                        <img src={pr.img}alt="Product" />
+                                                        <img className="image-product" src={pr.img}alt="Product" />
                                                         <div className="product-action">
                                                             <Link to={'/product-detail/' + pr._id}><i className="fas fa-eye" /></Link>
                                                         </div>

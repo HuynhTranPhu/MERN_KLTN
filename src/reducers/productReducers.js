@@ -14,7 +14,10 @@ import { PRODUCT_LIST_REQUEST,
       SEARCH_REQUEST,
       SEARCH_SUCCESS,
       SEARCH_FAIL,
-      PRODUCT_LIST_REQUEST_OF_PAGE} from "../constants/productConstants";
+      PRODUCT_LIST_REQUEST_OF_PAGE,
+      PRODUCT_LIST_SELLING_REQUEST,
+      PRODUCT_LIST_SELLING_SUCCESS,
+      PRODUCT_LIST_SELLING_FAIL} from "../constants/productConstants";
 
 //List product
 function productListReducer (state = { products: [],filteredItems: [], cate: "",sort: "",search:"",numberOfPages:0}, action){
@@ -47,6 +50,19 @@ function productListReducer (state = { products: [],filteredItems: [], cate: "",
                     search: action.payload.search,
                 };
         case PRODUCT_LIST_FAIL:
+            return { loading : false, error: action.payload}
+        default:
+            return state;
+    }
+}
+//List product selling
+function productListSellingReducer (state = { productSelling: []}, action){
+    switch(action.type){
+        case PRODUCT_LIST_SELLING_REQUEST:
+            return {loading: true, productSelling:[]};
+        case  PRODUCT_LIST_SELLING_SUCCESS:
+            return { loading : false , productSelling: action.payload.data};
+        case PRODUCT_LIST_SELLING_FAIL:
             return { loading : false, error: action.payload}
         default:
             return state;
@@ -95,4 +111,6 @@ function productDetailsReducer (state = { product: {}}, action){
 
 
 
-export {productListReducer, productDetailsReducer,categoryListReducer,searchHeaderReducer}
+export {productListReducer,
+    productListSellingReducer,
+     productDetailsReducer,categoryListReducer,searchHeaderReducer}

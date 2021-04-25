@@ -97,16 +97,9 @@ function SearchScreen(props){
                                         <div className="product-item">
                                             <div className="product-title">
                                                 <Link to={'/product-detail/' + product._id}>{product.name}</Link>
-                                                <div className="ratting">
-                                                    <i className="fa fa-star" />
-                                                    <i className="fa fa-star" />
-                                                    <i className="fa fa-star" />
-                                                    <i className="fa fa-star" />
-                                                    <i className="fa fa-star" />
-                                                </div>
                                             </div>
                                             <div className="product-image">
-                                                    <img src={product.img} alt="Product" />
+                                                    <img className="image-product" src={product.img} alt="Product" />
                                                     <div className="product-action">
                                                         <Link to={'/product-detail/' + product._id}><i className="fas fa-eye" /></Link>             
                                                     </div>

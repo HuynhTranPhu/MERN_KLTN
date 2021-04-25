@@ -67,7 +67,7 @@ function CartScreen(props){
     const checkoutHandler = () =>{
         //dispatch(addCart(userInfo.user.id,cartItems, grandTotal));
         //console.log(cartItems,grandTotal);
-        props.history.push("/login?redirect=shipping");
+        props.history.push("/shipping");
     }
     return  (
         <div>

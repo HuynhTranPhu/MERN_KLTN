@@ -36,25 +36,11 @@ import History from './components/MainPages/History/index';
 import ViewHistory from './components/MainPages/ViewHistory';
 import SearchScreen from './components/MainPages/SearchHeader';
 
-
-
 function App() {
   
    
   return (
     <BrowserRouter>
-      {/* <div> */}
-         {/* <!-- Top bar Start --> */}
-            
-              {/* <!-- Top bar End --> */}
-              
-              {/* <!-- Nav Bar Start --> */}
-           
-              {/* <!-- Nav Bar End -->      
-              
-              <!-- Bottom Bar Start --> */}
-       
-              
                   <Switch>
                      <Route path="/" exact component={HomeScreen}></Route> 
                      <PrivateRoute path="/cart/:id?" exact component={CartScreen}></PrivateRoute>
@@ -76,11 +62,6 @@ function App() {
                      <Route path="/search" exact component={SearchScreen}></Route>
                      <Route path="*" exact component={NotFound}></Route>
                   </Switch>   
-            
-              
-              
-    
-      {/* </div> */}
            
     </BrowserRouter>  
   );

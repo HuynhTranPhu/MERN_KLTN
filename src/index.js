@@ -5,6 +5,8 @@ import './index.css';
 import App from './App';
 import store from './Store/store';
 import reportWebVitals from './reportWebVitals';
+import {ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import {DataProvider} from './Socket'
@@ -13,6 +15,7 @@ ReactDOM.render(
     <React.StrictMode>
       <DataProvider>
         <App />
+        <ToastContainer autoClose={1500} />
       </DataProvider>
     </React.StrictMode>
   </Provider>

@@ -40,10 +40,8 @@ const login = (email,password) => async (dispatch) =>{
     try{
         const {data} = await axios.post(`${url}/user/login`, {email,password}
        )
-       //console.log(data);
         dispatch({type:USER_SIGNIN_SUCCESS,payload:data});
-        //console.log(data);
-      //  Cookie.set('userInfo', JSON.stringify(data));
+        Cookie.set('userInfo', JSON.stringify(data));
     }catch(error){
         
         const message=

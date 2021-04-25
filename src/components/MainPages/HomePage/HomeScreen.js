@@ -2,7 +2,7 @@ import React, {useEffect, useState } from 'react';
 import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { listProducts } from '../../../actions/productActions';
+import { listProducts, listProductsSelling } from '../../../actions/productActions';
 import LoadingBox from '../../Config/LoadingBox';
 import MessageBox from '../../Config/MessageBox';
 import TopBar from '../../Common/TopBar/TopBar';
@@ -17,15 +17,17 @@ import Feature from '../../Common/Feature/index'
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 
+import { toast } from 'react-toastify';
+
+
 function HomeScreen(props){
     
-    const productList = useSelector(state => state.productList);
-    const {products,loading , error} = productList;
-    // const addCartPost = useSelector(state => state.cartPost);
-    // const {success} = addCartPost;
+    // const productList = useSelector(state => state.productList);
+    // const {products} = productList;
 
-    // const cart = useSelector(state => state.cart);
-    // const {cartItems} = cart;
+    const productListSelling = useSelector(state => state.productListSelling);
+    const {productSelling,loading , error} = productListSelling;
+    console.log(productSelling)
     
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo} = userLogin;
@@ -46,11 +48,10 @@ function HomeScreen(props){
             quantity: 1
         };
         let carts =[a];
-        
         if(!userInfo){
             props.history.push("/login");
         }else{
-            alert('This product is added to cart');
+            toast.success("This product is added to cart");
             dispatch(addCart(userInfo.newUser._id,carts));
             dispatch(addToCart(id,1));   
             
@@ -58,7 +59,7 @@ function HomeScreen(props){
     }
   
     useEffect(() => {
-        dispatch(listProducts());
+        dispatch(listProductsSelling());
         
         return () => {
         };
@@ -254,7 +255,7 @@ function HomeScreen(props){
                       {/* <div className="align-items-center "> */}
                         <Slider {...settings}>
                         {
-                            products.map( (product) =>
+                            productSelling.map( (product) =>
                                 <div className="col-lg-12" key={product._id}>
                                     <div className="product-item">
                                         <div className="product-title">
@@ -262,7 +263,7 @@ function HomeScreen(props){
                                         </div>
                                         <div className="product-image">
                                             {
-                                                <img src={product.img} alt="Product "/>
+                                                <img className="image-product" src={product.img} alt="Product "/>
                                             }  
                                             <div className="product-action">   
                                                     <Link to={'/product-detail/' + product._id}><i className="fas fa-eye" ></i></Link>

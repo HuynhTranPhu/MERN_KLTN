@@ -9,7 +9,7 @@ import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
 import LoadingBox from '../../Config/LoadingBox';
 import MessageBox from '../../Config/MessageBox';
-
+import { toast } from 'react-toastify';
 export default function ProfileScreen(props){
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
@@ -19,17 +19,11 @@ export default function ProfileScreen(props){
     //console.log(userInfo);
     const userDetails = useSelector((state) => state.userDetails);
     const {loading, error, user} = userDetails;
-    console.log(user);
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-    const {success:successUpdate , 
-        error: errorUpdate, 
-        loading:loadingUpdate,}= userUpdateProfile;
+    const { error: errorUpdate }= userUpdateProfile;
     const dispatch = useDispatch();
    
     useEffect(() =>{
-        // if(error==="Time out, Please login again"){
-        //     props.history.push('/login');
-        // }
         if(!user){
             dispatch({type:USER_UPDATE_PROFILE_RESET});
             dispatch(detailsUser(userInfo.newUser._id));     
@@ -45,8 +39,9 @@ export default function ProfileScreen(props){
         e.preventDefault();
         //dispatch update 
         if(email==="" || name===""){
-            alert('Email or name are not valid');
+            toast.error('Email or name are not valid');
         }else{
+            toast.success("Profile updated success")
             dispatch(updateUserProfile(  email, name, userInfo.newUser._id));
         }
            
@@ -67,9 +62,7 @@ export default function ProfileScreen(props){
                             </h1>
                         </div>
                             <>
-                            { loadingUpdate && <LoadingBox></LoadingBox>}
-                            {errorUpdate && (<MessageBox variant="danger">{errorUpdate}</MessageBox>)}
-                            {successUpdate &&(<MessageBox variant="success">Profile Updated Successfully</MessageBox>) }
+                            {errorUpdate && toast.error(errorUpdate)}
                                 <div>
                                     <label htmlFor="name">Name</label>
                                     <input

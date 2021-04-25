@@ -1,13 +1,16 @@
 import { combineReducers} from 'redux';
 import { cartGetReducer, cartPostReducer, cartReducer, decreaseCartReducer, increaseCartReducer, removeCartPostReducer } from './cartReducers';
 import { historyReducer, orderPostReducer, removeOrderReducer, viewHistoryReducer } from './orderReducers';
-import { categoryListReducer, productDetailsReducer, productListReducer, searchHeaderReducer } from './productReducers';
+import {productListSellingReducer, categoryListReducer, productDetailsReducer, productListReducer, searchHeaderReducer } from './productReducers';
 import { forgotPasswordReducer, userDetailsReducer, userLoginReducer, userRegisterReducer, userUpdatePasswordReducer, userUpdateProfileReducer } from './userReducers';
 import { getCommentReducer, updateRatingReducer } from './comment';
 
 
 const reducer = combineReducers({
     productList : productListReducer,
+
+    productListSelling : productListSellingReducer,
+
     categoryList: categoryListReducer,
     productDetails: productDetailsReducer,
     cart: cartReducer,

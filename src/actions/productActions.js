@@ -15,7 +15,10 @@ PRODUCT_LIST_SUCCESS_OF_PAGE,
 SEARCH_REQUEST,
 SEARCH_SUCCESS,
 SEARCH_FAIL,
-PRODUCT_LIST_REQUEST_OF_PAGE
+PRODUCT_LIST_REQUEST_OF_PAGE,
+PRODUCT_LIST_SELLING_REQUEST,
+PRODUCT_LIST_SELLING_FAIL,
+PRODUCT_LIST_SELLING_SUCCESS
 } 
 from  '../constants/productConstants';
 import axios from 'axios'
@@ -51,6 +54,22 @@ const listProducts = () => async (dispatch) =>{
         ? error.response.data.message
         : error.message;
         dispatch({type: PRODUCT_LIST_FAIL, payload: message});
+    }
+
+}
+const listProductsSelling = () => async (dispatch) =>{
+    try{
+        dispatch({type: PRODUCT_LIST_SELLING_REQUEST});
+         const {data} = await axios.get(`${url}/product/banchay/top10`);
+        dispatch({type: PRODUCT_LIST_SELLING_SUCCESS, payload: data});
+        
+    }  
+    catch(error){
+        const message=
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+        dispatch({type: PRODUCT_LIST_SELLING_FAIL, payload: message});
     }
 
 }
@@ -174,5 +193,6 @@ export {listProducts, detailsProduct,
     listCategory,
     searchFilterProducts,
     listProductsOfPage,
-    searchHeader
+    searchHeader,
+    listProductsSelling
 };

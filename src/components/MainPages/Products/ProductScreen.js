@@ -188,7 +188,7 @@ function ProductScreen(props){
                                                     </div>
                                                 </div>
                                                 <div className="product-image">
-                                                        <img src={product.img} alt="Product" />
+                                                        <img className="image-product" src={product.img} alt="Product" />
                                                         <div className="product-action">
                                                             <Link to={'/product-detail/' + product._id}><i className="fas fa-eye" /></Link>             
                                                         </div>
