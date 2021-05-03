@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactImageZoom from 'react-image-zoom';
 //import { detailsProduct } from '../../../actions/productActions';
-import { listProducts } from '../../../actions/productActions';
+import { checkCanComment, listProducts } from '../../../actions/productActions';
 import LoadingBox from '../../Config/LoadingBox';
 //import MessageBox from '../../Config/MessageBox';
 import Brand from '../../Brand/Brand';
@@ -22,7 +22,8 @@ import CommentItem from './CommentItem/CommentItem';
 import { getData } from '../../utils/FetchDataComments';
 
 import Loading from '../../../images/loading.gif';
-
+require ('dotenv').config();
+const url = process.env.REACT_APP_URL_CLIENT;
 function ProductDetailScreen(props){
     const params = useParams()
     const [loading2,setLoading2]=useState(false);
@@ -35,8 +36,10 @@ function ProductDetailScreen(props){
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo} = userLogin;
 
-
-
+    const checkComment = useSelector(state => state.checkComment);
+    const { checkStatus} = checkComment;
+    console.log(checkStatus);
+    
     const [rating, setRating] = useState(0);
     
     const [comments, setComments] = useState([])
@@ -133,31 +136,35 @@ function ProductDetailScreen(props){
 
             products.forEach(product => {
                 if(product._id === params.id) setDetailProduct(product)
-            })
+            })    
         }
-        // console.log(productList.products)
 
-         const test = async()=>{
-            await dispatch(listProducts());
-            setLoading2(false)
-         }
-      
-       
-            // console.log(props.match.params.id);
-            if (products.length===0)
-            {
-                setLoading2(true)
 
-                test(); 
-               // dispatch(detailsProduct(props.match.params.id));
-            }
+        const test = async()=>{
+        await dispatch(listProducts());
+        setLoading2(false)
+        }
+    
+    
+        if (products.length===0)
+        {
+            setLoading2(true)
+            test(); 
+    
+        }
+
      
     }, [products.length,loading2,params.id])
+
+    //console.log(userInfo.newUser._id,params.id)
+    useEffect(() => {
+           dispatch(checkCanComment(userInfo.newUser._id,params.id));   
+    },[userInfo.newUser._id,params.id])
     
 
     useEffect(() => {
         setLoading(true)
-        getData(`/comment/${params.id}?limit=${page * 5}`)
+        getData(`${url}/comment/${params.id}?limit=${page * 5}`)
             .then(res => {
                 setComments(r => r = res.data.comments)
                 setLoading(false)
@@ -178,16 +185,10 @@ function ProductDetailScreen(props){
             props.history.push("/login");
         }else{
             dispatch(addCart(userInfo.newUser._id,carts));
-            // if(success){
                 props.history.push(`/cart/${id}`); 
-            // }else{
-            //     alert('Something is wrong');
-            // }
         }
-       
     }
     
-    //if(product.length === 0) return null;
     return <div>
         <TopBar/>
         <NavBar/>
@@ -252,59 +253,80 @@ function ProductDetailScreen(props){
                                         </div>
                                     </div>
                                 </div>
-                                <div className="comments">
-                                   
-                                    {
-                                        userInfo?(
-                                            <>
-                                             <h2 className="app_title">
-                                            Your Feedback
-                                            </h2>
-  
-                                            <div className="reviews">
-                                                <input type="radio" name="rate" id="rd-5" onChange={() => setRating(5)} />
-                                                <label htmlFor="rd-5" className="fas fa-star"></label>
-        
-                                                <input type="radio" name="rate" id="rd-4" onChange={() => setRating(4)} />
-                                                <label htmlFor="rd-4" className="fas fa-star"></label>
-        
-                                                <input type="radio" name="rate" id="rd-3" onChange={() => setRating(3)} />
-                                                <label htmlFor="rd-3" className="fas fa-star"></label>
-        
-                                                <input type="radio" name="rate" id="rd-2" onChange={() => setRating(2)} />
-                                                <label htmlFor="rd-2" className="fas fa-star"></label>
-        
-                                                <input type="radio" name="rate" id="rd-1" onChange={() => setRating(1)} />
-                                                <label htmlFor="rd-1" className="fas fa-star"></label>
+                                <div className="row product-detail-bottom">
+                                    <div className="col-lg-12">
+                                        <ul className="nav nav-pills nav-justified">
+                                            <li className="nav-item">
+                                                <a className="nav-link active" data-toggle="pill" href="#description">Description</a>
+                                            </li>
+                                            <li className="nav-item">
+                                                <a className="nav-link" data-toggle="pill" href="#reviews">Reviews</a>
+                                            </li>
+                                        </ul>
+                                        <div className="tab-content">
+                                            <div id="description" className="container tab-pane active">
+                                                <h4>Product description</h4>
+                                                <p>
+                                                    {detailProduct.description}   
+                                                </p>
                                             </div>
-                                            <FormInput id={params.id} socket={socket}  rating={rating} />
-                                            </>
-                                           
-                                        )
-                                        :
-                                        <Link to="/login"className="danger">Please login to feedback</Link>
-                                    }
-                                    
+                                            <div id="reviews" className="container tab-pane fade">
+                                            <div className="comments">
+                                            {
+                                                checkStatus==='true'?(
+                                                    <>
+                                                        <h2 className="app_title">
+                                                    Your Feedback
+                                                    </h2>
+            
+                                                    <div className="reviews">
+                                                        <input type="radio" name="rate" id="rd-5" onChange={() => setRating(5)} />
+                                                        <label htmlFor="rd-5" className="fas fa-star"></label>
+                
+                                                        <input type="radio" name="rate" id="rd-4" onChange={() => setRating(4)} />
+                                                        <label htmlFor="rd-4" className="fas fa-star"></label>
+                
+                                                        <input type="radio" name="rate" id="rd-3" onChange={() => setRating(3)} />
+                                                        <label htmlFor="rd-3" className="fas fa-star"></label>
+                
+                                                        <input type="radio" name="rate" id="rd-2" onChange={() => setRating(2)} />
+                                                        <label htmlFor="rd-2" className="fas fa-star"></label>
+                
+                                                        <input type="radio" name="rate" id="rd-1" onChange={() => setRating(1)} />
+                                                        <label htmlFor="rd-1" className="fas fa-star"></label>
+                                                    </div>
+                                                    <FormInput id={params.id} socket={socket}  rating={rating} />
+                                                    </>
+                                                    
+                                                )
+                                                :
+                                                <Link to="/product-list"className="danger">See more product</Link>
+                                            }
+                                            <div className="comments_list">
+                                                <h2 className="app_title">
+                                                    All of Feedback
+                                                </h2>
+                                                {
+                                                comments.length >0 ? comments.map(comment => (
+                                                    <CommentItem key={comment._id} comment={comment} socket={socket} />
+                                                )): <p>Let 's enter the first feedback</p>
+                                                    
+                                                }
+                                            </div>
 
-                                    <div className="comments_list">
-                                        <h2 className="app_title">
-                                            All of Feedback
-                                        </h2>
-                                        {
-                                        comments.length >0 ? comments.map(comment => (
-                                            <CommentItem key={comment._id} comment={comment} socket={socket} />
-                                        )): <p>Let 's enter the first feedback</p>
-                                         
-                                        }
+                                            </div>
+                                            {
+                                                loading && <div className="loading"><img src={Loading} alt=""/></div>
+                                            }  
+                                            <button ref={pageEnd} style={{opacity: 0}}>Load more</button> 
+                                            
+                                        </div>
+                                            
+                                        </div>
                                     </div>
-
                                 </div>
-                                {
-                                    loading && <div className="loading"><img src={Loading} alt=""/></div>
-                                }  
-                                <button ref={pageEnd} style={{opacity: 0}}>Load more</button> 
-                                
                             </div>
+                                
                             <div className="product">
                                 <div className="section-header">
                                     <h1>Related Products</h1>

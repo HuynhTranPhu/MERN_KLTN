@@ -1,8 +1,30 @@
 import { combineReducers} from 'redux';
-import { cartGetReducer, cartPostReducer, cartReducer, decreaseCartReducer, increaseCartReducer, removeCartPostReducer } from './cartReducers';
-import { historyReducer, orderPostReducer, removeOrderReducer, viewHistoryReducer } from './orderReducers';
-import {productListSellingReducer, categoryListReducer, productDetailsReducer, productListReducer, searchHeaderReducer } from './productReducers';
-import { forgotPasswordReducer, userDetailsReducer, userLoginReducer, userRegisterReducer, userUpdatePasswordReducer, userUpdateProfileReducer } from './userReducers';
+import { cartGetReducer,
+        cartPostReducer,
+        cartReducer, 
+        decreaseCartReducer,
+        increaseCartReducer, 
+        removeCartPostReducer 
+} from './cartReducers';
+import { historyReducer,
+        orderPostReducer, 
+        removeOrderReducer,
+        viewHistoryReducer 
+} from './orderReducers';
+import {productListSellingReducer,
+        categoryListReducer,
+        productDetailsReducer, 
+        productListReducer,
+        searchHeaderReducer, 
+        checkCanCommentReducer 
+} from './productReducers';
+import { forgotPasswordReducer,
+        userDetailsReducer, 
+        userLoginReducer, 
+        userRegisterReducer, 
+        userUpdatePasswordReducer,
+        userUpdateProfileReducer 
+} from './userReducers';
 import { getCommentReducer, updateRatingReducer } from './comment';
 
 
@@ -10,6 +32,8 @@ const reducer = combineReducers({
     productList : productListReducer,
 
     productListSelling : productListSellingReducer,
+
+    checkComment:checkCanCommentReducer,
 
     categoryList: categoryListReducer,
     productDetails: productDetailsReducer,

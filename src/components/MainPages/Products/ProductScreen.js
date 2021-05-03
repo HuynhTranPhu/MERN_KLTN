@@ -112,7 +112,7 @@ function ProductScreen(props){
                                                        }
                                                     }
                                                     />
-                                                    <button><i class="fa fa-search"></i></button>    
+                                                    <button><i className="fa fa-search"></i></button>    
                                             </div>
                                         </div>
                                         <div className="col-md-3">

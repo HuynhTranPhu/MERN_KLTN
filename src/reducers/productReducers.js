@@ -1,23 +1,28 @@
-import { PRODUCT_LIST_REQUEST, 
+import { 
+    PRODUCT_LIST_REQUEST, 
     PRODUCT_LIST_SUCCESS, 
     PRODUCT_LIST_FAIL, 
     PRODUCT_DETAILS_REQUEST, 
     PRODUCT_DETAILS_SUCCESS, 
     PRODUCT_DETAILS_FAIL, 
     ORDER_PRODUCTS_BY_PRICE,
-     CATEGORY_LIST_REQUEST, 
-     CATEGORY_LIST_SUCCESS,
-      CATEGORY_LIST_FAIL, 
-      FILTER_PRODUCTS_BY_CATEGORY, 
-      SEARCH_FILTER_PRODUCTS, 
-      PRODUCT_LIST_SUCCESS_OF_PAGE,
-      SEARCH_REQUEST,
-      SEARCH_SUCCESS,
-      SEARCH_FAIL,
-      PRODUCT_LIST_REQUEST_OF_PAGE,
-      PRODUCT_LIST_SELLING_REQUEST,
-      PRODUCT_LIST_SELLING_SUCCESS,
-      PRODUCT_LIST_SELLING_FAIL} from "../constants/productConstants";
+    CATEGORY_LIST_REQUEST, 
+    CATEGORY_LIST_SUCCESS,
+    CATEGORY_LIST_FAIL, 
+    FILTER_PRODUCTS_BY_CATEGORY, 
+    SEARCH_FILTER_PRODUCTS, 
+    PRODUCT_LIST_SUCCESS_OF_PAGE,
+    SEARCH_REQUEST,
+    SEARCH_SUCCESS,
+    SEARCH_FAIL,
+    PRODUCT_LIST_REQUEST_OF_PAGE,
+    PRODUCT_LIST_SELLING_REQUEST,
+    PRODUCT_LIST_SELLING_SUCCESS,
+    PRODUCT_LIST_SELLING_FAIL,
+    CHECK_CAN_COMMENT_REQUEST,
+    CHECK_CAN_COMMENT_SUCCESS,
+    CHECK_CAN_COMMENT_FAIL
+} from "../constants/productConstants";
 
 //List product
 function productListReducer (state = { products: [],filteredItems: [], cate: "",sort: "",search:"",numberOfPages:0}, action){
@@ -68,6 +73,18 @@ function productListSellingReducer (state = { productSelling: []}, action){
             return state;
     }
 }
+function checkCanCommentReducer (state = { checkStatus:{} }, action){
+    switch(action.type){
+        case CHECK_CAN_COMMENT_REQUEST:
+            return {loading: true};
+        case  CHECK_CAN_COMMENT_SUCCESS:
+            return { loading : false , checkStatus: action.payload};
+        case CHECK_CAN_COMMENT_FAIL:
+            return { loading : false, error: action.payload}
+        default:
+            return state;
+    }
+}
 //Category List
 function categoryListReducer(state={category:[]},action){
     switch(action.type){
@@ -112,5 +129,9 @@ function productDetailsReducer (state = { product: {}}, action){
 
 
 export {productListReducer,
-    productListSellingReducer,
-     productDetailsReducer,categoryListReducer,searchHeaderReducer}
+        productListSellingReducer,
+        productDetailsReducer,
+        categoryListReducer,
+        searchHeaderReducer,
+        checkCanCommentReducer
+}

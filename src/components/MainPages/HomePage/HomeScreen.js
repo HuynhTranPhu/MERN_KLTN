@@ -27,7 +27,6 @@ function HomeScreen(props){
 
     const productListSelling = useSelector(state => state.productListSelling);
     const {productSelling,loading , error} = productListSelling;
-    console.log(productSelling)
     
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo} = userLogin;

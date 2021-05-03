@@ -18,7 +18,10 @@ SEARCH_FAIL,
 PRODUCT_LIST_REQUEST_OF_PAGE,
 PRODUCT_LIST_SELLING_REQUEST,
 PRODUCT_LIST_SELLING_FAIL,
-PRODUCT_LIST_SELLING_SUCCESS
+PRODUCT_LIST_SELLING_SUCCESS,
+CHECK_CAN_COMMENT_SUCCESS,
+CHECK_CAN_COMMENT_REQUEST,
+CHECK_CAN_COMMENT_FAIL
 } 
 from  '../constants/productConstants';
 import axios from 'axios'
@@ -54,6 +57,28 @@ const listProducts = () => async (dispatch) =>{
         ? error.response.data.message
         : error.message;
         dispatch({type: PRODUCT_LIST_FAIL, payload: message});
+    }
+
+}
+const checkCanComment = (id_user, id_product) => async (dispatch) =>{
+
+    try{
+        dispatch({type: CHECK_CAN_COMMENT_REQUEST});
+        //const { userLogin :{userInfo}}= getState();
+         const {data} = await axios.post(`${url}/order/checkcancomment`,{id_user, id_product}
+        //  ,{
+        //     headers: {Authorization:`${userInfo.token}`},
+        //  }
+         );
+        dispatch({type: CHECK_CAN_COMMENT_SUCCESS, payload: data.message});
+        
+    }  
+    catch(error){
+        const message=
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+        dispatch({type: CHECK_CAN_COMMENT_FAIL, payload: message});
     }
 
 }
@@ -194,5 +219,6 @@ export {listProducts, detailsProduct,
     searchFilterProducts,
     listProductsOfPage,
     searchHeader,
-    listProductsSelling
+    listProductsSelling,
+    checkCanComment
 };
