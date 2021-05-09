@@ -63,3 +63,21 @@ left: 30px;
 .review .slick-slider:hover .slick-next {
 right: 30px;
 }
+@media (max-width: 320px) {
+    .review .review-img img{
+        width: 50%; 
+        height: 50%; 
+    }
+    .review .review-text {
+        padding: 5px;
+        width: 50%;
+       
+    }
+    .review .review-slider-item {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        background: #ffffff;
+    }
+    
+}

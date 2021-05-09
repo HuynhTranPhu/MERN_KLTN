@@ -6,8 +6,8 @@ import BottomBar from '../Common/BottomBar/index'
 const VerifyRegisterAccount = () => {
 	return <div>
 		<TopBar/>
-		<NavBar/>
 		<BottomBar  ></BottomBar>
+		<NavBar/>
 		<div className="container text-center">
 			<div className="content-404">
 				<img src="/img/confirm.png" className="img-responsive" alt="" />

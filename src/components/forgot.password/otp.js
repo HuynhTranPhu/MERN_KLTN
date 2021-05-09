@@ -8,8 +8,8 @@ const OTP = ({ setOTP, submitOTP, notificationOTP }) =>{
     return   (
         <div>
             <TopBar/>
-            <NavBar/>
             <BottomBar  ></BottomBar>
+            <NavBar/>
             <div className="container text-center">
                 <div className="content-404 forgotpass">
                     <h1><b>ENTER OTP

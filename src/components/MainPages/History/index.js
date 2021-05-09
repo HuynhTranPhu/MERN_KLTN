@@ -32,8 +32,8 @@ const History = () => {
     return (
         <div>
             <TopBar/>
-            <NavBar/>
             <BottomBar ></BottomBar>
+            <NavBar/>
             <h1 className="Order-title">Order History</h1>
             {loading?(
             <LoadingBox></LoadingBox>

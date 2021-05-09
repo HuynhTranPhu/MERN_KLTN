@@ -104,13 +104,12 @@ function HomeScreen(props){
         ):
         <div>
             <TopBar/>
-            <NavBar/>
-            {/* <BottomBar cartItems={cartIte} ></BottomBar> */}
             <BottomBar  ></BottomBar>
+            <NavBar/>
              <div className="header">
                   <div className="container-fluid">
                       <div className="row">
-                          <div className="col-md-3">
+                          <div className="col-md-3 header__mobile-res">
                               <nav className="navbar bg-light">
                                   <ul className="navbar-nav">
                                       <li className="nav-item">
@@ -141,7 +140,7 @@ function HomeScreen(props){
                               </nav>
                           </div>
                           <HeaderSlider/>
-                          <div className="col-md-3">
+                          <div className="col-md-3 header__mobile-res">
                               <div className="header-img">
                                   <div className="img-item">
                                       <img src="/img/category-1.jpg" />
@@ -272,9 +271,10 @@ function HomeScreen(props){
                                             <h3><span>$</span>{product.price}</h3>                                          
                                             {
                                                 product.quantity>0 && 
-                                                <a className="btn" 
+                                                <a className="btn btn_tablet_res-add-cart" 
                                                     onClick={()=>addToCartHandler( product._id,product.name,product.price ,product.img)} >
-                                                    <i className="fa fa-shopping-cart"></i>Add To Cart</a>
+                                                    <i className="fa fa-shopping-cart"></i>Add To Cart
+                                                </a>
                                             }
                                         </div>
                                     </div>

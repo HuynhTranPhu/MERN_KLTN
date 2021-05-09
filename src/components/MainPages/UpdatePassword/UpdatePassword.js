@@ -52,8 +52,8 @@ export default function UpdatePasswordScreen(){
     }
     return<div>
         <TopBar/>
-        <NavBar/>
         <BottomBar  ></BottomBar>
+        <NavBar/>
         <form className="form-profile" onSubmit={submitHandler}>
             <div>
                 <h1 className="title">

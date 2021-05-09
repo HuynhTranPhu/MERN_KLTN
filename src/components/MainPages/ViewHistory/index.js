@@ -57,8 +57,8 @@ function ViewHistory(props){
     // const totalPrice = toPrice(viewHistory.map(item=>item.order_subtotal ))+toPrice(viewHistory.map(item=>item.shiping ));
     return<div>
         <TopBar/>
-        <NavBar/>
         <BottomBar  ></BottomBar>
+        <NavBar/>
         {loading?(
             <LoadingBox></LoadingBox>
             ):

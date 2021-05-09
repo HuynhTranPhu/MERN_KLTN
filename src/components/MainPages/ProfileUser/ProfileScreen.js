@@ -48,8 +48,8 @@ export default function ProfileScreen(props){
     }
     return<div>
         <TopBar/>
-        <NavBar/>
         <BottomBar  ></BottomBar>
+        <NavBar/>
         {
              loading ? (
                 <LoadingBox></LoadingBox>)

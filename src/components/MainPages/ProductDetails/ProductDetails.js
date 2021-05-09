@@ -38,7 +38,7 @@ function ProductDetailScreen(props){
 
     const checkComment = useSelector(state => state.checkComment);
     const { checkStatus} = checkComment;
-    console.log(checkStatus);
+   
     
     const [rating, setRating] = useState(0);
     
@@ -188,11 +188,10 @@ function ProductDetailScreen(props){
                 props.history.push(`/cart/${id}`); 
         }
     }
-    
     return <div>
         <TopBar/>
-        <NavBar/>
         <BottomBar  ></BottomBar>
+        <NavBar/>
        
         {loading2?<LoadingBox></LoadingBox>:  <div className="product-detail">
                 <div className="container">
@@ -325,12 +324,16 @@ function ProductDetailScreen(props){
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                                
+                            </div>   
                             <div className="product">
-                                <div className="section-header">
-                                    <h1>Related Products</h1>
-                                </div>
+                                {
+                                    products.filter((pr)=>pr.id_category===detailProduct.id_category).length>1 ? 
+                                     <div className="section-header">
+                                        <h1>Related Products</h1>
+                                     </div>:null
+                                   
+                                }
+                                
                                 <div className="align-items-center">
                                 <Slider {...settings}>
                                     {

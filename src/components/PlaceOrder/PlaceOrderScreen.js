@@ -57,8 +57,8 @@ function PlaceOrderScreen(props){
     },[dispatch,props.history,success]);
     return<div>
         <TopBar/>
-        <NavBar/>
         <BottomBar  ></BottomBar>
+        <NavBar/>
         <CheckoutSteps step1 step2 step3 step4 ></CheckoutSteps>
         <div className="placeorder">
             <div className="placeorder-info">

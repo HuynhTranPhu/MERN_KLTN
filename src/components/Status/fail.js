@@ -8,8 +8,8 @@ const Fail = () =>{
 	return(
 		<>
 			<TopBar/>
+			<BottomBar  ></BottomBar>
             <NavBar/>
-            <BottomBar  ></BottomBar>
 			<div className="container text-center">
 				<div className="content-404">
 					<h1><b>OPPS!</b>Fail</h1>

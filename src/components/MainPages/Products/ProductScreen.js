@@ -78,8 +78,8 @@ function ProductScreen(props){
       };
     return <div>
         <TopBar/>
-        <NavBar/>
         <BottomBar  ></BottomBar>
+        <NavBar/>
         {loading?(
             <LoadingBox></LoadingBox>
         ):
@@ -179,13 +179,6 @@ function ProductScreen(props){
                                             <div className="product-item">
                                                 <div className="product-title">
                                                     <Link to={'/product-detail/' + product._id}>{product.name}</Link>
-                                                    <div className="ratting">
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                        <i className="fa fa-star" />
-                                                    </div>
                                                 </div>
                                                 <div className="product-image">
                                                         <img className="image-product" src={product.img} alt="Product" />
@@ -197,7 +190,7 @@ function ProductScreen(props){
                                                 <h3><span>$</span>{product.price}</h3>
                                                 {
                                                     product.quantity>0 && 
-                                                    <a className="btn" onClick={()=>handleAddToCart(product._id,product.name,product.price,product.img)}>
+                                                    <a className="btn btn_tablet_res-add-cart" onClick={()=>handleAddToCart(product._id,product.name,product.price,product.img)}>
                                                         <i className="fa fa-shopping-cart"></i>Buy Now</a>
                                                 }
                                                 </div>

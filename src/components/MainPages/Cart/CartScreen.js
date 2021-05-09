@@ -72,8 +72,8 @@ function CartScreen(props){
     return  (
         <div>
             <TopBar/>
-            <NavBar/>
             <BottomBar  ></BottomBar>
+            <NavBar/>
             <div className="cart-page">
                 <div className="container-fluid">
                     <div className="row">

@@ -57,6 +57,11 @@ padding: 30px;
     padding-left: 0;
 }
 }
+@media (min-width: 768px) and (max-width:1024px) {
+    .product-detail .product-content {
+        margin-left: 100px;
+    }
+}
 
 .product-detail .product-content .title h2 {
     font-size: 25px;

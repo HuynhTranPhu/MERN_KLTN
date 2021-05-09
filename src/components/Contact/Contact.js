@@ -10,8 +10,8 @@ import ScrollToTopBtn from '../Common/ScrollToTop/ScrollToTop';
 export default function ContactScreen(){
     return <div>
         <TopBar/>
-        <NavBar/>
         <BottomBar  ></BottomBar>
+        <NavBar/>
         <div className="contact">
             <div className="container-fluid">
                 <div className="row">

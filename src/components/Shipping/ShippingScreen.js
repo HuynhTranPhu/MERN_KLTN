@@ -51,8 +51,8 @@ function ShippingScreen(props){
     
     return <div>
             <TopBar/>
-            <NavBar/>
             <BottomBar></BottomBar>
+            <NavBar/>
             <CheckoutSteps step1 step2></CheckoutSteps>
             <div className="formShipping">
                 <form onSubmit={submitHandler}>

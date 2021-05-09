@@ -1,6 +1,18 @@
 /**********************************/
 /*********** Header CSS ***********/
 /**********************************/
+@media (max-width: 767.98px) {
+  .header__mobile-res{
+    display: none;
+  }
+}
+@media (min-width: 767.98px) and (max-width: 1110px) {
+  .btn_tablet_res-add-cart{
+    font-size: 10px;
+    padding-left:  5px ;
+  }
+}
+
 .header {
 position: relative;
 }

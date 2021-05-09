@@ -7,8 +7,8 @@ import Footer from '../../Common/Footer/Footer'
 const orderSuccess = () => {
 	return <div>
 		<TopBar/>
-		<NavBar/>
 		<BottomBar  ></BottomBar>
+		<NavBar/>
 		<div className="container text-center">
 			<div className="content-404">
 				<img src="/img/confirm.png" className="img-responsive" alt="" />

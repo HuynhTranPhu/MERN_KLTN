@@ -25,7 +25,7 @@ export default class Review extends Component {
                   <div className="container-fluid">
                         <div className="review-slider normal-slider">
                           <Slider {...settings}>
-                            <div className="col-md-12">
+                            <div className="col-md-12 ">
                                 <div className="review-slider-item">
                                     <div className="review-img">
                                         <img src="img/review-1.jpg" alt="review1" />

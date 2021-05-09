@@ -34,8 +34,8 @@ class EnterNewPassword extends Component {
     return (
       <div>
         <TopBar/>
-        <NavBar/>
         <BottomBar  ></BottomBar>
+        <NavBar/>
              <div className="container text-center">
               <div className="logo-404">
                 <Link to="/">

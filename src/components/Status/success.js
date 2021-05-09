@@ -7,8 +7,8 @@ const Success = () =>{
 	return (
 		<>
 			<TopBar/>
+			<BottomBar  ></BottomBar>
             <NavBar/>
-            <BottomBar  ></BottomBar>
 			<div className="container text-center">
 				<div className="content-404">
 					<h1><b>CONGRATULATIONS!</b></h1>

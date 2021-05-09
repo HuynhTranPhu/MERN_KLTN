@@ -32,8 +32,8 @@ function PaymentScreen(props){
 
     return <div>
             <TopBar/>
-            <NavBar/>
             <BottomBar  ></BottomBar>
+            <NavBar/>
             <CheckoutSteps step1 step2 step3></CheckoutSteps>
             <div className="formShipping">
                 <form onSubmit={submitHandler}>

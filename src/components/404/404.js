@@ -7,8 +7,8 @@ const NotFound = () => {
 
 	return <div>
 			<TopBar/>
-			<NavBar/>
 			<BottomBar  ></BottomBar>
+			<NavBar/>
 			<div className="container text-center">
 				<div className="content-404">
 					<img src="/img/404.png" className="img-responsive" alt="" />
