@@ -1,4 +1,4 @@
-import {ORDER_RESET, ADD_ORDER_FAIL, ADD_ORDER_REQUEST, ADD_ORDER_SUCCESS, HISTORY_FAIL, HISTORY_REQUEST, HISTORY_SUCCESS, REMOVE_ORDER_FAIL, REMOVE_ORDER_REQUEST, REMOVE_ORDER_SUCCESS, VIEW_HISTORY_FAIL, VIEW_HISTORY_REQUEST, VIEW_HISTORY_SUCCESS } from "../constants/orderContants";
+import {ORDER_RESET, ADD_ORDER_FAIL, ADD_ORDER_REQUEST, ADD_ORDER_SUCCESS, HISTORY_FAIL, HISTORY_REQUEST, HISTORY_SUCCESS, REMOVE_ORDER_FAIL, REMOVE_ORDER_REQUEST, REMOVE_ORDER_SUCCESS, VIEW_HISTORY_FAIL, VIEW_HISTORY_REQUEST, VIEW_HISTORY_SUCCESS, GET_ORDER_BY_TYPE_SUCCESS, GET_ORDER_BY_TYPE_REQUEST, GET_ORDER_BY_TYPE_FAIL } from "../constants/orderContants";
 
 
 //Add order in database
@@ -33,6 +33,18 @@ function historyReducer (state = { history:[]}, action){
             return state;
     }
 }
+function getOrderByTypeReducer (state = { ordersByTypes:[]}, action){
+    switch(action.type){
+        case GET_ORDER_BY_TYPE_REQUEST:
+            return {loading1: true, ordersByTypes:[]};
+        case  GET_ORDER_BY_TYPE_SUCCESS:
+            return { loading1 : false , ordersByTypes: action.payload};
+        case GET_ORDER_BY_TYPE_FAIL:
+            return { loading1 : false, error1: action.payload}
+        default:
+            return state;
+    }
+}
 
 //View detail history orders
 function viewHistoryReducer (state = { viewHistory:[]}, action){
@@ -63,4 +75,5 @@ export {orderPostReducer
     ,historyReducer
     ,viewHistoryReducer
     ,removeOrderReducer
+    ,getOrderByTypeReducer
 };

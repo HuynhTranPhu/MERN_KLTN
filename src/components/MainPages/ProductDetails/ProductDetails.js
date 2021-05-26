@@ -38,7 +38,7 @@ function ProductDetailScreen(props){
 
     const checkComment = useSelector(state => state.checkComment);
     const { checkStatus} = checkComment;
-   
+    console.log(checkStatus)
     
     const [rating, setRating] = useState(0);
     
@@ -159,6 +159,7 @@ function ProductDetailScreen(props){
     //console.log(userInfo.newUser._id,params.id)
     useEffect(() => {
            dispatch(checkCanComment(userInfo.newUser._id,params.id));   
+           console.log(userInfo.newUser._id, params.id)
     },[userInfo.newUser._id,params.id])
     
 
@@ -272,7 +273,7 @@ function ProductDetailScreen(props){
                                             <div id="reviews" className="container tab-pane fade">
                                             <div className="comments">
                                             {
-                                                checkStatus==='true'?(
+                                                checkStatus =='true'?(
                                                     <>
                                                         <h2 className="app_title">
                                                     Your Feedback

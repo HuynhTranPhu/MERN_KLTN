@@ -1,29 +1,95 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
 import { useDispatch, useSelector } from 'react-redux';
-import { historyGet,viewHistoryGet } from '../../../actions/orderActions';
-import LoadingBox from '../../Config/LoadingBox';
-import MessageBox from '../../Config/MessageBox';
+import { getOrderByType, historyGet } from '../../../actions/orderActions';
+
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
+
+import SwipeableViews from 'react-swipeable-views';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import HistoryItem from './HistoryItem';
+  
+function TabPanel(props) {
+const { children, value, index, ...other } = props;
+
+return (
+    <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`full-width-tabpanel-${index}`}
+        aria-labelledby={`full-width-tab-${index}`}
+        {...other}
+        >
+        {value === index && (
+            <Box p={6}>
+            <Typography>{children}</Typography>
+            </Box>
+        )}
+    </div>
+);
+}
+function a11yProps(index) {
+    return {
+      id: `full-width-tab-${index}`,
+      'aria-controls': `full-width-tabpanel-${index}`,
+    };
+  }
+  
+//   const useStyles = makeStyles((theme) => ({
+//     root: {
+//       backgroundColor: theme.palette.background.paper,
+//       width: 500,
+//     },
+//   }));
+
+
+
+
 
 const History = () => {
     const historyOrder = useSelector(state => state.historyOrder);
     const {history, loading, error } = historyOrder;
+
+    const getOrdersByType = useSelector(state => state.getOrdersByType);
+    const {ordersByTypes, loading1, error1 } = getOrdersByType;
+
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo} = userLogin;
     const dispatch = useDispatch();
     //const cartItems=[];
-    const HandelViewDetails = (id_order)=>{
-        dispatch(viewHistoryGet(id_order));
-
-    }
+   
     
+    //const classes = useStyles();
+    const theme = useTheme();
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+        //console.log(newValue)
+        dispatch(getOrderByType(userInfo.newUser._id, newValue, ''));
+        if(newValue==5){
+            dispatch(getOrderByType(userInfo.newUser._id, '', 'cancelled'));
+        }
+    };
+
+    const handleChangeIndex = (index) => {
+        setValue(index);
+    };
+
+
+
     useEffect(() => {
             dispatch(historyGet(userInfo.newUser._id));
+
         return () => {
             //
         };
@@ -34,68 +100,54 @@ const History = () => {
             <TopBar/>
             <BottomBar ></BottomBar>
             <NavBar/>
-            <h1 className="Order-title">Order History</h1>
-            {loading?(
-            <LoadingBox></LoadingBox>
-            ):
-            error? (
-                <MessageBox variant="danger">{error}</MessageBox>
-            ):(
-
-                <div className="cart-page">
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-lg-12" >
-                            <div className="cart-page-inner">
-                                <div className="table-responsive">
-                                    <table className="table table-bordered">
-                                        <thead className="thead-dark"> 
-                                                {
-                                                    history.length === 0 ?(                                                  
-                                                        <div className="empty-cart">
-                                                            <img className="empty-cart-img" src="/images/emptyCart.png" alt="Product" />
-                                                            <p className="empty-cart-note">Your orders is empty</p>
-                                                            <Link className="empty-cart-shopping" to="/">Go to Shopping</Link>
-                                                        </div>
-                                                    ):
-                                                    <tr>
-                                                        <th>Id order</th>
-                                                        <th>Date</th>
-                                                        <th>Details</th>
-                                                        <th>Total</th>
-                                                        <th>Payment Status</th>
-                                                        {/* <th>Remove</th> */}
-                                                    
-                                                    </tr>   
-                                                }
-                                                
-                                        </thead>
-                                        <tbody className="align-middle">
-                                            {
-                                                history.map(item=>
-                                                <tr key={item._id}>
-                                                    <td>{item._id}</td>
-                                                    <td>{item.order_date.substring(0, 10)}</td>  
-                                                    <td><Link to= {"/view-history/"+ item._id} onClick={()=>HandelViewDetails(item._id)}>View Details</Link></td>
-                                                    <td>${item.order_subtotal }</td>
-                                                    <td>{item.paymentStatus}</td>
-                                                </tr>)
-                                            }
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <h1 className="Order-title">My orders</h1>   
+                <div className="container-fluid" >
+                    <AppBar position="static" color="default">
+                        <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        variant="fullWidth"
+                        aria-label="full width tabs example"
+                        >
+                        <Tab label="All" {...a11yProps(0)} />
+                        <Tab label="Ordered" {...a11yProps(1)} />
+                        <Tab label="Packed" {...a11yProps(2)} />
+                        <Tab label="Shipped" {...a11yProps(3)} />
+                        <Tab label="Delivered" {...a11yProps(4)} />
+                        <Tab label="Canceled" {...a11yProps(5)} />
+                        </Tabs>
+                    </AppBar>
+                    <SwipeableViews
+                        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                        index={value}
+                        onChangeIndex={handleChangeIndex}
+                    >
+                        <TabPanel value={value} index={0} dir={theme.direction}>
+                         <HistoryItem history={history} loading={loading} error={error}/>
+                                
+                        </TabPanel>
+                        <TabPanel value={value} index={1} dir={theme.direction} >
+                          <HistoryItem history={ordersByTypes} loading={loading1} error={error1}/>
+                        </TabPanel>
+                        <TabPanel value={value} index={2} dir={theme.direction}>
+                           <HistoryItem history={ordersByTypes} loading={loading1} error={error1}/>
+                        </TabPanel>
+                        <TabPanel value={value} index={3} dir={theme.direction}>
+                          <HistoryItem history={ordersByTypes} loading={loading1} error={error1}/>
+                        </TabPanel>
+                        <TabPanel value={value} index={4} dir={theme.direction}>
+                          <HistoryItem history={ordersByTypes} loading={loading1} error={error1}/>
+                        </TabPanel>
+                        <TabPanel value={value} index={5} dir={theme.direction}>
+                           <HistoryItem history={ordersByTypes} loading={loading1} error={error1}/>
+                        </TabPanel>
+                    </SwipeableViews>
                 </div>
                 <FooterPage/>
                 <ScrollToTopBtn />
-            </div>
-
-            )
-            }
-            
+    
         </div>
        
     );

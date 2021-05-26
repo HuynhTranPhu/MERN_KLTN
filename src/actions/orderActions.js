@@ -11,7 +11,10 @@ import {REMOVE_ORDER_REQUEST,
         HISTORY_SUCCESS, 
         HISTORY_REQUEST, VIEW_HISTORY_FAIL,
         VIEW_HISTORY_SUCCESS, 
-        VIEW_HISTORY_REQUEST } from "../constants/orderContants";
+        VIEW_HISTORY_REQUEST, 
+        GET_ORDER_BY_TYPE_REQUEST,
+        GET_ORDER_BY_TYPE_SUCCESS,
+        GET_ORDER_BY_TYPE_FAIL} from "../constants/orderContants";
 require ('dotenv').config();
 const url = process.env.REACT_APP_URL_CLIENT;
 const addOrder = (id_user,city,posteCode,address,phone,payment,shiping) => async (dispatch, getState) =>{
@@ -41,7 +44,7 @@ const historyGet = (id_user) => async (dispatch,getState) =>{
     const { userLogin :{userInfo}}= getState();
     try{
         dispatch({type: HISTORY_REQUEST, payload: id_user});
-        const {data} = await Axios.get(`${url}/order/getorder/` + id_user
+        const {data} = await Axios.get(`${url}/order/all/` + id_user
         ,{
             headers: {Authorization:`${userInfo.token}`},
         }
@@ -55,6 +58,26 @@ const historyGet = (id_user) => async (dispatch,getState) =>{
         ? error.response.data.message
         : error.message;
         dispatch({type: HISTORY_FAIL, payload: message})
+    }
+}
+const getOrderByType = (id_user, type, paymentStatus) => async (dispatch,getState) =>{
+    const { userLogin :{userInfo}}= getState();
+    try{
+        dispatch({type: GET_ORDER_BY_TYPE_REQUEST, payload: {id_user,type,paymentStatus}});
+        const {data} = await Axios.post(`${url}/order/getorder/${id_user}` ,{type, paymentStatus}
+        ,{
+            headers: {Authorization:`${userInfo.token}`},
+        }
+        );
+        dispatch({type: GET_ORDER_BY_TYPE_SUCCESS, payload:data });
+        //console.log(data);
+    }
+    catch(error){
+        const message=
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+        dispatch({type: GET_ORDER_BY_TYPE_FAIL, payload: message})
     }
 }
 const viewHistoryGet = (id_order) => async (dispatch,getState) =>{
@@ -98,4 +121,5 @@ export {addOrder
     ,historyGet
     ,viewHistoryGet
     ,removeOrder
+    ,getOrderByType
 };

@@ -6,7 +6,7 @@ import { cartGetReducer,
         increaseCartReducer, 
         removeCartPostReducer 
 } from './cartReducers';
-import { historyReducer,
+import { getOrderByTypeReducer, historyReducer,
         orderPostReducer, 
         removeOrderReducer,
         viewHistoryReducer 
@@ -55,7 +55,10 @@ const reducer = combineReducers({
     increaseCart: increaseCartReducer,
     decreaseCart: decreaseCartReducer,
     orderPost: orderPostReducer,
+
     historyOrder: historyReducer,
+    getOrdersByType: getOrderByTypeReducer,
+    
     viewHistoryOrder: viewHistoryReducer,
     removeOrder: removeOrderReducer,
     searchHeader:searchHeaderReducer,

@@ -31,7 +31,7 @@ const listProductsOfPage = (pageNumber) => async (dispatch) =>{
     try{
         dispatch({type: PRODUCT_LIST_REQUEST_OF_PAGE});
          //const {data} =await axios.get("/api/products");
-         const {data} = await axios.get(`${url}/product/getproduct/`+ pageNumber);
+         const {data} = await axios.get(`${url}/product/getproducts/`+ pageNumber);
         //console.log({data});
         dispatch({type: PRODUCT_LIST_SUCCESS_OF_PAGE, payload: data});
         
@@ -46,7 +46,7 @@ const listProducts = () => async (dispatch) =>{
     try{
         dispatch({type: PRODUCT_LIST_REQUEST});
          //const {data} =await axios.get("/api/products");
-         const {data} = await axios.get(`${url}/product`);
+         const {data} = await axios.get(`${url}/products`);
         //console.log({data});
         dispatch({type: PRODUCT_LIST_SUCCESS, payload: data});
         
@@ -70,6 +70,7 @@ const checkCanComment = (id_user, id_product) => async (dispatch) =>{
         //     headers: {Authorization:`${userInfo.token}`},
         //  }
          );
+         console.log(data)
         dispatch({type: CHECK_CAN_COMMENT_SUCCESS, payload: data.message});
         
     }  
@@ -120,7 +121,7 @@ const listCategory = () => async (dispatch) =>{
     try{
         dispatch({type: CATEGORY_LIST_REQUEST});
          //const {data} =await axios.get("/api/products");
-         const {data} = await axios.get(`${url}/category`);
+         const {data} = await axios.get(`${url}/categorys`);
         //console.log({data});
         dispatch({type: CATEGORY_LIST_SUCCESS, payload: data});
         

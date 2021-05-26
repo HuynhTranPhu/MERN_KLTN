@@ -94,7 +94,7 @@ return (
                 </>
 
                 ):(
-                    <div className="mr-2" >
+                    <div className="mr-5" >
                         <Link to="/login" className="btn__bottom-bar btn-sm mr-2 search__mobile-res table__res">Login</Link>                 
                         <Link to="/register" className="btn__bottom-bar btn-sm mr-2 search__mobile-res ">Register</Link>
                     </div>

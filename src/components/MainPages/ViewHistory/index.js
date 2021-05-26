@@ -18,14 +18,14 @@ function ViewHistory(props){
      const {viewHistory, loading, error } = viewHistoryOrder;
      const removeOrder1 = useSelector(state => state.removeOrder);
      const { success } = removeOrder1;
-    const dispatch = useDispatch();
-    const removeOrderHandler = (id_order)=>{
+     const dispatch = useDispatch();
+     const removeOrderHandler = (id_order)=>{
         if(window.confirm('Do you want to delete this item?')){
             dispatch(removeOrder(id_order));
-           
+        
             
         }
-    }
+     }
     //const [viewHistory, setViewHistory] = useState([])
     //const dispatch = useDispatch();
     //const cartItems=[];
