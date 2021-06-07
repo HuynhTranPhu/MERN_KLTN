@@ -1,0 +1,18 @@
+{
+	"order_history":"My orders",
+	"empty_order":"Your orders is empty",
+	"all":"All",
+	"received":"Received",
+	"packed":"Packed",
+	"shipped":"Shipped",
+	"delivered":"Delivered",
+	"canceled":"Canceled",
+	"go_to_shopping":"Go to Shopping",
+	"id_order":"Id order",
+	"date":"Date",
+	"details":"Details",
+	"total":"Total",
+	"payment_status":"Payment Status",
+	"view_details":"View Details"
+
+}

@@ -13,8 +13,10 @@ import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 //import {logout} from '../../../actions/userAction'
 
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 export default function UpdatePasswordScreen(){
+    const { t } = useTranslation(['mainpages_updatepassword']);
     const [oldpassword,setOldPassword] = useState('');
     const [newpassword,setNewPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
@@ -57,42 +59,42 @@ export default function UpdatePasswordScreen(){
         <form className="form-profile" onSubmit={submitHandler}>
             <div>
                 <h1 className="title">
-                   Change Password
+                {t('mainpages_updatepassword:change_password')}
                 </h1>
             </div>
             {
                     <>
                         <div>
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="password"> {t('mainpages_updatepassword:password')}</label>
                             <input
                                 id="password"
                                 type="password"
-                                placeholder="Enter password"
+                                placeholder= {t('mainpages_updatepassword:password_place')}
                                 onChange={(e) => setOldPassword(e.target.value)}
                             ></input>
                         </div>
                         <div>
-                            <label htmlFor="newPassword">New Password</label>
+                            <label htmlFor="newPassword"> {t('mainpages_updatepassword:new_password')}</label>
                             <input
                                 id="newPassword"
                                 type="password"
-                                placeholder="Enter new password"
+                                placeholder={t('mainpages_updatepassword:new_pass_place')}
                                 onChange={(e) => setNewPassword(e.target.value)}
                             ></input>
                         </div>
                         <div>
-                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <label htmlFor="confirmPassword"> {t('mainpages_updatepassword:confirm_password')}</label>
                             <input
                                 id="confirmPassword"
                                 type="password"
-                                placeholder="Enter confirm password"
+                                placeholder={t('mainpages_updatepassword:confirm_password_place')}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             ></input>
                         </div>
                         <div>
                             <label> </label>
                             <button className="button primary update-profile" type="submit" >
-                                Update
+                            {t('mainpages_updatepassword:update')}
                             </button>
                         </div>
                     </>

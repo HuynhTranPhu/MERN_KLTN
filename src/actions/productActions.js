@@ -70,7 +70,6 @@ const checkCanComment = (id_user, id_product) => async (dispatch) =>{
         //     headers: {Authorization:`${userInfo.token}`},
         //  }
          );
-         console.log(data)
         dispatch({type: CHECK_CAN_COMMENT_SUCCESS, payload: data.message});
         
     }  
@@ -139,11 +138,12 @@ const listCategory = () => async (dispatch) =>{
 
 
 
-const detailsProduct = (productId) => async (dispatch) =>{
+const detailsProduct = (id) => async (dispatch) =>{
     try{
-        dispatch({type: PRODUCT_DETAILS_REQUEST, payload: productId});
-        const {data} = await axios.get(`${url}/product/` + productId);
+        dispatch({type: PRODUCT_DETAILS_REQUEST, payload: id});
+        const {data} = await axios.get(`${url}/product/${id}`);
         dispatch({type: PRODUCT_DETAILS_SUCCESS, payload:data });
+        console.log(data)
     }
     catch(error){
         const message=

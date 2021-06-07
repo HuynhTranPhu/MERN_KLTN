@@ -1,0 +1,22 @@
+{
+	"price":"Giá:",
+	"status":"Tình trạng:",
+	"in_stock":"Trong kho:",
+	"unavailable":"Không có sẵn",
+	"color":"Màu:",
+	"size":"Size:",
+	"review":"Nhận xét",
+	"reviews":"Nhận xét:",
+	"rating":"Đánh giá",
+	"add_to_cart":"Thêm vào giỏ hàng",
+	"description":"Mô tả",
+	"product_description":"Mô tả sản phẩm",
+	"category":"Loaị sản phẩm",
+	"brand":"Hãng sản phẩm",
+	"your_feedback":"Đánh giá của bạn",
+	"all_of_feedback":"Tất cả đánh giá",
+	"see_more":"Tiếp tục mua sắm",
+	"enter_first_feedback":"Hãy đánh giá sản phẩm",
+	"load_more":"Xem thêm",
+	"related_products":"Sản phẩm liên quan"
+}

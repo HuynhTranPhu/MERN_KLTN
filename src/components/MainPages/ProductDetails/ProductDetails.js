@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import Slider from "react-slick";
+import { toast } from 'react-toastify';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ReactImageZoom from 'react-image-zoom';
+//import ReactImageZoom from 'react-image-zoom';
+import { MagnifierContainer, SideBySideMagnifier } from 'react-image-magnifiers';
 //import { detailsProduct } from '../../../actions/productActions';
-import { checkCanComment, listProducts } from '../../../actions/productActions';
+import { checkCanComment, detailsProduct, listProducts } from '../../../actions/productActions';
 import LoadingBox from '../../Config/LoadingBox';
 //import MessageBox from '../../Config/MessageBox';
 import Brand from '../../Brand/Brand';
@@ -13,7 +15,7 @@ import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
-import { addCart } from '../../../actions/cartAction';
+import { addCart, getCart } from '../../../actions/cartAction';
 import Rating from './rating';
 import FormInput from './FormInput';
 
@@ -22,12 +24,16 @@ import CommentItem from './CommentItem/CommentItem';
 import { getData } from '../../utils/FetchDataComments';
 
 import Loading from '../../../images/loading.gif';
+import { useTranslation } from 'react-i18next';
 require ('dotenv').config();
+
 const url = process.env.REACT_APP_URL_CLIENT;
 function ProductDetailScreen(props){
-    const params = useParams()
-    const [loading2,setLoading2]=useState(false);
 
+    const { t } = useTranslation(['mainpages_pdetal_detail']);
+    const params = useParams()
+    //const [loading2,setLoading2]=useState(false);
+    const dispatch = useDispatch();
     const state = useContext(DataContext)
     const socket = state.socket
 
@@ -38,7 +44,11 @@ function ProductDetailScreen(props){
 
     const checkComment = useSelector(state => state.checkComment);
     const { checkStatus} = checkComment;
-    console.log(checkStatus)
+
+    const productDetails = useSelector(state => state.productDetails);
+    const { product, loading2} = productDetails;
+    //console.log(product);
+    
     
     const [rating, setRating] = useState(0);
     
@@ -47,8 +57,38 @@ function ProductDetailScreen(props){
     const [loading, setLoading] = useState(false);
     
     const [page, setPage] = useState(1)
+    const [color, setColor] = useState('')
+    const [size, setSize] = useState('')
     const pageEnd = useRef()
+    //detail
+    useEffect(() => {
+        //if(params.id){
 
+            // products.forEach(product => {
+            //     if(product._id === params.id) setDetailProduct(product)
+            // })  
+            dispatch(detailsProduct(params.id));
+            dispatch(listProducts());
+            
+       // }
+
+         
+        // const test = async()=>{
+        // await dispatch(listProducts());
+        // await dispatch(detailsProduct(params.id));
+        // setLoading2(false)
+        // }
+    
+    
+        // if (products.length===0)
+        // {
+        //     setLoading2(true)
+        //     test(); 
+    
+        // }
+
+     
+    }, [params.id])
     // Realtime 
     // Join room
     useEffect(() => {
@@ -99,8 +139,8 @@ function ProductDetailScreen(props){
         } 
     },[socket, comments])
 
-    const [detailProduct, setDetailProduct] = useState([])
-    const dispatch = useDispatch();
+    //const [detailProduct, setDetailProduct] = useState([])
+    
 
 
     const settings = {
@@ -130,36 +170,16 @@ function ProductDetailScreen(props){
             },
         ]
     };
-
-    useEffect(() => {
-        if(params.id){
-
-            products.forEach(product => {
-                if(product._id === params.id) setDetailProduct(product)
-            })    
-        }
-
-
-        const test = async()=>{
-        await dispatch(listProducts());
-        setLoading2(false)
-        }
-    
-    
-        if (products.length===0)
-        {
-            setLoading2(true)
-            test(); 
-    
-        }
-
-     
-    }, [products.length,loading2,params.id])
+    const handleSelectColor= (e)=>{
+        setColor(e.target.value);
+    }
+    const handleSelectSize= (e)=>{
+        setSize(e.target.value);
+    }
 
     //console.log(userInfo.newUser._id,params.id)
     useEffect(() => {
            dispatch(checkCanComment(userInfo.newUser._id,params.id));   
-           console.log(userInfo.newUser._id, params.id)
     },[userInfo.newUser._id,params.id])
     
 
@@ -173,21 +193,25 @@ function ProductDetailScreen(props){
             .catch(err => console.log(err.response.data.msg))
            
     },[params.id, page])
-    const prop = {width: 350, height: 292, zoomWidth: 350, zoomPosition :"original",img: `${detailProduct.img}`};
     const handleAddToCart = (id,name,price, image) =>{
-        let a = {_id: id,
+        let a = {id: id,
             name: name,
             price: price,
             img: image,
-            quantity: 1};
-        let carts =[a];
+            quantity: 1,
+            color:color,
+            size:size
+        };
+            if(color==''|| size==''){
+                toast.error("You don't select color or size");
+            }else{
+                dispatch(addCart(userInfo.newUser._id,a));
+                toast.success("This product is added to cart");
+            }
+            
+                //props.history.push(`/cart/${id}`); 
+            //dispatch(getCart(userInfo.newUser._id));
         
-        if(!userInfo){
-            props.history.push("/login");
-        }else{
-            dispatch(addCart(userInfo.newUser._id,carts));
-                props.history.push(`/cart/${id}`); 
-        }
     }
     return <div>
         <TopBar/>
@@ -202,23 +226,28 @@ function ProductDetailScreen(props){
                                 <div className="product-detail-top">
                                     <div className="row align-items-center">
                                         <div className="col-md-5">
-                                            <div className="product-slider-single ">
-                                                  <ReactImageZoom {...prop} /> 
-                                                {/* <img src={detailProduct.img} alt="Product" />   */}
+                                            <div className="product__image">
+                                                <MagnifierContainer>
+                                                    <SideBySideMagnifier
+                                                        alwaysInPlace={true}
+                                                        imageSrc={product?.images?.[0] || '/img/no-image.png'}
+                                                        className="product-img-magnifier"
+                                                    />
+                                                </MagnifierContainer>
                                             </div>
                                         </div>
-                                        <div className="col-md-4">
+                                        <div className="col-md-6">
                                             <div className="product-content">
                                                 <div className="title">
-                                                    <h2>{detailProduct.name}</h2>
+                                                    <h2>{product?.name}</h2>
                                                 </div>
                                                 <div className="price">
-                                                    <h4>Price:</h4>
-                                                    <p> ${detailProduct.price} <span>$149</span></p>
+                                                    <h4>{t('mainpages_pdetal_detail:price')}</h4>
+                                                    <p> ${product?.price} <span>$400</span></p>
                                                 </div>
                                                 <div className="quantity">
-                                                    <h4>Status:</h4>       
-                                                    {detailProduct.quantity > 0? 
+                                                    <h4>{t('mainpages_pdetal_detail:status')}</h4>       
+                                                    {product?.quantity > 0? 
                                                     (
                                                         <span className="success">In Stock</span>
                                                     ):(
@@ -226,27 +255,45 @@ function ProductDetailScreen(props){
                                                     )}
                                                 </div>
                                                 <div className="p-color">
-                                                    <h4>Color:</h4>
+                                                    <h4>{t('mainpages_pdetal_detail:color')}</h4>
                                                     <div className="btn-group btn-group-sm">
-                                                        {detailProduct.color}
+                                                    <select className="form-control" onChange={handleSelectColor}>
+                                                        <option value="">Select color</option>
+                                                        {
+                                                            product?.colorProducts?.colorProduct?.map(item => (
+                                                                <option value={item?._id?._id} key={item?._id?._id}>
+                                                                    {item?._id?.name}
+                                                                </option>
+                                                            ))
+                                                        }
+                                                    </select>
                                                     </div> 
                                                 </div>
                                                 <div className="p-color">
-                                                    <h4>Review:</h4>
+                                                    <h4>{t('mainpages_pdetal_detail:size')}</h4>
                                                     <div className="btn-group btn-group-sm">
-                                                        {detailProduct.rating} Reviews
-                                                    </div>
-                                                </div>
+                                                        <select className="form-control" onChange={handleSelectSize}>
+                                                            <option value="">Select size</option>
+                                                            {
+                                                                product?.sizeProducts?.sizeProduct?.map(item => (
+                                                                    <option value={item?._id?._id} key={item?._id?._id}>
+                                                                        {item?._id?.name}
+                                                                    </option>
+                                                                ))
+                                                            }
+                                                        </select>
+                                                    </div> 
+                                                </div> 
                                                 <div className="p-rating p-color">
-                                                    <h4>Rating:</h4>
+                                                    <h4>{t('mainpages_pdetal_detail:rating')}</h4>
                                                     <div>
-                                                    <Rating props={detailProduct}/>
+                                                    <Rating props={product}/>
                                                     </div>  
                                                 </div>
                                                 <div className="action">
                                                 {
-                                                    detailProduct.quantity>0 && 
-                                                    <a className="btn"  onClick={()=>handleAddToCart(detailProduct._id,detailProduct.name,detailProduct.price,detailProduct.img)} ><i className="fa fa-shopping-cart" />Add to Cart</a>
+                                                    product?.quantity>0 && 
+                                                    <a className="btn"  onClick={()=>handleAddToCart(product._id,product.name,product.price,product.images[0])} ><i className="fa fa-shopping-cart" />{t('mainpages_pdetal_detail:add_to_cart')}</a>
                                                 }
                                                 </div>
                                             </div>
@@ -257,26 +304,34 @@ function ProductDetailScreen(props){
                                     <div className="col-lg-12">
                                         <ul className="nav nav-pills nav-justified">
                                             <li className="nav-item">
-                                                <a className="nav-link active" data-toggle="pill" href="#description">Description</a>
+                                                <a className="nav-link active" data-toggle="pill" href="#description">{t('mainpages_pdetal_detail:description')}</a>
                                             </li>
                                             <li className="nav-item">
-                                                <a className="nav-link" data-toggle="pill" href="#reviews">Reviews</a>
+                                                <a className="nav-link" data-toggle="pill" href="#reviews">{product?.rating > 0?product.rating:0} {t('mainpages_pdetal_detail:review')}</a>
                                             </li>
                                         </ul>
                                         <div className="tab-content">
                                             <div id="description" className="container tab-pane active">
-                                                <h4>Product description</h4>
+                                                <h4>{t('mainpages_pdetal_detail:product_description')}</h4>
                                                 <p>
-                                                    {detailProduct.description}   
+                                                    {product?.description}   
+                                                </p>
+                                                <h4>{t('mainpages_pdetal_detail:category')}</h4>
+                                                <p>
+                                                    {product?.id_category?.name}   
+                                                </p>
+                                                <h4>{t('mainpages_pdetal_detail:brand')}</h4>
+                                                <p>
+                                                    {product?.id_brand?.name}   
                                                 </p>
                                             </div>
                                             <div id="reviews" className="container tab-pane fade">
                                             <div className="comments">
                                             {
-                                                checkStatus =='true'?(
+                                                checkStatus ==='true'?(
                                                     <>
                                                         <h2 className="app_title">
-                                                    Your Feedback
+                                                        {t('mainpages_pdetal_detail:your_feedback')}
                                                     </h2>
             
                                                     <div className="reviews">
@@ -300,16 +355,16 @@ function ProductDetailScreen(props){
                                                     
                                                 )
                                                 :
-                                                <Link to="/product-list"className="danger">See more product</Link>
+                                                <Link to="/product-list"className="danger">{t('mainpages_pdetal_detail:see_more')}</Link>
                                             }
                                             <div className="comments_list">
                                                 <h2 className="app_title">
-                                                    All of Feedback
+                                                {t('mainpages_pdetal_detail:all_of_feedback')}
                                                 </h2>
                                                 {
                                                 comments.length >0 ? comments.map(comment => (
                                                     <CommentItem key={comment._id} comment={comment} socket={socket} />
-                                                )): <p>Let 's enter the first feedback</p>
+                                                )): <p>{t('mainpages_pdetal_detail:enter_first_feedback')}</p>
                                                     
                                                 }
                                             </div>
@@ -328,9 +383,9 @@ function ProductDetailScreen(props){
                             </div>   
                             <div className="product">
                                 {
-                                    products.filter((pr)=>pr.id_category===detailProduct.id_category).length>1 ? 
+                                    products.filter((pr)=>pr.id_category===product?.id_category?._id).length>1 ? 
                                      <div className="section-header">
-                                        <h1>Related Products</h1>
+                                        <h1>{t('mainpages_pdetal_detail:related_products')}</h1>
                                      </div>:null
                                    
                                 }
@@ -339,7 +394,7 @@ function ProductDetailScreen(props){
                                 <Slider {...settings}>
                                     {
                                         products.map((pr)=>{
-                                            return  pr.id_category === detailProduct.id_category && pr._id!== detailProduct._id
+                                            return  pr.id_category === product?.id_category?._id && pr._id!== product?._id
                                             ?
                                                 <div className="col-lg-12" key={pr._id}>
                                                 <div className="product-item">
@@ -347,14 +402,14 @@ function ProductDetailScreen(props){
                                                     <Link to={"/product-detail/"+ pr._id}>{pr.name}</Link>
                                                     </div>
                                                     <div className="product-image">
-                                                        <img className="image-product" src={pr.img}alt="Product" />
+                                                        <img className="image-product" src={pr.images[0]}alt="Product" />
                                                         <div className="product-action">
                                                             <Link to={'/product-detail/' + pr._id}><i className="fas fa-eye" /></Link>
                                                         </div>
                                                     </div>
                                                     <div className="product-price">
                                                     <h3><span>$</span>{pr.price}</h3>
-                                                    <a className="btn" onClick={()=>handleAddToCart(pr._id,pr.name,pr.price,pr.img)} ><i className="fa fa-shopping-cart" />Buy Now</a>
+                                                    {/* <a className="btn" onClick={()=>handleAddToCart(pr._id,pr.name,pr.price,pr.img)} ><i className="fa fa-shopping-cart" />Buy Now</a> */}
                                                     </div>
                                                 </div>
                                             </div>

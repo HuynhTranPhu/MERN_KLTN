@@ -1,0 +1,17 @@
+.promotion-nav__link {
+    display: flex;
+    align-items: center;
+    color: #FF6F61 !important;
+    transition: color 0.2s;
+    will-change: color;
+}
+.promotion-nav__link:hover {
+    color: #fff !important;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+.promotion-nav__icon {
+    font-size: larger;
+    margin-right: 0.5em;
+    cursor: pointer;
+}

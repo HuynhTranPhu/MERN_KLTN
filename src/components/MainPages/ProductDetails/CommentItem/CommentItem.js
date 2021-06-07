@@ -1,10 +1,12 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import CommentCard from './CommentCard'
 import FormInput from '../FormInput'
+import { useTranslation } from 'react-i18next';
 
 let showComments = []
 
 function CommentItem({comment, socket}) {
+    const { t } = useTranslation(['mainpages_pdetal_cmtitems']);
     const [reply, setReply] = useState(false)
     const [name, setName] = useState('')
 
@@ -45,13 +47,13 @@ function CommentItem({comment, socket}) {
         <>
             <CommentCard comment={comment} >
                 <div className="nav_comment">
-                    <p onClick={() => handleReply(comment.username)}>Reply</p>
+                    <p onClick={() => handleReply(comment.username)}>{t('mainpages_pdetal_cmtitems:reply')}</p>
                     {
                         hideReplyComment > 0 && 
-                        <p onClick={loadMore}>Load more {hideReplyComment} comments</p>
+                        <p onClick={loadMore}>Load more {hideReplyComment} {t('mainpages_pdetal_cmtitems:comments')}</p>
                     }
                     
-                    <p onClick={hideReply}>Hide Reply</p>
+                    <p onClick={hideReply}>{t('mainpages_pdetal_cmtitems:hide_reply')}</p>
                 </div>
 
                 <div className="reply_comment">
@@ -59,7 +61,7 @@ function CommentItem({comment, socket}) {
                         replyComment.map(rep => (
                             <CommentCard comment={rep} key={rep._id}>
                                 <div className="nav_comment">
-                                    <p onClick={() => handleReply(rep.username)}>Reply</p>
+                                    <p onClick={() => handleReply(rep.username)}>{t('mainpages_pdetal_cmtitems:reply')}</p>
                                 </div>
                             </CommentCard>
                         ))

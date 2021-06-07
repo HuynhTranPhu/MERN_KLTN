@@ -5,9 +5,11 @@ import NavBar from '../Common/NavBar/index';
 import BottomBar from '../Common/BottomBar/index';
 import FooterPage from '../Common/Footer/Footer';
 import ScrollToTopBtn from '../Common/ScrollToTop/ScrollToTop';
+import { useTranslation } from 'react-i18next';
 
 
 export default function ContactScreen(){
+    const { t } = useTranslation(['contact']);
     return <div>
         <TopBar/>
         <BottomBar  ></BottomBar>
@@ -17,8 +19,8 @@ export default function ContactScreen(){
                 <div className="row">
                     <div className="col-lg-4">
                         <div className="contact-info">
-                            <h2>Our Office</h2>
-                            <h3><i className="fa fa-map-marker" />So 1, Vo Van Ngan, Thu Duc</h3>
+                            <h2>{t('contact:our_office')}</h2>
+                            <h3><i className="fa fa-map-marker" />{t('contact:address_office')}</h3>
                             <h3><i className="fa fa-envelope" />Phu@gmail.com</h3>
                             <h3><i className="fa fa-phone" />+034-304-8571</h3>
                             <div className="social">
@@ -32,8 +34,8 @@ export default function ContactScreen(){
                     </div>
                     <div className="col-lg-4">
                         <div className="contact-info">
-                            <h2>Our Store</h2>
-                            <h3><i className="fa fa-map-marker" />So 155, Vo Van Ngan, Thu Duc</h3>
+                            <h2>{t('contact:our_store')}</h2>
+                            <h3><i className="fa fa-map-marker" />{t('contact:address_store')}</h3>
                             <h3><i className="fa fa-envelope" />phumap@gmail.com</h3>
                             <h3><i className="fa fa-phone" />+123-456-7890</h3>
                             <div className="social">
@@ -50,19 +52,19 @@ export default function ContactScreen(){
                             <form>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <input type="text" className="form-control" placeholder="Your Name" />
+                                    <input type="text" className="form-control" placeholder={t('contact:your_name')} />
                                 </div>
                                 <div className="col-md-6">
-                                    <input type="email" className="form-control" placeholder="Your Email" />
+                                    <input type="email" className="form-control" placeholder={t('contact:your_mail')} />
                                 </div>
                             </div>
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Subject" />
+                                <input type="text" className="form-control" placeholder={t('contact:subject')} />
                             </div>
                             <div className="form-group">
-                                <textarea className="form-control" rows={5} placeholder="Message" defaultValue={""} />
+                                <textarea className="form-control" rows={5} placeholder={t('contact:message')} defaultValue={""} />
                             </div>
-                            <div><button className="btn" type="submit">Send Message</button></div>
+                            <div><button className="btn" type="submit">{t('contact:send_message')}</button></div>
                             </form>
                         </div>
                     </div>

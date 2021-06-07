@@ -1,20 +1,22 @@
 import { Drawer } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../../../../actions/userAction';
 import './index.css';
 
-
-
 function MobileBottomBar() {
+  const {i18n, t } = useTranslation(['common_btbar_mbbtbar_index']);
   const [open, setOpen] = useState(false);
   const cart = useSelector((state) => state.cart);
   const {cartItems} = cart;
   const userLogin = useSelector((state) => state.userLogin);
   const {userInfo} = userLogin;
-
+  const onLanguageClick = (code) => {
+    i18n.changeLanguage(code);
+  };
   const dispatch = useDispatch();
   const logoutHandler = () =>{
       dispatch(logout());}
@@ -41,10 +43,10 @@ function MobileBottomBar() {
           ) : (
             <div className="mobile-menu-user">
               <div>
-                <div className="mobile-menu-user-link">Đăng nhập để tìm hiểu sản phẩm</div>
+                <div className="mobile-menu-user-link">{t('common_btbar_mbbtbar_index:login_to_see')}</div>
                 <div className="text-center mt-3">
-                    <Link  to="/login" className=" btn__menu-mobile btn-sm mr-2">Login</Link>                 
-                    <Link to="/register" className="btn__menu-mobile btn-sm mr-2">Register</Link>
+                    <Link  to="/login" className=" btn__menu-mobile btn-sm mr-2">{t('common_btbar_mbbtbar_index:login')}</Link>                 
+                    <Link to="/register" className="btn__menu-mobile btn-sm mr-2">{t('common_btbar_mbbtbar_index:register')}</Link>
                 </div>
               </div>
             </div>
@@ -57,8 +59,8 @@ function MobileBottomBar() {
                     <li className="mobile-menu-list-item">
                       <Link to="/history">
                         <a className="mobile-menu-link">
-                        <i className="far fa-calendar-check mr-2" />
-                         My orders
+                        <i className="rockland-nav__icon far fa-calendar-check" />
+                          {t('common_btbar_mbbtbar_index:my_orders')}
                         </a>
                       </Link>
                     </li>
@@ -72,7 +74,7 @@ function MobileBottomBar() {
                   <Link to="/product-list">
                     <a className="mobile-menu-link">
                     <i className="rockland-nav__icon fas fa-list-ul" />
-                    <span>Products</span>
+                    <span>{t('common_btbar_mbbtbar_index:products')}</span>
                     </a>
                   </Link>
                 </li>
@@ -80,7 +82,7 @@ function MobileBottomBar() {
                   <Link to="/product-list">
                     <a className="mobile-menu-link">
                     <i className="rockland-nav__icon fa fa-shopping-bag" />
-                    <span>Best Selling</span>
+                    <span>{t('common_btbar_mbbtbar_index:best_selling')}</span>
                     </a>
                   </Link>
                 </li>
@@ -88,7 +90,7 @@ function MobileBottomBar() {
                   <Link to="/product-list">
                     <a className="mobile-menu-link">
                     <i className="rockland-nav__icon fa fa fa-plus-square" />
-                    <span>New Arrivals</span>
+                    <span>{t('common_btbar_mbbtbar_index:new_arrivals')}</span>
                     </a>
                   </Link>
                 </li>
@@ -96,7 +98,7 @@ function MobileBottomBar() {
                   <Link to="/product-list">
                     <a className="mobile-menu-link">
                     <i className="rockland-nav__icon fa fa-female" />
-                    <span>Fashion & Beauty</span>
+                    <span>{t('common_btbar_mbbtbar_index:fashion_beauty')}</span>
                     </a>
                   </Link>
                 </li>
@@ -104,7 +106,7 @@ function MobileBottomBar() {
                   <Link to="/product-list">
                     <a className="mobile-menu-link">
                     <i className="rockland-nav__icon fa fa-child" />
-                    <span>Kids & Babies Clothes</span>
+                    <span>{t('common_btbar_mbbtbar_index:kids_babies_clothes')}</span>
                     </a>
                   </Link>
                 </li>
@@ -116,7 +118,7 @@ function MobileBottomBar() {
                   <Link to="/contact">
                     <a className="mobile-menu-link">
                     <i className="rockland-nav__icon fas fa-map-marker-alt" />
-                    <span>Contact us</span>
+                    <span>{t('common_btbar_mbbtbar_index:contact_us')}</span>
                     </a>
                   </Link>
                 </li>
@@ -126,12 +128,34 @@ function MobileBottomBar() {
                       <Link to="/update-password">
                         <a className="mobile-menu-link">
                         <i className="rockland-nav__icon fa fa-key" />
-                        <span> Change password</span>
+                        <span> {t('common_btbar_mbbtbar_index:change_password')}</span>
                         </a>
                       </Link>
                     </li>
                   )
                 }
+                <hr className="hr my-3" />
+                <div className="mobile-menu-item-title">{t('common_btbar_mbbtbar_index:language')}</div>
+                <div className="change__language">
+                  <div className="language">
+                    <img src="/img/vn.png" alt="vn" />
+                    <a
+                      onClick={() => onLanguageClick('vi')}
+                      aria-hidden="true"
+                      className="language-title">
+                      {t('common_btbar_mbbtbar_index:vn')}
+                    </a>
+                  </div>
+                  <div className="language language-en">
+                    <img src="/img/en.png" alt="vn" />
+                    <a
+                      onClick={() => onLanguageClick('en')}
+                      aria-hidden="true"
+                      className="language-title">
+                      {t('common_btbar_mbbtbar_index:en')}
+                    </a>
+                  </div>
+                </div>
                
               </ul>
             </div>
@@ -139,8 +163,8 @@ function MobileBottomBar() {
               <div className="logout__mobile">
                 <hr className="hr my-3" />
                 <button type="button" className="mobile-menu-list-item pb-3" onClick={logoutHandler}>
-                  <i className="fas fa-sign-out-alt  " />
-                  Logout
+                  <i className="rockland-nav__icon fas fa-sign-out-alt  " />
+                  {t('common_btbar_mbbtbar_index:logout')}
                 </button>
               </div>
             )}

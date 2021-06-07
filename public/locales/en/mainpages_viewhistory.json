@@ -1,0 +1,15 @@
+{
+	"shipping":"Shipping",
+	"shipping_address":"Shipping address",
+	"payment":"Payment",
+	"payment_method":"Payment Method:",
+	"payment_status":"Payment Status:",
+	"product":"Product",
+	"price":"Price",
+	"quantity":"Quantity",
+	"total":"Total",
+	"order_summary":"Order Summary",
+	"sub_total":"SubTotal",
+	"order_total":"Order Total",
+	"delete_orders":"Delete orders"
+}

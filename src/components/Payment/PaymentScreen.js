@@ -7,13 +7,15 @@ import NavBar from '../Common/NavBar/index';
 import BottomBar from '../Common/BottomBar/index';
 import FooterPage from '../Common/Footer/Footer';
 import ScrollToTopBtn from '../Common/ScrollToTop/ScrollToTop';
-
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 
 
 
 function PaymentScreen(props){
 
+    const { t } = useTranslation(['payment']);
     const cart = useSelector((state)=>state.cart);
     const {shipping}= cart;
     if(!shipping.address){
@@ -22,24 +24,26 @@ function PaymentScreen(props){
     const [paymentMethod, setPaymentMethod] = useState('');
     const dispatch = useDispatch();
     const submitHandler =(e)=>{
-        if(paymentMethod===""){
-            alert('Payment method not found');
-        }
         e.preventDefault();
-        dispatch(savePayment({paymentMethod}));
-        props.history.push('/place-order');
+        if(paymentMethod===""){
+            toast.error('Payment method not found');
+        }else{
+            dispatch(savePayment({paymentMethod}));
+            props.history.push('/place-order');
         }
+        
+    }
 
     return <div>
             <TopBar/>
-            <BottomBar  ></BottomBar>
+            <BottomBar></BottomBar>
             <NavBar/>
             <CheckoutSteps step1 step2 step3></CheckoutSteps>
             <div className="formShipping">
                 <form onSubmit={submitHandler}>
                 <ul className="form-container-shipping">
                     <li>
-                        <h2>Payment</h2>
+                        <h2>{t('payment:payment')}</h2>
                     </li>
                     <li>
                         <input type="radio" name="paymentMethod" value="Paypal"
@@ -56,16 +60,16 @@ function PaymentScreen(props){
                             </label>
                     </li>
                     <li>
-                        <input type="radio" name="paymentMethod" value="payment On Delivery"
+                        <input type="radio" name="paymentMethod" value="Cash On Delivery"
                         id="paymentMethod" onChange={(e)=>setPaymentMethod(e.target.value)}></input>
                             <label htmlFor="paymentMethod">
-                                Payment on delivery
+                                {t('payment:payment_on_delivery')}
                             </label>
                     </li>
                     
                     <li>
                         <button type="submit" className="button primary">
-                                Continue 
+                                {t('payment:continue')}
                         </button>
                     </li>
                 

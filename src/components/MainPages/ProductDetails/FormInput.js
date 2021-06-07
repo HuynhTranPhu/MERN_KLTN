@@ -1,8 +1,10 @@
 import React, {useRef, useEffect} from 'react'
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux'
 import { updateRating } from '../../../actions/comment'
 
 function FormInput({id, socket, rating, setReply, send, name}) {
+    const { t } = useTranslation(['mainpages_pdetal_forminput']);
     const nameRef = useRef()
     const contentRef = useRef()
 
@@ -49,10 +51,10 @@ function FormInput({id, socket, rating, setReply, send, name}) {
 
     return (
         <div className="form_input">
-            <p>Name</p>
+            <p>{t('mainpages_pdetal_forminput:name')}</p>
             <input type="text" defaultValue={userInfo.newUser.name} ref={nameRef} />
 
-            <p>Content</p>
+            <p>{t('mainpages_pdetal_forminput:content')}</p>
             <div ref={contentRef} 
                 contentEditable="true"
                 style={{
@@ -63,7 +65,7 @@ function FormInput({id, socket, rating, setReply, send, name}) {
                 }}
             />
 
-            <button onClick={commentSubmit}>Send</button>
+            <button onClick={commentSubmit}>{t('mainpages_pdetal_forminput:send')}</button>
         </div>
     )
 }

@@ -17,6 +17,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import HistoryItem from './HistoryItem';
+import { useTranslation } from 'react-i18next';
   
 function TabPanel(props) {
 const { children, value, index, ...other } = props;
@@ -44,18 +45,8 @@ function a11yProps(index) {
     };
   }
   
-//   const useStyles = makeStyles((theme) => ({
-//     root: {
-//       backgroundColor: theme.palette.background.paper,
-//       width: 500,
-//     },
-//   }));
-
-
-
-
-
 const History = () => {
+    const { t } = useTranslation(['mainpages_history']);
     const historyOrder = useSelector(state => state.historyOrder);
     const {history, loading, error } = historyOrder;
 
@@ -100,7 +91,7 @@ const History = () => {
             <TopBar/>
             <BottomBar ></BottomBar>
             <NavBar/>
-            <h1 className="Order-title">My orders</h1>   
+            <h1 className="Order-title">{t('mainpages_history:order_history')}</h1>   
                 <div className="container-fluid" >
                     <AppBar position="static" color="default">
                         <Tabs
@@ -111,12 +102,12 @@ const History = () => {
                         variant="fullWidth"
                         aria-label="full width tabs example"
                         >
-                        <Tab label="All" {...a11yProps(0)} />
-                        <Tab label="Ordered" {...a11yProps(1)} />
-                        <Tab label="Packed" {...a11yProps(2)} />
-                        <Tab label="Shipped" {...a11yProps(3)} />
-                        <Tab label="Delivered" {...a11yProps(4)} />
-                        <Tab label="Canceled" {...a11yProps(5)} />
+                        <Tab label={t('mainpages_history:all')} {...a11yProps(0)} />
+                        <Tab label={t('mainpages_history:received')} {...a11yProps(1)} />
+                        <Tab label={t('mainpages_history:packed')} {...a11yProps(2)} />
+                        <Tab label={t('mainpages_history:shipped')} {...a11yProps(3)} />
+                        <Tab label={t('mainpages_history:delivered')} {...a11yProps(4)} />
+                        <Tab label={t('mainpages_history:canceled')} {...a11yProps(5)} />
                         </Tabs>
                     </AppBar>
                     <SwipeableViews

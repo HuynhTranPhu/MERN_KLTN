@@ -6,7 +6,7 @@ import Reducer from '../reducers/index';
 const cartItems = Cookie.getJSON("cartItems")|| [];
 const userInfo = Cookie.getJSON("userInfo")|| null;
 
-const initialState = {cart : {cartItems, shipping:{}, payment:{}}, userLogin: {userInfo}};
+const initialState = {cartGet : {cartItems, shipping:{}, payment:{}}, userLogin: {userInfo}};
 const reducer = Reducer;
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

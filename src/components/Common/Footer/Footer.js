@@ -1,7 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 
 function FooterPage(){
+  const { t } = useTranslation(['common_footer']);
   return (
     <div>
         <div className="footer">
@@ -9,9 +11,9 @@ function FooterPage(){
                 <div className="row">
                     <div className="col-lg-3 col-md-6">
                         <div className="footer-widget">
-                            <h2>Get in Touch</h2>
+                            <h2>{t('common_footer:get_in_touch')}</h2>
                             <div className="contact-info">
-                                <p><i className="fa fa-map-marker"></i>1 Vo Van Ngan, Thu Duc, Ho Chi Minh City</p>
+                                <p><i className="fa fa-map-marker"></i>{t('common_footer:address')}</p>
                                 <p><i className="fa fa-envelope"></i>phu@gmail.com</p>
                                 <p><i className="fa fa-phone"></i>+034-304-8571</p>
                             </div>
@@ -20,7 +22,7 @@ function FooterPage(){
                     
                     <div className="col-lg-3 col-md-6">
                         <div className="footer-widget">
-                            <h2>Follow Us</h2>
+                            <h2>{t('common_footer:follow_us')}</h2>
                             <div className="contact-info">
                                 <div className="social">
                                     <a href=""><i className="fab fa-twitter"></i></a>
@@ -35,22 +37,22 @@ function FooterPage(){
 
                     <div className="col-lg-3 col-md-6">
                         <div className="footer-widget">
-                            <h2>Company Info</h2>
+                            <h2>{t('common_footer:company_info')}</h2>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms & Condition</a></li>
+                                <li><a href="#">{t('common_footer:about_us')}</a></li>
+                                <li><a href="#">{t('common_footer:privacy_policy')}</a></li>
+                                <li><a href="#">{t('common_footer:terms_condition')}</a></li>
                             </ul>
                         </div>
                     </div>
 
                     <div className="col-lg-3 col-md-6">
                         <div className="footer-widget">
-                            <h2>Purchase Info</h2>
+                            <h2>{t('common_footer:purchase_info')}</h2>
                             <ul>
-                                <li><a href="#">Payment Policy</a></li>
-                                <li><a href="#">Shipping Policy</a></li>
-                                <li><a href="#">Return Policy</a></li>
+                                <li><a href="#">{t('common_footer:payment_policy')}</a></li>
+                                <li><a href="#">{t('common_footer:shipping_policy')}</a></li>
+                                <li><a href="#">{t('common_footer:return_policy')}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -59,13 +61,13 @@ function FooterPage(){
                 <div className="row payment align-items-center">
                     <div className="col-md-6">
                         <div className="payment-method">
-                            <h2>We Accept:</h2>
+                            <h2>{t('common_footer:we_accept')}</h2>
                             <img src="/img/payment-method.png" alt="Payment Method" />
                         </div>
                     </div>
                     <div className="col-md-6">
                         <div className="payment-security">
-                            <h2>Secured By:</h2>
+                            <h2>{t('common_footer:secured_by')}</h2>
                             <img src="/img/godaddy.svg" alt="Payment Security" />
                             <img src="/img/norton.svg" alt="Payment Security" />
                             <img src="/img/ssl.svg" alt="Payment Security" />
@@ -78,7 +80,7 @@ function FooterPage(){
             <div className="container">
                 <div className="row">
                     <div className="col-md-12 copyright">
-                        <p>Copyright &copy;{new Date().getFullYear()}. All Rights Reserved</p>
+                        <p>Copyright &copy;{new Date().getFullYear()}. {t('common_footer:all_reserved')}</p>
                     </div>
                 </div>
             </div>

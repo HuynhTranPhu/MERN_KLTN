@@ -47,8 +47,8 @@ function cartReducer(state ={cartItems:[], shipping: {}, payment: {}}, action){
             return {...state, shipping:action.payload}
         case CART_SAVE_PAYMENT:
             return {...state, payment:action.payload}
-        case CART_EMPTY:
-            return {...state, cartItems:[]};
+        // case CART_EMPTY:
+        //     return {...state, cartItems:[]};
         case CART_ADD_FAIL:
             return { loading : false, error: action.payload}
         default:
@@ -74,6 +74,8 @@ function cartGetReducer (state = { cartItems: []}, action){
             return {loading: true, cartItems:[]};
         case  CART_LIST_SUCCESS:
             return { loading : false , cartItems: action.payload};
+        case CART_EMPTY:
+            return {...state, cartItems:[]};
         case CART_LIST_FAIL:
             return { loading : false, error: action.payload}
         default:

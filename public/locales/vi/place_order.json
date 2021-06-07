@@ -1,0 +1,14 @@
+{
+	"shipping":"Phí vận chuyển",
+	"shipping_address":"Địa điểm",
+	"payment":"Thanh toán",
+	"payment_method":"Phương thức thanh toán:",
+	"product":"Sản phẩm",
+	"price":"Giá",
+	"quantity":"Số lượng",
+	"total":"Tổng", 
+	"order_summary":"Đơn hàng", 
+	"sub_total":"Tổng", 
+	"total_price":"Tổng tiền", 
+	"place_order":"Đặt hàng" 
+}

@@ -1,10 +1,12 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import TopBar from '../Common/TopBar/TopBar'
 import NavBar from '../Common/TopBar/TopBar'
 import BottomBar from '../Common/TopBar/TopBar'
 import Footer from '../Common/TopBar/TopBar'
 const Fail = () =>{
+	const { t } = useTranslation(['status_fail']);
 	return(
 		<>
 			<TopBar/>
@@ -12,9 +14,9 @@ const Fail = () =>{
             <NavBar/>
 			<div className="container text-center">
 				<div className="content-404">
-					<h1><b>OPPS!</b>Fail</h1>
-					<p>Uh... So it looks like you brock something. The page you are looking for has up and Vanished.</p>
-					<h2><Link to="/">Bring me back Home</Link></h2>
+					<h1><b>OPPS!</b>{t('status_fail:fail')}</h1>
+					<p>{t('status_fail:so_it_looks_like_you_brock_something')}</p>
+					<h2><Link to="/">{t('status_fail:bring_me_back_home')}</Link></h2>
 				</div>
 			</div>
 			<Footer/>

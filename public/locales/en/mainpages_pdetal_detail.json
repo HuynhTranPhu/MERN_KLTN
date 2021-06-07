@@ -1,0 +1,22 @@
+{
+	"price":"Price:",
+	"status":"Status:",
+	"in_stock":"In Stock:",
+	"unavailable":"Unavailable",
+	"color":"Color:",
+	"size":"Size:",
+	"review":"Reviews",
+	"reviews":"Review:",
+	"rating":"Rating",
+	"add_to_cart":"Add to Cart",
+	"description":"Description",
+	"product_description":"Product description",
+	"category":"Category",
+	"brand":"Brand",
+	"your_feedback":"Your Feedback",
+	"all_of_feedback":"All of Feedback",
+	"see_more":"Go to shopping",
+	"enter_first_feedback":"Let 's enter the first feedback",
+	"load_more":"Load more",
+	"related_products":"Related Products"
+}

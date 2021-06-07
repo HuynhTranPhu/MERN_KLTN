@@ -10,11 +10,14 @@ import ScrollToTopBtn from '../Common/ScrollToTop/ScrollToTop';
 import { addOrder } from '../../actions/orderActions';
 import { ORDER_RESET } from '../../constants/orderContants';
 import PayPalButton from './PayPalButton';
+import { useTranslation } from 'react-i18next';
 function PlaceOrderScreen(props){
 
-
+    const { t } = useTranslation(['place_order']);
     const cart = useSelector(state => state.cart);
-    const {cartItems, payment} = cart;
+    const { payment} = cart;
+    const cartGet = useSelector(state => state.cartGet);
+    const {cartItems, loading} = cartGet;
     const addOrderPost = useSelector(state => state.orderPost);
     const { success} = addOrderPost;
     
@@ -28,7 +31,7 @@ function PlaceOrderScreen(props){
 
     const toPrice = (num) => Number(num.toFixed(2));
     const itemsPrice = toPrice(
-        cartItems.reduce((a,c)=> a + c.price * c.count,0)
+        cartItems.reduce((a,c)=> a + c.price * c.quantity,0)
     ); 
     const shippingPrice = itemsPrice > 100||itemsPrice===0 ? toPrice(0) : toPrice(10);
     const totalPrice = itemsPrice + shippingPrice ;
@@ -38,13 +41,13 @@ function PlaceOrderScreen(props){
     const placeOrderHandler = () =>{
         ///create order
         dispatch(addOrder(userInfo.newUser._id,cart.shipping.city,
-            cart.shipping.postalCode,cart.shipping.address,
+            cart.shipping.name,cart.shipping.address,
             cart.shipping.numberPhone,cart.payment.paymentMethod, shippingPrice.toFixed(2)));
     }
     const tranSuccess = async(payment) => {
         if(payment.paid===true){
             dispatch(addOrder(userInfo.newUser._id,cart.shipping.city,
-                cart.shipping.postalCode,cart.shipping.address,
+                cart.shipping.name,cart.shipping.address,
                 cart.shipping.numberPhone,cart.payment.paymentMethod, shippingPrice.toFixed(2)));
         } 
     }
@@ -64,19 +67,19 @@ function PlaceOrderScreen(props){
             <div className="placeorder-info">
                 <div>
                     <h3>
-                        Shipping
+                        {t('place_order:shipping_address')}
                     </h3>
                     <div>
                         {cart.shipping.address},{cart.shipping.city},
-                        {cart.shipping.postalCode},{cart.shipping.numberPhone}
+                        {cart.shipping.name},{cart.shipping.numberPhone}
                     </div>
                 </div>
                 <div>
                     <h3>
-                        Payment
+                    {t('place_order:payment')}
                     </h3>
                     <div>
-                        Payment Method: {cart.payment.paymentMethod}
+                    {t('place_order:payment_method')} {cart.payment.paymentMethod}
                     </div>
                 </div>
                     <div className="cart-page">
@@ -88,10 +91,10 @@ function PlaceOrderScreen(props){
                                             <table className="table table-bordered">
                                                 <thead className="thead-dark"> 
                                                         <tr>
-                                                            <th>Product</th>
-                                                            <th>Price</th>
-                                                            <th>Quantity</th>
-                                                            <th>Total</th>
+                                                            <th>{t('place_order:product')}</th>
+                                                            <th>{t('place_order:price')}</th>
+                                                            <th>{t('place_order:quantity')}</th>
+                                                            <th>{t('place_order:total')}</th>
                                                             
                                                         </tr>    
                                                 </thead>
@@ -112,11 +115,11 @@ function PlaceOrderScreen(props){
                                                                 <div className="qty">
                                                                     
                                                                     <input type="text"
-                                                                    value={item.count}  />
+                                                                    value={item.quantity}  />
                                                                     
                                                                 </div>
                                                             </td>
-                                                            <td>${item.price * item.count}</td>
+                                                            <td>${item.price * item.quantity}</td>
                                                            
                                                         </tr>)
                                                     }    
@@ -132,12 +135,12 @@ function PlaceOrderScreen(props){
             <div className="placeorder-action">
                 <ul>
                     <li>
-                        <h3><b>Order Summary</b></h3>
+                        <h3><b>{t('place_order:order_summary')}</b></h3>
                     </li>
                     <li>
                         
                             <div>
-                                SubTotal
+                            {t('place_order:sub_total')}
                             </div>
                             <div>
                                 ${itemsPrice.toFixed(2)}
@@ -148,7 +151,7 @@ function PlaceOrderScreen(props){
                     <li>
                         
                             <div>
-                                Shipping
+                            {t('place_order:shipping')}
                             </div>
                             <div>
                                 ${shippingPrice.toFixed(2)}
@@ -159,7 +162,7 @@ function PlaceOrderScreen(props){
                     <li>
                         
                         <div>
-                            Order Total
+                        {t('place_order:total_price')}
                         </div>
                         <div>
                             ${totalPrice.toFixed(2)}
@@ -175,7 +178,7 @@ function PlaceOrderScreen(props){
                         </li>:
                          <li>
                          <button className="checkout-btn" disabled={cartItems.length===0} 
-                         onClick={placeOrderHandler}>Place Order</button>
+                         onClick={placeOrderHandler}>{t('place_order:place_order')}</button>
                          
                         </li>
                     }

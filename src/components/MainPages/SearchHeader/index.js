@@ -11,11 +11,13 @@ import BottomBar from '../../Common/BottomBar/index';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import { addCart } from '../../../actions/cartAction';
+import { useTranslation } from 'react-i18next';
 
 
 
 
 function SearchScreen(props){
+    const { t } = useTranslation(['mainpages_search']);
     const searchHeader = useSelector(state => state.searchHeader);
     const {productSearch, loading , error} = searchHeader;
 
@@ -87,8 +89,8 @@ function SearchScreen(props){
                             {  productSearch.length === 0 ?(                                                 
                                 <div className="empty-cart1 ">
                                     <img className="empty-cart-img" src="/images/emptyCart.png" alt="Product" />
-                                    <p className="empty-cart-note">OOPS!!!Products you search is not found!</p>
-                                    <Link className="empty-cart-shopping" to="/">Go to Shopping</Link>
+                                    <p className="empty-cart-note">{t('mainpages_search:search_products')}</p>
+                                    <Link className="empty-cart-shopping" to="/">{t('mainpages_search:go_to_shopping')}</Link>
                                 </div>
                                 ):
                                 productSearch.map((product) =>
@@ -109,7 +111,7 @@ function SearchScreen(props){
                                             {
                                                 product.count>0 && 
                                                 <a className="btn" onClick={()=>handleAddToCart(product._id,product.name,product.price,product.img)}>
-                                                    <i className="fa fa-shopping-cart"></i>Buy Now</a>
+                                                    <i className="fa fa-shopping-cart"></i>{t('mainpages_search:buy_now')}</a>
                                             }
                                             </div>
                                         </div>

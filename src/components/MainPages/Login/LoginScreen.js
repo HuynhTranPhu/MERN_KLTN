@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login, loginFaceBook, loginGoogle } from '../../../actions/userAction';
 import LoadingBox from '../../Config/LoadingBox';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 //import config from '../../Config/index';
 require ('dotenv').config();
 //file config
@@ -19,6 +20,7 @@ const fb = process.env.REACT_APP_FACEBOOK_CLIENT
 
 
 function LoginScreen(props){
+    const { t } = useTranslation(['mainpages_login']);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const userLogin = useSelector(state => state.userLogin);
@@ -103,7 +105,7 @@ function LoginScreen(props){
             <form onSubmit={submitHandler}>
                 <ul className="form-container">
                     <li>
-                        <h2 className="title">Welcome</h2>
+                        <h2 className="title">{t('mainpages_login:welcome')}</h2>
                     </li>
                     <li>
                         {loading && <LoadingBox></LoadingBox>}
@@ -115,22 +117,22 @@ function LoginScreen(props){
 
                     </li>
                     <li>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">{t('mainpages_login:password')}</label>
                         <input type="password" id="password" name="password" onChange={(e)=> setPassword(e.target.value)}></input>
                     </li>
                     <li>
                         <button type="submit" className="button primary">
-                                Login 
+                        {t('mainpages_login:login')}
                         </button>
                     </li>
                     <li>
-                       <Link to="/forgotPass/" className="forgot">Forgotten password?</Link> 
+                       <Link to="/forgotPass/" className="forgot">{t('mainpages_login:forgotten_password')}</Link> 
                     </li>
                     <li className="sign-up">
                         <p>
-                            Don't have an account?
+                            {t('mainpages_login:don_have an account')}
                             <Link to={redirect === "/" ? "register": "register? redirect=" + redirect} className="borders" >
-                                Sign Up
+                            {t('mainpages_login:sign_up')}
                             </Link>
                         </p>
                         
@@ -138,7 +140,7 @@ function LoginScreen(props){
                 
                     <li className="facebook">
                         <p>
-                            Login with
+                        {t('mainpages_login:login_with')}
                             <FacebookLogin
                             appId={fb}
                             autoLoad={false}

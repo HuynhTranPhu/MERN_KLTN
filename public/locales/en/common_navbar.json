@@ -1,0 +1,10 @@
+{
+	"home":"Home",
+	"products":"Products",
+	"cart":"Cart",
+	"my_account":"My Account",
+	"contact_us":"Contact Us",
+	"my_order":"My order",
+	"logout":"Logout",
+	"change_password":"Change password"
+}

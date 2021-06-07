@@ -10,10 +10,11 @@ import { removeOrder, viewHistoryGet } from '../../../actions/orderActions';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import OrderStatus from '../../OrderStatus/index';
+import { useTranslation } from 'react-i18next';
 
 function ViewHistory(props){
 
-
+     const { t } = useTranslation(['mainpages_viewhistory']);
      const viewHistoryOrder = useSelector(state => state.viewHistoryOrder);
      const {viewHistory, loading, error } = viewHistoryOrder;
      const removeOrder1 = useSelector(state => state.removeOrder);
@@ -72,22 +73,22 @@ function ViewHistory(props){
                 <div className="placeorder-info">
                     <div>
                         <h3>
-                            Shipping
+                        {t('mainpages_viewhistory:shipping_address')}
                         </h3>
                         <div>
                             {viewHistory.map(item=>item.address )},
                             {viewHistory.map(item=>item.city)},
-                            {viewHistory.map(item=> item.posteCode )},
+                            {viewHistory.map(item=> item.name )},
                             {viewHistory.map(item=>item.phone)}
                         </div>
                     </div>
                     <div>
                         <h3>
-                            Payment
+                        {t('mainpages_viewhistory:payment')}
                         </h3>
                         <div>
-                            Payment Method: {viewHistory.map(item=>item.payment)},
-                            Payment Status: {viewHistory.map(item=>item.paymentStatus)}
+                        {t('mainpages_viewhistory:payment_method')} {viewHistory.map(item=>item.payment)},
+                        {t('mainpages_viewhistory:payment_status')} {viewHistory.map(item=>item.paymentStatus)}
                         </div>
                     </div>
                         <div className="cart-page">
@@ -99,10 +100,10 @@ function ViewHistory(props){
                                                 <table className="table table-bordered">
                                                     <thead className="thead-dark"> 
                                                             <tr>
-                                                                <th>Product</th>
-                                                                <th>Price</th>
-                                                                <th>Quantity</th>
-                                                                <th>Total</th>
+                                                                <th>{t('mainpages_viewhistory:product')}</th>
+                                                                <th>{t('mainpages_viewhistory:price')}</th>
+                                                                <th>{t('mainpages_viewhistory:quantity')}</th>
+                                                                <th>{t('mainpages_viewhistory:total')}</th>
                                                                 
                                                             </tr>    
                                                     </thead>
@@ -151,12 +152,12 @@ function ViewHistory(props){
                 <div className="placeorder-action">
                     <ul>
                         <li>
-                            <h3><b>Order Summary</b></h3>
+                            <h3><b>{t('mainpages_viewhistory:order_summary')}</b></h3>
                         </li>
                         <li>
                             
                                 <div>
-                                    SubTotal
+                                {t('mainpages_viewhistory:sub_total')}
                                 </div>
                                 <div>
                                     ${viewHistory.map(item=>(
@@ -171,7 +172,7 @@ function ViewHistory(props){
                         <li>
                             
                                 <div>
-                                    Shipping
+                                {t('mainpages_viewhistory:shipping')}
                                 </div>
                                 <div>
                                     ${viewHistory.map(item=>item.shiping.toFixed(2) )}
@@ -182,7 +183,7 @@ function ViewHistory(props){
                         <li>
                             
                             <div>
-                                Order Total
+                            {t('mainpages_viewhistory:order_total')}
                             </div>
                             <div>
                                 ${viewHistory.map(item=>item.order_subtotal.toFixed(2) )}
@@ -191,7 +192,7 @@ function ViewHistory(props){
                         <li>
                             {
                                 <button className="checkout-btn" disabled={c>2}
-                                  onClick ={() =>removeOrderHandler(viewHistory.map(item=>item._id ))}>Delete orders
+                                  onClick ={() =>removeOrderHandler(viewHistory.map(item=>item._id ))}>{t('mainpages_viewhistory:delete_orders')}
                                 </button>
                                 
                             }

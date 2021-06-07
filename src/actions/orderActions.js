@@ -17,18 +17,18 @@ import {REMOVE_ORDER_REQUEST,
         GET_ORDER_BY_TYPE_FAIL} from "../constants/orderContants";
 require ('dotenv').config();
 const url = process.env.REACT_APP_URL_CLIENT;
-const addOrder = (id_user,city,posteCode,address,phone,payment,shiping) => async (dispatch, getState) =>{
-    console.log({id_user,city,posteCode,address,phone,payment,shiping});
-    dispatch({type: ADD_ORDER_REQUEST, payload:{id_user,city,posteCode,address,phone,payment,shiping}});
+const addOrder = (id_user,city,name,address,phone,payment,shiping) => async (dispatch, getState) =>{
+    dispatch({type: ADD_ORDER_REQUEST, payload:{id_user,city,name,address,phone,payment,shiping}});
     const { userLogin :{userInfo}}= getState();
     try{
-        const {data} = await Axios.post(`${url}/order/addorder`, {id_user,city,posteCode,address,phone,payment,shiping},
+        const {data} = await Axios.post(`${url}/order/addorder`, {id_user,city,name,address,phone,payment,shiping},
         {
             headers: {Authorization:`${userInfo.token}`},
         }
         );
         dispatch({type:ADD_ORDER_SUCCESS,payload:data});
         dispatch({type: CART_EMPTY});
+        //Cookie.remove('cartItems');
          
         
     }catch(error){

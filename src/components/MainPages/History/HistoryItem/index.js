@@ -1,10 +1,12 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { viewHistoryGet } from '../../../../actions/orderActions';
 import LoadingBox from '../../../Config/LoadingBox';
 import MessageBox from '../../../Config/MessageBox';
 function HistoryItem({history, loading, error}) {
+    const { t } = useTranslation(['mainpages_history']);
     const dispatch = useDispatch();
     const HandelViewDetails = (id_order)=>{
         dispatch(viewHistoryGet(id_order));
@@ -19,7 +21,7 @@ function HistoryItem({history, loading, error}) {
                         error? (
                             <MessageBox variant="danger">{error}</MessageBox>
                         ):(
-                            <div className="cart-page">
+                            <div className="cart-page my_orders">
                                 <div className="container-fluid">
                                     <div className="row">
                                         <div className="col-lg-12" >
@@ -31,16 +33,16 @@ function HistoryItem({history, loading, error}) {
                                                                     history.length === 0 ?(                                                  
                                                                         <div className="empty-cart">
                                                                             <img className="empty-cart-img" src="/images/emptyCart.png" alt="Product" />
-                                                                            <p className="empty-cart-note">Your orders is empty</p>
-                                                                            <Link className="empty-cart-shopping" to="/">Go to Shopping</Link>
+                                                                            <p className="empty-cart-note">{t('mainpages_history:empty_order')}</p>
+                                                                            <Link className="empty-cart-shopping" to="/">{t('mainpages_history:go_to_shopping')}</Link>
                                                                         </div>
                                                                     ):
                                                                     <tr>
-                                                                        <th>Id order</th>
-                                                                        <th>Date</th>
-                                                                        <th>Details</th>
-                                                                        <th>Total</th>
-                                                                        <th>Payment Status</th>
+                                                                        <th>{t('mainpages_history:id_order')}</th>
+                                                                        <th>{t('mainpages_history:date')}</th>
+                                                                        <th>{t('mainpages_history:details')}</th>
+                                                                        <th>{t('mainpages_history:total')}</th>
+                                                                        <th>{t('mainpages_history:payment_status')}</th>
                                                                         {/* <th>Remove</th> */}
                                                                     
                                                                     </tr>   
@@ -53,7 +55,7 @@ function HistoryItem({history, loading, error}) {
                                                                 <tr key={item._id}>
                                                                     <td>{item._id}</td>
                                                                     <td>{item.order_date.substring(0, 10)}</td>  
-                                                                    <td><Link to= {"/view-history/"+ item._id} onClick={()=>HandelViewDetails(item._id)}>View Details</Link></td>
+                                                                    <td><Link to= {"/view-history/"+ item._id} onClick={()=>HandelViewDetails(item._id)}>{t('mainpages_history:view_details')}</Link></td>
                                                                     <td>${item.order_subtotal }</td>
                                                                     <td>{item.paymentStatus}</td>
                                                                 </tr>)

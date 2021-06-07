@@ -11,11 +11,13 @@ import BottomBar from '../../Common/BottomBar/index';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import { addCart } from '../../../actions/cartAction';
+import { useTranslation } from 'react-i18next';
 
 
 
 
 function ProductScreen(props){
+    const { t } = useTranslation(['mainpages_product']);
     const productList = useSelector(state => state.productList);
     const {products,filteredItems,cate,sort,search,loading , error,numberOfPages} = productList;
 
@@ -34,8 +36,8 @@ function ProductScreen(props){
 
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i+1);
-    console.log(pageNumber);
-    console.log(numberOfPages);
+    // console.log(pageNumber);
+    // console.log(numberOfPages);
    
     const dispatch = useDispatch();
 
@@ -47,27 +49,27 @@ function ProductScreen(props){
         };
     }, [pageNumber])
     //Add to cart
-    const handleAddToCart = (id,name,price, image) =>{
-        let a = {_id: id,
-            name: name,
-            price: price,
-            img: image,
-            quantity: 1};
-        let carts =[a];
+    // const handleAddToCart = (id,name,price, image) =>{
+    //     let a = {_id: id,
+    //         name: name,
+    //         price: price,
+    //         img: image,
+    //         quantity: 1};
+    //     let carts =[a];
         
-        if(!userInfo){
-            props.history.push("/login");
-        }else{
+    //     if(!userInfo){
+    //         props.history.push("/login");
+    //     }else{
             
-            dispatch(addCart(userInfo.newUser._id,carts));
-            // if(success){
-            props.history.push(`/cart/${id}`); 
-            // }else{
-            //     alert('Something is wrong');
-            // }
-        }
+    //         dispatch(addCart(userInfo.newUser._id,carts));
+    //         // if(success){
+    //         props.history.push(`/cart/${id}`); 
+    //         // }else{
+    //         //     alert('Something is wrong');
+    //         // }
+    //     }
        
-    }
+    // }
     
     const gotoPrevious = () => {
         setPageNumber(Math.max(0, pageNumber - 1));
@@ -97,11 +99,11 @@ function ProductScreen(props){
                                 <div className="product-view-top">
                                     <div className="row">
                                         <div className="col-md-3">
-                                            {`${filteredItems.length} products found- pages ${pageNumber}`}
+                                            {`${filteredItems.length} ${t('mainpages_product:count_in_page')} ${pageNumber}`}
                                         </div>
                                         <div className="col-md-3">
                                             <div className="product-search">
-                                                    <input type="text" placeholder="Search"
+                                                    <input type="text" placeholder={t('mainpages_product:search_place')}
                                                     value={search}
                                                     onChange={e=>
                                                        {
@@ -127,7 +129,7 @@ function ProductScreen(props){
                                                                     )) 
                                                             }}
                                                             >
-                                                            <option value="">All Products</option>
+                                                            <option value="">{t('mainpages_product:all_products')}</option>
                                                             {
                                                                 category.map(category => (
                                                                     <option value={category._id} key={category._id}>
@@ -155,9 +157,9 @@ function ProductScreen(props){
                                                             ));
                                                         }}
                                                         >
-                                                            <option value="">Sort by</option>
-                                                            <option value="lowestprice">Lowest to highest</option>
-                                                            <option value="highestprice">Highest to lowest</option>
+                                                            <option value="">{t('mainpages_product:sort_by')}</option>
+                                                            <option value="lowestprice">{t('mainpages_product:lowest_to_highest')}</option>
+                                                            <option value="highestprice">{t('mainpages_product:highest_to_lowest')}</option>
                                                     </select>
                                               </div>
                                              
@@ -169,8 +171,8 @@ function ProductScreen(props){
                                 filteredItems.length===0?(                                                 
                                     <div className="empty-cart1 ">
                                         <img className="empty-cart-img" src="/images/emptyCart.png" alt="Product" />
-                                        <p className="empty-cart-note">OOPS!!!Products you search is not found!</p>
-                                        <Link className="empty-cart-shopping" to="/">Go to Shopping</Link>
+                                        <p className="empty-cart-note">{t('mainpages_product:search_products')}</p>
+                                        <Link className="empty-cart-shopping" to="/">{t('mainpages_product:go_to_shopping')}</Link>
                                     </div>
                                     ):
                                     filteredItems.map((product) =>
@@ -181,18 +183,18 @@ function ProductScreen(props){
                                                     <Link to={'/product-detail/' + product._id}>{product.name}</Link>
                                                 </div>
                                                 <div className="product-image">
-                                                        <img className="image-product" src={product.img} alt="Product" />
+                                                        <img className="image-product" src={product.images[0]} alt="Product" />
                                                         <div className="product-action">
                                                             <Link to={'/product-detail/' + product._id}><i className="fas fa-eye" /></Link>             
                                                         </div>
                                                 </div>
                                                 <div className="product-price">
                                                 <h3><span>$</span>{product.price}</h3>
-                                                {
+                                                {/* {
                                                     product.quantity>0 && 
                                                     <a className="btn btn_tablet_res-add-cart" onClick={()=>handleAddToCart(product._id,product.name,product.price,product.img)}>
-                                                        <i className="fa fa-shopping-cart"></i>Buy Now</a>
-                                                }
+                                                        <i className="fa fa-shopping-cart"></i>{t('mainpages_product:buy_now')}</a>
+                                                } */}
                                                 </div>
                                             </div>
                                         </div>
@@ -202,13 +204,13 @@ function ProductScreen(props){
                         </div>
                        { filteredItems.length>0 &&
                         <div className="col-md-12 pagination justify-content-center">
-                            <button onClick={gotoPrevious}>Previous</button>
+                            <button onClick={gotoPrevious}>{t('mainpages_product:previous')}</button>
                             {pages.map((pageIndex) => (
                                 <button key={pageIndex} onClick={() => setPageNumber(pageIndex)}>
                                 {pageIndex }
                                 </button>
                             ))}
-                            <button onClick={gotoNext}>Next</button>
+                            <button onClick={gotoNext}>{t('mainpages_product:next')}</button>
                         </div>
                        
                        }

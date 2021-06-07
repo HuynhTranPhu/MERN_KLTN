@@ -1,0 +1,9 @@
+{
+	"hello":"Hello",
+	"login":"Login",
+	"register":"Register",
+	"language": "Language",
+	"search_bottom_bar":"Search",
+	"vi":"Vietnamese",
+  	"en": "English"
+}

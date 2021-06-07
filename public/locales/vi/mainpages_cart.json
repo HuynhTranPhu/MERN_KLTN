@@ -1,0 +1,17 @@
+{
+	"empty_cart":"Không có sản phẩm nào trong giỏ hàng.",
+	"go_to_shopping":"Tiếp tục mua sắm",
+	"product":"Sản phẩm",
+	"price":"Giá",
+	"color":"Màu",
+	"size":"Size",
+	"quantity":"Số lượng",
+	"total":"Tổng",
+	"remove":"Xóa",
+	"cart_summary":"Giỏ hàng",
+	"sub_total":"Tổng tiền",
+	"shipping_cost":"Phí vận chuyển",
+	"grand_total":"Tổng cộng",
+	"update_cart":"Cập nhật giỏ hàng",
+	"proceed_to_checkout":"Thanh toán"
+}

@@ -1,0 +1,9 @@
+{
+	"shipping":"Shipping address",
+	"name":"Name",
+	"address":"Address",
+	"city":"City",
+	"postal_code":"Postal Code",
+	"number_phone":"Number Phone",
+	"continue":"Continue"
+}

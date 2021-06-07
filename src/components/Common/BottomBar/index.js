@@ -3,18 +3,18 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { useMediaQuery } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import MobileBottomBar from './MobileBottomBar/index'
-
 import {
     Link, useHistory
   } from "react-router-dom";
 import { searchHeader } from '../../../actions/productActions';
-
+import { useTranslation } from "react-i18next";
 
 
 
 
 
 function Index(props) {
+    const { t } = useTranslation(['common_btbar_index']);
     const userLogin = useSelector((state) => state.userLogin);
     const {userInfo} = userLogin;
     const cart = useSelector((state) => state.cart);
@@ -68,7 +68,7 @@ return (
                 < >
                     <div className="col-md-6 mr-5 search__mobile-search-res">
                         <div className="search">
-                            <input type="text" placeholder="Search"
+                            <input type="text" placeholder= {t('common_btbar_index:search_bottom_bar')}
                             //value={e.target.value}
                             
                             onChange={(e)=>
@@ -87,7 +87,7 @@ return (
                     </div>
                     <div className="col-md-2 search__mobile-res ">
                             <div className="user-name_bottom-bar">
-                                Hello {userInfo.newUser.name}
+                            {t('common_btbar_index:hello')} {userInfo.newUser.name}
                             </div>                   
                         
                     </div>
@@ -95,8 +95,8 @@ return (
 
                 ):(
                     <div className="mr-5" >
-                        <Link to="/login" className="btn__bottom-bar btn-sm mr-2 search__mobile-res table__res">Login</Link>                 
-                        <Link to="/register" className="btn__bottom-bar btn-sm mr-2 search__mobile-res ">Register</Link>
+                        <Link to="/login" className="btn__bottom-bar btn-sm mr-2 search__mobile-res table__res">{t('common_btbar_index:login')}</Link>                 
+                        <Link to="/register" className="btn__bottom-bar btn-sm mr-2 search__mobile-res ">{t('common_btbar_index:register')}</Link>
                     </div>
                 )
                 

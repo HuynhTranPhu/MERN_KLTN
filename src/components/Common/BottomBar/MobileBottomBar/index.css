@@ -53,27 +53,32 @@ color: #fff;
     font-size: 1.5rem;
 }
 .mobile-menu-list {
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .mobile-menu-list-item {
-padding: 1rem 0 0 0;
+    padding: 1rem 0 0 0;
 }
 
 .mobile-menu-item-title {
-text-transform: uppercase;
-font-weight: 500;
-color: gray;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: gray;
 }
 
 .mobile-menu-list-item .mobile-menu-link {
-color: black;
-display: flex;
-align-items: center;
+    color: black;
+    display: flex;
+    align-items: center;
 }
 .mobile-menu-link:active {
     color: #FF6F61;
 }
+.rockland-nav__icon {
+    font-size: larger;
+    margin-right: 0.5em;
+    cursor: pointer;
+  }
 /*  news*/
 .logout__mobile button, .icon__mobile__menu-res button{
     background-color: transparent;
@@ -82,4 +87,17 @@ align-items: center;
 .cart-nav-icon{
     color: #000;
 }
+/*language*/ 
+.change__language{
+  display: flex;
+  margin-top: 1rem;
+}
+.change__language .language-en img {margin-left: 0.5rem;}
+.change__language .language {  display: flex;}
+.change__language .language img{
+    width: 45px;
+    height: 30px;
+    padding: 0 0.5rem 0 0 ;
+}
+.change__language .language .language-title {color: black;}
 

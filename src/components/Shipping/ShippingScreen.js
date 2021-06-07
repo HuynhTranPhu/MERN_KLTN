@@ -8,36 +8,40 @@ import BottomBar from '../Common/BottomBar/index';
 import FooterPage from '../Common/Footer/Footer';
 import ScrollToTopBtn from '../Common/ScrollToTop/ScrollToTop';
 import Axios from 'axios';
-
-
+import { useTranslation } from 'react-i18next';
+import useAddress from'../../components/hooks/useAddress';
+import { toast } from 'react-toastify';
 
 
 
 function ShippingScreen(props){
-    // const cart = useSelector(state => state.cart);
-
-    // const {cartItems, payment} = cart;
+    const { t } = useTranslation(['shipping']);
     const userLogin = useSelector((state) => state.userLogin);
     const {userInfo}= userLogin;
+    // const cart = useSelector((state) => state.cart);
+    // const {shipping}= cart;
     if(!userInfo){
         props.history.push('/login');
     }
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
-    const [postalCode, setPostalCode] = useState('');
+    const [name, setName] = useState(userInfo.newUser.name);
     const [numberPhone, setNumberPhone] = useState('');
     
     const dispatch = useDispatch();
-   
+    // const [city] = useAddress();
+    // console.log(city)
    
     
     const submitHandler =(e)=>{
-        if(address===''||city===''||postalCode===''||numberPhone===''){
-            alert("Information not found")
-        }
         e.preventDefault();
-        dispatch(saveShipping({address, city, postalCode, numberPhone}));
-        props.history.push('payment');
+        if(name ===''||address===''||city===''||numberPhone===''){
+            toast.error("Information not found")
+        }else{
+            dispatch(saveShipping({name, address, city, numberPhone}));
+            props.history.push('payment');
+        }
+        
         
         
     }
@@ -58,40 +62,41 @@ function ShippingScreen(props){
                 <form onSubmit={submitHandler}>
                 <ul className="form-container-shipping">
                     <li>
-                        <h2>Shipping</h2>
+                        <h2>{t('shipping:shipping')}</h2>
                     </li>
                     <li>
-                        <label htmlFor="address">
-                            Address
+                        <label htmlFor="name">
+                        {t('shipping:name')}
                         </label>
-                        <input type="text" name="address" id="address" onChange={(e)=>setAddress(e.target.value)}></input>
+                        <input defaultValue={userInfo.newUser.name} type="text" name="name" id="name" onChange={(e)=>setName(e.target.value)}></input>
 
                     </li>
-                    <li>
-                        <label htmlFor="city">
-                            City
-                        </label>
-                        <input type="text" name="city" id="city" onChange={(e)=>setCity(e.target.value)}></input>
-
-                    </li>
-                    <li>
-                        <label htmlFor="postalCode">
-                            Postal Code
-                        </label>
-                        <input type="text" name="postalCode" id="postalCode" onChange={(e)=>setPostalCode(e.target.value)}></input>
-
-                    </li>
+                    
                     <li>
                         <label htmlFor="numberPhone">
-                            Number Phone
+                        {t('shipping:number_phone')}
                         </label>
                         <input type="text" name="numberPhone" id="numberPhone" onChange={(e)=>setNumberPhone(e.target.value)}></input>
 
                     </li>
                     
                     <li>
+                        <label htmlFor="address">
+                        {t('shipping:address')}
+                        </label>
+                        <input type="text" name="address" id="address" onChange={(e)=>setAddress(e.target.value)}></input>
+
+                    </li>
+                    <li>
+                        <label htmlFor="city">
+                        {t('shipping:city')}
+                        </label>
+                        <input type="text" name="city" id="city" onChange={(e)=>setCity(e.target.value)}></input>
+
+                    </li>
+                    <li>
                         <button type="submit" className="button primary">
-                                Continue 
+                        {t('shipping:continue')} 
                         </button>
                     </li>
                 

@@ -1,0 +1,17 @@
+{
+	"empty_cart":"Your shopping cart is empty.",
+	"go_to_shopping":"Go to Shopping",
+	"product":"Product",
+	"price":"Price",
+	"color":"Color",
+	"size":"Size",
+	"quantity":"Quantity",
+	"total":"Total",
+	"remove":"Remove",
+	"cart_summary":"Cart Summary",
+	"sub_total":"Sub Total",
+	"shipping_cost":"Shipping Cost",
+	"grand_total":"Grand Total",
+	"update_cart":"Update Cart",
+	"proceed_to_checkout":"Proceed to Checkout"
+}

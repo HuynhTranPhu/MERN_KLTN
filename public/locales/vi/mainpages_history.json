@@ -1,0 +1,18 @@
+{
+	"order_history":"Đơn hàng của tôi",
+	"empty_order":"Chưa có đơn hàng",
+	"all":"Tất cả",
+	"received":"Đã tiếp nhận",
+	"packed":"Đã đóng gói",
+	"shipped":"Đã giao hàng",
+	"delivered":"Đã hoàn thành",
+	"canceled":"Đã hủy",
+	"go_to_shopping":"Tiếp tục mua sắm",
+	"id_order":"Mã đơn hàng",
+	"date":"Ngày đặt hàng",
+	"details":"Chi tiết",
+	"total":"Tổng tiền",
+	"payment_status":"Tình trạng thanh toán",
+	"view_details":"Xem chi tiết"
+
+}

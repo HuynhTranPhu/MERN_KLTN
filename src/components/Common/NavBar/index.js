@@ -1,22 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu } from '@material-ui/core';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { logout } from '../../../actions/userAction';
+import { useTranslation } from "react-i18next";
+import { getCart } from '../../../actions/cartAction';
 
 const Index = () => {
 
-
-    const cart = useSelector((state) => state.cart);
-    const {cartItems} = cart;
+    const { t } = useTranslation(['common_navbar']);
+    // const cart = useSelector((state) => state.cart);
+    // const {cartItems} = cart;
+    const cartGet = useSelector(state => state.cartGet);
+    const {cartItems} = cartGet;
     const userLogin = useSelector((state) => state.userLogin);
     const {userInfo} = userLogin;
   
     const dispatch = useDispatch();
     const logoutHandler = () =>{
         dispatch(logout());}
-
+    
+    useEffect(() => { 
+        //dispatch(getCart(userInfo?.newUser?._id));
+        return () => {
+            //
+        };
+        // if(productId){
+        //     dispatch(addToCart(productId,qty));
+        // }
+    },
+    // []
+        []
+    );
     const [anchorEl, setAnchorEl] = useState(null);
 
     const openMenu = (event) => {
@@ -37,11 +53,11 @@ const Index = () => {
 
                           <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                               <div className="navbar-nav mr-auto ml-3">
-                                  <NavLink to="/" className="nav-item nav-link">Home</NavLink>
-                                  <NavLink to="/product-list" className="nav-item nav-link">Products</NavLink>
-                                  <NavLink to="/cart" className="nav-item nav-link">Cart</NavLink>
+                                  <NavLink to="/" className="nav-item nav-link">{t('common_navbar:home')}</NavLink>
+                                  <NavLink to="/product-list" className="nav-item nav-link">{t('common_navbar:products')}</NavLink>
+                                  <NavLink to="/cart" className="nav-item nav-link">{t('common_navbar:cart')}</NavLink>
                                   {/* <NavLink to="/profile" className="nav-item nav-link">My Account</NavLink> */}
-                                  <NavLink to="/contact" className="nav-item nav-link">Contact Us</NavLink>
+                                  <NavLink to="/contact" className="nav-item nav-link">{t('common_navbar:contact_us')}</NavLink>
                                   {/* <NavLink to="/place-order" className="nav-item nav-link">Place Order</NavLink> */}
                                   {/* <NavLink to="/history" className="nav-item nav-link">History</NavLink> */}
                               </div>
@@ -56,7 +72,7 @@ const Index = () => {
                                                                 <a className="rockland-nav__link notification" >
                                                                     <ShoppingCartOutlinedIcon />
                                                                     {/* <span className="extraCart"> {t('cart:cart')} </span> */}
-                                                                        {cartItems.length>0 &&<span className="notification__counter">{cartItems.length}</span>}
+                                                                        {cartItems?.length>0 &&<span className="notification__counter">{cartItems.reduce((a,c)=> a + c.quantity,0)}</span>}
                                                                 </a>              
                                                         </Link>
                                                     </li>
@@ -80,7 +96,7 @@ const Index = () => {
                                                         <Link to="/profile">
                                                             <a className="dropdown__item dropdown__item-link">
                                                             <i className="far fa-user-circle dropdown__item-icon" />
-                                                             My account
+                                                            {t('common_navbar:my_account')}
                                                             </a>
                                                         </Link>
                                                     </div>
@@ -88,7 +104,7 @@ const Index = () => {
                                                         <Link to="/history">
                                                             <a className="dropdown__item dropdown__item-link">
                                                             <i className="far fa-calendar-check dropdown__item-icon" />
-                                                             My order
+                                                            {t('common_navbar:my_order')}
                                                             </a>
                                                         </Link>
                                                     </div>
@@ -96,7 +112,7 @@ const Index = () => {
                                                         <Link to="/" onClick={logoutHandler}>
                                                             <a className="dropdown__item dropdown__item-link">
                                                                 <i className="fas fa-sign-out-alt dropdown__item-icon" />
-                                                               Logout
+                                                                {t('common_navbar:logout')}
                                                             </a>
                                                         </Link>
                                                     </div>
@@ -104,7 +120,7 @@ const Index = () => {
                                                         <Link to="/update-password" >
                                                             <a className="dropdown__item dropdown__item-link">
                                                                 <i className="fa fa-key dropdown__item-icon" />
-                                                               Change password
+                                                                {t('common_navbar:change_password')}
                                                             </a>
                                                         </Link>
                                                     </div>

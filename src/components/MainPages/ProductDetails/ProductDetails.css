@@ -325,4 +325,13 @@ background: #FF6F61;
     width: 150px;
     margin: 20px 0;
     border: none;
-} 
+}
+/* .product-detail-top .product__image {
+    background-position: inherit;
+}  */
+.product-img-magnifier > div > img {
+    min-height: 20em;
+    max-height: 250px;
+    object-fit: contain;
+    pointer-events: none;
+}

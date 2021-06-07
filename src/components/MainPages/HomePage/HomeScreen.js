@@ -2,7 +2,7 @@ import React, {useEffect, useState } from 'react';
 import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { listProducts, listProductsSelling } from '../../../actions/productActions';
+import {listProductsSelling } from '../../../actions/productActions';
 import LoadingBox from '../../Config/LoadingBox';
 import MessageBox from '../../Config/MessageBox';
 import TopBar from '../../Common/TopBar/TopBar';
@@ -11,19 +11,18 @@ import NavBar from '../../Common/NavBar/index';
 import Brand from '../../Brand/Brand';
 import Review from '../../Review/Review';
 import HeaderSlider from '../../Header/HeaderSlider/HeaderSlider';
-import {addCart, addToCart } from '../../../actions/cartAction';
+import {addCart, addToCart, getCart } from '../../../actions/cartAction';
 import  BottomBar from '../../Common/BottomBar/index'
 import Feature from '../../Common/Feature/index'
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 
-import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 
 function HomeScreen(props){
     
-    // const productList = useSelector(state => state.productList);
-    // const {products} = productList;
+    const { t } = useTranslation(['feature_home','mainpages_home']);
 
     const productListSelling = useSelector(state => state.productListSelling);
     const {productSelling,loading , error} = productListSelling;
@@ -32,34 +31,15 @@ function HomeScreen(props){
     const { userInfo} = userLogin;
     const dispatch = useDispatch();
 
-    const feature = [ {title:'Secure Payment',content:'You can chose payments', icon:'fab fa-cc-mastercard'},
-                    {title:'Worldwide Delivery',content:'Delivery anywhere in the world',icon:'fa fa-truck'},
-                    {title:'90 Days Return',content:'You can return orders in 90 days', icon:'fas fa-sync'},
-                    {title:'24/7 Support',content:'Our staff always support you if you want', icon:'fa fa-comments'}
+    const feature = [ {title:t('feature_home:secure_payment'),content:t('feature_home:chose_payment'), icon:'fab fa-cc-mastercard'},
+                    {title:t('feature_home:delivery'),content:t('feature_home:delivery_in_the_world'),icon:'fa fa-truck'},
+                    {title:t('feature_home:day_return'),content:t('feature_home:can_return'), icon:'fas fa-sync'},
+                    {title:t('feature_home:support'),content:t('feature_home:always_support'), icon:'fa fa-comments'}
                     ]
-    
-
-    const addToCartHandler = (id,name,price,image) =>{
-        let a = {_id: id,
-            name: name,
-            price: price,
-            img: image,
-            quantity: 1
-        };
-        let carts =[a];
-        if(!userInfo){
-            props.history.push("/login");
-        }else{
-            toast.success("This product is added to cart");
-            dispatch(addCart(userInfo.newUser._id,carts));
-            dispatch(addToCart(id,1));   
-            
-        }
-    }
   
     useEffect(() => {
         dispatch(listProductsSelling());
-        
+        dispatch(getCart(userInfo?.newUser?._id));
         return () => {
         };
     }, [])
@@ -145,13 +125,13 @@ function HomeScreen(props){
                                   <div className="img-item">
                                       <img src="/img/category-1.jpg" />
                                       <Link className="img-text" to="/product-list">
-                                          <p>Woman Fashion 2021</p>
+                                          <p>{t('mainpages_home:woman_fashion')}</p>
                                       </Link>
                                   </div>
                                   <div className="img-item">
                                       <img src="/img/category-2.jpg" />
                                       <Link className="img-text" to="/product-list">
-                                          <p>Kids Fashion 2021</p>
+                                          <p>{t('mainpages_home:kids_fashion')}</p>
                                       </Link>
                                   </div>
                               </div>
@@ -169,7 +149,7 @@ function HomeScreen(props){
               <div className="feature">
                   <div className="container-fluid">
                       <div className="row align-items-center">
-                          {feature.map(item=><Feature title={item.title}content={item.content} icon={item.icon}></Feature>)}
+                          {feature.map(item=><Feature key={item.title} title={item.title}content={item.content} icon={item.icon}></Feature>)}
                       
                       </div>
                   </div>
@@ -183,36 +163,36 @@ function HomeScreen(props){
                           <div className="col-md-3">
                               <div className="category-item ch-400">
                                   <img src="img/category-3.jpg" />
-                                  <Link className="category-name" >
-                                      <p>Hot trend in 2021</p>
+                                  <Link className="category-name" to="" >
+                                      <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
                               </div>
                           </div>
                           <div className="col-md-3">
                               <div className="category-item ch-250">
                                   <img src="img/category-4.jpg" />
-                                  <Link className="category-name" >
-                                      <p>Hot trend in 2021</p>
+                                  <Link className="category-name"to="" >
+                                      <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
                               </div>
                               <div className="category-item ch-150">
                                   <img src="img/category-5.jpg" />
-                                  <Link className="category-name" >
-                                      <p>Hot trend in 2021</p>
+                                  <Link className="category-name"to="" >
+                                      <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
                               </div>
                           </div>
                           <div className="col-md-3">
                               <div className="category-item ch-150">
                                   <img src="img/category-6.jpg" />
-                                  <Link className="category-name" >
-                                      <p>Hot trend in 2021</p>
+                                  <Link className="category-name"to="" >
+                                      <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
                               </div>
                               <div className="category-item ch-250">
                                   <img src="img/category-7.jpg" />
-                                  <Link className="category-name" >
-                                      <p>Hot trend in 2021</p>
+                                  <Link className="category-name"to="" >
+                                      <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
                               </div>
                           </div>
@@ -220,7 +200,7 @@ function HomeScreen(props){
                               <div className="category-item ch-400">
                                   <img src="img/category-8.jpg" />
                                   <a className="category-name" >
-                                      <p>Hot trend in 2021</p>
+                                      <p>{t('mainpages_home:hot_trend')}</p>
                                   </a>
                               </div>
                           </div>
@@ -234,7 +214,7 @@ function HomeScreen(props){
                   <div className="container-fluid">
                       <div className="row align-items-center">
                           <div className="col-md-6">
-                              <h1>call us for any queries</h1>
+                              <h1>{t('mainpages_home:call_us')}</h1>
                           </div>
                           <div className="col-md-6">
                               <a href="tel:0123456789">+034-304-8571</a>
@@ -248,34 +228,34 @@ function HomeScreen(props){
                <div className="featured-product product">
                   <div className="container-fluid">
                       <div className="section-header">
-                          <h1>Featured Product</h1>
+                          <h1>{t('mainpages_home:featured_product')}</h1>
                       </div>
                       {/* <div className="align-items-center "> */}
                         <Slider {...settings}>
                         {
                             productSelling.map( (product) =>
-                                <div className="col-lg-12" key={product._id}>
+                                <div className="col-lg-12" key={product?._id}>
                                     <div className="product-item">
                                         <div className="product-title">
-                                            <Link to={'/product-detail/' + product._id}>{product.name}</Link>
+                                            <Link to={'/product-detail/' + product?._id}>{product?.name}</Link>
                                         </div>
                                         <div className="product-image">
                                             {
-                                                <img className="image-product" src={product.img} alt="Product "/>
+                                                <img className="image-product" src={product?.images[0]} alt="Product "/>
                                             }  
                                             <div className="product-action">   
-                                                    <Link to={'/product-detail/' + product._id}><i className="fas fa-eye" ></i></Link>
+                                                    <Link to={'/product-detail/' + product?._id}><i className="fas fa-eye" ></i></Link>
                                             </div>
                                         </div>
                                         <div className="product-price">
-                                            <h3><span>$</span>{product.price}</h3>                                          
-                                            {
-                                                product.quantity>0 && 
+                                            <h3><span>$</span>{product?.price}</h3>                                          
+                                            {/* {
+                                                product?.quantity>0 && 
                                                 <a className="btn btn_tablet_res-add-cart" 
-                                                    onClick={()=>addToCartHandler( product._id,product.name,product.price ,product.img)} >
+                                                    onClick={()=>addToCartHandler( product?._id,product.name,product.price ,product.img)} >
                                                     <i className="fa fa-shopping-cart"></i>Add To Cart
                                                 </a>
-                                            }
+                                            } */}
                                         </div>
                                     </div>
                                 </div> 

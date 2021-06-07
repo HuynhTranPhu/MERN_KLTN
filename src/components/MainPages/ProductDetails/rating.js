@@ -4,14 +4,14 @@ import React from 'react'
 
 let rate = 0;
 function rating({props}) {
-    if(props.numReviews){
-        rate = 100 - (props.rating / props.numReviews * 20)
+    if(props?.numReviews){
+        rate = 100 - (props?.rating / props?.numReviews * 20)
     }else{
-        rate = 100 - (props.rating * 20)
+        rate = 100 - (props?.rating * 20)
     }
 
     const style_star = {
-        clipPath: props.rating === 0 ? `inset(0 100% 0 0)` : `inset(0 ${rate}% 0 0)`
+        clipPath: props?.rating === 0 ? `inset(0 100% 0 0)` : `inset(0 ${rate}% 0 0)`
     }
     
     return (

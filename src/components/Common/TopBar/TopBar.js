@@ -1,17 +1,20 @@
 import React from 'react';
-import TopBarC from './TopBarC';
+import LanguagePicker from '../LanguagePicker';
 
 const TopBar = () => {
-    const topBar = [ {content:'support@email.com', icon:'fa fa-envelope'},
-                     {content:'+034-304-8571',icon:'fas fa-phone'}]
     return (
         <div className="top-bar">
-                  <div className="container-fluid">
-                      <div className="row">
-                      {topBar.map(item=><TopBarC   content={item.content} icon={item.icon}></TopBarC>)}
-                      </div>
-                        
-                  </div>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-sm-11">
+                        <i className="fa fa-envelope"></i>
+                        support@email.com
+                    </div>
+                    <div className="col-sm-1">
+                       <LanguagePicker/>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

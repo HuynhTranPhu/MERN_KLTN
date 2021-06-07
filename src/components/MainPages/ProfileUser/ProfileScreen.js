@@ -10,7 +10,9 @@ import BottomBar from '../../Common/BottomBar/index';
 import LoadingBox from '../../Config/LoadingBox';
 import MessageBox from '../../Config/MessageBox';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 export default function ProfileScreen(props){
+    const { t } = useTranslation(['mainpages_profile_user']);
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
 
@@ -58,13 +60,13 @@ export default function ProfileScreen(props){
                     <form className="form-profile" onSubmit={submitHandler}>
                         <div>
                             <h1 className="title">
-                                User Profile
+                            {t('mainpages_profile_user:user_profile')}
                             </h1>
                         </div>
                             <>
                             {errorUpdate && toast.error(errorUpdate)}
                                 <div>
-                                    <label htmlFor="name">Name</label>
+                                    <label htmlFor="name">{t('mainpages_profile_user:name')}</label>
                                     <input
                                         id="name"
                                         type="text"
@@ -86,7 +88,7 @@ export default function ProfileScreen(props){
                                 <div>
                                     <label> </label>
                                     <button className="button primary update-profile" type="submit">
-                                        Update
+                                    {t('mainpages_profile_user:update')}
                                     </button>
                                 </div>
                             </>
