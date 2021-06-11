@@ -214,12 +214,12 @@ const sortProducts = (items, sort) => (dispatch) => {
 
 
 export {listProducts, detailsProduct,
-    filterProducts,
-    sortProducts,
-    listCategory,
-    searchFilterProducts,
-    listProductsOfPage,
-    searchHeader,
-    listProductsSelling,
-    checkCanComment
+        filterProducts,
+        sortProducts,
+        listCategory,
+        searchFilterProducts,
+        listProductsOfPage,
+        searchHeader,
+        listProductsSelling,
+        checkCanComment
 };

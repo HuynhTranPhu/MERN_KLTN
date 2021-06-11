@@ -138,14 +138,14 @@ background: #000000;
     text-align: center;
     background: #000000;
     transition: all .3s;
+    height: 80px;
   }
   
-  .product-item:hover .product-title {
+  /* .product-item:hover .product-title {
     background: #FF6F61;
-  }
+  } */
   
-  .product-item .product-title a,
-  .product-item .product-title .ratting {
+  .product-item .product-title a{
     position: relative;
     width: 100%;
   }
@@ -156,10 +156,7 @@ background: #000000;
     font-size: 18px;
   }
   
-  .product-item .product-title .ratting i {
-    font-size: 14px;
-    color: #FF6F61;
-  }
+  
   
   .product-item .product-content .price span {
     margin-left: 12px;
@@ -168,8 +165,7 @@ background: #000000;
     color: #999999;
   }
   
-  .product-item:hover .product-title a,
-  .product-item:hover .product-title .ratting i {
+  .product-item:hover .product-title a {
     color: #ffffff;
   }
   
@@ -248,14 +244,15 @@ background: #000000;
   }
   
   .product-item .product-price {
+    /* display: flex; */
     padding: 20px;
     background: #000000;
     transition: all .3s;
   }
   
-  .product-item:hover .product-price {
+  /* .product-item:hover .product-price {
     background: #FF6F61;
-  }
+  } */
   
   .product-item .product-price h3 {
     display: inline-block;
@@ -267,11 +264,11 @@ background: #000000;
     font-size: 16px;
   }
   
-  .product-item .product-price .btn {
+  .product-item .product-price .ratting {
     float: right;
     border: none;
     color: #000000;
-    background: #FF6F61;
+
   }
   
   .product-item:hover .product-price .btn,

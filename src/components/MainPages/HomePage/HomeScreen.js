@@ -11,13 +11,15 @@ import NavBar from '../../Common/NavBar/index';
 import Brand from '../../Brand/Brand';
 import Review from '../../Review/Review';
 import HeaderSlider from '../../Header/HeaderSlider/HeaderSlider';
-import {addCart, addToCart, getCart } from '../../../actions/cartAction';
+import { getCart } from '../../../actions/cartAction';
 import  BottomBar from '../../Common/BottomBar/index'
 import Feature from '../../Common/Feature/index'
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 
 import { useTranslation } from 'react-i18next';
+import Rating from '../ProductDetails/rating';
+import LoadingBackdrop from '../../Config/LoadingBackdrop';
 
 
 function HomeScreen(props){
@@ -77,12 +79,8 @@ function HomeScreen(props){
         ]
     };
     return(
-        loading?(
-            <LoadingBox></LoadingBox>
-        ):error? (
-            <MessageBox variant="danger">{error}</MessageBox>
-        ):
         <div>
+            <LoadingBackdrop open={loading} />
             <TopBar/>
             <BottomBar  ></BottomBar>
             <NavBar/>
@@ -231,37 +229,42 @@ function HomeScreen(props){
                           <h1>{t('mainpages_home:featured_product')}</h1>
                       </div>
                       {/* <div className="align-items-center "> */}
-                        <Slider {...settings}>
-                        {
-                            productSelling.map( (product) =>
-                                <div className="col-lg-12" key={product?._id}>
-                                    <div className="product-item">
-                                        <div className="product-title">
-                                            <Link to={'/product-detail/' + product?._id}>{product?.name}</Link>
-                                        </div>
-                                        <div className="product-image">
-                                            {
-                                                <img className="image-product" src={product?.images[0]} alt="Product "/>
-                                            }  
-                                            <div className="product-action">   
-                                                    <Link to={'/product-detail/' + product?._id}><i className="fas fa-eye" ></i></Link>
+                      {
+                          error? (
+                            <MessageBox variant="danger">{error}</MessageBox>
+                        ):(
+                            <Slider {...settings}>
+                            {
+                                productSelling.map( (product) =>
+                                    <div className="col-lg-12" key={product?._id}>
+                                        <div className="product-item">
+                                            <div className="product-title">
+                                                <Link to={'/product-detail/' + product?._id}>{product?.name}</Link>
+                                            </div>
+                                            
+                                            <div className="product-image">
+                                                {
+                                                    <img className="image-product" src={product?.images[0]} alt="Product "/>
+                                                }  
+                                                <div className="product-action">   
+                                                        <Link to={'/product-detail/' + product?._id}><i className="fas fa-eye" ></i></Link>
+                                                </div>
+                                            </div>
+                                            <div className="product-price">
+                                                <h3><span>$</span>{product?.price}</h3> 
+                                                <div className="ratting">
+                                                    <Rating props={product}/>
+                                                </div>
+                                            
                                             </div>
                                         </div>
-                                        <div className="product-price">
-                                            <h3><span>$</span>{product?.price}</h3>                                          
-                                            {/* {
-                                                product?.quantity>0 && 
-                                                <a className="btn btn_tablet_res-add-cart" 
-                                                    onClick={()=>addToCartHandler( product?._id,product.name,product.price ,product.img)} >
-                                                    <i className="fa fa-shopping-cart"></i>Add To Cart
-                                                </a>
-                                            } */}
-                                        </div>
-                                    </div>
-                                </div> 
-                                )
-                        } 
-                        </Slider>   
+                                    </div> 
+                                    )
+                            } 
+                                </Slider>
+                        )
+                      }
+                           
                       {/* </div> */}
                   </div>
               </div>
@@ -269,6 +272,7 @@ function HomeScreen(props){
               <FooterPage/>
               
               <ScrollToTopBtn />
+
         </div>
     )
 }

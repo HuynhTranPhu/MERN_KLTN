@@ -7,6 +7,8 @@
 	"size":"Size:",
 	"review":"Reviews",
 	"reviews":"Review:",
+	"select_color":"Select color",
+	"select_size":"Select size",
 	"rating":"Rating",
 	"add_to_cart":"Add to Cart",
 	"description":"Description",

@@ -12,6 +12,8 @@ import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import { addCart } from '../../../actions/cartAction';
 import { useTranslation } from 'react-i18next';
+import Rating from '../ProductDetails/rating';
+import LoadingBackdrop from '../../Config/LoadingBackdrop';
 
 
 
@@ -48,28 +50,6 @@ function ProductScreen(props){
         return () => {
         };
     }, [pageNumber])
-    //Add to cart
-    // const handleAddToCart = (id,name,price, image) =>{
-    //     let a = {_id: id,
-    //         name: name,
-    //         price: price,
-    //         img: image,
-    //         quantity: 1};
-    //     let carts =[a];
-        
-    //     if(!userInfo){
-    //         props.history.push("/login");
-    //     }else{
-            
-    //         dispatch(addCart(userInfo.newUser._id,carts));
-    //         // if(success){
-    //         props.history.push(`/cart/${id}`); 
-    //         // }else{
-    //         //     alert('Something is wrong');
-    //         // }
-    //     }
-       
-    // }
     
     const gotoPrevious = () => {
         setPageNumber(Math.max(0, pageNumber - 1));
@@ -82,10 +62,9 @@ function ProductScreen(props){
         <TopBar/>
         <BottomBar  ></BottomBar>
         <NavBar/>
-        {loading?(
-            <LoadingBox></LoadingBox>
-        ):
-        error? (
+        <LoadingBackdrop open={loading} />
+        
+        {error? (
             <MessageBox variant="danger">{error}</MessageBox>
         ):
         (
@@ -183,18 +162,16 @@ function ProductScreen(props){
                                                     <Link to={'/product-detail/' + product._id}>{product.name}</Link>
                                                 </div>
                                                 <div className="product-image">
-                                                        <img className="image-product" src={product.images[0]} alt="Product" />
+                                                        <img className="image-product" src={product.images[0]|| '/img/no-image.png'} alt="Product" />
                                                         <div className="product-action">
                                                             <Link to={'/product-detail/' + product._id}><i className="fas fa-eye" /></Link>             
                                                         </div>
                                                 </div>
                                                 <div className="product-price">
-                                                <h3><span>$</span>{product.price}</h3>
-                                                {/* {
-                                                    product.quantity>0 && 
-                                                    <a className="btn btn_tablet_res-add-cart" onClick={()=>handleAddToCart(product._id,product.name,product.price,product.img)}>
-                                                        <i className="fa fa-shopping-cart"></i>{t('mainpages_product:buy_now')}</a>
-                                                } */}
+                                                    <h3><span>$</span>{product.price}</h3>
+                                                    <div className="ratting">
+                                                        <Rating props={product}/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

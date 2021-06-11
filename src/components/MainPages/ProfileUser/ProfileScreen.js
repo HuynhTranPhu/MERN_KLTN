@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailsUser, updateUserProfile } from '../../../actions/userAction';
 import { USER_UPDATE_PROFILE_RESET } from '../../../constants/userConstant';
-//import FooterPage from '../../Common/Footer/Footer';
+import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
@@ -54,7 +54,11 @@ export default function ProfileScreen(props){
         <NavBar/>
         {
              loading ? (
-                <LoadingBox></LoadingBox>)
+                 <>
+                 <LoadingBox></LoadingBox>
+                 <div  style={{height:"350px"}}></div>
+                 </>
+                )
                 : error? (<MessageBox variant="danger">{error}</MessageBox>
                 ) :(
                     <form className="form-profile" onSubmit={submitHandler}>
@@ -95,7 +99,7 @@ export default function ProfileScreen(props){
                     </form>
                 )
         }
-       {/* <FooterPage/> */}
+       <FooterPage/>
        <ScrollToTopBtn />
     </div>;  
 }

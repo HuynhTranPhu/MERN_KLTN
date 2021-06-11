@@ -5,7 +5,7 @@ import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, loginFaceBook, loginGoogle } from '../../../actions/userAction';
-import LoadingBox from '../../Config/LoadingBox';
+import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 //import config from '../../Config/index';
@@ -101,92 +101,97 @@ function LoginScreen(props){
 
 
 
-    return <div className="formContain">
-            <form onSubmit={submitHandler}>
-                <ul className="form-container">
-                    <li>
-                        <h2 className="title">{t('mainpages_login:welcome')}</h2>
-                    </li>
-                    <li>
-                        {loading && <LoadingBox></LoadingBox>}
-                        {/* {error && toast.error(error)} */}
-                    </li>
-                    <li>
-                        <label htmlFor="email">Email</label>
-                        <input type="email" name="email" id="email" onChange={(e)=>setEmail(e.target.value)}></input>
+    return <div>
+        <LoadingBackdrop open={loading} />
+        <div className="formContain">
+                    <form onSubmit={submitHandler}>
+                        <ul className="form-container">
+                            <li>
+                                <h2 className="title">{t('mainpages_login:welcome')}</h2>
+                            </li>
+                            {/* <li>
+                                {loading && <LoadingBox></LoadingBox>}
+                                {loading && <LoadingBox></LoadingBox>}
+                                
+                            </li> */}
+                            <li>
+                                <label htmlFor="email">Email</label>
+                                <input type="email" name="email" id="email" onChange={(e)=>setEmail(e.target.value)}></input>
 
-                    </li>
-                    <li>
-                        <label htmlFor="password">{t('mainpages_login:password')}</label>
-                        <input type="password" id="password" name="password" onChange={(e)=> setPassword(e.target.value)}></input>
-                    </li>
-                    <li>
-                        <button type="submit" className="button primary">
-                        {t('mainpages_login:login')}
-                        </button>
-                    </li>
-                    <li>
-                       <Link to="/forgotPass/" className="forgot">{t('mainpages_login:forgotten_password')}</Link> 
-                    </li>
-                    <li className="sign-up">
-                        <p>
-                            {t('mainpages_login:don_have an account')}
-                            <Link to={redirect === "/" ? "register": "register? redirect=" + redirect} className="borders" >
-                            {t('mainpages_login:sign_up')}
-                            </Link>
-                        </p>
-                        
-                    </li>
-                
-                    <li className="facebook">
-                        <p>
-                        {t('mainpages_login:login_with')}
-                            <FacebookLogin
-                            appId={fb}
-                            autoLoad={false}
-                            callback={responseFacebook}
-                            render={renderProps => (
-                                <b 
-                                onClick={renderProps.onClick}
-                                >
-                                {/* <div className=' p-2 rounded-full '> */}
+                            </li>
+                            <li>
+                                <label htmlFor="password">{t('mainpages_login:password')}</label>
+                                <input type="password" id="password" name="password" onChange={(e)=> setPassword(e.target.value)}></input>
+                            </li>
+                            <li>
+                                <button type="submit" className="button primary">
+                                {t('mainpages_login:login')}
+                                </button>
+                            </li>
+                            <li>
+                            <Link to="/forgotPass/" className="forgot">{t('mainpages_login:forgotten_password')}</Link> 
+                            </li>
+                            <li className="sign-up">
+                                <p>
+                                    {t('mainpages_login:don_have an account')}
+                                    <Link to={redirect === "/" ? "register": "register? redirect=" + redirect} className="borders" >
+                                    {t('mainpages_login:sign_up')}
+                                    </Link>
+                                </p>
                                 
-                                <img className="img-fa" src="/images/fb.png" alt=""/>
-                                {/* </div> */}
-                                </b>
-                            )}
-                            />
-                            <GoogleLogin
-                                clientId={gg}
-                                buttonText="Login"
-                                onSuccess={responseGoogle}
-                                onFailure={responseGoogle}
-                                cookiePolicy={'single_host_origin'}
-                                render={renderProps => (
-                                    <b 
-                                
-                                    onClick={renderProps.onClick}
-                                    disabled={renderProps.disabled}>
-                                    {/* <div className=' p-2 rounded-full '> */}
-                                    <img className="img-gg" src="/images/google.png" alt=""/>
-                                    {/* </div> */}
-                                
-                                    </b>
-                                )}
-                            ></GoogleLogin>
-                        </p>
+                            </li>
                         
-                        
-                    </li>
+                            <li className="facebook">
+                                <p>
+                                {t('mainpages_login:login_with')}
+                                    <FacebookLogin
+                                    appId={fb}
+                                    autoLoad={false}
+                                    callback={responseFacebook}
+                                    render={renderProps => (
+                                        <b 
+                                        onClick={renderProps.onClick}
+                                        >
+                                        {/* <div className=' p-2 rounded-full '> */}
+                                        
+                                        <img className="img-fa" src="/images/fb.png" alt=""/>
+                                        {/* </div> */}
+                                        </b>
+                                    )}
+                                    />
+                                    <GoogleLogin
+                                        clientId={gg}
+                                        buttonText="Login"
+                                        onSuccess={responseGoogle}
+                                        onFailure={responseGoogle}
+                                        cookiePolicy={'single_host_origin'}
+                                        render={renderProps => (
+                                            <b 
+                                        
+                                            onClick={renderProps.onClick}
+                                            disabled={renderProps.disabled}>
+                                            {/* <div className=' p-2 rounded-full '> */}
+                                            <img className="img-gg" src="/images/google.png" alt=""/>
+                                            {/* </div> */}
+                                        
+                                            </b>
+                                        )}
+                                    ></GoogleLogin>
+                                </p>
+                                
+                                
+                            </li>
 
+                            
+                            
+                                
+                            
+                        </ul>
+                    </form> 
                     
-                    
-                        
-                    
-                </ul>
-             </form> 
-            
-            </div>
+                    </div>
+    </div> 
+    
     
     
 }

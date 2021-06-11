@@ -15,9 +15,9 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <DataProvider>
-      <Suspense fallback={<div></div>}>
-        <App />
-      </Suspense>
+        <Suspense fallback={<div></div>}>
+          <App />
+        </Suspense>
         <ToastContainer autoClose={1500} />
       </DataProvider>
     </React.StrictMode>

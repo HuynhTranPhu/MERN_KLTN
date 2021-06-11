@@ -58,7 +58,7 @@ const Index = () => {
                                   <NavLink to="/cart" className="nav-item nav-link">{t('common_navbar:cart')}</NavLink>
                                   {/* <NavLink to="/profile" className="nav-item nav-link">My Account</NavLink> */}
                                   <NavLink to="/contact" className="nav-item nav-link">{t('common_navbar:contact_us')}</NavLink>
-                                  {/* <NavLink to="/place-order" className="nav-item nav-link">Place Order</NavLink> */}
+                                  <NavLink to="/size-chart" className="nav-item nav-link">{t('common_navbar:size_chart')}</NavLink>
                                   {/* <NavLink to="/history" className="nav-item nav-link">History</NavLink> */}
                               </div>
                               <div className="navbar-nav ml-auto">

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom'
 import TopBar from '../Common/TopBar/TopBar';
 import BottomBar from '../Common/BottomBar/index';
 import NavBar from '../Common/NavBar/index';
@@ -28,7 +27,7 @@ const ForgotPassword = ({ setEmail, submit, notification }) => {
 						onClick={() => submit()}>
 						{t('password_forgot:submit')}
 					</button>
-					<h2><Link to="/">{t('password_forgot:back_home')}</Link></h2>
+					<div  style={{height:"80px"}}></div>
 				</div>
 			</div>
 			<FooterPage/>

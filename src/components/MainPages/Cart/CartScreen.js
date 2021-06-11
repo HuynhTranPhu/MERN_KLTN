@@ -68,8 +68,10 @@ function CartScreen(props){
             <BottomBar  ></BottomBar>
             <NavBar/>
             {
-                loading?  <LoadingBox/>:(
-
+                loading?(<>
+                         <LoadingBox/>
+                         <div  style={{height:"180px"}}></div>
+                    </>) :(
                     <div className="cart-page">
                         <div className="container-fluid">
                             <div className="row">

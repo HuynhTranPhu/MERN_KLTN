@@ -70,9 +70,7 @@ class EnterNewPassword extends Component {
                 >
                   submit
                 </button>
-                <h2>
-                  <Link to="/">Bring me back Home</Link>
-                </h2>
+                <div  style={{height:"80px"}}></div>
               </div>
             </div>
             <Footer/>

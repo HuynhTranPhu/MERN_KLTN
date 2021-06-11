@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import TopBar from '../Common/TopBar/TopBar'
 import NavBar from '../Common/NavBar/index'
 import BottomBar from '../Common/BottomBar/index'
@@ -29,7 +28,7 @@ const OTP = ({ setOTP, submitOTP, notificationOTP }) =>{
                         onClick={() => submitOTP()}>
                         {t('password_otp:submit')}
                     </button>
-                    <h2><Link to="/">{t('password_otp:bring_me_back_home')}</Link></h2>
+                    <div  style={{height:"80px"}}></div>
                 </div>
             </div>
             <Footer/>

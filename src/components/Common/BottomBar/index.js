@@ -87,7 +87,7 @@ return (
                     </div>
                     <div className="col-md-2 search__mobile-res ">
                             <div className="user-name_bottom-bar">
-                            {t('common_btbar_index:hello')} {userInfo.newUser.name}
+                            {t('common_btbar_index:hello')} {userInfo?.newUser?.name}
                             </div>                   
                         
                     </div>

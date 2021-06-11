@@ -25,6 +25,7 @@ import { getData } from '../../utils/FetchDataComments';
 
 import Loading from '../../../images/loading.gif';
 import { useTranslation } from 'react-i18next';
+import LoadingBackdrop from '../../Config/LoadingBackdrop';
 require ('dotenv').config();
 
 const url = process.env.REACT_APP_URL_CLIENT;
@@ -214,11 +215,12 @@ function ProductDetailScreen(props){
         
     }
     return <div>
+        <LoadingBackdrop open={loading2} />
         <TopBar/>
         <BottomBar  ></BottomBar>
         <NavBar/>
        
-        {loading2?<LoadingBox></LoadingBox>:  <div className="product-detail">
+        <div className="product-detail">
                 <div className="container">
                     <div className="row ">
                         <div className="col-lg-12">
@@ -258,7 +260,7 @@ function ProductDetailScreen(props){
                                                     <h4>{t('mainpages_pdetal_detail:color')}</h4>
                                                     <div className="btn-group btn-group-sm">
                                                     <select className="form-control" onChange={handleSelectColor}>
-                                                        <option value="">Select color</option>
+                                                        <option value="">{t('mainpages_pdetal_detail:select_color')}</option>
                                                         {
                                                             product?.colorProducts?.colorProduct?.map(item => (
                                                                 <option value={item?._id?._id} key={item?._id?._id}>
@@ -273,7 +275,7 @@ function ProductDetailScreen(props){
                                                     <h4>{t('mainpages_pdetal_detail:size')}</h4>
                                                     <div className="btn-group btn-group-sm">
                                                         <select className="form-control" onChange={handleSelectSize}>
-                                                            <option value="">Select size</option>
+                                                            <option value="">{t('mainpages_pdetal_detail:select_size')}</option>
                                                             {
                                                                 product?.sizeProducts?.sizeProduct?.map(item => (
                                                                     <option value={item?._id?._id} key={item?._id?._id}>
@@ -423,7 +425,7 @@ function ProductDetailScreen(props){
                         </div>
                     </div>
                 </div>
-            </div>} 
+            </div>
       
           
      

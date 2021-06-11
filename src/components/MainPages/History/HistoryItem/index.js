@@ -16,10 +16,17 @@ function HistoryItem({history, loading, error}) {
     return (
         <div>
             {loading?(
-                        <LoadingBox></LoadingBox>
+                        <>
+                            <LoadingBox></LoadingBox>
+                            <div  style={{height:"150px"}}></div>
+                        </>
                         ):
                         error? (
-                            <MessageBox variant="danger">{error}</MessageBox>
+                            <>
+                              <MessageBox variant="danger">{error}</MessageBox>
+                              <div  style={{height:"150px"}}></div>
+                            </>
+                           
                         ):(
                             <div className="cart-page my_orders">
                                 <div className="container-fluid">

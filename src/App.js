@@ -35,6 +35,7 @@ import OrderSuccess from './components/MainPages/OrderSuccess/OrderSuccess';
 import History from './components/MainPages/History/index';
 import ViewHistory from './components/MainPages/ViewHistory';
 import SearchScreen from './components/MainPages/SearchHeader';
+import Size from './components/Common/Size-chart';
 
 function App() {
   
@@ -59,6 +60,7 @@ function App() {
                      <Route path="/order-success" exact component={OrderSuccess}></Route>
                      <PrivateRoute path="/history" exact component={History}></PrivateRoute>
                      <PrivateRoute path="/view-history/:id" exact component={ViewHistory}></PrivateRoute>
+                     <Route path="/size-chart" exact component={Size}></Route>
                      <Route path="/search" exact component={SearchScreen}></Route>
                      <Route path="*" exact component={NotFound}></Route>
                   </Switch>   
