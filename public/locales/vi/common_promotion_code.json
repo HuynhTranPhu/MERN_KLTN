@@ -1,0 +1,20 @@
+{
+    "promo_codes": "Mã Khuyến Mãi",
+    "user_manual": "Hướng dẫn sử dụng:",
+    "order": "<b>Đặt hàng: </b> Vào trang <a1>Trang chủ</a1> hoặc <a2>Sản phẩm</a2> để đặt hàng.",
+    "order_content": "<b>Vào trang Thanh toán: </b>Vào trang <a1>Thanh toán</a1>. Nhấn vào chữ \"Dùng mã khuyến mãi\"",
+    "use_promocode": "<b>Dùng mã: </b>Ở trang Thanh toán, chọn \"Dùng mã giảm giá\", chọn mã từ danh sách hoặc nhập mã muốn dùng rồi nhấn \"Dùng ngay\" để áp dụng mã giảm giá cho đơn hàng.",
+    "just_for_you": "Dành riêng cho bạn",
+    "just_for_you_content": "Tham gia chương trình <a1>Giới thiệu bạn bè</a1>, <a2>Đổi điểm tích luỹ</a2> để nhận được code riêng",
+    "special_codes": "Mã giảm giá đặc biệt",
+    "all_promo_codes": "Các Mã Giảm Giá",
+    "present": "Quà tặng",
+    "discount": "Giảm giá",
+    "order_now": "Đặt hàng ngay",
+    "promocde_title":"Chi tiết mã giảm giá",
+    "code":"Mã",
+    "exp_date":"Ngày hết hạn",
+    "conditions":"Điều kiện",
+    "HSD":"HSD",
+    "update":"Chưa có mã giảm giá hôm nay"
+  }

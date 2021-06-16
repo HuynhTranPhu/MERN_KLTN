@@ -6,6 +6,10 @@
 	"contact_us":"Contact Us",
 	"my_order":"My order",
 	"size_chart":"Size chart",
+	"promotion":"Promotion",
+	"promo_code":"Promotion Codes",
+	"promo_products":"Promotion Products",
+	"promotions":"Promotions",
 	"logout":"Logout",
 	"change_password":"Change password"
 }

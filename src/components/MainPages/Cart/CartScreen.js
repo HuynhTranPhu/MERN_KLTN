@@ -8,7 +8,8 @@ import BottomBar from '../../Common/BottomBar/index';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import { useTranslation } from 'react-i18next';
-import LoadingBox from '../../Config/LoadingBox';
+//import LoadingBox from '../../Config/LoadingBox';
+import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import Brand from '../../Brand/Brand';
 
 function CartScreen(props){
@@ -69,7 +70,7 @@ function CartScreen(props){
             <NavBar/>
             {
                 loading?(<>
-                         <LoadingBox/>
+                        <LoadingBackdrop open={loading}/>
                          <div  style={{height:"180px"}}></div>
                     </>) :(
                     <div className="cart-page">

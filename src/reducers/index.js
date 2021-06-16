@@ -26,6 +26,7 @@ import { forgotPasswordReducer,
         userUpdateProfileReducer 
 } from './userReducers';
 import { getCommentReducer, updateRatingReducer } from './comment';
+import { getBannerReducer, getPromoCodeReducer } from './promotionReducers';
 
 
 const reducer = combineReducers({
@@ -43,6 +44,9 @@ const reducer = combineReducers({
 
     updateRating: updateRatingReducer,
     getComments: getCommentReducer,
+
+    getPromoCodes: getPromoCodeReducer,
+    getBanners:getBannerReducer,
 
     userDetails: userDetailsReducer,
     userUpdateProfile:userUpdateProfileReducer,

@@ -143,7 +143,7 @@ const detailsProduct = (id) => async (dispatch) =>{
         dispatch({type: PRODUCT_DETAILS_REQUEST, payload: id});
         const {data} = await axios.get(`${url}/product/${id}`);
         dispatch({type: PRODUCT_DETAILS_SUCCESS, payload:data });
-        console.log(data)
+        //console.log(data)
     }
     catch(error){
         const message=

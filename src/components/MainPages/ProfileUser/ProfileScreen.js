@@ -7,7 +7,8 @@ import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
-import LoadingBox from '../../Config/LoadingBox';
+//import LoadingBox from '../../Config/LoadingBox';
+import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import MessageBox from '../../Config/MessageBox';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
@@ -55,7 +56,7 @@ export default function ProfileScreen(props){
         {
              loading ? (
                  <>
-                 <LoadingBox></LoadingBox>
+                <LoadingBackdrop open={loading}/>
                  <div  style={{height:"350px"}}></div>
                  </>
                 )

@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { viewHistoryGet } from '../../../../actions/orderActions';
-import LoadingBox from '../../../Config/LoadingBox';
+//import LoadingBox from '../../../Config/LoadingBox';
+import LoadingBackdrop from '../../../Config/LoadingBackdrop';
 import MessageBox from '../../../Config/MessageBox';
 function HistoryItem({history, loading, error}) {
     const { t } = useTranslation(['mainpages_history']);
@@ -17,7 +18,7 @@ function HistoryItem({history, loading, error}) {
         <div>
             {loading?(
                         <>
-                            <LoadingBox></LoadingBox>
+                            <LoadingBackdrop open={loading}/>
                             <div  style={{height:"150px"}}></div>
                         </>
                         ):

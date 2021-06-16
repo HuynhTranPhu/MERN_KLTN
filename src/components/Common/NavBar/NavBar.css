@@ -140,3 +140,27 @@
   align-items: center;
   justify-content: center;
 }
+/*Promocodes*/
+/* .rockland-nav__item {
+  position: relative;
+  border-bottom: 3px solid transparent;
+} */
+.rockland-nav__item.active {
+  border-bottom-color: #fff;
+}
+.rockland-nav__item:hover {
+  border-bottom-color: #fbcb5b;
+}
+
+/*Dropdown*/
+.dropdown-item-text {
+  display: block;
+  padding: 0.25rem 1.5rem;
+  color: #212529;
+}
+.dropdown.dropdown-nav:hover > .dropdown-menu {
+  display: block !important;
+  width: auto;
+  padding: 5px;
+  height: auto;
+}

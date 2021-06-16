@@ -15,7 +15,7 @@ import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
-import { addCart, getCart } from '../../../actions/cartAction';
+import { addCart } from '../../../actions/cartAction';
 import Rating from './rating';
 import FormInput from './FormInput';
 
@@ -25,7 +25,7 @@ import { getData } from '../../utils/FetchDataComments';
 
 import Loading from '../../../images/loading.gif';
 import { useTranslation } from 'react-i18next';
-import LoadingBackdrop from '../../Config/LoadingBackdrop';
+import LoadingBackdrop from '../../Config/LoadingBackdrop'
 require ('dotenv').config();
 
 const url = process.env.REACT_APP_URL_CLIENT;
@@ -89,7 +89,7 @@ function ProductDetailScreen(props){
         // }
 
      
-    }, [params.id])
+    }, [dispatch,params.id])
     // Realtime 
     // Join room
     useEffect(() => {
@@ -181,7 +181,7 @@ function ProductDetailScreen(props){
     //console.log(userInfo.newUser._id,params.id)
     useEffect(() => {
            dispatch(checkCanComment(userInfo.newUser._id,params.id));   
-    },[userInfo.newUser._id,params.id])
+    },[dispatch,userInfo.newUser._id,params.id])
     
 
     useEffect(() => {
@@ -203,7 +203,7 @@ function ProductDetailScreen(props){
             color:color,
             size:size
         };
-            if(color==''|| size==''){
+            if(color ===''|| size ===''){
                 toast.error("You don't select color or size");
             }else{
                 dispatch(addCart(userInfo.newUser._id,a));
@@ -215,12 +215,14 @@ function ProductDetailScreen(props){
         
     }
     return <div>
-        <LoadingBackdrop open={loading2} />
+        {/* <LoadingBackdrop open={loading2} /> */}
         <TopBar/>
-        <BottomBar  ></BottomBar>
+        <BottomBar ></BottomBar>
         <NavBar/>
-       
-        <div className="product-detail">
+       {
+           loading2?(<><LoadingBackdrop open={loading2}/>
+            <div  style={{height:"80px"}}></div></>):(
+            <div className="product-detail">
                 <div className="container">
                     <div className="row ">
                         <div className="col-lg-12">
@@ -295,7 +297,7 @@ function ProductDetailScreen(props){
                                                 <div className="action">
                                                 {
                                                     product?.quantity>0 && 
-                                                    <a className="btn"  onClick={()=>handleAddToCart(product._id,product.name,product.price,product.images[0])} ><i className="fa fa-shopping-cart" />{t('mainpages_pdetal_detail:add_to_cart')}</a>
+                                                    <span className="btn"  onClick={()=>handleAddToCart(product._id,product.name,product.price,product.images[0])} ><i className="fa fa-shopping-cart" />{t('mainpages_pdetal_detail:add_to_cart')}</span>
                                                 }
                                                 </div>
                                             </div>
@@ -386,10 +388,10 @@ function ProductDetailScreen(props){
                             <div className="product">
                                 {
                                     products.filter((pr)=>pr.id_category===product?.id_category?._id).length>1 ? 
-                                     <div className="section-header">
+                                    <div className="section-header">
                                         <h1>{t('mainpages_pdetal_detail:related_products')}</h1>
-                                     </div>:null
-                                   
+                                    </div>:null
+                                
                                 }
                                 
                                 <div className="align-items-center">
@@ -410,8 +412,10 @@ function ProductDetailScreen(props){
                                                         </div>
                                                     </div>
                                                     <div className="product-price">
-                                                    <h3><span>$</span>{pr.price}</h3>
-                                                    {/* <a className="btn" onClick={()=>handleAddToCart(pr._id,pr.name,pr.price,pr.img)} ><i className="fa fa-shopping-cart" />Buy Now</a> */}
+                                                    <h3>${pr.price}</h3>
+                                                    <div className="ratting">
+                                                        <Rating props={pr}/>
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -426,6 +430,9 @@ function ProductDetailScreen(props){
                     </div>
                 </div>
             </div>
+           )
+       }
+        
       
           
      

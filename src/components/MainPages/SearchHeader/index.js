@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 //import { filterProducts, listCategory, listProductsOfPage, searchFilterProducts, sortProducts } from '../../../actions/productActions';
-import LoadingBox from '../../Config/LoadingBox';
+//import LoadingBox from '../../Config/LoadingBox';
+import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import MessageBox from '../../Config/MessageBox';
 import Brand from '../../Brand/Brand';
 import TopBar from '../../Common/TopBar/TopBar';
@@ -10,9 +11,8 @@ import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
-import { addCart } from '../../../actions/cartAction';
 import { useTranslation } from 'react-i18next';
-
+import Rating from '../ProductDetails/rating';
 
 
 
@@ -21,9 +21,9 @@ function SearchScreen(props){
     const searchHeader = useSelector(state => state.searchHeader);
     const {productSearch, loading , error} = searchHeader;
 
-    console.log(productSearch);
-    const userLogin = useSelector(state => state.userLogin);
-    const { userInfo} = userLogin;
+    //console.log(productSearch);
+    //const userLogin = useSelector(state => state.userLogin);
+    //const { userInfo} = userLogin;
 
   
 
@@ -36,7 +36,7 @@ function SearchScreen(props){
 
    
    
-    const dispatch = useDispatch();
+   // const dispatch = useDispatch();
 
     useEffect(() => {
         
@@ -46,35 +46,18 @@ function SearchScreen(props){
         };
     }, [])
     //Add to cart
-    const handleAddToCart = (id,name,price, image) =>{
-        let a = {_id: id,
-            name: name,
-            price: price,
-            img: image,
-            count: 1};
-        let carts =[a];
-        
-        if(!userInfo){
-            props.history.push("/login");
-        }else{
-            
-            dispatch(addCart(userInfo.newUser._id,carts));
-            // if(success){
-                props.history.push(`/cart/${id}`); 
-            // }else{
-            //     alert('Something is wrong');
-            // }
-        }
-       
-    }
+   
     
    
     return <div>
         <TopBar/>
         <BottomBar  ></BottomBar>
         <NavBar/>
-        {loading?(
-            <LoadingBox></LoadingBox>
+        {loading?(<>
+            <LoadingBackdrop open={loading}/>
+            <div  style={{height:"300px"}}></div>
+        </>
+            
         ):
         error? (
             <MessageBox variant="danger">{error}</MessageBox>
@@ -101,18 +84,16 @@ function SearchScreen(props){
                                                 <Link to={'/product-detail/' + product._id}>{product.name}</Link>
                                             </div>
                                             <div className="product-image">
-                                                    <img className="image-product" src={product.img} alt="Product" />
+                                                    <img className="image-product" src={product.images[0]} alt="Product" />
                                                     <div className="product-action">
                                                         <Link to={'/product-detail/' + product._id}><i className="fas fa-eye" /></Link>             
                                                     </div>
                                             </div>
                                             <div className="product-price">
-                                            <h3><span>$</span>{product.price}</h3>
-                                            {
-                                                product.count>0 && 
-                                                <a className="btn" onClick={()=>handleAddToCart(product._id,product.name,product.price,product.img)}>
-                                                    <i className="fa fa-shopping-cart"></i>{t('mainpages_search:buy_now')}</a>
-                                            }
+                                                <h3>${product.price}</h3>
+                                                <div className="ratting">
+                                                            <Rating props={product}/>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

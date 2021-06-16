@@ -1,0 +1,64 @@
+.coupon {
+    /* // --c-border-top: $primary; */
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    font-size: small;
+    background-color: white;
+    /* // border-top: 2px solid #343a40; */
+    border-radius: 20px;
+    box-shadow: 15px 15px 20px -20px #343a40;
+}
+.deal-info {
+    text-align: center;
+    text-transform: capitalize;
+}
+.coupon__code {
+    color: #ffcb31;
+    font-weight: bold;
+    /* // text-transform: uppercase; */
+    font-size: large;
+    border: 1px dashed #343a40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.coupon__amount {
+/* // font-size: large; */
+font-size: 1.1rem;
+font-weight: 900;
+text-transform: uppercase;
+}
+.btn__bottom-bar{
+    color: #000;
+    background-color: #FF6F61;
+    border-color: #FF6F61;
+    border-radius: 50px;
+}
+
+.deal-info .benefit {
+    border-radius: 5px;
+    border: 1px dashed #e9ecef;
+    padding: 0.5em;
+    color: #dc3545;
+}
+.deal-info .benefit .discount {
+font-size: small;
+font-weight: 900;
+margin-bottom: 0.25em;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+.text-max-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

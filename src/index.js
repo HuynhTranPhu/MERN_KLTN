@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense }  from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import './index.css';
@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./i18n";
 
 import {DataProvider} from './Socket'
-import { Suspense } from 'react';
+
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

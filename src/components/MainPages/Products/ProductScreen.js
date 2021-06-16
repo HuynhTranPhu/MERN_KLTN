@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterProducts, listCategory, listProductsOfPage, searchFilterProducts, sortProducts } from '../../../actions/productActions';
-import LoadingBox from '../../Config/LoadingBox';
+//import LoadingBox from '../../Config/LoadingBox';
+import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import MessageBox from '../../Config/MessageBox';
 import Brand from '../../Brand/Brand';
 import TopBar from '../../Common/TopBar/TopBar';
@@ -10,10 +11,10 @@ import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
-import { addCart } from '../../../actions/cartAction';
+//import { addCart } from '../../../actions/cartAction';
 import { useTranslation } from 'react-i18next';
 import Rating from '../ProductDetails/rating';
-import LoadingBackdrop from '../../Config/LoadingBackdrop';
+
 
 
 
@@ -23,8 +24,8 @@ function ProductScreen(props){
     const productList = useSelector(state => state.productList);
     const {products,filteredItems,cate,sort,search,loading , error,numberOfPages} = productList;
 
-    const userLogin = useSelector(state => state.userLogin);
-    const { userInfo} = userLogin;
+    //const userLogin = useSelector(state => state.userLogin);
+    //const { userInfo} = userLogin;
 
     const categories = useSelector(state => state.categoryList);
     const {category} = categories;
@@ -49,7 +50,7 @@ function ProductScreen(props){
         dispatch(listCategory());
         return () => {
         };
-    }, [pageNumber])
+    }, [dispatch,pageNumber])
     
     const gotoPrevious = () => {
         setPageNumber(Math.max(0, pageNumber - 1));
@@ -62,9 +63,11 @@ function ProductScreen(props){
         <TopBar/>
         <BottomBar  ></BottomBar>
         <NavBar/>
-        <LoadingBackdrop open={loading} />
         
-        {error? (
+        
+        {loading?(<><LoadingBackdrop open={loading}/>
+            <div  style={{height:"80px"}}></div></>)
+        :error? (
             <MessageBox variant="danger">{error}</MessageBox>
         ):
         (
@@ -168,7 +171,7 @@ function ProductScreen(props){
                                                         </div>
                                                 </div>
                                                 <div className="product-price">
-                                                    <h3><span>$</span>{product.price}</h3>
+                                                    <h3>${product.price}</h3>
                                                     <div className="ratting">
                                                         <Rating props={product}/>
                                                     </div>

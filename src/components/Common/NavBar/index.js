@@ -59,7 +59,29 @@ const Index = () => {
                                   {/* <NavLink to="/profile" className="nav-item nav-link">My Account</NavLink> */}
                                   <NavLink to="/contact" className="nav-item nav-link">{t('common_navbar:contact_us')}</NavLink>
                                   <NavLink to="/size-chart" className="nav-item nav-link">{t('common_navbar:size_chart')}</NavLink>
-                                  {/* <NavLink to="/history" className="nav-item nav-link">History</NavLink> */}
+                                  <NavLink to="#" className=" dropdown dropdown-nav nav-item nav-link">
+                                    <div data-toggle="dropdown" data-hover="dropdown">
+                                        <Link to="#" className="rockland-nav__link">
+                                            <span className="rockland-nav__title">{t('common_navbar:promotion')}</span>
+                                        </Link>
+                                    </div>
+                                    <ul className="dropdown-menu">
+                                        <li className="dropdown-item">
+                                            <Link to="/promo-codes">
+                                            <span className="dropdown-item-text p-0">
+                                                {t('common_navbar:promo_code')}
+                                            </span>
+                                            </Link>
+                                        </li>
+                                        <li className="dropdown-item">
+                                            <Link to="/promotions">
+                                            <span className="dropdown-item-text p-0">
+                                               {t('common_navbar:promo_products')}
+                                            </span>
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </NavLink>
                               </div>
                               <div className="navbar-nav ml-auto">
                                   {

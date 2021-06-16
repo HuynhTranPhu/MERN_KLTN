@@ -1,0 +1,16 @@
+
+.coupons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2em;
+}
+@media (max-width: 991.98px) {
+    .coupons {
+      grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 575.98px) {
+    .coupons {
+      grid-template-columns: 1fr;
+    }
+}

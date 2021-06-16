@@ -131,15 +131,15 @@ background: #000000;
 
 .product-item {
     position: relative;
-  }
+}
   
-  .product-item .product-title {
+.product-item .product-title {
     padding: 15px;
     text-align: center;
     background: #000000;
     transition: all .3s;
     height: 80px;
-  }
+}
   
   /* .product-item:hover .product-title {
     background: #FF6F61;
@@ -262,6 +262,11 @@ background: #000000;
   
   .product-item .product-price h3 span {
     font-size: 16px;
+  }
+  .product-item .product-price span {
+    color: #999999;
+    text-decoration: line-through;
+    margin-left: 12px;
   }
   
   .product-item .product-price .ratting {

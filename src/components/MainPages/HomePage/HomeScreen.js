@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {listProductsSelling } from '../../../actions/productActions';
-import LoadingBox from '../../Config/LoadingBox';
+//import LoadingBox from '../../Config/LoadingBox';
 import MessageBox from '../../Config/MessageBox';
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
@@ -251,7 +251,7 @@ function HomeScreen(props){
                                                 </div>
                                             </div>
                                             <div className="product-price">
-                                                <h3><span>$</span>{product?.price}</h3> 
+                                                <h3>${product?.price}</h3> 
                                                 <div className="ratting">
                                                     <Rating props={product}/>
                                                 </div>
