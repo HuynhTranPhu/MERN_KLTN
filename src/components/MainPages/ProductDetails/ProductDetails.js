@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MagnifierContainer, SideBySideMagnifier } from 'react-image-magnifiers';
 //import { detailsProduct } from '../../../actions/productActions';
 import { checkCanComment, detailsProduct, listProducts } from '../../../actions/productActions';
-import LoadingBox from '../../Config/LoadingBox';
+//import LoadingBox from '../../Config/LoadingBox';
 //import MessageBox from '../../Config/MessageBox';
 import Brand from '../../Brand/Brand';
 import TopBar from '../../Common/TopBar/TopBar';
@@ -37,6 +37,7 @@ function ProductDetailScreen(props){
     const dispatch = useDispatch();
     const state = useContext(DataContext)
     const socket = state.socket
+
 
     let productList = useSelector(state => state.productList);
     let {products} = productList;
@@ -220,8 +221,10 @@ function ProductDetailScreen(props){
         <BottomBar ></BottomBar>
         <NavBar/>
        {
-           loading2?(<><LoadingBackdrop open={loading2}/>
-            <div  style={{height:"80px"}}></div></>):(
+           loading2?(<>
+           <LoadingBackdrop open={loading2}/>
+            <div  style={{height:"80px"}}></div>
+            </>):(
             <div className="product-detail">
                 <div className="container">
                     <div className="row ">
@@ -233,14 +236,15 @@ function ProductDetailScreen(props){
                                             <div className="product__image">
                                                 <MagnifierContainer>
                                                     <SideBySideMagnifier
-                                                        alwaysInPlace={true}
+                                                        alwaysInPlace={false}
+                                                        fillAvailableSpace={false}
                                                         imageSrc={product?.images?.[0] || '/img/no-image.png'}
                                                         className="product-img-magnifier"
                                                     />
                                                 </MagnifierContainer>
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-md-7">
                                             <div className="product-content">
                                                 <div className="title">
                                                     <h2>{product?.name}</h2>

@@ -1,6 +1,7 @@
 {
 	"shipping":"Phí vận chuyển",
 	"shipping_address":"Địa điểm",
+	"shipping_user":"Thông tin người nhận",
 	"payment":"Thanh toán",
 	"payment_method":"Phương thức thanh toán:",
 	"product":"Sản phẩm",
@@ -9,6 +10,15 @@
 	"total":"Tổng", 
 	"order_summary":"Đơn hàng", 
 	"sub_total":"Tổng", 
+	"promotion_code":"Mã khuyến mãi", 
 	"total_price":"Tổng tiền", 
-	"place_order":"Đặt hàng" 
+	"place_order":"Đặt hàng",
+	"choose_or_input_promo_code": "Chọn hoặc nhập mã khuyến mãi", 
+	"apply_coupon_popup_title": "Áp dụng mã khuyến mãi",
+	"apply_coupon_input_label": "Nhập mã",
+	"apply_coupon_confirm_btn": "Áp dụng",  
+	"promotion": "Khuyến mãi",
+	"success": "Cập nhật mã khuyến mãi thành công",
+	"error": "Mã khuyến mãi không tồn tại",  
+	"no_coupon": "Bạn không có mã giảm giá nào." 
 }

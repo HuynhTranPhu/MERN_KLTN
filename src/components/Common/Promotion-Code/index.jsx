@@ -15,7 +15,7 @@ function PromotionCode() {
     const { t } = useTranslation(['common_promotion_code']);
 
     const getPromoCodes = useSelector(state => state.getPromoCodes);
-    const {promoCodes,loading } = getPromoCodes;
+    const {promoCodes,loadingPromotion } = getPromoCodes;
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getPromoCode());
@@ -66,7 +66,7 @@ function PromotionCode() {
                
             </div>
             {
-                loading?(<LoadingBackdrop open={loading} />):(
+                loadingPromotion?(<LoadingBackdrop open={loadingPromotion} />):(
                     <div className="another-promocodes mb-5">
                         <div className="container">
                             <div className="row mb-3">

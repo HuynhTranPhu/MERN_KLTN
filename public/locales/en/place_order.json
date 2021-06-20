@@ -1,14 +1,24 @@
 {
 	"shipping":"Shipping",
 	"shipping_address":"Shipping Address",
+	"shipping_user":"Shipping User",
 	"payment":"Payment",
 	"payment_method":"Payment Method:",
 	"product":"Product",
 	"price":"Price",
 	"quantity":"Quantity",
 	"total":"Total" , 
-	"order_summary":"Order Summary", 
+	"order_summary":"Order", 
 	"sub_total":"Sub Total", 
+	"promotion_code":"Promotion codes", 
 	"total_price":"Total", 
-	"place_order":"Place order" 
+	"place_order":"Place order",
+	"choose_or_input_promo_code": "Chose or input promotion code", 
+	"apply_coupon_popup_title": "Apply promotion code",
+	"apply_coupon_input_label": "Input promotion code",
+	"apply_coupon_confirm_btn": "Apply",  
+	"promotion": "Discount",
+	"success": "Add promotion code success",
+	"error": "Promotion code is null",
+	"no_coupon": "You have no available coupons."
 }

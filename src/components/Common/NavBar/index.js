@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Menu } from '@material-ui/core';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { logout } from '../../../actions/userAction';
 import { useTranslation } from "react-i18next";
-import { getCart } from '../../../actions/cartAction';
 
 const Index = () => {
 
     const { t } = useTranslation(['common_navbar']);
-    // const cart = useSelector((state) => state.cart);
-    // const {cartItems} = cart;
     const cartGet = useSelector(state => state.cartGet);
     const {cartItems} = cartGet;
     const userLogin = useSelector((state) => state.userLogin);
@@ -21,18 +18,7 @@ const Index = () => {
     const logoutHandler = () =>{
         dispatch(logout());}
     
-    useEffect(() => { 
-        //dispatch(getCart(userInfo?.newUser?._id));
-        return () => {
-            //
-        };
-        // if(productId){
-        //     dispatch(addToCart(productId,qty));
-        // }
-    },
-    // []
-        []
-    );
+    
     const [anchorEl, setAnchorEl] = useState(null);
 
     const openMenu = (event) => {
@@ -55,8 +41,6 @@ const Index = () => {
                               <div className="navbar-nav mr-auto ml-3">
                                   <NavLink to="/" className="nav-item nav-link">{t('common_navbar:home')}</NavLink>
                                   <NavLink to="/product-list" className="nav-item nav-link">{t('common_navbar:products')}</NavLink>
-                                  <NavLink to="/cart" className="nav-item nav-link">{t('common_navbar:cart')}</NavLink>
-                                  {/* <NavLink to="/profile" className="nav-item nav-link">My Account</NavLink> */}
                                   <NavLink to="/contact" className="nav-item nav-link">{t('common_navbar:contact_us')}</NavLink>
                                   <NavLink to="/size-chart" className="nav-item nav-link">{t('common_navbar:size_chart')}</NavLink>
                                   <NavLink to="#" className=" dropdown dropdown-nav nav-item nav-link">
@@ -91,11 +75,10 @@ const Index = () => {
                                                 <div className="nav-right-side">
                                                     <li className="nav-items custom-nav-item-cart">
                                                         <Link to="/cart" className="cart-nav-icon">
-                                                                <a className="rockland-nav__link notification" >
+                                                                <span className="rockland-nav__link notification" >
                                                                     <ShoppingCartOutlinedIcon />
-                                                                    {/* <span className="extraCart"> {t('cart:cart')} </span> */}
                                                                         {cartItems?.length>0 &&<span className="notification__counter">{cartItems.reduce((a,c)=> a + c.quantity,0)}</span>}
-                                                                </a>              
+                                                                </span>              
                                                         </Link>
                                                     </li>
                                                     <li className="nav-items ml-4">
@@ -116,34 +99,34 @@ const Index = () => {
                                                     }}>
                                                     <div>
                                                         <Link to="/profile">
-                                                            <a className="dropdown__item dropdown__item-link">
+                                                            <span className="dropdown__item dropdown__item-link">
                                                             <i className="far fa-user-circle dropdown__item-icon" />
                                                             {t('common_navbar:my_account')}
-                                                            </a>
+                                                            </span>
                                                         </Link>
                                                     </div>
                                                     <div>
                                                         <Link to="/history">
-                                                            <a className="dropdown__item dropdown__item-link">
+                                                            <span className="dropdown__item dropdown__item-link">
                                                             <i className="far fa-calendar-check dropdown__item-icon" />
                                                             {t('common_navbar:my_order')}
-                                                            </a>
+                                                            </span>
                                                         </Link>
                                                     </div>
                                                     <div>
                                                         <Link to="/" onClick={logoutHandler}>
-                                                            <a className="dropdown__item dropdown__item-link">
+                                                            <span className="dropdown__item dropdown__item-link">
                                                                 <i className="fas fa-sign-out-alt dropdown__item-icon" />
                                                                 {t('common_navbar:logout')}
-                                                            </a>
+                                                            </span>
                                                         </Link>
                                                     </div>
                                                     <div>
                                                         <Link to="/update-password" >
-                                                            <a className="dropdown__item dropdown__item-link">
+                                                            <span className="dropdown__item dropdown__item-link">
                                                                 <i className="fa fa-key dropdown__item-icon" />
                                                                 {t('common_navbar:change_password')}
-                                                            </a>
+                                                            </span>
                                                         </Link>
                                                     </div>
                                                 </Menu>

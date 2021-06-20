@@ -93,7 +93,7 @@ const History = () => {
             <NavBar/>
             <h1 className="Order-title">{t('mainpages_history:order_history')}</h1>   
                 <div className="container-fluid" >
-                    <AppBar position="static" color="default">
+                    <AppBar position="static" color="default" >
                         <Tabs
                         value={value}
                         onChange={handleChange}

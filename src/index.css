@@ -12,6 +12,9 @@
   background-color: #FF6F61;
   cursor: pointer;
 }
+button:focus{
+  outline: none;
+}
 .button:hover{
   border: 0.1rem #404040 solid;
 }
@@ -41,13 +44,7 @@
 /* back to top**/
 @import url("./components/Common/ScrollToTop/ScrollToTop.css");
 
-/*cart bag*/
-.badge {
-  color: #636161;
-  padding: 0.2rem 0.2rem;
-  font-size: 1.4rem;
-  margin-left: 0.2rem;
-}
+
 
 /* Alert*/
 
@@ -55,10 +52,7 @@
 @import url("./components/MainPages/ProfileUser/Profile.css");
 /*loading*/
 @import url("./components/Config/Config.css");
-/*content-main*/
-.content-main{
-  min-height: 17rem;
-}
+
 
 /**********************************/
 /********** General CSS ***********/

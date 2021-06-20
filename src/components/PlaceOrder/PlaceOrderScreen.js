@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom';
 import CheckoutSteps from '../CheckOutStep/CheckoutSteps';
@@ -11,44 +11,81 @@ import { addOrder } from '../../actions/orderActions';
 import { ORDER_RESET } from '../../constants/orderContants';
 import PayPalButton from './PayPalButton';
 import { useTranslation } from 'react-i18next';
+import PromoCodes from './Apply-Promotion-Code/PromoCodes';
+import { getPromoCode } from '../../actions/promotionAction';
+
 function PlaceOrderScreen(props){
 
     const { t } = useTranslation(['place_order']);
-    const cart = useSelector(state => state.cart);
-    const { payment} = cart;
+    // const cart = useSelector(state => state.cart);
+    // const { payment} = cart;
     const cartGet = useSelector(state => state.cartGet);
-    const {cartItems, loading} = cartGet;
+    const {cartItems, payment, shipping} = cartGet;
+
+    //console.log(cartGet);
     const addOrderPost = useSelector(state => state.orderPost);
     const { success} = addOrderPost;
     
+    const getPromoCodes = useSelector(state => state.getPromoCodes);
+    const {promoCodes} = getPromoCodes;
+
+    const [discount,setDiscount]= useState(0)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getPromoCode());
+        return () => {
+        };
+    }, [dispatch])
+
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo} = userLogin;
-    if(!payment.paymentMethod){
+    if(!payment?.paymentMethod){
         
         props.history.push('/payment'); 
     }
     
-
+    
     const toPrice = (num) => Number(num.toFixed(2));
-    const itemsPrice = toPrice(
+    let itemsPrice = toPrice(
         cartItems.reduce((a,c)=> a + c.price * c.quantity,0)
-    ); 
+    );
+    //let itemsPricePromotion = 0 ;
+    const priceDecreaseHandle = (element) => {
+        promoCodes.map((item)=>{
+            return  item.promotion_code === element
+            ? setDiscount(item.price_discount): null
+        } )
+       
+    } 
+    
+    
     const shippingPrice = itemsPrice > 100||itemsPrice===0 ? toPrice(0) : toPrice(10);
-    const totalPrice = itemsPrice + shippingPrice ;
-    //const paymentStatus= "pending";
-    console.log(cart.payment.paymentMethod);
-    const dispatch = useDispatch();
+    const PromotionPrice = discount===0 ? toPrice(0) : toPrice(discount);
+    const totalPrice = itemsPrice + shippingPrice - PromotionPrice ;
+    
+    const addAddress = shipping.district +', '+ shipping.ward + ', ' +shipping.infoDetail
+    console.log(totalPrice);
+    
     const placeOrderHandler = () =>{
         ///create order
-        dispatch(addOrder(userInfo.newUser._id,cart.shipping.city,
-            cart.shipping.name,cart.shipping.address,
-            cart.shipping.numberPhone,cart.payment.paymentMethod, shippingPrice.toFixed(2)));
+        dispatch(addOrder(
+            userInfo.newUser._id,
+            shipping.city,
+            shipping.name,addAddress,
+            shipping.phone,payment.paymentMethod, 
+            shippingPrice.toFixed(2), 
+            totalPrice.toFixed(2)));
     }
     const tranSuccess = async(payment) => {
         if(payment.paid===true){
-            dispatch(addOrder(userInfo.newUser._id,cart.shipping.city,
-                cart.shipping.name,cart.shipping.address,
-                cart.shipping.numberPhone,cart.payment.paymentMethod, shippingPrice.toFixed(2)));
+            dispatch(addOrder(
+               userInfo.newUser._id,
+               shipping.city,
+               shipping.name,addAddress,
+               shipping.phone,
+               payment.paymentMethod, 
+               shippingPrice.toFixed(2),
+               totalPrice.toFixed(2)));
         } 
     }
     useEffect(()=>{
@@ -56,7 +93,7 @@ function PlaceOrderScreen(props){
             props.history.push('/order-success');
             dispatch({type:ORDER_RESET});
         }
-        console.log(cart.payment.paymentMethod);
+        //console.log(payment.paymentMethod);
     },[dispatch,props.history,success]);
     return<div>
         <TopBar/>
@@ -66,20 +103,29 @@ function PlaceOrderScreen(props){
         <div className="placeorder">
             <div className="placeorder-info">
                 <div>
-                    <h3>
-                        {t('place_order:shipping_address')}
-                    </h3>
+                    <h4>
+                        <b>{t('place_order:shipping_address')}</b>
+                    </h4>
                     <div>
-                        {cart.shipping.address},{cart.shipping.city},
-                        {cart.shipping.name},{cart.shipping.numberPhone}
+                        {shipping?.city},{shipping?.district},{shipping?.ward},{shipping?.infoDetail}
+                     
                     </div>
                 </div>
                 <div>
-                    <h3>
-                    {t('place_order:payment')}
-                    </h3>
+                    <h4>
+                        <b>{t('place_order:shipping_user')}</b>
+                    </h4>
                     <div>
-                    {t('place_order:payment_method')} {cart.payment.paymentMethod}
+                        {shipping?.name},{shipping?.phone}
+                    </div>
+                </div>
+                <div>
+                    <h4>
+                     <b> {t('place_order:payment')}</b>
+                    </h4>
+                    <div>
+                    {t('place_order:payment_method')} 
+                    {payment?.paymentMethod}
                     </div>
                 </div>
                     <div className="cart-page">
@@ -160,6 +206,22 @@ function PlaceOrderScreen(props){
                         
                     </li>
                     <li>
+                        <h3><b>{t('place_order:promotion_code')}</b></h3>
+                    </li>
+                    <li>
+                        <PromoCodes priceDecreaseHandle={priceDecreaseHandle}/>
+                        
+                        
+                    </li>
+                    <li>
+                            <div>
+                            {t('place_order:promotion')}
+                            </div>
+                            <div>
+                               - ${discount.toFixed(2)}
+                            </div>
+                    </li>
+                    <li>
                         
                         <div>
                         {t('place_order:total_price')}
@@ -170,7 +232,7 @@ function PlaceOrderScreen(props){
                     </li>
                    
                     {
-                        cart.payment.paymentMethod==="Paypal"?
+                       payment?.paymentMethod==="Paypal"?
                         <li className="payPal">
                                 <PayPalButton   
                                 total={totalPrice.toFixed(2)}

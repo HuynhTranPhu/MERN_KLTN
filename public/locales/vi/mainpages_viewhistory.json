@@ -9,6 +9,7 @@
 	"quantity":"Số lượng",
 	"total":"Tổng",
 	"order_summary":"Đơn hàng",
+	"shipping_user":"Thông tin người nhận",
 	"sub_total":"Tổng tiền",
 	"order_total":"Tổng đơn hàng",
 	"delete_orders":"Xóa đơn hàng"

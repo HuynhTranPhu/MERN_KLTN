@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { useMediaQuery } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,8 +17,8 @@ function Index(props) {
     const { t } = useTranslation(['common_btbar_index']);
     const userLogin = useSelector((state) => state.userLogin);
     const {userInfo} = userLogin;
-    const cart = useSelector((state) => state.cart);
-    const {cartItems} = cart;
+    const cartGet = useSelector((state) => state.cartGet);
+    const {cartItems} = cartGet;
     const history =useHistory();
     const dispatch = useDispatch();
     

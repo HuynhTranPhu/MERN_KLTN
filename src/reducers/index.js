@@ -1,7 +1,8 @@
 import { combineReducers} from 'redux';
-import { cartGetReducer,
-        cartPostReducer,
-        cartReducer, 
+import { 
+        //addAddressReducer, 
+        cartGetReducer,
+        //cartPostReducer,
         decreaseCartReducer,
         increaseCartReducer, 
         removeCartPostReducer 
@@ -26,7 +27,7 @@ import { forgotPasswordReducer,
         userUpdateProfileReducer 
 } from './userReducers';
 import { getCommentReducer, updateRatingReducer } from './comment';
-import { getBannerReducer, getPromoCodeReducer } from './promotionReducers';
+import { checkPromotionReducer, getBannerReducer, getPromoCodeReducer } from './promotionReducers';
 
 
 const reducer = combineReducers({
@@ -35,10 +36,10 @@ const reducer = combineReducers({
     productListSelling : productListSellingReducer,
 
     checkComment:checkCanCommentReducer,
+    checkPromotion:checkPromotionReducer,
 
     categoryList: categoryListReducer,
     productDetails: productDetailsReducer,
-    cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
 
@@ -53,7 +54,9 @@ const reducer = combineReducers({
     userUpdatePassword:userUpdatePasswordReducer,
     forgotPassword:forgotPasswordReducer,
 
-    cartPost:cartPostReducer,
+    //addAddressState:addAddressReducer,
+
+    //cartPost:cartPostReducer,
     cartGet:cartGetReducer,
     removeCartPost:removeCartPostReducer,
     increaseCart: increaseCartReducer,

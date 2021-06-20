@@ -19,9 +19,10 @@ export default function ProfileScreen(props){
 
     const userLogin = useSelector((state) => state.userLogin);
     const {userInfo} = userLogin;
-    //console.log(userInfo);
+    
     const userDetails = useSelector((state) => state.userDetails);
     const {loading, error, user} = userDetails;
+    //console.log(user);
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
     const { error: errorUpdate }= userUpdateProfile;
     const dispatch = useDispatch();
@@ -51,7 +52,7 @@ export default function ProfileScreen(props){
     }
     return<div>
         <TopBar/>
-        <BottomBar  ></BottomBar>
+        <BottomBar></BottomBar>
         <NavBar/>
         {
              loading ? (

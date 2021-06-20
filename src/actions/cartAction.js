@@ -1,16 +1,11 @@
 import axios from 'axios'
 import Cookie from 'js-cookie';
-import {CART_INCREASE, 
-    CART_DECREASE, 
-    CART_ADD_FAIL, 
-    CART_ADD_ITEM, 
-    CART_REMOVE_ITEM, 
+import {
     CART_SAVE_PAYMENT, 
     CART_SAVE_SHIPPING, 
     CART_ADD_POST_REQUEST,
     CART_ADD_POST_SUCCESS,
     CART_ADD_POST_FAIL,
-    CART_REMOVE_POST_REQUEST,
     CART_REMOVE_POST_SUCCESS,
     CART_REMOVE_POST_FAIL,
     CART_LIST_REQUEST,
@@ -21,58 +16,43 @@ import {CART_INCREASE,
     CART_INCREASE_FAIL,
     CART_DECREASE_REQUEST,
     CART_DECREASE_FAIL,
-    CART_DECREASE_SUCCESS} 
+    CART_DECREASE_SUCCESS,
+    ADD_ADDRESS_REQUEST,
+    ADD_ADDRESS_SUCCESS,
+    ADD_ADDRESS_FAIL} 
     from '../constants/cartConstants';
+import {detailsUser} from './userAction';
 require ('dotenv').config();
 const url = process.env.REACT_APP_URL_CLIENT;
 
-///add cart tren man hinh
-// const addToCart = (productId, count) => async (dispatch, getState) => {
-//     try{
-//         const {data} = await axios.get(`${url}/product/`+ productId);
-//         dispatch({
-//             type: CART_ADD_ITEM, payload:{
-//             id: data._id,
-//             name: data.name,
-//             img: data.images[0],
-//             price: data.price,
-//             color:data.color,
-//             size:data.size,
-//             countInStock : data.quantity,
-//             count,
-//             }
-//         });
-//         const {cart: {cartItems}} = getState();
-//         Cookie.set("cartItems", JSON.stringify(cartItems));
 
-//     } catch(error){
-//         dispatch({type: CART_ADD_FAIL, payload: error.message})
-//     }
-// }
-
-// const removeFromCart =(productId) => (dispatch, getState) =>{
-
-//     //const {cart: {cartItems}} = getState();
-//     //Cookie.set("cartItems", JSON.stringify(cartItems));
-//     Cookie.remove('cartItems');
-//     dispatch({type :CART_REMOVE_ITEM, payload : productId});
-// }
-// const decrease = (productId) =>(dispatch, getState)=>{
-//     const {cart: {cartItems}} = getState();
-//     Cookie.set("cartItems", JSON.stringify(cartItems));
-//     dispatch({type :CART_DECREASE, payload : productId});
-// }
-// const increase = (productId) =>(dispatch, getState)=>{
-//     const {cart: {cartItems}} = getState();
-//     Cookie.set("cartItems", JSON.stringify(cartItems));
-//     dispatch({type :CART_INCREASE, payload :productId });
-// }
 const saveShipping =(data) => (dispatch) =>{
     dispatch({type:CART_SAVE_SHIPPING, payload:data});
-   // Cookie.set("shipping", JSON.stringify(data));
-} 
+    Cookie.set("shipping", JSON.stringify(data));
+}
+const addAddress = (id,address) => async (dispatch,getState) =>{
+    dispatch({type: ADD_ADDRESS_REQUEST, payload:{id, address}});
+    //console.log(id,address);
+    //const { userLogin :{userInfo}}= getState();
+    try{
+        const {data} = await axios.post( `${url}/address/add`, {id,address}
+        // ,{
+        //     headers: {Authorization:`${userInfo.token}`},
+        // }
+        );
+        dispatch({type:ADD_ADDRESS_SUCCESS,payload:data});   
+        dispatch(detailsUser(id));   
+    }catch(error){
+        const message=
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+        dispatch({type:ADD_ADDRESS_FAIL,payload:message});
+    }
+}
 const savePayment =(data) => (dispatch) =>{
     dispatch({type:CART_SAVE_PAYMENT, payload:data});
+    Cookie.set("payment", JSON.stringify(data));
 }
 const addCart = (id_user,products) => async (dispatch,getState) =>{
     dispatch({type: CART_ADD_POST_REQUEST, payload:{id_user, products}});
@@ -162,9 +142,8 @@ const increaseCart = (id_user,id_product ,color,size) => async (dispatch, getSta
 const decreaseCart = (id_user,id_product, color,size) => async (dispatch, getState) =>{
     dispatch({type: CART_DECREASE_REQUEST, payload:{id_user,id_product, color,size}});
     const { userLogin :{userInfo}}= getState();
-    //console.log(id_user,id_product);
     try{
-        //console.log({id_product,id_user});https://backendheroku112.herokuapp.com
+        
         const {data} = await axios.put(`${url}/cart/updategiam`, {id_user,id_product, color,size}
         ,{
             headers: {Authorization:`${userInfo.token}`},
@@ -189,4 +168,5 @@ export {
      ,removeCart
      ,increaseCart
      ,decreaseCart
+     ,addAddress
 };

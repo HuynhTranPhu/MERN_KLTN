@@ -30,12 +30,12 @@
     background-color: #FF6F61;
 }
 .orderInfo{
-    height: 60px;
+    height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: absolute;
-    top: -26px;
+    top: -39px;
     transform: translateX(-50%);
 }
 

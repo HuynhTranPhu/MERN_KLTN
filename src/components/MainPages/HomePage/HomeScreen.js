@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, {useEffect} from 'react';
 import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -44,7 +44,7 @@ function HomeScreen(props){
         dispatch(getCart(userInfo?.newUser?._id));
         return () => {
         };
-    }, [])
+    }, [dispatch, userInfo?.newUser?._id])
     const settings = {
         autoplay: true,
         infinite: true,
@@ -121,13 +121,13 @@ function HomeScreen(props){
                           <div className="col-md-3 header__mobile-res">
                               <div className="header-img">
                                   <div className="img-item">
-                                      <img src="/img/category-1.jpg" />
+                                      <img src="/img/category-1.jpg" alt="category" />
                                       <Link className="img-text" to="/product-list">
                                           <p>{t('mainpages_home:woman_fashion')}</p>
                                       </Link>
                                   </div>
                                   <div className="img-item">
-                                      <img src="/img/category-2.jpg" />
+                                      <img src="/img/category-2.jpg" alt="category" />
                                       <Link className="img-text" to="/product-list">
                                           <p>{t('mainpages_home:kids_fashion')}</p>
                                       </Link>
@@ -160,7 +160,7 @@ function HomeScreen(props){
                       <div className="row">
                           <div className="col-md-3">
                               <div className="category-item ch-400">
-                                  <img src="img/category-3.jpg" />
+                                  <img src="img/category-3.jpg" alt="category" />
                                   <Link className="category-name" to="" >
                                       <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
@@ -168,13 +168,13 @@ function HomeScreen(props){
                           </div>
                           <div className="col-md-3">
                               <div className="category-item ch-250">
-                                  <img src="img/category-4.jpg" />
+                                  <img src="img/category-4.jpg" alt="category" />
                                   <Link className="category-name"to="" >
                                       <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
                               </div>
                               <div className="category-item ch-150">
-                                  <img src="img/category-5.jpg" />
+                                  <img src="img/category-5.jpg" alt="category" />
                                   <Link className="category-name"to="" >
                                       <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
@@ -182,13 +182,13 @@ function HomeScreen(props){
                           </div>
                           <div className="col-md-3">
                               <div className="category-item ch-150">
-                                  <img src="img/category-6.jpg" />
+                                  <img src="img/category-6.jpg" alt="category" />
                                   <Link className="category-name"to="" >
                                       <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
                               </div>
                               <div className="category-item ch-250">
-                                  <img src="img/category-7.jpg" />
+                                  <img src="img/category-7.jpg" alt="category" />
                                   <Link className="category-name"to="" >
                                       <p>{t('mainpages_home:hot_trend')}</p>
                                   </Link>
@@ -196,10 +196,10 @@ function HomeScreen(props){
                           </div>
                           <div className="col-md-3">
                               <div className="category-item ch-400">
-                                  <img src="img/category-8.jpg" />
-                                  <a className="category-name" >
+                                  <img src="img/category-8.jpg" alt="category" />
+                                  <span className="category-name" >
                                       <p>{t('mainpages_home:hot_trend')}</p>
-                                  </a>
+                                  </span>
                               </div>
                           </div>
                       </div>

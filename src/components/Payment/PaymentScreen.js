@@ -9,16 +9,16 @@ import FooterPage from '../Common/Footer/Footer';
 import ScrollToTopBtn from '../Common/ScrollToTop/ScrollToTop';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-
+import './Payment.css';
 
 
 
 function PaymentScreen(props){
 
     const { t } = useTranslation(['payment']);
-    const cart = useSelector((state)=>state.cart);
-    const {shipping}= cart;
-    if(!shipping.address){
+    const cartGet = useSelector((state)=>state.cartGet);
+    const {shipping}= cartGet;
+    if(!shipping?.infoDetail){
         props.history.push('/shipping');
     }
     const [paymentMethod, setPaymentMethod] = useState('');
@@ -39,36 +39,45 @@ function PaymentScreen(props){
             <BottomBar></BottomBar>
             <NavBar/>
             <CheckoutSteps step1 step2 step3></CheckoutSteps>
-            <div className="formShipping">
+            <div className="formPayment">
                 <form onSubmit={submitHandler}>
-                <ul className="form-container-shipping">
+                <ul className="form-container-payment">
                     <li>
-                        <h2>{t('payment:payment')}</h2>
+                        <h2 className="text-center" >{t('payment:payment')}</h2>
                     </li>
                     <li>
-                        <input type="radio" name="paymentMethod" value="Paypal"
-                        id="paymentMethod" onChange={(e)=>setPaymentMethod(e.target.value)}></input>
+                        <div className="payment__method">
+                            <input type="radio" name="paymentMethod" value="Paypal"
+                                    id="paymentMethod" onChange={(e)=>setPaymentMethod(e.target.value)}></input>
                             <label htmlFor="paymentMethod">
                                 PayPal
                             </label>
+                        </div>
+                        
                     </li>
                     <li>
-                        <input type="radio" name="paymentMethod" value="Momo"
-                        id="paymentMethod" onChange={(e)=>setPaymentMethod(e.target.value)}></input>
+                        <div className="payment__method">
+                            <input type="radio" name="paymentMethod" value="Momo"
+                                    id="paymentMethod" onChange={(e)=>setPaymentMethod(e.target.value)}></input>
                             <label htmlFor="paymentMethod">
                                 MoMo
                             </label>
+                        </div>
+                        
                     </li>
                     <li>
-                        <input type="radio" name="paymentMethod" value="Cash On Delivery"
-                        id="paymentMethod" onChange={(e)=>setPaymentMethod(e.target.value)}></input>
+                        <div className="payment__method">
+                            <input type="radio" name="paymentMethod" value="Cash On Delivery"
+                                    id="paymentMethod" onChange={(e)=>setPaymentMethod(e.target.value)}></input>
                             <label htmlFor="paymentMethod">
                                 {t('payment:payment_on_delivery')}
                             </label>
+                        </div>
+                        
                     </li>
                     
                     <li>
-                        <button type="submit" className="button primary">
+                        <button type="submit" className="button primary ">
                                 {t('payment:continue')}
                         </button>
                     </li>

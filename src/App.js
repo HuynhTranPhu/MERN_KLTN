@@ -46,14 +46,14 @@ function App() {
                      <Route path="/register" exact component={RegisterScreen}></Route>
                      <PrivateRoute path="/profile" exact component={ProfileScreen}></PrivateRoute>
                      <Route path="/product-list" exact component={ProductScreen}></Route>
-                     <Route path="/update-password" exact component={UpdatePasswordScreen}></Route>
+                     <PrivateRoute path="/update-password" exact component={UpdatePasswordScreen}></PrivateRoute>
                      <PrivateRoute path="/product-detail/:id" exact component={ProductDetailScreen}></PrivateRoute>
                      <Route path="/contact" exact component={ContactScreen}></Route>
                      <Route path="/confirm/:token" exact component={VerifyRegisterAccountContainer}></Route>
                      <Route path="/forgotPass/" exact component={ForgotPasswordContainer}></Route>
-                     <Route path="/shipping" exact component={ShippingScreen}></Route>
-                     <Route path="/payment" exact component={PaymentScreen}></Route>
-                     <Route path="/place-order" exact component={PlaceOrderScreen}></Route>
+                     <PrivateRoute path="/shipping" exact component={ShippingScreen}></PrivateRoute>
+                     <PrivateRoute path="/payment" exact component={PaymentScreen}></PrivateRoute>
+                     <PrivateRoute path="/place-order" exact component={PlaceOrderScreen}></PrivateRoute>
                      <Route path="/order-success" exact component={OrderSuccess}></Route>
                      <PrivateRoute path="/history" exact component={History}></PrivateRoute>
                      <PrivateRoute path="/view-history/:id" exact component={ViewHistory}></PrivateRoute>

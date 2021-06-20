@@ -17,11 +17,12 @@ import {REMOVE_ORDER_REQUEST,
         GET_ORDER_BY_TYPE_FAIL} from "../constants/orderContants";
 require ('dotenv').config();
 const url = process.env.REACT_APP_URL_CLIENT;
-const addOrder = (id_user,city,name,address,phone,payment,shiping) => async (dispatch, getState) =>{
-    dispatch({type: ADD_ORDER_REQUEST, payload:{id_user,city,name,address,phone,payment,shiping}});
+const addOrder = (id_user,city,name,address,phone,payment,shiping,order_subtotal) => async (dispatch, getState) =>{
+    dispatch({type: ADD_ORDER_REQUEST, payload:{id_user,city,name,address,phone,payment,shiping,order_subtotal}});
+    console.log(id_user,city,name,address,phone,payment,shiping, order_subtotal);
     const { userLogin :{userInfo}}= getState();
     try{
-        const {data} = await Axios.post(`${url}/order/addorder`, {id_user,city,name,address,phone,payment,shiping},
+        const {data} = await Axios.post(`${url}/order/addorder`, {id_user,city,name,address,phone,payment,shiping, order_subtotal},
         {
             headers: {Authorization:`${userInfo.token}`},
         }
@@ -117,7 +118,8 @@ const removeOrder = (id_order) => async (dispatch) =>{
 
 
 
-export {addOrder
+export {
+    addOrder
     ,historyGet
     ,viewHistoryGet
     ,removeOrder

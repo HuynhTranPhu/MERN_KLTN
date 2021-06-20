@@ -1,9 +1,18 @@
 {
 	"shipping":"Shipping address",
 	"name":"Name",
-	"address":"Address",
-	"city":"City",
-	"postal_code":"Postal Code",
-	"number_phone":"Number Phone",
+	"city":"City/Province",
+	"district":"District",
+	"ward":"Ward",
+	"address":"Address detail",
+	"select_city":"Select city/province",
+	"select_district":"Select district",
+	"select_ward":"Select ward",
+	"number_phone":"Phone",
+	"ph_name":"Enter your name",
+	"ph_phone":"Enter your phone",
+	"ph_infoDetail":"Enter address detail",
+	"add_success":"Update address success",
+	"add_error":"Enter your full address",
 	"continue":"Continue"
 }

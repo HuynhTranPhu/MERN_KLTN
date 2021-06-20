@@ -34,10 +34,10 @@ export default function PromoCodeItem(props) {
             {leftPromoCode()}
         </div>
         <div className="col-7 justify-content-between text-center">
-          <Tooltip title="Tặng voucher 100.000 đ cho đơn đâu tiên với khách hàng mới" placement="top">
+          <Tooltip title={props.content} placement="top">
             <div className="mb-2">
               <div className="coupon__amount text-max-2">{props.content}</div>
-              <span>{props.price_discount} VND discount on total amount</span>
+              <span>{props.price_discount} $ discount on total amount</span>
             </div>
           </Tooltip>
           {props.couponCode !== 'false' && (

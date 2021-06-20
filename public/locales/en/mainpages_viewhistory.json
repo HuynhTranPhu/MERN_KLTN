@@ -9,6 +9,7 @@
 	"quantity":"Quantity",
 	"total":"Total",
 	"order_summary":"Order Summary",
+	"shipping_user":"Shipping user",
 	"sub_total":"SubTotal",
 	"order_total":"Order Total",
 	"delete_orders":"Delete orders"

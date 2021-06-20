@@ -97,6 +97,7 @@ const logout = () =>(dispatch) =>{
     Cookie.remove('userInfo');
     Cookie.remove('cartItems');
     Cookie.remove('shipping');
+    Cookie.remove('payment');
     dispatch({type: USER_SIGNOUT});
 }
 
@@ -257,7 +258,13 @@ export const forgotPasswordFail = () => ({
 })
 
 
-export {login, register, logout, detailsUser, updateUserProfile, updateUserPassword, 
+export {
+    login,
+    register, 
+    logout, 
+    detailsUser, 
+    updateUserProfile, 
+    updateUserPassword, 
     loginFaceBook,
     loginGoogle
 };

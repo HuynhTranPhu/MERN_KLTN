@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
-import LoadingBox from '../../Config/LoadingBox';
+//import LoadingBox from '../../Config/LoadingBox';
 import MessageBox from '../../Config/MessageBox';
 import { removeOrder, viewHistoryGet } from '../../../actions/orderActions';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import OrderStatus from '../../OrderStatus/index';
 import { useTranslation } from 'react-i18next';
+import LoadingBackdrop from '../../Config/LoadingBackdrop';
 
 function ViewHistory(props){
 
@@ -36,10 +37,8 @@ function ViewHistory(props){
         if(success===true){
             props.history.push('/history');
         }
-        return () => {
-            //
-        };
-    }, [success])
+        return () => {};
+    }, [dispatch, success, props.match.params.id, props.history])
     let c=0;
     const checkOrderStatus =()=>{
         viewHistory.map(item=>(
@@ -61,7 +60,7 @@ function ViewHistory(props){
         <BottomBar  ></BottomBar>
         <NavBar/>
         {loading?(
-            <LoadingBox></LoadingBox>
+           <LoadingBackdrop open={loading}/>
             ):
             error? (
                 <MessageBox variant="danger">{error}</MessageBox>
@@ -72,19 +71,26 @@ function ViewHistory(props){
                 <div className="placeorder">
                 <div className="placeorder-info">
                     <div>
-                        <h3>
-                        {t('mainpages_viewhistory:shipping_address')}
-                        </h3>
+                        <h4>
+                          <b>{t('mainpages_viewhistory:shipping_address')}</b> 
+                        </h4>
                         <div>
-                            {viewHistory.map(item=>item.address )},
                             {viewHistory.map(item=>item.city)},
-                            {viewHistory.map(item=> item.name )},
+                            {viewHistory.map(item=>item.address )}
+                        </div>
+                    </div>
+                    <div>
+                        <h4>
+                            <b>{t('mainpages_viewhistory:shipping_user')}</b>
+                        </h4>
+                        <div>
+                            {viewHistory.map(item=>item.name )},
                             {viewHistory.map(item=>item.phone)}
                         </div>
                     </div>
                     <div>
                         <h3>
-                        {t('mainpages_viewhistory:payment')}
+                          <b>{t('mainpages_viewhistory:payment')} </b> 
                         </h3>
                         <div>
                         {t('mainpages_viewhistory:payment_method')} {viewHistory.map(item=>item.payment)},

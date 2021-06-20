@@ -1,9 +1,18 @@
 {
-	"shipping":"Nhập địa chỉ",
+	"shipping":"Địa chỉ giao hàng",
 	"name":"Tên khách hàng",
-	"address":"Địa chỉ",
-	"city":"Thành phố",
-	"postal_code":"Mã bưu điện",
+	"city":"Thành phố/Tỉnh",
+	"district":"Quận/Huyện",
+	"ward":"Phường/Xã",
+	"address":"Địa chỉ cụ thể",
+	"select_city":"Chọn tỉnh/thành phố",
+	"select_district":"Chọn quận/huyện",
+	"select_ward":"Chọn phường/xã",
 	"number_phone":"Số điện thoại",
+	"ph_name":"Nhập tên của bạn",
+	"ph_phone":"Nhập số điện thoại",
+	"ph_infoDetail":"Nhập địa chỉ chi tiết",
+	"add_success":"Cập nhật địa chỉ thành công",
+	"add_error":"Nhập đầy đủ thông tin",
 	"continue":"Tiếp tục"
 }

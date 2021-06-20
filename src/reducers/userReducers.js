@@ -1,4 +1,3 @@
-//import { CART_ADD_POST_FAIL, CART_ADD_POST_REQUEST, CART_ADD_POST_SUCCESS } from '../constants/cartConstants';
 import {
     USER_UPDATE_PASSWORD_REQUEST, 
     USER_UPDATE_PASSWORD_SUCCESS, 
@@ -160,8 +159,10 @@ function forgotPasswordReducer(state = {}, action){
 
 
 export{
-    userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userUpdatePasswordReducer,
+    userLoginReducer, 
+    userRegisterReducer, 
+    userDetailsReducer, 
+    userUpdateProfileReducer, 
+    userUpdatePasswordReducer,
     forgotPasswordReducer,
-    //addCartReducer,
-   // userLoginFaceBookReducer
 }

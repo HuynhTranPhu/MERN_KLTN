@@ -9,13 +9,13 @@
 }
 .placeorder-action{
   flex: 1 1 20rem;
-  border: .1rem #FF6F61 solid;
+  /* border: .1rem #FF6F61 solid; */
   border-radius: .5rem;
   background-color: #fff;
   padding: 1rem;
 }
 .placeorder-info > div{
-  border: .1rem #FF6F61 solid;
+  /* border: .1rem #FF6F61 solid; */
   border-radius: .5rem;
   background-color: #fff;
   padding: 1rem;
