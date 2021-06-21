@@ -3,8 +3,8 @@ import Slider from "react-slick";
 import { toast } from 'react-toastify';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-//import ReactImageZoom from 'react-image-zoom';
-import { MagnifierContainer, SideBySideMagnifier } from 'react-image-magnifiers';
+import ReactImageZoom from 'react-image-zoom';
+//import { MagnifierContainer, SideBySideMagnifier } from 'react-image-magnifiers';
 //import { detailsProduct } from '../../../actions/productActions';
 import { checkCanComment, detailsProduct, listProducts } from '../../../actions/productActions';
 //import LoadingBox from '../../Config/LoadingBox';
@@ -64,31 +64,9 @@ function ProductDetailScreen(props){
     const pageEnd = useRef()
     //detail
     useEffect(() => {
-        //if(params.id){
-
-            // products.forEach(product => {
-            //     if(product._id === params.id) setDetailProduct(product)
-            // })  
+       
             dispatch(detailsProduct(params.id));
-            dispatch(listProducts());
-            
-       // }
-
-         
-        // const test = async()=>{
-        // await dispatch(listProducts());
-        // await dispatch(detailsProduct(params.id));
-        // setLoading2(false)
-        // }
-    
-    
-        // if (products.length===0)
-        // {
-        //     setLoading2(true)
-        //     test(); 
-    
-        // }
-
+            dispatch(listProducts()); 
      
     }, [dispatch,params.id])
     // Realtime 
@@ -211,10 +189,9 @@ function ProductDetailScreen(props){
                 toast.success("This product is added to cart");
             }
             
-                //props.history.push(`/cart/${id}`); 
-            //dispatch(getCart(userInfo.newUser._id));
         
     }
+    const propsImage = {width: 350, height: 300, zoomPosition:'original' ,img: product?.images?.[0] || '/img/no-image.png'};
     return <div>
         {/* <LoadingBackdrop open={loading2} /> */}
         <TopBar/>
@@ -229,19 +206,20 @@ function ProductDetailScreen(props){
                 <div className="container">
                     <div className="row ">
                         <div className="col-lg-12">
-                            <div className="col-lg-12">
+                            {/* <div className="col-lg-12"> */}
                                 <div className="product-detail-top">
                                     <div className="row align-items-center">
                                         <div className="col-md-5">
                                             <div className="product__image">
-                                                <MagnifierContainer>
+                                                {/* <MagnifierContainer>
                                                     <SideBySideMagnifier
-                                                        alwaysInPlace={false}
-                                                        fillAvailableSpace={false}
+                                                        alwaysInPlace={true}
+                                                        //fillAvailableSpace={false}
                                                         imageSrc={product?.images?.[0] || '/img/no-image.png'}
                                                         className="product-img-magnifier"
                                                     />
-                                                </MagnifierContainer>
+                                                </MagnifierContainer> */}
+                                                <ReactImageZoom {...propsImage} />
                                             </div>
                                         </div>
                                         <div className="col-md-7">
@@ -301,7 +279,7 @@ function ProductDetailScreen(props){
                                                 <div className="action">
                                                 {
                                                     product?.quantity>0 && 
-                                                    <span className="btn"  onClick={()=>handleAddToCart(product._id,product.name,product.price,product.images[0])} ><i className="fa fa-shopping-cart" />{t('mainpages_pdetal_detail:add_to_cart')}</span>
+                                                    <span className="btn"  onClick={()=>handleAddToCart(product._id,product.name,product.price,product.images[0])} ><i className="fa fa-shopping-cart" /> {t('mainpages_pdetal_detail:add_to_cart')}</span>
                                                 }
                                                 </div>
                                             </div>
@@ -388,7 +366,7 @@ function ProductDetailScreen(props){
                                         </div>
                                     </div>
                                 </div>
-                            </div>   
+                            {/* </div>    */}
                             <div className="product">
                                 {
                                     products.filter((pr)=>pr.id_category===product?.id_category?._id).length>1 ? 

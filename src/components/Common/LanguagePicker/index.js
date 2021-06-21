@@ -1,5 +1,4 @@
 import { Menu, MenuItem } from '@material-ui/core';
-//import { i18n, useTranslation } from 'i18n';
 import React, {useState } from 'react';
 import './index.css';
 import { useTranslation } from "react-i18next";
@@ -26,10 +25,10 @@ const LanguagePicker = () => {
 
   return (
     <>
-      <a className="promotion-nav__link" onClick={openMenu} style={{ border: 'none' }}>
+      <span className="promotion-nav__link" onClick={openMenu} style={{ border: 'none' }}>
         <i className="promotion-nav__icon fas fa-globe-americas" />
         <span>{t('common_btbar_index:language')}</span>
-      </a>
+      </span>
 
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={!!anchorEl} onClose={closeMenu}>
         {Object.keys(languageNames).map((code) => (

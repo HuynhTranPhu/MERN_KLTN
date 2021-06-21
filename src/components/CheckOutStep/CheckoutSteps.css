@@ -3,14 +3,24 @@
     justify-content: space-between;
     width: 40rem;
     margin: 1rem auto;
-  }
-  .checkout-steps > div{
+}
+.checkout-steps > div{
     border-top: .3rem #c0c0c0 solid;
     color: #c0c0c0;
     flex: 1 1;
     padding-top: 1rem;
-  }
-  .checkout-steps > div.active{
+}
+.checkout-steps > div.active{
     border-top: .3rem #FF6F61 solid;
     color: #FF6F61;
+}
+@media (min-width: 575px) and (max-width: 767.98px) {
+  .checkout-steps{
+    width: 30rem;
   }
+} 
+@media (max-width: 574.98px) {
+  .checkout-steps{
+    width: 22rem;
+  }
+} 

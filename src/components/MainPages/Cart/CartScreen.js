@@ -82,7 +82,7 @@ function CartScreen(props){
                                             <table className="table table-bordered">
                                                 <thead className="thead-dark">
                                                     {
-                                                        (cartItems?.length=== 0|| cartItems==undefined) ?(                                                  
+                                                        (cartItems?.length=== 0|| cartItems===undefined) ?(                                                  
                                                             <div className="empty-cart">
                                                                 <img className="empty-cart-img" src="/images/emptyCart.png" alt="Product" />
                                                                 <p className="empty-cart-note">{t('mainpages_cart:empty_cart')}</p>
@@ -152,15 +152,15 @@ function CartScreen(props){
                                                         <h1>{t('mainpages_cart:cart_summary')}</h1>
                                                         <p>{t('mainpages_cart:sub_total')}
                                                             <span>
-                                                            ${cartItems?.reduce((a,c) => a+c.price * c.quantity,0)}
+                                                            ${cartItems?.reduce((a,c) => a+c.price * c.quantity,0)||0}
                                                             </span>
                                                         </p>
                                                         <p>{t('mainpages_cart:shipping_cost')}<span>$0</span></p>
-                                                        <h2>{t('mainpages_cart:grand_total')}<span>${ cartItems?.reduce((a,c) => a+c.price * c.quantity,0)}</span></h2>
+                                                        <h2>{t('mainpages_cart:grand_total')}<span>${ cartItems?.reduce((a,c) => a+c.price * c.quantity,0)||0}</span></h2>
                                                     </div>
                                                     <div className="cart-btn">
                                                         <Link to="/product-list"><button>{t('mainpages_cart:update_cart')}</button></Link>
-                                                        <button onClick={checkoutHandler} disabled={cartItems?.length=== 0|| cartItems==undefined}>{t('mainpages_cart:proceed_to_checkout')}</button>
+                                                        <button onClick={checkoutHandler} disabled={cartItems?.length=== 0|| cartItems===undefined}>{t('mainpages_cart:proceed_to_checkout')}</button>
                                                     </div>
                                                 </div>
                                             </div>

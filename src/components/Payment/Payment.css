@@ -42,3 +42,9 @@
 .form-container-payment .back{
     border-radius: 2rem;
 }
+@media (max-width: 574.98px) {
+    .form-container-payment{
+        width: 22rem;
+        
+    }
+} 

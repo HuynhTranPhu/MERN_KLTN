@@ -24,7 +24,6 @@ function ViewHistory(props){
      const removeOrderHandler = (id_order)=>{
         if(window.confirm('Do you want to delete this item?')){
             dispatch(removeOrder(id_order));
-        
             
         }
      }
@@ -166,11 +165,7 @@ function ViewHistory(props){
                                 {t('mainpages_viewhistory:sub_total')}
                                 </div>
                                 <div>
-                                    ${viewHistory.map(item=>(
-                                        item.cart.map(i=>(i.price*i.quantity).toFixed(2))
-                                    )  
-                                    )
-                                    }
+                                    ${viewHistory.map(item=>item.order_subtotal.toFixed(2))}
                                 </div>
                             
                             

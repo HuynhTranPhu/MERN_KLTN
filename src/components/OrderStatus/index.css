@@ -47,3 +47,42 @@
     font-size: 16px;
     font-weight: 400;
 }
+@media (min-width: 1600px)  {
+    .orderTrack{
+        width: 700px;
+        margin-left: 500px;
+    }
+} 
+@media (min-width: 900.98px) and (max-width: 1200px) {
+    .orderTrack{
+        width: 500px;
+        margin-left: 280px;
+    }
+} 
+@media (min-width: 769px) and (max-width: 900px) {
+    .orderTrack{
+        width: 400px;
+        margin-left: 220px;
+    }
+} 
+@media (min-width: 575px) and (max-width: 768.98px) {
+    .orderTrack{
+        width: 400px;
+        margin-left: 150px;
+        margin-top: 3rem;
+    }
+} 
+@media (max-width: 574.98px) {
+    .orderTrack{
+        width: 300px;
+        margin-left: 100px;
+        margin-top: 3rem;
+    }
+} 
+@media (max-width: 400px) {
+    .orderTrack{
+        width: 270px;
+        margin-left: 50px;
+        margin-top: 3rem;
+    }
+} 

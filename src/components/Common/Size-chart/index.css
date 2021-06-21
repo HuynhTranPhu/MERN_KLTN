@@ -97,6 +97,10 @@
     background-color: #fff;
     border-collapse: collapse;
 }
+.size-chart__table td {
+    padding: 15px 20px;
+    border: 1px solid #fafafa;
+}
 @media(max-width:767px){
     .size-chart__table td{
         padding: 15px;
