@@ -16,5 +16,9 @@
     "exp_date":"Expire date",
     "conditions":"Conditions",
     "HSD":"EXP",
-    "update":"Currently no promotions"
+    "update":"Currently no promotions",
+    "received":"Received",
+    "packed":"Packed",
+    "shipped":"Shipped",
+    "delivered":"Delivered"
   }

@@ -31,12 +31,13 @@
 }
 .orderInfo{
     height: 80px;
+    width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: absolute;
-    top: -39px;
-    transform: translateX(-50%);
+    top: -35px;
+    transform: translateX(-25%);
 }
 
 .status{
@@ -78,11 +79,23 @@
         margin-left: 100px;
         margin-top: 3rem;
     }
+    .status{
+        font-size: 14px;
+    }
+    .date{
+        font-size: 14px;
+    }
 } 
 @media (max-width: 400px) {
     .orderTrack{
         width: 270px;
         margin-left: 50px;
         margin-top: 3rem;
+    }
+    .status{
+        font-size: 13px;
+    }
+    .date{
+        font-size: 14px;
     }
 } 

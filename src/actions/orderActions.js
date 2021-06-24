@@ -17,12 +17,12 @@ import {REMOVE_ORDER_REQUEST,
         GET_ORDER_BY_TYPE_FAIL} from "../constants/orderContants";
 require ('dotenv').config();
 const url = process.env.REACT_APP_URL_CLIENT;
-const addOrder = (id_user,city,name,address,phone,payment,shiping,order_subtotal) => async (dispatch, getState) =>{
-    dispatch({type: ADD_ORDER_REQUEST, payload:{id_user,city,name,address,phone,payment,shiping,order_subtotal}});
+const addOrder = (id_user,promotion_code,city,name,address,phone,payment,shiping,order_subtotal) => async (dispatch, getState) =>{
+    dispatch({type: ADD_ORDER_REQUEST, payload:{id_user,promotion_code,city,name,address,phone,payment,shiping,order_subtotal}});
     console.log(id_user,city,name,address,phone,payment,shiping, order_subtotal);
     const { userLogin :{userInfo}}= getState();
     try{
-        const {data} = await Axios.post(`${url}/order/addorder`, {id_user,city,name,address,phone,payment,shiping, order_subtotal},
+        const {data} = await Axios.post(`${url}/order/addorder`, {id_user,promotion_code,city,name,address,phone,payment,shiping, order_subtotal},
         {
             headers: {Authorization:`${userInfo.token}`},
         }
@@ -81,15 +81,10 @@ const getOrderByType = (id_user, type, paymentStatus) => async (dispatch,getStat
         dispatch({type: GET_ORDER_BY_TYPE_FAIL, payload: message})
     }
 }
-const viewHistoryGet = (id_order) => async (dispatch,getState) =>{
-    const { userLogin :{userInfo}}= getState();
+const viewHistoryGet = (id_order) => async (dispatch) =>{
     try{
         dispatch({type: VIEW_HISTORY_REQUEST, payload: id_order});
-        const {data} = await Axios.get(`${url}/order/detail/` +id_order,
-        {
-            headers: {Authorization:`${userInfo.token}`},
-        }
-        );
+        const {data} = await Axios.get(`${url}/order/detail/` +id_order);
         dispatch({type: VIEW_HISTORY_SUCCESS, payload:data });
         //console.log(data);
     }

@@ -4,47 +4,58 @@ import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { useTranslation } from 'react-i18next';
 import ApplyPromoCodesDialog from './ApplyPromoCodesDialog'
 import { useDispatch, useSelector } from 'react-redux';
-import { checkPromotionCode, getPromoCode } from '../../../actions/promotionAction';
+import {checkPromotionCode,  getPromoCode } from '../../../actions/promotionAction';
 import { toast } from 'react-toastify';
+
+//import LoadingBackdrop from '../../Config/LoadingBackdrop';
 
 function PromoCodes(props) {
     const { t } = useTranslation(['place_order']);
     const [open, setOpen] = useState(false);
-    const [code, setCode] = useState('');
+    //const [code, setCode] = useState('');
 
     const getPromoCodes = useSelector(state => state.getPromoCodes);
     const {promoCodes } = getPromoCodes;
 
+
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo} = userLogin;
-
-    const checkPromotion = useSelector(state => state.checkPromotion);
-    const { checkPromotions } = checkPromotion;
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getPromoCode());
         return () => { };
     }, [dispatch])
     
-    useEffect(() => {
-      dispatch(checkPromotionCode(userInfo.newUser._id,code));  
-    },[code, dispatch, userInfo.newUser._id])
+    // useEffect(() => {
+    //   dispatch(checkPromotionCode(userInfo.newUser._id,code));  
+    // },[code, dispatch, userInfo.newUser._id])
     
     const handleApplyCoupon = (input) => {
-        setCode(input);
+        //setCode(input);
+        dispatch(checkPromotionCode(userInfo.newUser._id,input));
         const listCode = promoCodes.map((coupon)=>coupon.promotion_code)
         for (const element of listCode) {
-           if(element === input && checkPromotions === true ){
-            setOpen(false);
-            toast.success(t('place_order:success'));
-            props.priceDecreaseHandle(element)
+           if( element === input ){
+              setOpen(false);
+              toast.success(t('place_order:success'));
+              props.priceDecreaseHandle(element,input)
            }  
         }
        if(listCode.indexOf(input) === -1){
           toast.error(t('place_order:error'));
        }
-       //console.log(checkPromotions);
-     };
+       
+    };
+    // const check =()=>{
+    //   if(checkPromotions===true){
+    //     setOpen(false);
+    //     toast.success(t('place_order:success'));
+    //   }
+    //   else{
+    //     toast.error(t('place_order:error'));
+    //   }
+            
+    // }
     return (
         <div>
             <Button
@@ -65,11 +76,13 @@ function PromoCodes(props) {
             open={open}
             onClose={() => setOpen(false)}
             handleApplyCoupon={handleApplyCoupon}
+           // code={code}
             // handleUnapplyCoupon={handleUnapplyCoupon}
             // usableCoupons={getUsedCouponsData?.getUsedCoupon || []}
             // loading={gettingUsedCoupons || applyingCoupon}
             //promoCodes={promoCodes}
-          />    
+          /> 
+         
         </div>
     )
 }

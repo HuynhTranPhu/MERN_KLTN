@@ -47,10 +47,10 @@ function getOrderByTypeReducer (state = { ordersByTypes:[]}, action){
 }
 
 //View detail history orders
-function viewHistoryReducer (state = { viewHistory:[]}, action){
+function viewHistoryReducer (state = { viewHistory:{}}, action){
     switch(action.type){
         case VIEW_HISTORY_REQUEST:
-            return {loading: true, viewHistory:[]};
+            return {loading: true, viewHistory:{}};
         case  VIEW_HISTORY_SUCCESS:
             return { loading : false , viewHistory: action.payload};
         case VIEW_HISTORY_FAIL:

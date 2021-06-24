@@ -46,7 +46,7 @@ return (
                         <Link to="/cart" className="cart-nav-icon">
                         <a className="rockland-nav__link notification" >
                             <ShoppingCartOutlinedIcon />
-                                {cartItems.length>0 &&<span className="notification__counter">{cartItems.length}</span>}
+                                {cartItems?.length>0 &&<span className="notification__counter">{cartItems?.length}</span>}
                         </a>              
                         </Link>
                     ) : (

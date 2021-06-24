@@ -12,13 +12,14 @@ import { ORDER_RESET } from '../../constants/orderContants';
 import PayPalButton from './PayPalButton';
 import { useTranslation } from 'react-i18next';
 import PromoCodes from './Apply-Promotion-Code/PromoCodes';
-import { getPromoCode } from '../../actions/promotionAction';
+import {  getPromoCode } from '../../actions/promotionAction';
+import LoadingBackdrop from '../Config/LoadingBackdrop';
+import { toast } from 'react-toastify';
 
 function PlaceOrderScreen(props){
 
     const { t } = useTranslation(['place_order']);
-    // const cart = useSelector(state => state.cart);
-    // const { payment} = cart;
+    
     const cartGet = useSelector(state => state.cartGet);
     const {cartItems, payment, shipping} = cartGet;
 
@@ -29,33 +30,38 @@ function PlaceOrderScreen(props){
     const getPromoCodes = useSelector(state => state.getPromoCodes);
     const {promoCodes} = getPromoCodes;
 
-    const [discount,setDiscount]= useState(0)
+    const [discount,setDiscount]= useState(0);
+    const [input,setInput]= useState('');
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getPromoCode());
         return () => {
         };
     }, [dispatch])
-
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo} = userLogin;
     if(!payment?.paymentMethod){
         
         props.history.push('/payment'); 
     }
-    
-    
+    const checkPromotion = useSelector(state => state.checkPromotion);
+    const { checkPromotions,loading } = checkPromotion;
+
+    //  useEffect(() => {
+    //   dispatch(checkPromotionCode(userInfo.newUser._id,input));  
+    // },[input, dispatch, userInfo.newUser._id])
     const toPrice = (num) => Number(num.toFixed(2));
     let itemsPrice = toPrice(
         cartItems.reduce((a,c)=> a + c.price * c.quantity,0)
     );
     //let itemsPricePromotion = 0 ;
-    const priceDecreaseHandle = (element) => {
+    const priceDecreaseHandle = (element,checkCode) => {
         promoCodes.map((item)=>{
             return  item.promotion_code === element
             ? setDiscount(item.price_discount): null
         } )
-       
+        setInput(checkCode);
+         
     } 
     
     
@@ -64,29 +70,38 @@ function PlaceOrderScreen(props){
     const totalPrice = itemsPrice + shippingPrice - PromotionPrice ;
     
     const addAddress = shipping.district +', '+ shipping.ward + ', ' +shipping.infoDetail
-    console.log(totalPrice);
+    
     
     const placeOrderHandler = () =>{
-        ///create order
-        dispatch(addOrder(
-            userInfo.newUser._id,
-            shipping.city,
-            shipping.name,addAddress,
-            shipping.phone,payment.paymentMethod, 
-            shippingPrice.toFixed(2), 
-            totalPrice.toFixed(2)));
+        if(checkPromotions===true){
+            ///create order
+            dispatch(addOrder(
+                userInfo.newUser._id,
+                input,
+                shipping.city,
+                shipping.name,addAddress,
+                shipping.phone,payment.paymentMethod, 
+                shippingPrice.toFixed(2), 
+                totalPrice.toFixed(2)));
+        }else{
+            toast.error("Mã giảm giá chỉ được dùng cho 1 đơn hàng")
+        }
+        
     }
-    const tranSuccess = async(payment) => {
-        if(payment.paid===true){
+    const tranSuccess = async(pay) => {
+        if(pay.paid===true && checkPromotions===true){
             dispatch(addOrder(
                userInfo.newUser._id,
+               input,
                shipping.city,
                shipping.name,addAddress,
                shipping.phone,
                payment.paymentMethod, 
                shippingPrice.toFixed(2),
                totalPrice.toFixed(2)));
-        } 
+        }else{
+            toast.error("Mã giảm giá chỉ được dùng cho 1 đơn hàng")
+        }
     }
     useEffect(()=>{
         if(success){
@@ -139,6 +154,8 @@ function PlaceOrderScreen(props){
                                                         <tr>
                                                             <th>{t('place_order:product')}</th>
                                                             <th>{t('place_order:price')}</th>
+                                                            <th>{t('place_order:color')}</th>
+                                                            <th>{t('place_order:size')}</th>
                                                             <th>{t('place_order:quantity')}</th>
                                                             <th>{t('place_order:total')}</th>
                                                             
@@ -157,6 +174,8 @@ function PlaceOrderScreen(props){
                                                                 </div>
                                                             </td>
                                                             <td>${item.price}</td>
+                                                            <td>{item.color.name}</td>
+                                                            <td>{item.size.name}</td>
                                                             <td>
                                                                 <div className="qty">
                                                                     
@@ -209,7 +228,7 @@ function PlaceOrderScreen(props){
                         <h3><b>{t('place_order:promotion_code')}</b></h3>
                     </li>
                     <li>
-                        <PromoCodes priceDecreaseHandle={priceDecreaseHandle}/>
+                        <PromoCodes priceDecreaseHandle={priceDecreaseHandle} />
                         
                         
                     </li>
@@ -248,6 +267,7 @@ function PlaceOrderScreen(props){
                 </ul>   
             </div>
         </div>
+        <LoadingBackdrop open={loading}/>   
         <FooterPage/>
         <ScrollToTopBtn />
         

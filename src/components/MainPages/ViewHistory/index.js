@@ -40,14 +40,12 @@ function ViewHistory(props){
     }, [dispatch, success, props.match.params.id, props.history])
     let c=0;
     const checkOrderStatus =()=>{
-        viewHistory.map(item=>(
-            item.orderStatus.map(i=>(
+        viewHistory?.orderStatus?.map(i=>(
                 
                (i.isCompleted===true)&& c++
                 
                 
             ))
-        ))
         if(c>2) return true;
         else return false;
     }
@@ -74,8 +72,8 @@ function ViewHistory(props){
                           <b>{t('mainpages_viewhistory:shipping_address')}</b> 
                         </h4>
                         <div>
-                            {viewHistory.map(item=>item.city)},
-                            {viewHistory.map(item=>item.address )}
+                            {viewHistory.city},
+                            {viewHistory.address }
                         </div>
                     </div>
                     <div>
@@ -83,8 +81,8 @@ function ViewHistory(props){
                             <b>{t('mainpages_viewhistory:shipping_user')}</b>
                         </h4>
                         <div>
-                            {viewHistory.map(item=>item.name )},
-                            {viewHistory.map(item=>item.phone)}
+                            {viewHistory.name},
+                            {viewHistory.phone}
                         </div>
                     </div>
                     <div>
@@ -92,8 +90,8 @@ function ViewHistory(props){
                           <b>{t('mainpages_viewhistory:payment')} </b> 
                         </h3>
                         <div>
-                        {t('mainpages_viewhistory:payment_method')} {viewHistory.map(item=>item.payment)},
-                        {t('mainpages_viewhistory:payment_status')} {viewHistory.map(item=>item.paymentStatus)}
+                        {t('mainpages_viewhistory:payment_method')} {viewHistory.payment},
+                        {t('mainpages_viewhistory:payment_status')} {viewHistory.paymentStatus}
                         </div>
                     </div>
                         <div className="cart-page">
@@ -107,44 +105,45 @@ function ViewHistory(props){
                                                             <tr>
                                                                 <th>{t('mainpages_viewhistory:product')}</th>
                                                                 <th>{t('mainpages_viewhistory:price')}</th>
+                                                                <th>{t('mainpages_viewhistory:color')}</th>
+                                                                <th>{t('mainpages_viewhistory:size')}</th>
                                                                 <th>{t('mainpages_viewhistory:quantity')}</th>
                                                                 <th>{t('mainpages_viewhistory:total')}</th>
                                                                 
                                                             </tr>    
                                                     </thead>
                                                     <tbody className="align-middle">
-                                                        {
-                                                            viewHistory.map(item=>
+                                                    {
+                                                            viewHistory?.cart?.map(item=>
                                                                 <>
-                                                                    
-                                                                     {item.cart.map(i=>  
-                                                                        <tr key={i._id}>
+                                                                        <tr key={item._id}>
 
                                                                             <td>
                                                                                 <div className="img">
-                                                                                    <Link to={"/product/"+i._id}>
-                                                                                    <img src={i.img} alt="Product" />
+                                                                                    <Link to={"/product/"+item._id}>
+                                                                                    <img src={item.img} alt="Product" />
                                                                                     </Link>
-                                                                                    <p><Link to ={"/product/" +i._id}>  {i.name}</Link></p>     
+                                                                                    <p><Link to ={"/product/" +item._id}>  {item.name}</Link></p>     
                                                                                 </div>
                                                                             </td>
-                                                                            <td>${i.price}</td>
+                                                                            <td>${item.price}</td>
+                                                                            <td>{item.color.name}</td>
+                                                                            <td>{item.size.name}</td>
                                                                             <td>
                                                                                 <div className="qty">
                                                                                     
                                                                                     <input type="text"
-                                                                                    value={i.quantity}  />
+                                                                                    value={item.quantity}  />
                                                                                     
                                                                                 </div>
                                                                             </td>
-                                                                            <td>${i.price * i.quantity}</td>
+                                                                            <td>${item.price * item.quantity}</td>
 
                                                                         </tr>
                                                                         
-                                                                    )}
                                                                 </>
-                                                            )}
-                                                        
+                                                    )}
+                                                             
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -165,7 +164,7 @@ function ViewHistory(props){
                                 {t('mainpages_viewhistory:sub_total')}
                                 </div>
                                 <div>
-                                    ${viewHistory.map(item=>item.order_subtotal.toFixed(2))}
+                                    ${viewHistory?.order_subtotal?.toFixed(2)}
                                 </div>
                             
                             
@@ -176,7 +175,7 @@ function ViewHistory(props){
                                 {t('mainpages_viewhistory:shipping')}
                                 </div>
                                 <div>
-                                    ${viewHistory.map(item=>item.shiping.toFixed(2) )}
+                                    ${viewHistory?.shiping?.toFixed(2)}
                                 </div>
                             
                             
@@ -187,13 +186,13 @@ function ViewHistory(props){
                             {t('mainpages_viewhistory:order_total')}
                             </div>
                             <div>
-                                ${viewHistory.map(item=>item.order_subtotal.toFixed(2) )}
+                                ${viewHistory?.order_subtotal?.toFixed(2) }
                             </div>
                         </li>
                         <li>
                             {
                                 <button className="checkout-btn" disabled={c>2}
-                                  onClick ={() =>removeOrderHandler(viewHistory.map(item=>item._id ))}>{t('mainpages_viewhistory:delete_orders')}
+                                  onClick ={() =>removeOrderHandler(viewHistory?._id )}>{t('mainpages_viewhistory:delete_orders')}
                                 </button>
                                 
                             }

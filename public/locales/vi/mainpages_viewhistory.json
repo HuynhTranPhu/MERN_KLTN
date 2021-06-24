@@ -5,6 +5,8 @@
 	"payment_method":"Phương thức thanh toán:",
 	"payment_status":"Tình trang thanh toán:",
 	"product":"Sản phẩm",
+	"color":"Màu sắc",
+	"size":"Size",
 	"price":"Giá",
 	"quantity":"Số lượng",
 	"total":"Tổng",

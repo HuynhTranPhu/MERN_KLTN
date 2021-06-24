@@ -3,6 +3,8 @@
 	"shipping_address":"Địa điểm",
 	"shipping_user":"Thông tin người nhận",
 	"payment":"Thanh toán",
+	"color":"Màu sắc",
+	"size":"Size",
 	"payment_method":"Phương thức thanh toán:",
 	"product":"Sản phẩm",
 	"price":"Giá",

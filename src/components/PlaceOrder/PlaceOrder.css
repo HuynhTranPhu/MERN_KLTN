@@ -63,9 +63,7 @@
 @media (min-width: 768px) and (max-width: 1100px) {
     .placeorder{
       display: flex;
-      flex-grow: warp;
-      padding : 1rem;
-      justify-content: space-between;
+      flex-direction: column;
     }
     .placeorder-info{
       flex: 3 1 ;

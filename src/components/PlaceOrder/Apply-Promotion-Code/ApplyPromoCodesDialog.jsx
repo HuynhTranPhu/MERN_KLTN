@@ -16,7 +16,7 @@ import LoadingBackdrop from '../../Config/LoadingBackdrop';
 
 
   
-  const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     padding2: {
       padding: theme.spacing(2)
     },
@@ -43,7 +43,7 @@ import LoadingBackdrop from '../../Config/LoadingBackdrop';
     promoTimeLeft: {
       fontSize: 14
     }
-  }));
+}));
   
 
   
@@ -93,7 +93,7 @@ import LoadingBackdrop from '../../Config/LoadingBackdrop';
                   className={classes.applyPromoBtn}
                   onClick={() =>props.handleApplyCoupon(input)}
                   variant="contained"
-                  color="secondary"
+                  color="primary"
                   disabled={!input}>
                   {t('place_order:apply_coupon_confirm_btn')}
                 </Button>

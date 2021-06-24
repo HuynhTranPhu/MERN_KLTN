@@ -16,5 +16,9 @@
     "exp_date":"Ngày hết hạn",
     "conditions":"Điều kiện",
     "HSD":"HSD",
-    "update":"Chưa có mã giảm giá hôm nay"
+    "update":"Chưa có mã giảm giá hôm nay",
+    "received":"Đã xác nhận",
+    "packed":"Đã đóng gói",
+    "shipped":"Đã giao hàng",
+    "delivered":"Đã giao hàng"
   }

@@ -3,6 +3,8 @@
 	"shipping_address":"Shipping Address",
 	"shipping_user":"Shipping User",
 	"payment":"Payment",
+	"color":"Color",
+	"size":"Size",
 	"payment_method":"Payment Method:",
 	"product":"Product",
 	"price":"Price",

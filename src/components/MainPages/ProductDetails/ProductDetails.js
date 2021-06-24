@@ -3,12 +3,10 @@ import Slider from "react-slick";
 import { toast } from 'react-toastify';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ReactImageZoom from 'react-image-zoom';
-//import { MagnifierContainer, SideBySideMagnifier } from 'react-image-magnifiers';
+//import ReactImageZoom from 'react-image-zoom';
+import { MagnifierContainer, SideBySideMagnifier } from 'react-image-magnifiers';
 //import { detailsProduct } from '../../../actions/productActions';
 import { checkCanComment, detailsProduct, listProducts } from '../../../actions/productActions';
-//import LoadingBox from '../../Config/LoadingBox';
-//import MessageBox from '../../Config/MessageBox';
 import Brand from '../../Brand/Brand';
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
@@ -23,16 +21,50 @@ import {DataContext} from '../../../Socket'
 import CommentItem from './CommentItem/CommentItem';
 import { getData } from '../../utils/FetchDataComments';
 
-import Loading from '../../../images/loading.gif';
+import { makeStyles } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
+
+import Loading from '../../../assets/images/loading.gif';
 import { useTranslation } from 'react-i18next';
 import LoadingBackdrop from '../../Config/LoadingBackdrop'
 require ('dotenv').config();
 
+
+
+
 const url = process.env.REACT_APP_URL_CLIENT;
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+      position: 'relative'
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary
+    }
+  }));
+const ArrowButton = ({ onClick, type = 'prev' }) => {
+    return (
+      <button
+        onClick={onClick}
+        className={`slide-arrow-image ${type}-arrow slick-arrow`}
+        aria-disabled="true">
+        <i className={`fas fa-chevron-${type === 'prev' ? 'left' : 'right'}`}></i>
+      </button>
+    );
+  };
+
+
 function ProductDetailScreen(props){
 
     const { t } = useTranslation(['mainpages_pdetal_detail']);
     const params = useParams()
+
+    const classes = useStyles();
     //const [loading2,setLoading2]=useState(false);
     const dispatch = useDispatch();
     const state = useContext(DataContext)
@@ -51,7 +83,8 @@ function ProductDetailScreen(props){
     const { product, loading2} = productDetails;
     //console.log(product);
     
-    
+    const [subImageIndex, setSubImageIndex] = useState(0);
+
     const [rating, setRating] = useState(0);
     
     const [comments, setComments] = useState([])
@@ -183,15 +216,17 @@ function ProductDetailScreen(props){
             size:size
         };
             if(color ===''|| size ===''){
-                toast.error("You don't select color or size");
+                toast.error(t('mainpages_pdetal_detail:add_fail'));
             }else{
                 dispatch(addCart(userInfo.newUser._id,a));
-                toast.success("This product is added to cart");
+                toast.success(t('mainpages_pdetal_detail:add_success'));
             }
             
         
     }
-    const propsImage = {width: 350, height: 300, zoomPosition:'original' ,img: product?.images?.[0] || '/img/no-image.png'};
+    const imagesSlice = product?.images?.slice(0, 4);
+
+   
     return <div>
         {/* <LoadingBackdrop open={loading2} /> */}
         <TopBar/>
@@ -209,20 +244,71 @@ function ProductDetailScreen(props){
                             {/* <div className="col-lg-12"> */}
                                 <div className="product-detail-top">
                                     <div className="row align-items-center">
-                                        <div className="col-md-5">
-                                            <div className="product__image">
-                                                {/* <MagnifierContainer>
+                                        <div className="col-md-4">
+                                            <div className="product__image d-none d-sm-block">
+                                                <MagnifierContainer>
                                                     <SideBySideMagnifier
                                                         alwaysInPlace={true}
-                                                        //fillAvailableSpace={false}
-                                                        imageSrc={product?.images?.[0] || '/img/no-image.png'}
+                                                        imageSrc={product?.images?.[subImageIndex] || '/img/no-image.png'}
                                                         className="product-img-magnifier"
                                                     />
-                                                </MagnifierContainer> */}
-                                                <ReactImageZoom {...propsImage} />
+                                                </MagnifierContainer>
+                                                
                                             </div>
+                                            <div className="product__image d-sm-none">
+                                                {product?.images?.length > 1 && (
+                                                <Slider
+                                                    infinite={true}
+                                                    slidesToShow={1}
+                                                    slidesToScroll={1}
+                                                    prevArrow={<ArrowButton />}
+                                                    nextArrow={<ArrowButton type="next" />}>
+                                                    {product?.images.map((image, index) => (
+                                                    <MagnifierContainer key={index}>
+                                                        <SideBySideMagnifier
+                                                            alwaysInPlace={true}
+                                                            imageSrc={image}
+                                                            className="product-img-magnifier"
+                                                        />
+                                                    </MagnifierContainer>
+                                                    ))}
+                                                </Slider>
+                                                )}
+                                            </div>
+                                            <section className="box-image d-none d-sm-block">
+                                                <div className="container mb-3">
+                                                </div>
+                                                {product?.images?.length > 1 && (
+                                                <div className={classes.root}>
+                                                    <Grid container>
+                                                    {imagesSlice.map((image, index) => (
+                                                        <Grid
+                                                            xs={6}
+                                                            sm={4}
+                                                            md={3}
+                                                            lg={3}
+                                                            item
+                                                            key={index}
+                                                            className="grid-sub-image">
+                                                            <Paper>
+                                                                <div
+                                                                    onClick={() => { setSubImageIndex(index);}}
+                                                                    className={`border-sub__image ${
+                                                                    subImageIndex === index ? 'active' : ''} `}
+                                                                    key={index}>
+                                                                    <img src={image} alt={image} className="img-fluid" />
+                                                                </div>
+                                                            
+                                                            </Paper>
+                                                        </Grid>
+                                                    ))}
+                                                    </Grid>
+                                                   
+                                                </div>
+                                                )}
+                                            </section>
                                         </div>
-                                        <div className="col-md-7">
+                                        <div className="col-md-8">
                                             <div className="product-content">
                                                 <div className="title">
                                                     <h2>{product?.name}</h2>
@@ -232,56 +318,69 @@ function ProductDetailScreen(props){
                                                     <p> ${product?.price} <span>$400</span></p>
                                                 </div>
                                                 <div className="quantity">
+                                                    <h4>{t('mainpages_pdetal_detail:brand')}</h4>
+                                                    <span> {product?.id_brand?.name} </span>
+                                                </div>
+                                                <div className="quantity">
                                                     <h4>{t('mainpages_pdetal_detail:status')}</h4>       
                                                     {product?.quantity > 0? 
                                                     (
-                                                        <span className="success">In Stock</span>
+                                                        <span className="success">{`${t('mainpages_pdetal_detail:in_stock')} (${product?.quantity} ${t('mainpages_pdetal_detail:products_are_available')})`}</span>
                                                     ):(
-                                                        <span className="danger">Unavailable</span>
+                                                        <span className="danger">{t('mainpages_pdetal_detail:unavailable')}</span>
                                                     )}
                                                 </div>
-                                                <div className="p-color">
-                                                    <h4>{t('mainpages_pdetal_detail:color')}</h4>
-                                                    <div className="btn-group btn-group-sm">
-                                                    <select className="form-control" onChange={handleSelectColor}>
-                                                        <option value="">{t('mainpages_pdetal_detail:select_color')}</option>
-                                                        {
-                                                            product?.colorProducts?.colorProduct?.map(item => (
-                                                                <option value={item?._id?._id} key={item?._id?._id}>
-                                                                    {item?._id?.name}
-                                                                </option>
-                                                            ))
-                                                        }
-                                                    </select>
-                                                    </div> 
-                                                </div>
-                                                <div className="p-color">
-                                                    <h4>{t('mainpages_pdetal_detail:size')}</h4>
-                                                    <div className="btn-group btn-group-sm">
-                                                        <select className="form-control" onChange={handleSelectSize}>
-                                                            <option value="">{t('mainpages_pdetal_detail:select_size')}</option>
+                                                <div className="p-color__p-size">
+                                                    <div className="p-color">
+                                                        <h4>{t('mainpages_pdetal_detail:color')}</h4>
+                                                        <div className="btn-group btn-group-sm">
+                                                        <select className="form-control" onChange={handleSelectColor}>
+                                                            <option value="">{t('mainpages_pdetal_detail:select_color')}</option>
                                                             {
-                                                                product?.sizeProducts?.sizeProduct?.map(item => (
+                                                                product?.colorProducts?.colorProduct?.map(item => (
                                                                     <option value={item?._id?._id} key={item?._id?._id}>
                                                                         {item?._id?.name}
                                                                     </option>
                                                                 ))
                                                             }
                                                         </select>
+                                                        </div> 
+                                                    </div>
+                                                    <div className="p-size">
+                                                        <h4>{t('mainpages_pdetal_detail:size')}</h4>
+                                                        <div className="btn-group btn-group-sm">
+                                                            <select className="form-control" onChange={handleSelectSize}>
+                                                                <option value="">{t('mainpages_pdetal_detail:select_size')}</option>
+                                                                {
+                                                                    product?.sizeProducts?.sizeProduct?.map(item => (
+                                                                        <option value={item?._id?._id} key={item?._id?._id}>
+                                                                            {item?._id?.name}
+                                                                        </option>
+                                                                    ))
+                                                                }
+                                                            </select>
+                                                        </div>
                                                     </div> 
-                                                </div> 
+                                                </div>
+                                               
+
                                                 <div className="p-rating p-color">
                                                     <h4>{t('mainpages_pdetal_detail:rating')}</h4>
                                                     <div>
-                                                    <Rating props={product}/>
-                                                    </div>  
+                                                        <Rating props={product}/> 
+                                                        
+                                                    </div> 
+                                                    
                                                 </div>
-                                                <div className="action">
+                                                 
+                                                <div className="action mb-3">
                                                 {
                                                     product?.quantity>0 && 
                                                     <span className="btn"  onClick={()=>handleAddToCart(product._id,product.name,product.price,product.images[0])} ><i className="fa fa-shopping-cart" /> {t('mainpages_pdetal_detail:add_to_cart')}</span>
                                                 }
                                                 </div>
+                                                <span ><Link className="success"  to='/size-chart'>{t('mainpages_pdetal_detail:size-chart')}</Link></span>
+                                                
                                             </div>
                                         </div>
                                     </div>

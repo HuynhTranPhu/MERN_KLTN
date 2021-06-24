@@ -20,7 +20,7 @@ function getPromoCodeReducer(state={promoCodes:[]}, action){
         default : return state;
     }
 }
-function checkPromotionReducer (state = { checkPromotions:{} }, action){
+function checkPromotionReducer (state = { checkPromotions:true }, action){
     switch(action.type){
         case CHECK_PROMOTION_REQUEST:
             return {loading: true};

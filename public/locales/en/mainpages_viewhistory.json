@@ -5,6 +5,8 @@
 	"payment_method":"Payment Method:",
 	"payment_status":"Payment Status:",
 	"product":"Product",
+	"color":"Color",
+	"size":"Size",
 	"price":"Price",
 	"quantity":"Quantity",
 	"total":"Total",
