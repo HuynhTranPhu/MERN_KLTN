@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterProducts, listCategory, listProductsOfPage, searchFilterProducts, sortProducts } from '../../../actions/productActions';
+import { filterProducts, listCategory, listProductsOfPage, sortProducts } from '../../../actions/productActions';
 //import LoadingBox from '../../Config/LoadingBox';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import MessageBox from '../../Config/MessageBox';
@@ -22,7 +22,7 @@ import Rating from '../ProductDetails/rating';
 function ProductScreen(props){
     const { t } = useTranslation(['mainpages_product']);
     const productList = useSelector(state => state.productList);
-    const {products,filteredItems,cate,sort,search,loading , error,numberOfPages} = productList;
+    const {products,filteredItems,cate,sort,loading , error,numberOfPages} = productList;
 
     //const userLogin = useSelector(state => state.userLogin);
     //const { userInfo} = userLogin;
@@ -83,7 +83,8 @@ function ProductScreen(props){
                                         <div className="col-md-3">
                                             {`${filteredItems.length} ${t('mainpages_product:count_in_page')} ${pageNumber}`}
                                         </div>
-                                        <div className="col-md-3">
+                                        <div className="col-md-3"></div>
+                                        {/* <div className="col-md-3">
                                             <div className="product-search">
                                                     <input type="text" placeholder={t('mainpages_product:search_place')}
                                                     value={search}
@@ -98,7 +99,7 @@ function ProductScreen(props){
                                                     />
                                                     <button><i className="fa fa-search"></i></button>    
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="col-md-3">
                                             <div className="product-filter">
                                                 <select

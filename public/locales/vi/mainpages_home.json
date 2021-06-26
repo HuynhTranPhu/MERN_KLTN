@@ -1,10 +1,10 @@
 {
 	"home":"Trang chủ",
 	"best_selling":"Bán chạy",
-	"new_arrivals":"Điểm đến mới",
-	"fashion_beauty":"Thời trang & Sắc đẹp",
-	"kids_babies_clothes":"Quần áo trẻ em & trẻ sơ sinh",
-	"men_women_clothes":"Quần áo Nam & Nữ",
+	"new_arrivals":"Sản phẩm mới",
+	"women_clothes":"Thời trang nữ",
+	"kids_babies_clothes":"Thời trang trẻ em",
+	"men_clothes":"Thời trang nam",
 	"gadgets_accessories":"Tiện ích & Phụ kiện ",
 	"electronics_accessories":"Điện tử & Phụ kiện ",
 	"woman_fashion":"Thời trang nữ 2021",
@@ -12,5 +12,6 @@
 	"hot_trend":"Xu hướng 2021",
 	"call_us":"Gọi cho chúng tôi nếu có thắc mắc",
 	"featured_product":"Sản phẩm nổi bật ",
-	"add_to_cart":"Thêm vào giỏ hàng"
+	"add_to_cart":"Thêm vào giỏ hàng",
+	"update":"Đang cập nhật"
 }

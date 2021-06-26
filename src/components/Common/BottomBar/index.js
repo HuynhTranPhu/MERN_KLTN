@@ -1,12 +1,10 @@
 import React from 'react';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { useMediaQuery } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MobileBottomBar from './MobileBottomBar/index'
-import {
-    Link, useHistory
-  } from "react-router-dom";
-import { searchHeader } from '../../../actions/productActions';
+import {Link} from "react-router-dom";
+import Search from './Search';
 import { useTranslation } from "react-i18next";
 
 
@@ -19,13 +17,7 @@ function Index(props) {
     const {userInfo} = userLogin;
     const cartGet = useSelector((state) => state.cartGet);
     const {cartItems} = cartGet;
-    const history =useHistory();
-    const dispatch = useDispatch();
-    
-
-    const handelSearch=()=>{
-        history.push('/search');
-    }
+    console.log(cartItems);
     const isSmallScreen = useMediaQuery('(max-width: 767.98px)');
 return (
         
@@ -44,9 +36,9 @@ return (
                     </div>
                     {userInfo ? (
                         <Link to="/cart" className="cart-nav-icon">
-                        <a className="rockland-nav__link notification" >
+                        <a className="rockland-nav__link notification"  >
                             <ShoppingCartOutlinedIcon />
-                                {cartItems?.length>0 &&<span className="notification__counter">{cartItems?.length}</span>}
+                                {cartItems?.length>0 &&<span className="notification__counter">{cartItems?.reduce((a,c) => a+ c.quantity,0)}</span>}
                         </a>              
                         </Link>
                     ) : (
@@ -68,21 +60,7 @@ return (
                 < >
                     <div className="col-md-6 mr-5 search__mobile-search-res">
                         <div className="search">
-                            <input type="text" placeholder= {t('common_btbar_index:search_bottom_bar')}
-                            //value={e.target.value}
-                            
-                            onChange={(e)=>
-                            {
-                                if (e.target.value!=='')
-                                {
-                                    dispatch(searchHeader(
-                                        e.target.value
-                                    ));
-                                }   
-                            }   
-                            }
-                            />
-                            <button onClick={handelSearch}><i  className="fa fa-search"></i></button> 
+                            <Search/> 
                         </div>
                     </div>
                     <div className="col-md-2 search__mobile-res ">

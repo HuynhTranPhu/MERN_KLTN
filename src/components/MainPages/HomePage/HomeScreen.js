@@ -91,28 +91,28 @@ function HomeScreen(props){
                               <nav className="navbar bg-light">
                                   <ul className="navbar-nav">
                                       <li className="nav-item">
-                                          <Link className="nav-link" to="/"><i className="fa fa-home"></i>Home</Link>
+                                          <Link className="nav-link" to="/"><i className="fa fa-home"></i>{t('mainpages_home:home')}</Link>
                                       </li>
                                       <li className="nav-item">
-                                          <Link className="nav-link" to="/product-list"><i className="fa fa-shopping-bag"></i>Best Selling</Link>
+                                          <Link className="nav-link" to="/product-list"><i className="fa fa-shopping-bag"></i>{t('mainpages_home:best_selling')}</Link>
                                       </li>
                                       <li className="nav-item">
-                                          <Link className="nav-link" to="/product-list"><i className="fa fa-plus-square"></i>New Arrivals</Link>
+                                          <Link className="nav-link" to="/updating"><i className="fa fa-plus-square"></i>{t('mainpages_home:new_arrivals')}</Link>
                                       </li>
                                       <li className="nav-item">
-                                          <Link className="nav-link" to="/product-list"><i className="fa fa-female"></i>Fashion & Beauty</Link>
+                                          <Link className="nav-link" to="/product-list"><i className="fa fa-child"></i>{t('mainpages_home:kids_babies_clothes')}</Link>
                                       </li>
                                       <li className="nav-item">
-                                          <Link className="nav-link" to="/product-list"><i className="fa fa-child"></i>Kids & Babies Clothes</Link>
+                                          <Link className="nav-link"to="/product-list"><i className="fas fa-tshirt"></i>{t('mainpages_home:men_clothes')}</Link>
                                       </li>
                                       <li className="nav-item">
-                                          <Link className="nav-link"to="/product-list"><i className="fas fa-tshirt"></i>Men & Women Clothes</Link>
+                                          <Link className="nav-link" to="/product-list"><i className="fa fa-female"></i>{t('mainpages_home:women_clothes')}</Link>
                                       </li>
                                       <li className="nav-item">
-                                          <Link className="nav-link" to="/product-list"><i className="fas fa-mobile"></i>Gadgets & Accessories</Link>
+                                          <Link className="nav-link" to="/updating"><i className="fas fa-mobile"></i>{t('mainpages_home:gadgets_accessories')}</Link>
                                       </li>
                                       <li className="nav-item">
-                                          <Link className="nav-link" to="/product-list"><i className="fa fa-microchip"></i>Electronics & Accessories</Link>
+                                          <Link className="nav-link" to="/updating"><i className="fa fa-microchip"></i>{t('mainpages_home:electronics_accessories')}</Link>
                                       </li>
                                   </ul>
                               </nav>

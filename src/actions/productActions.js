@@ -1,27 +1,27 @@
 import { 
-PRODUCT_LIST_REQUEST,
-PRODUCT_LIST_SUCCESS,
-PRODUCT_LIST_FAIL, 
-PRODUCT_DETAILS_REQUEST, 
-PRODUCT_DETAILS_SUCCESS,
-PRODUCT_DETAILS_FAIL,
-FILTER_PRODUCTS_BY_CATEGORY,
-ORDER_PRODUCTS_BY_PRICE,
-CATEGORY_LIST_REQUEST,
-CATEGORY_LIST_SUCCESS,
-CATEGORY_LIST_FAIL,
-SEARCH_FILTER_PRODUCTS, 
-PRODUCT_LIST_SUCCESS_OF_PAGE,
-SEARCH_REQUEST,
-SEARCH_SUCCESS,
-SEARCH_FAIL,
-PRODUCT_LIST_REQUEST_OF_PAGE,
-PRODUCT_LIST_SELLING_REQUEST,
-PRODUCT_LIST_SELLING_FAIL,
-PRODUCT_LIST_SELLING_SUCCESS,
-CHECK_CAN_COMMENT_SUCCESS,
-CHECK_CAN_COMMENT_REQUEST,
-CHECK_CAN_COMMENT_FAIL
+    PRODUCT_LIST_REQUEST,
+    PRODUCT_LIST_SUCCESS,
+    PRODUCT_LIST_FAIL, 
+    PRODUCT_DETAILS_REQUEST, 
+    PRODUCT_DETAILS_SUCCESS,
+    PRODUCT_DETAILS_FAIL,
+    FILTER_PRODUCTS_BY_CATEGORY,
+    ORDER_PRODUCTS_BY_PRICE,
+    CATEGORY_LIST_REQUEST,
+    CATEGORY_LIST_SUCCESS,
+    CATEGORY_LIST_FAIL,
+    SEARCH_FILTER_PRODUCTS, 
+    PRODUCT_LIST_SUCCESS_OF_PAGE,
+    SEARCH_REQUEST,
+    SEARCH_SUCCESS,
+    SEARCH_FAIL,
+    PRODUCT_LIST_REQUEST_OF_PAGE,
+    PRODUCT_LIST_SELLING_REQUEST,
+    PRODUCT_LIST_SELLING_FAIL,
+    PRODUCT_LIST_SELLING_SUCCESS,
+    CHECK_CAN_COMMENT_SUCCESS,
+    CHECK_CAN_COMMENT_REQUEST,
+    CHECK_CAN_COMMENT_FAIL
 } 
 from  '../constants/productConstants';
 import axios from 'axios'
@@ -98,11 +98,11 @@ const listProductsSelling = () => async (dispatch) =>{
     }
 
 }
-const searchHeader = (value) => async (dispatch) =>{
+const searchHeader = (name) => async (dispatch) =>{
     try{
-        dispatch({type: SEARCH_REQUEST, payload: value});
+        dispatch({type: SEARCH_REQUEST, payload:name});
          //const {data} =await axios.get("/api/products");
-         const {data} = await axios.get(`${url}/product/search/`+value);
+         const {data} = await axios.get(`${url}/product/search/s?name=${name}`);
         //console.log(data);
         dispatch({type: SEARCH_SUCCESS, payload: data});
         

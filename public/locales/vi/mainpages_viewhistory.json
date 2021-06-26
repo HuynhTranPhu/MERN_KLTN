@@ -14,5 +14,7 @@
 	"shipping_user":"Thông tin người nhận",
 	"sub_total":"Tổng tiền",
 	"order_total":"Tổng đơn hàng",
-	"delete_orders":"Xóa đơn hàng"
+	"delete_orders":"Xóa đơn hàng",
+	"pending":"Chưa thanh toán",
+	"paid":"Đã thanh toán"
 }

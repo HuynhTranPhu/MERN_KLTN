@@ -33,6 +33,7 @@ import SearchScreen from './components/MainPages/SearchHeader';
 import Size from './components/Common/Size-chart';
 import PromotionCode from './components/Common/Promotion-Code';
 import PromotionProducts from './components/Common/Promotion-Products';
+import CategoryUpdating from './components/MainPages/HomePage/CategoryUpdating';
 
 function App() {
   
@@ -61,6 +62,7 @@ function App() {
                      <Route path="/promo-codes" exact component={PromotionCode}></Route>
                      <Route path="/promotions" exact component={PromotionProducts}></Route>
                      <Route path="/search" exact component={SearchScreen}></Route>
+                     <Route path="/updating" exact component={CategoryUpdating}></Route>
                      <Route path="*" exact component={NotFound}></Route>
                   </Switch>   
            

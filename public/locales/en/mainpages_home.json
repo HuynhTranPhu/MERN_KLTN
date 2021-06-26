@@ -2,9 +2,9 @@
 	"home":"Home",
 	"best_selling":"Best Selling",
 	"new_arrivals":"New Arrivals",
-	"fashion_beauty":"Fashion & Beauty",
-	"kids_babies_clothes":"Kids & Babies Clothes",
-	"men_women_clothes":"Men & Women Clothes",
+	"women_clothes":"Women Clothes",
+	"kids_babies_clothes":"Kids Clothes",
+	"men_clothes":"Men Clothes",
 	"gadgets_accessories":"Gadgets & Accessories",
 	"electronics_accessories":"Electronics & Accessories",
 	"woman_fashion":"Woman Fashion 2021",
@@ -12,5 +12,6 @@
 	"hot_trend":"Hot trend in 2021",
 	"call_us":"Call us for any queries",
 	"featured_product":"Featured Product",
-	"add_to_cart":"Add To Cart"
+	"add_to_cart":"Add To Cart",
+	"update":"Updating"
 }

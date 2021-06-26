@@ -85,7 +85,7 @@ function MobileBottomBar() {
                   </Link>
                 </li>
                 <li className="mobile-menu-list-item">
-                  <Link to="/product-list">
+                  <Link to="/updating">
                     <span className="mobile-menu-link">
                     <i className="rockland-nav__icon fa fa fa-plus-square" />
                     <span>{t('common_btbar_mbbtbar_index:new_arrivals')}</span>
@@ -95,8 +95,16 @@ function MobileBottomBar() {
                 <li className="mobile-menu-list-item">
                   <Link to="/product-list">
                     <span className="mobile-menu-link">
+                    <i className="rockland-nav__icon fas fa-mobile" />
+                    <span>{t('common_btbar_mbbtbar_index:men_clothes')}</span>
+                    </span>
+                  </Link>
+                </li>
+                <li className="mobile-menu-list-item">
+                  <Link to="/product-list">
+                    <span className="mobile-menu-link">
                     <i className="rockland-nav__icon fa fa-female" />
-                    <span>{t('common_btbar_mbbtbar_index:fashion_beauty')}</span>
+                    <span>{t('common_btbar_mbbtbar_index:women_clothes')}</span>
                     </span>
                   </Link>
                 </li>

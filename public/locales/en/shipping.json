@@ -14,5 +14,6 @@
 	"ph_infoDetail":"Enter address detail",
 	"add_success":"Update address success",
 	"add_error":"Enter your full address",
+	"phone_error":"Number phone is error",
 	"continue":"Continue"
 }

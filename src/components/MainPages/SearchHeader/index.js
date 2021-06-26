@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 //import { filterProducts, listCategory, listProductsOfPage, searchFilterProducts, sortProducts } from '../../../actions/productActions';
 //import LoadingBox from '../../Config/LoadingBox';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
@@ -21,22 +21,6 @@ function SearchScreen(props){
     const searchHeader = useSelector(state => state.searchHeader);
     const {productSearch, loading , error} = searchHeader;
 
-    //console.log(productSearch);
-    //const userLogin = useSelector(state => state.userLogin);
-    //const { userInfo} = userLogin;
-
-  
-
-    // const addCartPost = useSelector(state => state.cartPost);
-    // const {success} = addCartPost;
-
-    //pagination
-  
-
-
-   
-   
-   // const dispatch = useDispatch();
 
     useEffect(() => {
         

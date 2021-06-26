@@ -10,7 +10,7 @@ import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 
 import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -67,7 +67,7 @@ const History = () => {
         setValue(newValue);
         //console.log(newValue)
         dispatch(getOrderByType(userInfo.newUser._id, newValue, ''));
-        if(newValue==5){
+        if(newValue===5){
             dispatch(getOrderByType(userInfo.newUser._id, '', 'cancelled'));
         }
     };
@@ -84,7 +84,7 @@ const History = () => {
         return () => {
             //
         };
-    }, [])
+    }, [dispatch, userInfo.newUser._id])
    
     return (
         <div>

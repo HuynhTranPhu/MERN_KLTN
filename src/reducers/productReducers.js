@@ -99,12 +99,12 @@ function categoryListReducer(state={category:[]},action){
             return state;
     }
 }
-function searchHeaderReducer(state={productSearch:[]},action){
+function searchHeaderReducer(state={productSearch:{}},action){
     switch(action.type){
         case SEARCH_REQUEST:
-            return {loading: true, productSearch:[]};
+            return {loading: true, productSearch:{}};
         case  SEARCH_SUCCESS:
-            return { loading : false , productSearch: action.payload};
+            return { loading : false , productSearch: action.payload.data};
     
         case SEARCH_FAIL:
             return { loading : false, error: action.payload}

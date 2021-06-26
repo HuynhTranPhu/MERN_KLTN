@@ -8,14 +8,14 @@ import reportWebVitals from './reportWebVitals';
 import {ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./i18n";
-
+import LoadingBackdrop from './components/Config/LoadingBackdrop';
 import {DataProvider} from './Socket'
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <DataProvider>
-        <Suspense fallback={<div></div>}>
+        <Suspense fallback={<LoadingBackdrop open={true}/>}>
           <App />
         </Suspense>
         <ToastContainer autoClose={1500} />

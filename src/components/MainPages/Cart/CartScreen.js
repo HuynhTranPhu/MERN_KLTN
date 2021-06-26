@@ -24,12 +24,8 @@ function CartScreen(props){
     const { userInfo} = userLogin;
 
     const [detailProduct, setDetailProduct] = useState([])
- 
+   
 
-    //const productId = props.match.params.id;
-    //const qty = props.location.search ? Number(props.location.search.split("=")[1]):1;
-    //let total=0 ;
-    //let grandTotal=0;
     const dispatch = useDispatch();
     const removeFromCartHandler = (productId, color,size) =>{
         if(window.confirm('Do you want to delete this item?')){
@@ -43,9 +39,6 @@ function CartScreen(props){
     const decreaseHandler = (productId, color,size) =>{
         dispatch(decreaseCart(userInfo.newUser._id,productId, color,size));
         
-        //if(successDecrease){
-           // dispatch(decrease(productId));
-        //}
     }
     const increaseHandler = (productId, color, size) =>{
         products.forEach(product => {
@@ -59,8 +52,6 @@ function CartScreen(props){
         };
     },[]);
     const checkoutHandler = () =>{
-        //dispatch(addCart(userInfo.user.id,cartItems, grandTotal));
-        //console.log(cartItems,grandTotal);
         props.history.push("/shipping");
     }
     return  (
