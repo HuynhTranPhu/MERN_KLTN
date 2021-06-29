@@ -35,11 +35,11 @@ return (
                         </div>
                     </div>
                     {userInfo ? (
-                        <Link to="/cart" className="cart-nav-icon">
-                        <a className="rockland-nav__link notification"  >
+                        <Link to="/cart" >
+                        <span className="cart-nav-icon notification"   >
                             <ShoppingCartOutlinedIcon />
-                                {cartItems?.length>0 &&<span className="notification__counter">{cartItems?.reduce((a,c) => a+ c.quantity,0)}</span>}
-                        </a>              
+                                {cartItems?.length>0 &&<span className="notification__counter__bottom">{cartItems?.reduce((a,c) => a+ c.quantity,0)}</span>}
+                        </span>              
                         </Link>
                     ) : (
                     <div></div>

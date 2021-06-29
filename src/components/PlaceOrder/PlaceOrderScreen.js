@@ -23,7 +23,7 @@ function PlaceOrderScreen(props){
     const cartGet = useSelector(state => state.cartGet);
     const {cartItems, payment, shipping} = cartGet;
 
-    //console.log(cartGet);
+    console.log(cartGet);
     const addOrderPost = useSelector(state => state.orderPost);
     const { success} = addOrderPost;
     
@@ -164,13 +164,13 @@ function PlaceOrderScreen(props){
                                                 <tbody className="align-middle">
                                                     {
                                                         cartItems.map(item=>
-                                                        <tr key={item._id}>
+                                                        <tr key={item.id}>
                                                             <td>
                                                                 <div className="img">
-                                                                    <Link to={"/product/"+item.product}>
+                                                                    <Link to={"/product-detail/"+item.id}>
                                                                         <img src={item.img} alt="Product" />
                                                                         </Link>
-                                                                    <p><Link to ={"/product/" +item.product}> {item.name}</Link></p>
+                                                                    <p><Link to ={"/product-detail/" +item.id}> {item.name}</Link></p>
                                                                 </div>
                                                             </td>
                                                             <td>${item.price}</td>

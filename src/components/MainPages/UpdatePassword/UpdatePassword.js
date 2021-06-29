@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 //import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 //import { Redirect } from 'react-router-dom';
 import { updateUserPassword } from '../../../actions/userAction';
-import { USER_UPDATE_PASSWORD_RESET } from '../../../constants/userConstant';
+//import { USER_UPDATE_PASSWORD_RESET } from '../../../constants/userConstant';
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
@@ -41,13 +41,13 @@ export default function UpdatePasswordScreen(){
         }
         //dispatch update
         if(newpassword===""|| confirmPassword===""){
-            toast.error('New Password or Confirm Password are not valid');
+            toast.error(t('mainpages_updatepassword:password_not_valid'));
         }
         else if(newpassword !== confirmPassword){
-            toast.error('Password and Confirm Password are not matched');
+            toast.error(t('mainpages_updatepassword:password_match'));
         }else{
             dispatch(updateUserPassword( oldpassword, newpassword, userInfo.newUser.id));
-            toast.success('Password Updated Successfully')
+            toast.success(t('mainpages_updatepassword:update_success'))
 
         }
        // Redirect("/logout/");

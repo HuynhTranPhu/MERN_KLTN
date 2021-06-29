@@ -64,12 +64,7 @@ const checkCanComment = (id_user, id_product) => async (dispatch) =>{
 
     try{
         dispatch({type: CHECK_CAN_COMMENT_REQUEST});
-        //const { userLogin :{userInfo}}= getState();
-         const {data} = await axios.post(`${url}/order/checkcancomment`,{id_user, id_product}
-        //  ,{
-        //     headers: {Authorization:`${userInfo.token}`},
-        //  }
-         );
+         const {data} = await axios.post(`${url}/order/checkcancomment`,{id_user, id_product});
         dispatch({type: CHECK_CAN_COMMENT_SUCCESS, payload: data.message});
         
     }  
@@ -101,7 +96,6 @@ const listProductsSelling = () => async (dispatch) =>{
 const searchHeader = (name) => async (dispatch) =>{
     try{
         dispatch({type: SEARCH_REQUEST, payload:name});
-         //const {data} =await axios.get("/api/products");
          const {data} = await axios.get(`${url}/product/search/s?name=${name}`);
         //console.log(data);
         dispatch({type: SEARCH_SUCCESS, payload: data});

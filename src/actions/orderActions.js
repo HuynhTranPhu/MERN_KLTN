@@ -9,7 +9,8 @@ import {REMOVE_ORDER_REQUEST,
         ADD_ORDER_SUCCESS, 
         HISTORY_FAIL, 
         HISTORY_SUCCESS, 
-        HISTORY_REQUEST, VIEW_HISTORY_FAIL,
+        HISTORY_REQUEST, 
+        VIEW_HISTORY_FAIL,
         VIEW_HISTORY_SUCCESS, 
         VIEW_HISTORY_REQUEST, 
         GET_ORDER_BY_TYPE_REQUEST,
@@ -17,20 +18,15 @@ import {REMOVE_ORDER_REQUEST,
         GET_ORDER_BY_TYPE_FAIL} from "../constants/orderContants";
 require ('dotenv').config();
 const url = process.env.REACT_APP_URL_CLIENT;
-const addOrder = (id_user,promotion_code,city,name,address,phone,payment,shiping,order_subtotal) => async (dispatch, getState) =>{
+
+const addOrder = (id_user,promotion_code,city,name,address,phone,payment,shiping,order_subtotal) => async (dispatch) =>{
     dispatch({type: ADD_ORDER_REQUEST, payload:{id_user,promotion_code,city,name,address,phone,payment,shiping,order_subtotal}});
     console.log(id_user,city,name,address,phone,payment,shiping, order_subtotal);
-    const { userLogin :{userInfo}}= getState();
+
     try{
-        const {data} = await Axios.post(`${url}/order/addorder`, {id_user,promotion_code,city,name,address,phone,payment,shiping, order_subtotal},
-        {
-            headers: {Authorization:`${userInfo.token}`},
-        }
-        );
+        const {data} = await Axios.post(`${url}/order/addorder`, {id_user,promotion_code,city,name,address,phone,payment,shiping, order_subtotal});
         dispatch({type:ADD_ORDER_SUCCESS,payload:data});
         dispatch({type: CART_EMPTY});
-        //Cookie.remove('cartItems');
-         
         
     }catch(error){
         const message=
@@ -41,15 +37,10 @@ const addOrder = (id_user,promotion_code,city,name,address,phone,payment,shiping
     }
     Cookie.remove('cartItems');
 }
-const historyGet = (id_user) => async (dispatch,getState) =>{
-    const { userLogin :{userInfo}}= getState();
+const historyGet = (id_user) => async (dispatch) =>{
     try{
         dispatch({type: HISTORY_REQUEST, payload: id_user});
-        const {data} = await Axios.get(`${url}/order/all/` + id_user
-        ,{
-            headers: {Authorization:`${userInfo.token}`},
-        }
-        );
+        const {data} = await Axios.get(`${url}/order/all/` + id_user);
         dispatch({type: HISTORY_SUCCESS, payload:data });
         //console.log(data);
     }
@@ -61,15 +52,10 @@ const historyGet = (id_user) => async (dispatch,getState) =>{
         dispatch({type: HISTORY_FAIL, payload: message})
     }
 }
-const getOrderByType = (id_user, type, paymentStatus) => async (dispatch,getState) =>{
-    const { userLogin :{userInfo}}= getState();
+const getOrderByType = (id_user, type, paymentStatus) => async (dispatch) =>{
     try{
         dispatch({type: GET_ORDER_BY_TYPE_REQUEST, payload: {id_user,type,paymentStatus}});
-        const {data} = await Axios.post(`${url}/order/getorder/${id_user}` ,{type, paymentStatus}
-        ,{
-            headers: {Authorization:`${userInfo.token}`},
-        }
-        );
+        const {data} = await Axios.post(`${url}/order/getorder/${id_user}` ,{type, paymentStatus});
         dispatch({type: GET_ORDER_BY_TYPE_SUCCESS, payload:data });
         //console.log(data);
     }

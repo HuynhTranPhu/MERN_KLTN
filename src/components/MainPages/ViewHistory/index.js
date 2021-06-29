@@ -120,10 +120,10 @@ function ViewHistory(props){
 
                                                                             <td>
                                                                                 <div className="img">
-                                                                                    <Link to={"/product/"+item._id}>
+                                                                                    <Link to={"/product-detail/"+item._id}>
                                                                                     <img src={item.img} alt="Product" />
                                                                                     </Link>
-                                                                                    <p><Link to ={"/product/" +item._id}>  {item.name}</Link></p>     
+                                                                                    <p><Link to ={"/product-detail/" +item._id}>  {item.name}</Link></p>     
                                                                                 </div>
                                                                             </td>
                                                                             <td>${item.price}</td>

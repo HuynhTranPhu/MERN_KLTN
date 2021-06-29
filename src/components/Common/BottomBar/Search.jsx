@@ -29,7 +29,7 @@ function Search(props) {
 return (
      <div>
           <input type="text" 
-            placeholder= {t('common_btbar_index:search_bottom_bar')}            
+            placeholder= {t('common_btbar_index:search_bottom_bar')}          
             onChange={(event) => setInput(event.target.value)}
             onKeyPress={handleKeyPress}
             />

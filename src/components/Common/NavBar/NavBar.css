@@ -159,6 +159,9 @@
   padding: 0.25rem 1.5rem;
   color: #212529;
 }
+.dropdown-menu .dropdown-item:active{
+  background-color: #fff;
+}
 .dropdown.dropdown-nav:hover > .dropdown-menu {
   display: block !important;
   width: auto;

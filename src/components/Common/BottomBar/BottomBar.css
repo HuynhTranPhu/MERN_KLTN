@@ -132,9 +132,26 @@
   width: auto;
 }
 .btn__bottom-bar{
+  padding: .25rem .5rem;
   color: #000;
   background-color: #FF6F61;
   border-color: #FF6F61;
   border-radius: 50px;
+  font-size: 1rem;
+}
+.notification__counter__bottom {
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.25em;
+  border-radius: 50px;
+  background-color: black;
+  color: white;
+  font-size: 0.75em;
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 

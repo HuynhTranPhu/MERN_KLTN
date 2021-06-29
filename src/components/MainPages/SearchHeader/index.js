@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-//import { filterProducts, listCategory, listProductsOfPage, searchFilterProducts, sortProducts } from '../../../actions/productActions';
-//import LoadingBox from '../../Config/LoadingBox';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import MessageBox from '../../Config/MessageBox';
 import Brand from '../../Brand/Brand';
@@ -23,11 +21,7 @@ function SearchScreen(props){
 
 
     useEffect(() => {
-        
-        //dispatch(listProducts());
-        //dispatch(listCategory());
-        return () => {
-        };
+        return () => {};
     }, [])
     //Add to cart
    

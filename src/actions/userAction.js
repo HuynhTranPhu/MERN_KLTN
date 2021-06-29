@@ -30,7 +30,8 @@ import {
     FORGOT_PASSWORD_FAIL,
     USER_SIGNIN_GG_SUCCESS,
     USER_SIGNIN_GG_FAIL,
-    USER_SIGNIN_GG_REQUEST} 
+    USER_SIGNIN_GG_REQUEST,
+    USER_UPDATE_PROFILE_RESET} 
 from  '../constants/userConstant';
 
 require ('dotenv').config();
@@ -99,6 +100,7 @@ const logout = () =>(dispatch) =>{
     Cookie.remove('shipping');
     Cookie.remove('payment');
     dispatch({type: USER_SIGNOUT});
+    //dispatch({type:USER_UPDATE_PROFILE_RESET});
 }
 
 
