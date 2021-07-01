@@ -22,7 +22,7 @@ export default function ProfileScreen(props){
     
     const userDetails = useSelector((state) => state.userDetails);
     const {loading, error, user} = userDetails;
-    //console.log(user);
+    console.log(user);
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
     const { error: errorUpdate }= userUpdateProfile;
     const dispatch = useDispatch();
@@ -57,11 +57,16 @@ export default function ProfileScreen(props){
         {
              loading ? (
                  <>
-                <LoadingBackdrop open={loading}/>
-                 <div  style={{height:"350px"}}></div>
+                    <LoadingBackdrop open={loading}/>
+                    <div  style={{height:"350px"}}></div>
                  </>
                 )
-                : error? (<MessageBox variant="danger">{error}</MessageBox>
+                : error? (
+                    <>
+                        <MessageBox variant="danger">{error}</MessageBox>
+                        <div  style={{height:"350px"}}></div>
+                    </>
+                
                 ) :(
                     <form className="form-profile" onSubmit={submitHandler}>
                         <div>

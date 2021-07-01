@@ -315,7 +315,9 @@ function ProductDetailScreen(props){
                                                 </div>
                                                 <div className="price">
                                                     <h4>{t('mainpages_pdetal_detail:price')}</h4>
-                                                    <p> ${product?.price} <span>$400</span></p>
+                                                    {product?.sellPrice!== undefined?(<p> ${product?.sellPrice} <span>${product?.price}</span></p>):(
+                                                        <p> ${product?.price}</p>
+                                                    ) }
                                                 </div>
                                                 <div className="quantity">
                                                     <h4>{t('mainpages_pdetal_detail:brand')}</h4>

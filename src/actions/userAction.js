@@ -30,8 +30,7 @@ import {
     FORGOT_PASSWORD_FAIL,
     USER_SIGNIN_GG_SUCCESS,
     USER_SIGNIN_GG_FAIL,
-    USER_SIGNIN_GG_REQUEST,
-    USER_UPDATE_PROFILE_RESET} 
+    USER_SIGNIN_GG_REQUEST} 
 from  '../constants/userConstant';
 
 require ('dotenv').config();
@@ -94,13 +93,14 @@ const loginGoogle = (tokenId) => async (dispatch) =>{
         dispatch({type:USER_SIGNIN_GG_FAIL,payload:message});
     }
 }
-const logout = () =>(dispatch) =>{
+const logout = () =>(dispatch,getState) =>{
+    const { userLogin :{userInfo}}= getState();
     Cookie.remove('userInfo');
     Cookie.remove('cartItems');
     Cookie.remove('shipping');
     Cookie.remove('payment');
     dispatch({type: USER_SIGNOUT});
-    //dispatch({type:USER_UPDATE_PROFILE_RESET});
+    dispatch(detailsUser(userInfo.newUser._id));
 }
 
 
