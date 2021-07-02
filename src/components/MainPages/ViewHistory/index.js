@@ -30,7 +30,7 @@ function ViewHistory(props){
     //const [viewHistory, setViewHistory] = useState([])
     //const dispatch = useDispatch();
     //const cartItems=[];
-    console.log(viewHistory);
+    //console.log(viewHistory);
     useEffect(() => {
         dispatch(viewHistoryGet(props.match.params.id));
         if(success===true){

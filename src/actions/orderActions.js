@@ -21,7 +21,7 @@ const url = process.env.REACT_APP_URL_CLIENT;
 
 const addOrder = (id_user,promotion_code,city,name,address,phone,payment,shiping,order_subtotal) => async (dispatch) =>{
     dispatch({type: ADD_ORDER_REQUEST, payload:{id_user,promotion_code,city,name,address,phone,payment,shiping,order_subtotal}});
-    console.log(id_user,city,name,address,phone,payment,shiping, order_subtotal);
+    //console.log(id_user,city,name,address,phone,payment,shiping, order_subtotal);
 
     try{
         const {data} = await Axios.post(`${url}/order/addorder`, {id_user,promotion_code,city,name,address,phone,payment,shiping, order_subtotal});

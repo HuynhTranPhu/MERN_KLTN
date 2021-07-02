@@ -13,7 +13,7 @@ function HistoryItem({history, loading, error}) {
         dispatch(viewHistoryGet(id_order));
 
     }
-    console.log(history)
+    //console.log(history)
     return (
         <div>
             {loading?(

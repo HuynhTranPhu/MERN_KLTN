@@ -71,7 +71,7 @@ export default function ContactScreen(){
                     <div className="col-lg-12">
                         <div className="contact-map">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.480424582181!2d106.77006551488576!3d10.851017092270931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752763f23816ab%3A0x282f711441b6916f!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTxrAgcGjhuqFtIEvhu7kgdGh14bqtdCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1606146040864!5m2!1svi!2s" 
-                        frameBorder={0} style={{border: 0}} allowFullScreen aria-hidden="false" tabIndex={0} />
+                        frameBorder={0} style={{border: 0}} allowFullScreen aria-hidden="false" tabIndex={0} title='gg' />
 
                         </div>
                     </div>

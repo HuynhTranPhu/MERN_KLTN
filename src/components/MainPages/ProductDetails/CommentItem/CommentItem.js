@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useState, useEffect} from 'react'
 import CommentCard from './CommentCard'
 import FormInput from '../FormInput'
 import { useTranslation } from 'react-i18next';

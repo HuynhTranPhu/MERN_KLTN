@@ -22,7 +22,7 @@ export default function ProfileScreen(props){
     
     const userDetails = useSelector((state) => state.userDetails);
     const {loading, error, user} = userDetails;
-    console.log(user);
+    //console.log(user);
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
     const { error: errorUpdate }= userUpdateProfile;
     const dispatch = useDispatch();

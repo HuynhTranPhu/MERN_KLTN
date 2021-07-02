@@ -28,14 +28,14 @@ export default function HeaderSlider() {
                         <img src="img/slider-2.jpg" alt="Slider " />
                         <div className="header-slider-caption">
                             <p>{t('header_slider:sale_off_50')}</p>
-                            <a className="btn" href=""><i className="fa fa-shopping-cart"></i>{t('header_slider:shop_now')}</a>
+                            <a className="btn" href="*"><i className="fa fa-shopping-cart"></i>{t('header_slider:shop_now')}</a>
                         </div>
                     </div>
                     <div className="header-slider-item">
                         <img src="img/slider-3.jpg" alt="Slider " />
                         <div className="header-slider-caption">
                             <p>{t('header_slider:summer_offer')}</p>
-                            <a className="btn" href=""><i className="fa fa-shopping-cart"></i>{t('header_slider:shop_now')}</a>
+                            <a className="btn" href="*"><i className="fa fa-shopping-cart"></i>{t('header_slider:shop_now')}</a>
                         </div>
                     </div>
                 </Slider>

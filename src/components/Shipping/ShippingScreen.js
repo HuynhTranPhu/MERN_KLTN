@@ -22,7 +22,7 @@ function ShippingScreen(props){
     
     const userDetails = useSelector((state) => state.userDetails);
     const { user, loading} = userDetails;
-    console.log(user?.user?.address);
+    //console.log(user?.user?.address);
 
     if(!userInfo){
         props.history.push('/login');
@@ -56,7 +56,7 @@ function ShippingScreen(props){
         })
         //getNameCity để lấy ID
         if (getOneCity) {
-            console.log(getOneCity.Districts);
+            //console.log(getOneCity.Districts);
             setDistricts(getOneCity.Districts)
         }
     }, [city])

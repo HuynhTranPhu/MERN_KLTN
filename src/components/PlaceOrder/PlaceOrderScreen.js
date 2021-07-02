@@ -23,7 +23,7 @@ function PlaceOrderScreen(props){
     const cartGet = useSelector(state => state.cartGet);
     const {cartItems, payment, shipping} = cartGet;
 
-    console.log(cartGet);
+    //console.log(cartGet);
     const addOrderPost = useSelector(state => state.orderPost);
     const { success} = addOrderPost;
     

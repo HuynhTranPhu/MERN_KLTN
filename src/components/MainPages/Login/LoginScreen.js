@@ -46,61 +46,18 @@ function LoginScreen(props){
             toast.error(error);
         }
     }
-    // const sendGoogleToken = tokenId => {
-    //     Axios
-    //       .post("/googlelogin", {
-    //         idToken: tokenId
-    //       })
-    //       .then(res => {
-    //         console.log(res.data);
-    //         //informParent();
-    //       })
-    //       .catch(error => {
-    //         console.log('GOOGLE SIGNIN ERROR', error.response);
-    //       });
-    //   };
-    // const sendFacebookToken = (userID, accessToken) => {
-    //     Axios
-    //       .post("/facebooklogin", {
-    //         userID,
-    //         accessToken
-    //       })
-    //       .then(res => {
-    //         console.log(res.data);
-    //        //informParent();
-    //       })
-    //       .catch(error => {
-    //         console.log('GOOGLE SIGNIN ERROR', error.response);
-    //       });
-    //   };
-
-      // const informParent = () => {
-      //    props.history.push('/');
     
-      // };
     //Nhan respone tu gg
       const responseGoogle = response => {
-        console.log(response);
+        //console.log(response);
         dispatch(loginGoogle(response.tokenId));
       };
-      // const responseGoogle = response => {
-      //   console.log(response);
-      //   sendGoogleToken(response.tokenId);
-      // };
-
+     
       const responseFacebook = response => {
-        console.log(response);
+        //console.log(response);
         dispatch(loginFaceBook(response.userID, response.accessToken)); 
       };
     
-      // const responseFacebook = response => {
-      //   console.log(response);
-      //   sendFacebookToken(response.userID, response.accessToken)
-      // };
-    
-
-
-
     return <div>
         <LoadingBackdrop open={loading} />
         <div className="formContain">

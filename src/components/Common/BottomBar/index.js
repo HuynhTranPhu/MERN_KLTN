@@ -17,7 +17,7 @@ function Index(props) {
     const {userInfo} = userLogin;
     const cartGet = useSelector((state) => state.cartGet);
     const {cartItems} = cartGet;
-    console.log(cartItems);
+    //console.log(cartItems);
     const isSmallScreen = useMediaQuery('(max-width: 767.98px)');
 return (
         
