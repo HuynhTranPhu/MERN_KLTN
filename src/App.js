@@ -35,6 +35,11 @@ import PromotionCode from './components/Common/Promotion-Code';
 import PromotionProducts from './components/Common/Promotion-Products';
 import CategoryUpdating from './components/MainPages/HomePage/CategoryUpdating';
 
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+require ('dotenv').config();
+const pageId = process.env.REACT_APP_PAGE_ID ;
+const appId = process.env.REACT_APP_FACEBOOK_CLIENT;
+
 function App() {
   
    
@@ -65,8 +70,12 @@ function App() {
                      <Route path="/updating" exact component={CategoryUpdating}></Route>
                      <Route path="*" exact component={NotFound}></Route>
                   </Switch>   
-           
-    </BrowserRouter>  
+                  <MessengerCustomerChat
+                    pageId={pageId}
+                    appId={appId}
+                  />
+    </BrowserRouter>
+    
   );
 }
 
