@@ -16,7 +16,7 @@
     transition: 0.5s linear;
 }
 .back-to-top.show {
-    bottom: 5em;
+    bottom: 6em;
 }
 @media (max-width: 575.98px) {
     .back-to-top.show {
