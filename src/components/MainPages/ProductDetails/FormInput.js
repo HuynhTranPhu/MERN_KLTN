@@ -52,7 +52,7 @@ function FormInput({id, socket, rating, setReply, send, name}) {
     return (
         <div className="form_input">
             <p>{t('mainpages_pdetal_forminput:name')}</p>
-            <input type="text" defaultValue={userInfo.newUser.name} ref={nameRef} />
+            <input type="text" defaultValue={userInfo?.newUser?.name} ref={nameRef} />
 
             <p>{t('mainpages_pdetal_forminput:content')}</p>
             <div ref={contentRef} 

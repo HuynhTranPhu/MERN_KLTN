@@ -63,14 +63,15 @@ function LoginScreen(props){
         <div className="formContain">
                     <form onSubmit={submitHandler}>
                         <ul className="form-container">
+                            
                             <li>
                                 <h2 className="title">{t('mainpages_login:welcome')}</h2>
                             </li>
-                            {/* <li>
-                                {loading && <LoadingBox></LoadingBox>}
-                                {loading && <LoadingBox></LoadingBox>}
-                                
-                            </li> */}
+                            <li>
+                                <Link className="logo__login text-center title" to="/">
+                                    <img src="/img/logo.png" alt="Logo"/>
+                                </Link>
+                            </li>
                             <li>
                                 <label htmlFor="email">Email</label>
                                 <input type="email" name="email" id="email" onChange={(e)=>setEmail(e.target.value)}></input>

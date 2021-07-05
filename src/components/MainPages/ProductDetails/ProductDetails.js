@@ -77,7 +77,7 @@ function ProductDetailScreen(props){
     const { userInfo} = userLogin;
 
     const checkComment = useSelector(state => state.checkComment);
-    const { checkStatus} = checkComment;
+    const { checkStatus,loadingComment} = checkComment;
 
     const productDetails = useSelector(state => state.productDetails);
     const { product, loading2} = productDetails;
@@ -191,10 +191,16 @@ function ProductDetailScreen(props){
     }
 
     //console.log(userInfo.newUser._id,params.id)
-    useEffect(() => {
-           dispatch(checkCanComment(userInfo.newUser._id,params.id));   
-    },[dispatch,userInfo.newUser._id,params.id])
-    
+    // useEffect(() => {
+    //        dispatch(checkCanComment(userInfo.newUser._id,params.id));   
+    // },[dispatch,userInfo.newUser._id,params.id])
+    const checkCommentHandle = () =>{
+        if(userInfo){
+            dispatch(checkCanComment(userInfo.newUser._id,params.id));
+        }else{
+            props.history.push('/login');
+        }
+    }
 
     useEffect(() => {
         setLoading(true)
@@ -207,21 +213,24 @@ function ProductDetailScreen(props){
            
     },[params.id, page])
     const handleAddToCart = (id,name,price, image) =>{
-        let a = {id: id,
-            name: name,
-            price: price,
-            img: image,
-            quantity: 1,
-            color:color,
-            size:size
-        };
+        if(!userInfo){
+            props.history.push('/login');
+        }else{
+            let a = {id: id,
+                name: name,
+                price: price,
+                img: image,
+                quantity: 1,
+                color:color,
+                size:size
+            };
             if(color ===''|| size ===''){
                 toast.error(t('mainpages_pdetal_detail:add_fail'));
             }else{
                 dispatch(addCart(userInfo.newUser._id,a));
                 toast.success(t('mainpages_pdetal_detail:add_success'));
             }
-            
+        }     
         
     }
     const imagesSlice = product?.images?.slice(0, 4);
@@ -393,7 +402,7 @@ function ProductDetailScreen(props){
                                             <li className="nav-item">
                                                 <a className="nav-link active" data-toggle="pill" href="#description">{t('mainpages_pdetal_detail:description')}</a>
                                             </li>
-                                            <li className="nav-item">
+                                            <li className="nav-item" onClick={checkCommentHandle}>
                                                 <a className="nav-link" data-toggle="pill" href="#reviews">{product?.rating > 0?product.rating:0} {t('mainpages_pdetal_detail:review')}</a>
                                             </li>
                                         </ul>
@@ -413,56 +422,56 @@ function ProductDetailScreen(props){
                                                 </p>
                                             </div>
                                             <div id="reviews" className="container tab-pane fade">
-                                            <div className="comments">
-                                            {
-                                                checkStatus ==='true'?(
-                                                    <>
+                                                <div className="comments">
+                                                    {
+                                                        checkStatus ==='true'?(
+                                                            <>
+                                                                <h2 className="app_title">
+                                                                {t('mainpages_pdetal_detail:your_feedback')}
+                                                            </h2>
+                    
+                                                            <div className="reviews">
+                                                                <input type="radio" name="rate" id="rd-5" onChange={() => setRating(5)} />
+                                                                <label htmlFor="rd-5" className="fas fa-star"></label>
+                        
+                                                                <input type="radio" name="rate" id="rd-4" onChange={() => setRating(4)} />
+                                                                <label htmlFor="rd-4" className="fas fa-star"></label>
+                        
+                                                                <input type="radio" name="rate" id="rd-3" onChange={() => setRating(3)} />
+                                                                <label htmlFor="rd-3" className="fas fa-star"></label>
+                        
+                                                                <input type="radio" name="rate" id="rd-2" onChange={() => setRating(2)} />
+                                                                <label htmlFor="rd-2" className="fas fa-star"></label>
+                        
+                                                                <input type="radio" name="rate" id="rd-1" onChange={() => setRating(1)} />
+                                                                <label htmlFor="rd-1" className="fas fa-star"></label>
+                                                            </div>
+                                                            <FormInput id={params.id} socket={socket}  rating={rating} />
+                                                            </>
+                                                            
+                                                        )
+                                                        :
+                                                        <Link to="/product-list"className="danger">{t('mainpages_pdetal_detail:see_more')}</Link>
+                                                    }
+                                                    <div className="comments_list">
                                                         <h2 className="app_title">
-                                                        {t('mainpages_pdetal_detail:your_feedback')}
-                                                    </h2>
-            
-                                                    <div className="reviews">
-                                                        <input type="radio" name="rate" id="rd-5" onChange={() => setRating(5)} />
-                                                        <label htmlFor="rd-5" className="fas fa-star"></label>
-                
-                                                        <input type="radio" name="rate" id="rd-4" onChange={() => setRating(4)} />
-                                                        <label htmlFor="rd-4" className="fas fa-star"></label>
-                
-                                                        <input type="radio" name="rate" id="rd-3" onChange={() => setRating(3)} />
-                                                        <label htmlFor="rd-3" className="fas fa-star"></label>
-                
-                                                        <input type="radio" name="rate" id="rd-2" onChange={() => setRating(2)} />
-                                                        <label htmlFor="rd-2" className="fas fa-star"></label>
-                
-                                                        <input type="radio" name="rate" id="rd-1" onChange={() => setRating(1)} />
-                                                        <label htmlFor="rd-1" className="fas fa-star"></label>
+                                                        {t('mainpages_pdetal_detail:all_of_feedback')}
+                                                        </h2>
+                                                        {
+                                                        comments.length >0 ? comments.map(comment => (
+                                                            <CommentItem key={comment._id} comment={comment} socket={socket} />
+                                                        )): <p>{t('mainpages_pdetal_detail:enter_first_feedback')}</p>
+                                                            
+                                                        }
                                                     </div>
-                                                    <FormInput id={params.id} socket={socket}  rating={rating} />
-                                                    </>
-                                                    
-                                                )
-                                                :
-                                                <Link to="/product-list"className="danger">{t('mainpages_pdetal_detail:see_more')}</Link>
-                                            }
-                                            <div className="comments_list">
-                                                <h2 className="app_title">
-                                                {t('mainpages_pdetal_detail:all_of_feedback')}
-                                                </h2>
-                                                {
-                                                comments.length >0 ? comments.map(comment => (
-                                                    <CommentItem key={comment._id} comment={comment} socket={socket} />
-                                                )): <p>{t('mainpages_pdetal_detail:enter_first_feedback')}</p>
-                                                    
-                                                }
-                                            </div>
 
-                                            </div>
-                                            {
-                                                loading && <div className="loading"><img src={Loading} alt=""/></div>
-                                            }  
-                                            <button ref={pageEnd} style={{opacity: 0}}>Load more</button> 
+                                                </div>
+                                                {
+                                                    loading && <div className="loading"><img src={Loading} alt=""/></div>
+                                                }  
+                                                <button ref={pageEnd} style={{opacity: 0}}>Load more</button> 
                                             
-                                        </div>
+                                            </div>
                                             
                                         </div>
                                     </div>
@@ -518,7 +527,7 @@ function ProductDetailScreen(props){
         
       
           
-     
+    <LoadingBackdrop open={loadingComment}/>
     <Brand/>
     <FooterPage/>
     <ScrollToTopBtn />

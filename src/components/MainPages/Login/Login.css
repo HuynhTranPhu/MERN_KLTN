@@ -89,3 +89,6 @@
 .form-container .back{
     border-radius: 2rem;
 }
+.logo__login img {
+    max-height: 32px;
+}

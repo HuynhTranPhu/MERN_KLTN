@@ -53,7 +53,7 @@ function App() {
                      <PrivateRoute path="/profile" exact component={ProfileScreen}></PrivateRoute>
                      <Route path="/product-list" exact component={ProductScreen}></Route>
                      <PrivateRoute path="/update-password" exact component={UpdatePasswordScreen}></PrivateRoute>
-                     <PrivateRoute path="/product-detail/:id" exact component={ProductDetailScreen}></PrivateRoute>
+                     <Route path="/product-detail/:id" exact component={ProductDetailScreen}></Route>
                      <Route path="/contact" exact component={ContactScreen}></Route>
                      <Route path="/confirm/:token" exact component={VerifyRegisterAccountContainer}></Route>
                      <Route path="/forgotPass/" exact component={ForgotPasswordContainer}></Route>

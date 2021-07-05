@@ -76,11 +76,11 @@ function productListSellingReducer (state = { productSelling: []}, action){
 function checkCanCommentReducer (state = { checkStatus:{} }, action){
     switch(action.type){
         case CHECK_CAN_COMMENT_REQUEST:
-            return {loading: true};
+            return {loadingComment: true};
         case  CHECK_CAN_COMMENT_SUCCESS:
-            return { loading : false , checkStatus: action.payload};
+            return { loadingComment : false , checkStatus: action.payload};
         case CHECK_CAN_COMMENT_FAIL:
-            return { loading : false, error: action.payload}
+            return { loadingComment : false, error: action.payload}
         default:
             return state;
     }
