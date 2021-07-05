@@ -2,6 +2,7 @@ import React, { Component} from 'react'
 import axios from 'axios'
 import VerifyRegisterAccount from '../../VerifyRegisterAccount/VerifyRegisterAccount'
 import NotFound from '../../404/404'
+import LoginScreen from '../Login/LoginScreen';
 require ('dotenv').config();
 const url = process.env.REACT_APP_URL_CLIENT;
 class VerifyRegisterAccountContainer extends Component {
@@ -25,7 +26,11 @@ class VerifyRegisterAccountContainer extends Component {
        
         if(this.state.isconfirm) {
             return(
-                <VerifyRegisterAccount/>
+                <>
+                    <VerifyRegisterAccount/>
+                    <LoginScreen/>
+                </>
+                
             )
         } else {
             return (

@@ -30,7 +30,7 @@ function ViewHistory(props){
     //const [viewHistory, setViewHistory] = useState([])
     //const dispatch = useDispatch();
     //const cartItems=[];
-    //console.log(viewHistory);
+    console.log(viewHistory);
     useEffect(() => {
         dispatch(viewHistoryGet(props.match.params.id));
         if(success===true){
@@ -120,10 +120,10 @@ function ViewHistory(props){
 
                                                                             <td>
                                                                                 <div className="img">
-                                                                                    <Link to={"/product-detail/"+item._id}>
+                                                                                    <Link to={"/product-detail/"+item.id}>
                                                                                     <img src={item.img} alt="Product" />
                                                                                     </Link>
-                                                                                    <p><Link to ={"/product-detail/" +item._id}>  {item.name}</Link></p>     
+                                                                                    <p><Link to ={"/product-detail/" +item.id}>  {item.name}</Link></p>     
                                                                                 </div>
                                                                             </td>
                                                                             <td>${item.price}</td>

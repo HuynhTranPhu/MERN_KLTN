@@ -37,7 +37,7 @@ export default function PromoCodeItem(props) {
           <Tooltip title={props.content} placement="top">
             <div className="mb-2">
               <div className="coupon__amount text-max-2">{props.content}</div>
-              <span>{props.price_discount} $ discount on total amount</span>
+              <span>{props.price_discount} $ {t('common_promotion_code:discount_total')}</span>
             </div>
           </Tooltip>
           {props.couponCode !== 'false' && (

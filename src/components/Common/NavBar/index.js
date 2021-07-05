@@ -32,11 +32,6 @@ const Index = () => {
         <div className="nav nav-Bar">
                   <div className="container-fluid">
                       <nav className="navbar navbar-expand-md bg-dark navbar-dark">
-                          {/* <Link to="" className="navbar-brand">MENU</Link>
-                          <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                              <span className="navbar-toggler-icon"></span>
-                          </button> */}
-
                           <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                               <div className="navbar-nav mr-auto ml-3">
                                   <NavLink to="/" className="nav-item nav-link">{t('common_navbar:home')}</NavLink>
@@ -67,7 +62,7 @@ const Index = () => {
                                     </ul>
                                 </NavLink>
                               </div>
-                              <div className="navbar-nav ml-auto">
+                              <div className="navbar-nav ml-auto mr-3">
                                   {
                                       userInfo?(
                                         <div className="header-right flex-shrink-0 ">
@@ -114,18 +109,18 @@ const Index = () => {
                                                         </Link>
                                                     </div>
                                                     <div>
-                                                        <Link to="/" onClick={logoutHandler}>
-                                                            <span className="dropdown__item dropdown__item-link">
-                                                                <i className="fas fa-sign-out-alt dropdown__item-icon" />
-                                                                {t('common_navbar:logout')}
-                                                            </span>
-                                                        </Link>
-                                                    </div>
-                                                    <div>
                                                         <Link to="/update-password" >
                                                             <span className="dropdown__item dropdown__item-link">
                                                                 <i className="fa fa-key dropdown__item-icon" />
                                                                 {t('common_navbar:change_password')}
+                                                            </span>
+                                                        </Link>
+                                                    </div>
+                                                    <div>
+                                                        <Link to="/" onClick={logoutHandler}>
+                                                            <span className="dropdown__item dropdown__item-link">
+                                                                <i className="fas fa-sign-out-alt dropdown__item-icon" />
+                                                                {t('common_navbar:logout')}
                                                             </span>
                                                         </Link>
                                                     </div>

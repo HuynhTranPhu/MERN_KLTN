@@ -20,5 +20,6 @@
     "received":"Received",
     "packed":"Packed",
     "shipped":"Shipped",
-    "delivered":"Delivered"
+    "delivered":"Delivered",
+    "discount_total":"discount on total amount"
   }

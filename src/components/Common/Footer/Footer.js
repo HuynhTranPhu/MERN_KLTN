@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 
 function FooterPage(){
@@ -25,11 +26,11 @@ function FooterPage(){
                             <h2>{t('common_footer:follow_us')}</h2>
                             <div className="contact-info">
                                 <div className="social">
-                                    <a href=""><i className="fab fa-twitter"></i></a>
-                                    <a href=""><i className="fab fa-facebook-f"></i></a>
-                                    <a href=""><i className="fab fa-linkedin-in"></i></a>
-                                    <a href=""><i className="fab fa-instagram"></i></a>
-                                    <a href=""><i className="fab fa-youtube"></i></a>
+                                    <Link to="/"><i className="fab fa-twitter"></i></Link>
+                                    <Link to="/"><i className="fab fa-facebook-f"></i></Link>
+                                    <Link to="/"><i className="fab fa-linkedin-in"></i></Link>
+                                    <Link to="/"><i className="fab fa-instagram"></i></Link>
+                                    <Link to="/"><i className="fab fa-youtube"></i></Link>
                                 </div>
                             </div>
                         </div>
@@ -39,9 +40,9 @@ function FooterPage(){
                         <div className="footer-widget">
                             <h2>{t('common_footer:company_info')}</h2>
                             <ul>
-                                <li><a href="#">{t('common_footer:about_us')}</a></li>
-                                <li><a href="#">{t('common_footer:privacy_policy')}</a></li>
-                                <li><a href="#">{t('common_footer:terms_condition')}</a></li>
+                                <li><Link to="/contact">{t('common_footer:about_us')}</Link></li>
+                                <li><Link to="/">{t('common_footer:privacy_policy')}</Link></li>
+                                <li><Link to="/">{t('common_footer:terms_condition')}</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -50,9 +51,9 @@ function FooterPage(){
                         <div className="footer-widget">
                             <h2>{t('common_footer:purchase_info')}</h2>
                             <ul>
-                                <li><a href="#">{t('common_footer:payment_policy')}</a></li>
-                                <li><a href="#">{t('common_footer:shipping_policy')}</a></li>
-                                <li><a href="#">{t('common_footer:return_policy')}</a></li>
+                                <li><Link to="/">{t('common_footer:payment_policy')}</Link></li>
+                                <li><Link to="/">{t('common_footer:shipping_policy')}</Link></li>
+                                <li><Link to="/">{t('common_footer:return_policy')}</Link></li>
                             </ul>
                         </div>
                     </div>

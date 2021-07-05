@@ -8,9 +8,6 @@ import Search from './Search';
 import { useTranslation } from "react-i18next";
 
 
-
-
-
 function Index(props) {
     const { t } = useTranslation(['common_btbar_index']);
     const userLogin = useSelector((state) => state.userLogin);
@@ -65,7 +62,7 @@ return (
                     </div>
                     <div className="col-md-2 search__mobile-res ">
                             <div className="user-name_bottom-bar">
-                            {t('common_btbar_index:hello')} {userInfo?.newUser?.name}
+                             <Link className="name__to-profile" to="/profile"> {t('common_btbar_index:hello')} {userInfo?.newUser?.name}</Link>  
                             </div>                   
                         
                     </div>

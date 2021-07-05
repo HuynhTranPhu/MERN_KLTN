@@ -20,5 +20,6 @@
     "received":"Đã xác nhận",
     "packed":"Đã đóng gói",
     "shipped":"Đã giao hàng",
-    "delivered":"Đã giao hàng"
+    "delivered":"Đã giao hàng",
+    "discount_total":"chiết khấu trên tổng số tiền"
   }
