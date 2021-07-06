@@ -109,7 +109,7 @@ const register = (name, email, password, repassword) => async (dispatch) =>{
         try{
             const {data} = await axios.post(`${url}/user/register`, {name, email,password,repassword});
             dispatch({type:USER_REGISTER_SUCCESS,payload:data});
-            Cookie.set('userInfo', JSON.stringify(data));
+            //Cookie.set('userInfo', JSON.stringify(data));
         }catch(error){
             const message=
             error.response && error.response.data.message
