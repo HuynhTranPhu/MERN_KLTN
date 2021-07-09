@@ -41,10 +41,13 @@ function HomeScreen(props){
   
     useEffect(() => {
         dispatch(listProductsSelling());
-        dispatch(getCart(userInfo?.newUser?._id));
-        return () => {
-        };
-    }, [dispatch, userInfo?.newUser?._id])
+        if(userInfo){
+            dispatch(getCart(userInfo?.newUser?._id));
+        }
+        return () => {};
+    }, [dispatch, userInfo, userInfo?.newUser?._id])
+
+    
     const settings = {
         autoplay: true,
         infinite: true,

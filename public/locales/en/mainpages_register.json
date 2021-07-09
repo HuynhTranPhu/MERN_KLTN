@@ -4,5 +4,7 @@
 	"password":"Password",
 	"re_enter_password":"Re enter password",
 	"register":"Register",
-	"back":"Back"
+	"back":"Back",
+	"not_found":"Information not found",
+	"success":"Register successfully, please check mail to verify account"
 }

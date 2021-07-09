@@ -41,7 +41,7 @@ function CartScreen(props){
         
     }
     const increaseHandler = (productId, color, size) =>{
-        products.forEach(product => {
+        products?.forEach(product => {
             if(product._id === productId) setDetailProduct(product)
         })
             dispatch(increaseCart(userInfo.newUser._id,productId, color, size));

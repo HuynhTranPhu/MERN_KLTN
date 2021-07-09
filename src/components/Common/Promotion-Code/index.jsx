@@ -77,7 +77,7 @@ function PromotionCode() {
                             <div className="row">
                                 <div className="col-12 coupons">
                                 {promoCodes &&
-                                    promoCodes.map((coupon, index) => (
+                                    promoCodes?.map((coupon, index) => (
                                     <PromoCodeItem
                                         key={index}
                                         id={coupon._id}
@@ -89,7 +89,7 @@ function PromotionCode() {
                                 }
                                 </div>
                                 {
-                                    promoCodes.length <= 0 ? <h6 className="col text-center font-weight-bold">{t('common_promotion_code:update')}</h6>:null
+                                    promoCodes?.length <= 0 ? <h6 className="col text-center font-weight-bold">{t('common_promotion_code:update')}</h6>:null
                                 }
                             </div>
                         </div>

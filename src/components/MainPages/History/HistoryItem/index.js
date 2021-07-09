@@ -35,7 +35,7 @@ function HistoryItem({history, loading, error}) {
                                         <div className="col-lg-12" >
                                             <div className="cart-page-inner">
                                                 <div className="table-responsive">
-                                                    <table className="table table-bordered">
+                                                    <table className="table table-bordered table-striped">
                                                         <thead className="thead-dark"> 
                                                                 {
                                                                     history.length === 0 ?(                                                  

@@ -47,14 +47,14 @@ function SearchScreen(props){
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="row">
-                            {  productSearch.length === 0 ?(                                                 
+                            {  productSearch?.length === 0 ?(                                                 
                                 <div className="empty-cart1 ">
                                     <img className="empty-cart-img" src="/images/emptyCart.png" alt="Product" />
                                     <p className="empty-cart-note">{t('mainpages_search:search_products')}</p>
                                     <Link className="empty-cart-shopping" to="/">{t('mainpages_search:go_to_shopping')}</Link>
                                 </div>
                                 ):
-                                productSearch.map((product) =>
+                                productSearch?.map((product) =>
 
                                     <div className="col-md-3" key={product._id}>
                                         <div className="product-item">

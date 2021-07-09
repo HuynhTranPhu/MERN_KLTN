@@ -13,9 +13,9 @@ const VerifyRegisterAccount = () => {
 		<div className="container text-center">
 			<div className="content-404">
 				<img src="/img/confirm.png" className="img-responsive" alt="" />
-				<h3><b>{t('verify_register_account:congrations')}
+				<h3><b>{t('verify_register_account:congratulation')}
 				</b> {t('verify_register_account:you_have_verified')}</h3>
-				<h3><Link to="/">{t('verify_register_account:bring_me_back_home')}</Link></h3>
+				<h3><Link to="/login">{t('verify_register_account:bring_me_back_home')}</Link></h3>
 			</div>
 		</div>
 	</div>

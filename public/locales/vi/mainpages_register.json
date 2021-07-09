@@ -4,5 +4,7 @@
 	"password":"Mật khẩu",
 	"re_enter_password":"Nhập lại mật khẩu",
 	"register":"Đăng kí",
-	"back":"Trở về"
+	"back":"Trở về",
+	"not_found":"Nhập đầy đủ thông tin",
+	"success":"Đăng kí thành công, kiểm tra mail để xác nhận tài khoản"
 }

@@ -9,8 +9,6 @@ import {
     CATEGORY_LIST_REQUEST, 
     CATEGORY_LIST_SUCCESS,
     CATEGORY_LIST_FAIL, 
-    FILTER_PRODUCTS_BY_CATEGORY, 
-    SEARCH_FILTER_PRODUCTS, 
     PRODUCT_LIST_SUCCESS_OF_PAGE,
     SEARCH_REQUEST,
     SEARCH_SUCCESS,
@@ -21,40 +19,37 @@ import {
     PRODUCT_LIST_SELLING_FAIL,
     CHECK_CAN_COMMENT_REQUEST,
     CHECK_CAN_COMMENT_SUCCESS,
-    CHECK_CAN_COMMENT_FAIL
+    CHECK_CAN_COMMENT_FAIL,
+    FILTER_PRODUCTS_BY_CATEGORY_REQUEST,
+    FILTER_PRODUCTS_BY_CATEGORY_SUCCESS,
+    FILTER_PRODUCTS_BY_CATEGORY_FAIL
 } from "../constants/productConstants";
 
 //List product
-function productListReducer (state = { products: [],filteredItems: [], cate: "",sort: "",search:"",numberOfPages:0}, action){
+function productListReducer (state = { products: [],filteredItems: [], cate: "",sort: "",numberOfPages:0}, action){
     switch(action.type){
         case PRODUCT_LIST_REQUEST:
             return {loading: true, products:[]};
         case PRODUCT_LIST_REQUEST_OF_PAGE:
             return {loading: true, filteredItems:[]};
+        case FILTER_PRODUCTS_BY_CATEGORY_REQUEST:
+            return {loading: true, filteredItems:[]};
         case  PRODUCT_LIST_SUCCESS:
             return { loading : false , products: action.payload, filteredItems:action.payload};
         case  PRODUCT_LIST_SUCCESS_OF_PAGE:
-            return { loading : false , products: action.payload.data,
-                 filteredItems:action.payload.data,numberOfPages:action.payload.totalPage};
-        case FILTER_PRODUCTS_BY_CATEGORY:
-            return {
-                  ...state,
-                  filteredItems: action.payload.items,
-                  cate: action.payload.category,
-                };
+            return { loading : false, filteredItems:action.payload.data,numberOfPages:action.payload.totalPage};
+        case  FILTER_PRODUCTS_BY_CATEGORY_SUCCESS:
+            return { loading : false ,filteredItems:action.payload.items,numberOfPages:action.payload.totalPage,
+                cate: action.payload.category};
         case ORDER_PRODUCTS_BY_PRICE:
             return {
                     ...state,
                     filteredItems: action.payload.items,
                     sort: action.payload.sort,
                 };
-        case SEARCH_FILTER_PRODUCTS:
-            return {
-                    ...state,
-                    filteredItems: action.payload.items,
-                    search: action.payload.search,
-                };
         case PRODUCT_LIST_FAIL:
+            return { loading : false, error: action.payload}
+        case FILTER_PRODUCTS_BY_CATEGORY_FAIL:
             return { loading : false, error: action.payload}
         default:
             return state;
@@ -99,10 +94,10 @@ function categoryListReducer(state={category:[]},action){
             return state;
     }
 }
-function searchHeaderReducer(state={productSearch:{}},action){
+function searchHeaderReducer(state={productSearch:[]},action){
     switch(action.type){
         case SEARCH_REQUEST:
-            return {loading: true, productSearch:{}};
+            return {loading: true, productSearch:[]};
         case  SEARCH_SUCCESS:
             return { loading : false , productSearch: action.payload.data};
     

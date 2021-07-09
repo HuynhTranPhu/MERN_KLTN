@@ -304,6 +304,11 @@
   margin-right: 5px;
 }
 .pagination button{
-  color: #FF6F61;
+  color: #fff;
   background: #000000;
+  padding: 6px 15px;
+  border: .5px solid #fff;
+}
+.pagination > button.active{
+  background: #FF6F61;
 }

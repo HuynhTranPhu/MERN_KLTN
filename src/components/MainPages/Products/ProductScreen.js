@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterProducts, listCategory, listProductsOfPage, sortProducts } from '../../../actions/productActions';
-//import LoadingBox from '../../Config/LoadingBox';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import MessageBox from '../../Config/MessageBox';
 import Brand from '../../Brand/Brand';
@@ -11,7 +10,6 @@ import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
 import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
-//import { addCart } from '../../../actions/cartAction';
 import { useTranslation } from 'react-i18next';
 import Rating from '../ProductDetails/rating';
 
@@ -22,17 +20,12 @@ import Rating from '../ProductDetails/rating';
 function ProductScreen(props){
     const { t } = useTranslation(['mainpages_product']);
     const productList = useSelector(state => state.productList);
-    const {products,filteredItems,cate,sort,loading , error,numberOfPages} = productList;
+    const {cate, filteredItems, sort, loading, error, numberOfPages} = productList;
 
-    //const userLogin = useSelector(state => state.userLogin);
-    //const { userInfo} = userLogin;
 
     const categories = useSelector(state => state.categoryList);
     const {category} = categories;
-
-    // const addCartPost = useSelector(state => state.cartPost);
-    // const {success} = addCartPost;
-
+    //console.log(numberOfPages);
     //pagination
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -81,51 +74,36 @@ function ProductScreen(props){
                                 <div className="product-view-top">
                                     <div className="row">
                                         <div className="col-md-3">
-                                            {`${filteredItems.length} ${t('mainpages_product:count_in_page')} ${pageNumber}`}
+                                            {`${filteredItems.length} ${t('mainpages_product:count_in_page')} ${pageNumber>numberOfPages? 1 : pageNumber}`}
                                         </div>
                                         <div className="col-md-3"></div>
-                                        {/* <div className="col-md-3">
-                                            <div className="product-search">
-                                                    <input type="text" placeholder={t('mainpages_product:search_place')}
-                                                    value={search}
-                                                    onChange={e=>
-                                                       {
-                                                           dispatch(searchFilterProducts(
-                                                               products,
-                                                               e.target.value
-                                                           ))
-                                                       }
-                                                    }
-                                                    />
-                                                    <button><i className="fa fa-search"></i></button>    
-                                            </div>
-                                        </div> */}
                                         <div className="col-md-3">
                                             <div className="product-filter">
-                                                <select
-                                                           
-                                                            value={cate}
-                                                            onChange={(e) => {
+                                                    <select
+                                                        value={cate}
+                                                        onChange={(e) => {
+                                                             
+                                                            if(e.target.value===""){
+                                                                dispatch(listProductsOfPage(pageNumber))
+                                                            }else{
                                                                 dispatch(filterProducts(
-                                                                    products,
-                                                                    e.target.value
-                                                                    )) 
-                                                            }}
-                                                            >
-                                                            <option value="">{t('mainpages_product:all_products')}</option>
-                                                            {
-                                                                category.map(category => (
-                                                                    <option value={category._id} key={category._id}>
-                                                                        {category.name}
-                                                                    </option>
-                                                                ))
+                                                                    e.target.value,
+                                                                    pageNumber>numberOfPages? 1 : pageNumber
+                                                                    ))
                                                             }
-                                                        </select>
+                                                        }}
+                                                    >
+                                                        <option value="">{t('mainpages_product:all_products')}</option>
+                                                        {
+                                                            category.map(category => (
+                                                                <option value={category._id} key={category._id}>
+                                                                    {category.name}
+                                                                </option>
+                                                            ))
+                                                        }
+                                                    </select>
                                             </div>
                                                     
-                                              
-                                                
-                                           
                                         </div>
                                         <div className="col-md-3">
                                            
@@ -185,9 +163,9 @@ function ProductScreen(props){
                         </div>
                        { filteredItems.length>0 &&
                         <div className="col-md-12 pagination justify-content-center">
-                            <button onClick={gotoPrevious}>{t('mainpages_product:previous')}</button>
+                            <button disabled={pageNumber===1} onClick={gotoPrevious}>{t('mainpages_product:previous')}</button>
                             {pages.map((pageIndex) => (
-                                <button key={pageIndex} onClick={() => setPageNumber(pageIndex)}>
+                                <button className={pageNumber===pageIndex?'active':''}  key={pageIndex} onClick={() => setPageNumber(pageIndex)}>
                                 {pageIndex }
                                 </button>
                             ))}

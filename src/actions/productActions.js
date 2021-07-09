@@ -5,7 +5,6 @@ import {
     PRODUCT_DETAILS_REQUEST, 
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
-    FILTER_PRODUCTS_BY_CATEGORY,
     ORDER_PRODUCTS_BY_PRICE,
     CATEGORY_LIST_REQUEST,
     CATEGORY_LIST_SUCCESS,
@@ -21,7 +20,10 @@ import {
     PRODUCT_LIST_SELLING_SUCCESS,
     CHECK_CAN_COMMENT_SUCCESS,
     CHECK_CAN_COMMENT_REQUEST,
-    CHECK_CAN_COMMENT_FAIL
+    CHECK_CAN_COMMENT_FAIL,
+    FILTER_PRODUCTS_BY_CATEGORY_REQUEST,
+    FILTER_PRODUCTS_BY_CATEGORY_SUCCESS,
+    FILTER_PRODUCTS_BY_CATEGORY_FAIL
 } 
 from  '../constants/productConstants';
 import axios from 'axios'
@@ -165,23 +167,26 @@ const searchFilterProducts  = (products,search) =>  (dispatch) =>{
   //console.log(category)
   
 }
-const filterProducts  = (products,category) =>  (dispatch) =>{
+const filterProducts  = (id,page) => async  (dispatch) =>{
     
-        dispatch({
-            type: FILTER_PRODUCTS_BY_CATEGORY, 
-            payload: {
-                category: category,
-                items:
-                category === ""
-                    ? products
-                    : products.filter(
-                        (x) => x.id_category===category
-                      )      
-              }
-        }); 
-        //console.log(category)
+    try{
+        dispatch({type: FILTER_PRODUCTS_BY_CATEGORY_REQUEST});
+         //const {data} =await axios.get("/api/products");
+         const {data} = await axios.get(`${url}/product/category/cate?id=${id}&page=${page}`);
+        
+        dispatch({type: FILTER_PRODUCTS_BY_CATEGORY_SUCCESS, 
+                 payload: {category: id,items: data.data, totalPage:data.totalPage}}); 
+    } 
+    catch(error){
+        const message=
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+        dispatch({type: FILTER_PRODUCTS_BY_CATEGORY_FAIL, payload: message});
+    }
         
 }
+
 const sortProducts = (items, sort) => (dispatch) => {
     const products = items.slice();
     if (sort !== "") {

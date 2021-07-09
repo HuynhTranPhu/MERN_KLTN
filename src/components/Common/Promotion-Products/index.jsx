@@ -49,7 +49,7 @@ function PromotionProducts() {
                             <div className="row">
                                 
                                 {
-                                        products.map((product) =>{
+                                        products?.map((product) =>{
                                             return product.id_category === banners?.map((banner)=>banner.id_category)[0]?
                                             <div className="col-md-3" key={product._id}>
                                                 <div className="product-item">
@@ -67,7 +67,7 @@ function PromotionProducts() {
                                                         <Link to={'/product-detail/' + product._id}>{product.name}</Link>
                                                     </div>
                                                     <div className="product-price">
-                                                        <h3>${product.sellPrice} <span>${product.price}</span></h3>
+                                                        <h3>${product.sellPrice?product.sellPrice:0} <span>${product.price}</span></h3>
                                                         <div className="ratting">
                                                             <Rating props={product}/>
                                                         </div>

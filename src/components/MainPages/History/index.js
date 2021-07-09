@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { useMediaQuery } from '@material-ui/core';
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
@@ -46,6 +46,7 @@ function a11yProps(index) {
   }
   
 const History = () => {
+    const isSmallScreen = useMediaQuery('(max-width: 767.98px)');
     const { t } = useTranslation(['mainpages_history']);
     const historyOrder = useSelector(state => state.historyOrder);
     const {history, loading, error } = historyOrder;
@@ -92,15 +93,35 @@ const History = () => {
             <BottomBar ></BottomBar>
             <NavBar/>
             <h1 className="Order-title">{t('mainpages_history:order_history')}</h1>   
-                <div className="container-fluid" >
+                <div className="container" >
                     <AppBar position="static" color="default" >
-                        <Tabs
-                        value={value}
-                        onChange={handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        variant="fullWidth"
-                        aria-label="full width tabs example"
+                        {isSmallScreen?
+                         <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            indicatorColor="primary"
+                            textColor="primary"
+                            //variant="fullWidth"
+                            variant="scrollable"
+                            scrollButtons="auto"
+                            aria-label="full width tabs example"
+                        >
+                        <Tab label={t('mainpages_history:all')} {...a11yProps(0)} />
+                        <Tab label={t('mainpages_history:received')} {...a11yProps(1)} />
+                        <Tab label={t('mainpages_history:packed')} {...a11yProps(2)} />
+                        <Tab label={t('mainpages_history:shipped')} {...a11yProps(3)} />
+                        <Tab label={t('mainpages_history:delivered')} {...a11yProps(4)} />
+                        <Tab label={t('mainpages_history:canceled')} {...a11yProps(5)} />
+                        </Tabs>:
+                            <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            indicatorColor="primary"
+                            textColor="primary"
+                            variant="fullWidth"
+                            //variant="scrollable"
+                            //scrollButtons="auto"
+                            aria-label="full width tabs example"
                         >
                         <Tab label={t('mainpages_history:all')} {...a11yProps(0)} />
                         <Tab label={t('mainpages_history:received')} {...a11yProps(1)} />
@@ -109,6 +130,8 @@ const History = () => {
                         <Tab label={t('mainpages_history:delivered')} {...a11yProps(4)} />
                         <Tab label={t('mainpages_history:canceled')} {...a11yProps(5)} />
                         </Tabs>
+                        }
+                       
                     </AppBar>
                     <SwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}

@@ -479,7 +479,7 @@ function ProductDetailScreen(props){
                             {/* </div>    */}
                             <div className="product">
                                 {
-                                    products.filter((pr)=>pr.id_category===product?.id_category?._id).length>1 ? 
+                                    products?.filter((pr)=>pr.id_category===product?.id_category?._id).length>1 ? 
                                     <div className="section-header">
                                         <h1>{t('mainpages_pdetal_detail:related_products')}</h1>
                                     </div>:null
@@ -489,7 +489,7 @@ function ProductDetailScreen(props){
                                 <div className="align-items-center">
                                 <Slider {...settings}>
                                     {
-                                        products.map((pr)=>{
+                                        products?.map((pr)=>{
                                             return  pr.id_category === product?.id_category?._id && pr._id!== product?._id
                                             ?
                                                 <div className="col-lg-12" key={pr._id}>

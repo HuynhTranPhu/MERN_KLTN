@@ -34,10 +34,11 @@ function RegisterScreen(props){
     const submitHandler =(e)=>{
         e.preventDefault();
         if(name===""|| email===""||password===""||repassword===""){
-            toast.error("information not found");
+            toast.error(t('mainpages_register:not_found'));
         }
         else{
             dispatch(register(name, email,password,repassword));
+            toast.success(t('mainpages_register:success'));
         }
         
     }

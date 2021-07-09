@@ -381,7 +381,6 @@ transform: scale(1.2);
     min-height: 20em;
     max-height: 250px;
     object-fit: contain;
-    pointer-events: none;
 }
 
 /*Multiple images*/
