@@ -18,7 +18,7 @@ function Search(props) {
 
     const handelSearch=()=>{
         dispatch(searchHeader(input));
-        history.push('/search');
+        history.push(`/search?keyword=${input}`);
     }
     const handleKeyPress = (e) => {
         if (e.key === 'Enter' && input.length > 0) {

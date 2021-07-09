@@ -1,5 +1,7 @@
 {
-	"search_products":"OOPS!!!Sản phẩm bạn tìm kiếm hiện tại không có",
+	"search_products":"OOPS!!!Không có sản phẩm phù hợp với từ khoá:",
 	"go_to_shopping":"Tiếp tục mua sắm",
-	"buy_now":"Mua ngay"
+	"buy_now":"Mua ngay",
+	"search_result_1":"Hiển thị ",
+	"search_result_2":"kêt quả tìm kiếm cho: "
 }

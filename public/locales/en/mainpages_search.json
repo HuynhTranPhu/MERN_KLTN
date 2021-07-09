@@ -1,5 +1,7 @@
 {
-	"search_products":"OOPS!!!Products you search is not found!",
+	"search_products":"OOPS!!!No products matching the keyword:",
 	"go_to_shopping":"Go to Shopping",
-	"buy_now":"Buy now"
+	"buy_now":"Buy now",
+	"search_result_1":"Showing ",
+	"search_result_2":"results for: "
 }
