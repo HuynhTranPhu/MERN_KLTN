@@ -28,11 +28,8 @@ function CartScreen(props){
 
     const dispatch = useDispatch();
     const removeFromCartHandler = (productId, color,size) =>{
-        if(window.confirm('Do you want to delete this item?')){
+        if(window.confirm(t('mainpages_cart:delete_confirm'))){
             dispatch(removeCart(userInfo.newUser._id, productId, color,size));
-           // if(successRemove){
-               // dispatch(removeFromCart(id));
-            //}
         }
         
     }

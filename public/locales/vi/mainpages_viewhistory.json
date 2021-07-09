@@ -16,5 +16,7 @@
 	"order_total":"Tổng đơn hàng",
 	"delete_orders":"Xóa đơn hàng",
 	"pending":"Chưa thanh toán",
-	"paid":"Đã thanh toán"
+	"paid":"Đã thanh toán",
+	"delete_success":"Xóa đơn hàng thành công",
+	"delete_confirm":"Bạn có chắc chắn xóa đơn hàng này không?"
 }

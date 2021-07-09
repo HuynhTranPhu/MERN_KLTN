@@ -61,7 +61,7 @@ function HistoryItem({history, loading, error}) {
                                                             {
                                                                 history.map(item=>
                                                                 <tr key={item._id}>
-                                                                    <td>{item._id}</td>
+                                                                    <td><Link to= {"/view-history/"+ item._id} onClick={()=>HandelViewDetails(item._id)}>{item._id}</Link></td>
                                                                     <td>{item.order_date.substring(0, 10)}</td>  
                                                                     <td><Link to= {"/view-history/"+ item._id} onClick={()=>HandelViewDetails(item._id)}>{t('mainpages_history:view_details')}</Link></td>
                                                                     <td>${item.order_subtotal }</td>

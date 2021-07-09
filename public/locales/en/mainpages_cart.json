@@ -13,5 +13,6 @@
 	"shipping_cost":"Shipping Cost",
 	"grand_total":"Grand Total",
 	"update_cart":"Update Cart",
-	"proceed_to_checkout":"Proceed to Checkout"
+	"proceed_to_checkout":"Proceed to Checkout",
+	"delete_confirm":"Do you want to delete this item?"
 }

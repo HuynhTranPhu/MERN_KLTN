@@ -13,5 +13,6 @@
 	"shipping_cost":"Phí vận chuyển",
 	"grand_total":"Tổng cộng",
 	"update_cart":"Cập nhật giỏ hàng",
-	"proceed_to_checkout":"Thanh toán"
+	"proceed_to_checkout":"Thanh toán",
+	"delete_confirm":"Bạn có chắc chắn xóa sản phẩm này?"
 }

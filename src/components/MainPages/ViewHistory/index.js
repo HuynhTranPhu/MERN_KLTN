@@ -12,49 +12,40 @@ import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import OrderStatus from '../../OrderStatus/index';
 import { useTranslation } from 'react-i18next';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
+import { toast } from 'react-toastify';
 
 function ViewHistory(props){
 
      const { t } = useTranslation(['mainpages_viewhistory']);
      const viewHistoryOrder = useSelector(state => state.viewHistoryOrder);
      const {viewHistory, loading, error } = viewHistoryOrder;
-     const removeOrder1 = useSelector(state => state.removeOrder);
-     const { success } = removeOrder1;
      const dispatch = useDispatch();
      const removeOrderHandler = (id_order)=>{
-        if(window.confirm('Do you want to delete this item?')){
+        if(window.confirm(t('mainpages_viewhistory:delete_confirm'))){
             dispatch(removeOrder(id_order));
-            
+            toast.success(t('mainpages_viewhistory:delete_success'));
         }
      }
-    //const [viewHistory, setViewHistory] = useState([])
-    //const dispatch = useDispatch();
-    //const cartItems=[];
-    console.log(viewHistory);
+    
+    //console.log(viewHistory);
     useEffect(() => {
         dispatch(viewHistoryGet(props.match.params.id));
-        if(success===true){
-            props.history.push('/history');
-        }
         return () => {};
-    }, [dispatch, success, props.match.params.id, props.history])
+    }, [dispatch, props.match.params.id])
     let c=0;
     const checkOrderStatus =()=>{
         viewHistory?.orderStatus?.map(i=>(
                 
                (i.isCompleted===true)&& c++
-                
-                
             ))
+        console.log(c)
         if(c>2) return true;
         else return false;
     }
-    console.log(checkOrderStatus());
-    // const toPrice = (num) => Number(num.toFixed(2));
-    // const totalPrice = toPrice(viewHistory.map(item=>item.order_subtotal ))+toPrice(viewHistory.map(item=>item.shiping ));
+    
     return<div>
         <TopBar/>
-        <BottomBar  ></BottomBar>
+        <BottomBar></BottomBar>
         <NavBar/>
         {loading?(
            <LoadingBackdrop open={loading}/>
@@ -191,7 +182,7 @@ function ViewHistory(props){
                         </li>
                         <li>
                             {
-                                <button className="checkout-btn" disabled={c>2}
+                                <button className="checkout-btn" disabled={checkOrderStatus()===true}
                                   onClick ={() =>removeOrderHandler(viewHistory?._id )}>{t('mainpages_viewhistory:delete_orders')}
                                 </button>
                                 

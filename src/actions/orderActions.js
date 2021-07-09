@@ -87,7 +87,7 @@ const removeOrder = (id_order) => async (dispatch) =>{
         dispatch({type: REMOVE_ORDER_REQUEST, payload:id_order});
         const {data} = await Axios.put(`${url}/order/` +id_order);
         dispatch({type: REMOVE_ORDER_SUCCESS, payload:data});
-        
+        dispatch(viewHistoryGet(id_order));
     }catch(error){
         const message=
         error.response && error.response.data.message

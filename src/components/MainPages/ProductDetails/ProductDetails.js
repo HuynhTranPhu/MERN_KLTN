@@ -25,10 +25,13 @@ import { makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
+import { FacebookShareButton, TwitterShareButton,WhatsappShareButton } from 'react-share';
+import { FacebookIcon, TwitterIcon,WhatsappIcon } from 'react-share';
 
 import Loading from '../../../assets/images/loading.gif';
 import { useTranslation } from 'react-i18next';
 import LoadingBackdrop from '../../Config/LoadingBackdrop'
+
 require ('dotenv').config();
 
 
@@ -375,12 +378,49 @@ function ProductDetailScreen(props){
                                                 </div>
                                                
 
-                                                <div className="p-rating p-color">
-                                                    <h4>{t('mainpages_pdetal_detail:rating')}</h4>
-                                                    <div>
-                                                        <Rating props={product}/> 
+                                                <div className="p-color__p-size">
+                                                    <div className="p-rating p-color">
+                                                        <h4>{t('mainpages_pdetal_detail:rating')}</h4>
+                                                        <div>
+                                                            <Rating props={product}/> 
                                                         
-                                                    </div> 
+                                                        </div> 
+                                                    </div>
+                                                    <div className="p-rating p-color p-share">
+                                                        <h4>{t('mainpages_pdetal_detail:share')}</h4>
+                                                        <div className="p-share__icon">
+                                                            <FacebookShareButton
+                                                                url="https://estore-kltn.herokuapp.com/"
+                                                                role={"The best shop online you chose"}
+                                                                hashtag="#EStore"
+                                                            >
+                                                                <FacebookIcon size={30} round={true} ></FacebookIcon>
+
+                                                            </FacebookShareButton>
+                                                            <p >
+                                                                <TwitterShareButton
+                                                                    url="https://estore-kltn.herokuapp.com/"
+                                                                    title="The best shop online you chose"
+                                                                    hashtag="#EStore"
+                                                                >
+                                                                    <TwitterIcon size={30} round={true} ></TwitterIcon>
+
+                                                                </TwitterShareButton>
+                                                            </p>
+                                                            <p>
+                                                                <WhatsappShareButton
+                                                                    url="https://estore-kltn.herokuapp.com/"
+                                                                    title="The best shop online you chose"
+                                                                >
+                                                                    <WhatsappIcon size={30} round={true} ></WhatsappIcon>
+
+                                                                </WhatsappShareButton>
+                                                            </p>
+                                                           
+                                                        
+                                                        </div> 
+                                                    </div>
+                                                   
                                                     
                                                 </div>
                                                  
