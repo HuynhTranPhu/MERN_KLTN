@@ -47,9 +47,7 @@ function PlaceOrderScreen(props){
     const checkPromotion = useSelector(state => state.checkPromotion);
     const { checkPromotions,loading } = checkPromotion;
 
-    //  useEffect(() => {
-    //   dispatch(checkPromotionCode(userInfo.newUser._id,input));  
-    // },[input, dispatch, userInfo.newUser._id])
+    
     const toPrice = (num) => Number(num.toFixed(2));
     let itemsPrice = toPrice(
         cartItems.reduce((a,c)=> a + c.price * c.quantity,0)
@@ -84,7 +82,7 @@ function PlaceOrderScreen(props){
                 shippingPrice.toFixed(2), 
                 totalPrice.toFixed(2)));
         }else{
-            toast.error("Mã giảm giá chỉ được dùng cho 1 đơn hàng")
+            toast.error(t('place_order:error_code'))
         }
         
     }
@@ -100,7 +98,7 @@ function PlaceOrderScreen(props){
                shippingPrice.toFixed(2),
                totalPrice.toFixed(2)));
         }else{
-            toast.error("Mã giảm giá chỉ được dùng cho 1 đơn hàng")
+            toast.error(t('place_order:error_code'))
         }
     }
     useEffect(()=>{

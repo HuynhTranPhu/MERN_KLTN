@@ -13,10 +13,11 @@ const OrderSuccess = () => {
 		<NavBar/>
 		<div className="container text-center">
 			<div className="content-404">
-				<img src="/img/confirm.png" className="img-responsive" alt="" />
+				<img src="/img/confirm.png" className="img-responsive-order-success" alt="" />
 				<h3><b>{t('mainpages_ordersuccess:congratulations')}
 				</b> {t('mainpages_ordersuccess:your_order_had_been_place_order')}</h3>
 				<h4><Link to="/">{t('mainpages_ordersuccess:bring_me_back_home')}</Link></h4>
+				<div  style={{height:"150px"}}></div>
 			</div>
 		</div>
 		<Footer/>

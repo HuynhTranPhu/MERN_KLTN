@@ -22,5 +22,6 @@
 	"promotion": "Khuyến mãi",
 	"success": "Cập nhật mã khuyến mãi thành công",
 	"error": "Mã khuyến mãi không tồn tại",  
-	"no_coupon": "Bạn không có mã giảm giá nào." 
+	"no_coupon": "Bạn không có mã giảm giá nào.", 
+	"error_code": "Mã giảm giá chỉ được dùng cho 1 đơn hàng"
 }
