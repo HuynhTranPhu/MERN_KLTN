@@ -20,7 +20,7 @@ function SearchScreen(props){
     const {productSearch, loading , error} = searchHeader;
 
     const keyWord =props.location.search.split("=")[1]
-    console.log(keyWord);
+    //console.log(keyWord);
     useEffect(() => {
         return () => {};
     }, [])

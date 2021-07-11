@@ -25,11 +25,12 @@ function RegisterScreen(props){
     useEffect(() => {
         if(userInfo){
             props.history.push(redirect);
+            toast.success(t('mainpages_register:success'));
         }
         return () => {
             //
         };
-    }, [props.history, redirect, userInfo]);
+    }, [props.history, redirect, t, userInfo]);
     
     const submitHandler =(e)=>{
         e.preventDefault();
@@ -38,7 +39,6 @@ function RegisterScreen(props){
         }
         else{
             dispatch(register(name, email,password,repassword));
-            toast.success(t('mainpages_register:success'));
         }
         
     }

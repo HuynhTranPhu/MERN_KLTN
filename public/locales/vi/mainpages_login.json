@@ -5,5 +5,6 @@
 	"password":"Mật khẩu",
 	"don_have an account":"Bạn không có tài khoản?",
 	"sign_up":"Đăng kí",
-	"login_with":"Đăng nhập với"
+	"login_with":"Đăng nhập với",
+	"login_success":"Đăng nhập thành công"
 }

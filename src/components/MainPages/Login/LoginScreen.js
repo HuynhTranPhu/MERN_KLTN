@@ -32,19 +32,19 @@ function LoginScreen(props){
     useEffect(() => {
         if(userInfo){
             props.history.push(redirect);
-            toast.success("Login is successfully");
+            toast.success(t('mainpages_login:login_success'));
+        }
+        if(error){
+            toast.error(error);
         }
         return () => {
             //
         };
-    }, [props.history,redirect,userInfo]);
+    }, [error, props.history, redirect, t, userInfo]);
     
     const submitHandler =(e)=>{
         e.preventDefault();
         dispatch(login(email,password));
-        if(error){
-            toast.error(error);
-        }
     }
     
     //Nhan respone tu gg
