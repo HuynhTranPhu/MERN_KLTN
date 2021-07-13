@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
-//import FacebookLogin from 'react-facebook-login';
+import clsx from 'clsx';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, loginFaceBook, loginGoogle } from '../../../actions/userAction';
@@ -15,10 +15,6 @@ const gg = process.env.REACT_APP_GOOGLE_CLIENT
 const fb = process.env.REACT_APP_FACEBOOK_CLIENT
 //console.log(gg);
 
-
-
-
-
 function LoginScreen(props){
     const { t } = useTranslation(['mainpages_login']);
     const [email, setEmail] = useState('');
@@ -26,6 +22,14 @@ function LoginScreen(props){
     const userLogin = useSelector(state => state.userLogin);
     const {loading, userInfo, error} = userLogin;
     
+
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    function toggleShowPassword() {
+        setShowPassword(!showPassword);
+    }
+
     const dispatch = useDispatch();
 
     const redirect = props.location.search?props.location.search.split("=")[1]:'/';
@@ -79,7 +83,16 @@ function LoginScreen(props){
                             </li>
                             <li>
                                 <label htmlFor="password">{t('mainpages_login:password')}</label>
-                                <input type="password" id="password" name="password" onChange={(e)=> setPassword(e.target.value)}></input>
+                                <div className="group__password-login" >
+                                    <input 
+                                        type={showPassword ? 'text' : 'password'} 
+                                        id="password" name="password" 
+                                        onChange={(e)=> setPassword(e.target.value)}></input>
+                                    <span className="form__password-label" onClick={toggleShowPassword}>
+                                            <i className={clsx('fas fa-fw mr-1', showPassword ? 'fa-eye-slash' : 'fa-eye')} />
+                                    </span>
+                                </div>
+                                
                             </li>
                             <li>
                                 <button type="submit" className="button primary">
@@ -87,7 +100,7 @@ function LoginScreen(props){
                                 </button>
                             </li>
                             <li>
-                            <Link to="/forgotPass/" className="forgot">{t('mainpages_login:forgotten_password')}</Link> 
+                            <Link to="/forgotPass" className="forgot">{t('mainpages_login:forgotten_password')}</Link> 
                             </li>
                             <li className="sign-up">
                                 <p>

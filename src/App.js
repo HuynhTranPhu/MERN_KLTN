@@ -56,11 +56,11 @@ function App() {
                      <Route path="/product-detail/:id" exact component={ProductDetailScreen}></Route>
                      <Route path="/contact" exact component={ContactScreen}></Route>
                      <Route path="/confirm/:token" exact component={VerifyRegisterAccountContainer}></Route>
-                     <Route path="/forgotPass/" exact component={ForgotPasswordContainer}></Route>
+                     <Route path="/forgotPass" exact component={ForgotPasswordContainer}></Route>
                      <PrivateRoute path="/shipping" exact component={ShippingScreen}></PrivateRoute>
                      <PrivateRoute path="/payment" exact component={PaymentScreen}></PrivateRoute>
                      <PrivateRoute path="/place-order" exact component={PlaceOrderScreen}></PrivateRoute>
-                     <Route path="/order-success" exact component={OrderSuccess}></Route>
+                     <PrivateRoute path="/order-success" exact component={OrderSuccess}></PrivateRoute>
                      <PrivateRoute path="/history" exact component={History}></PrivateRoute>
                      <PrivateRoute path="/view-history/:id" exact component={ViewHistory}></PrivateRoute>
                      <Route path="/size-chart" exact component={Size}></Route>

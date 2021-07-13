@@ -36,6 +36,14 @@
   border-radius: 4px;
   transition: all .3s;
 }
+@media (max-width: 767.98px) {
+  .product-view .product-filter select {
+    margin-bottom: 10px;
+  }
+  .product-view-top__count-page{
+    margin-bottom: 4px;
+  }
+}
 
 .product-view .product-search input:focus {
   border-color: #FF6F61;

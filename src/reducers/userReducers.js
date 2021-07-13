@@ -90,7 +90,7 @@ function userUpdateProfileReducer(state ={}, action){
 function userUpdatePasswordReducer(state ={}, action){
     switch(action.type){
         case USER_UPDATE_PASSWORD_REQUEST:
-            return {loading:true};
+            return {loading:true,success:false};
         case USER_UPDATE_PASSWORD_SUCCESS:
             return {loading :false, success:true};
         case USER_UPDATE_PASSWORD_FAIL:

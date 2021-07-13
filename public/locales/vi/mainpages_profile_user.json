@@ -1,5 +1,8 @@
 {
 	"user_profile":"Cập nhật hồ sơ",
 	"name":"Tên",
-	"update":"Cập nhật"
+	"update":"Cập nhật",
+	"name_email_null":"Chưa nhập tên hoặc email",
+	"name_error":"Nhập tên lỗi",
+	"update_success":"Cập nhật thành công"
 }

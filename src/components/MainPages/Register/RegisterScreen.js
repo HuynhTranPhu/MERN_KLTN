@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import clsx from 'clsx';
 import { register } from '../../../actions/userAction';
 import MessageBox from '../../Config/MessageBox';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +21,20 @@ function RegisterScreen(props){
     const [repassword, setRePassword] = useState('');
     const userRegister = useSelector(state => state.userRegister);
     const {loading, userInfo, error} = userRegister;
+
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    function toggleShowPassword() {
+        setShowPassword(!showPassword);
+    }
+    const [showRePassword, setShowRePassword] = useState(false);
+
+    function toggleShowRePassword() {
+        setShowRePassword(!showRePassword);
+    }
+
+
     const dispatch = useDispatch();
     const redirect = props.location.search?props.location.search.split("=")[1]:'/';
     useEffect(() => {
@@ -67,16 +82,32 @@ function RegisterScreen(props){
 
                     </li>
                     <li>
-                        <label htmlFor="password">
-                        {t('mainpages_register:password')}
-                        </label>
-                        <input type="password" id="password" name="password" onChange={(e)=> setPassword(e.target.value)}></input>
+                        <label htmlFor="password">{t('mainpages_register:password')}</label>
+                        <div className="group__password-login">
+                            <input 
+                                type={showPassword ? 'text' : 'password'} 
+                                id="password" 
+                                name="password" 
+                                onChange={(e)=> setPassword(e.target.value)}></input>
+                            <span className="form__password-label" onClick={toggleShowPassword}>
+                                <i className={clsx('fas fa-fw mr-1', showPassword ? 'fa-eye-slash' : 'fa-eye')} />
+                            </span>
+                        </div>
+                        
                     </li>
                     <li>
-                        <label htmlFor="rePassword">
-                        {t('mainpages_register:re_enter_password')}
-                        </label>
-                        <input type="Password" id="rePassword" name="rePassword" onChange={(e)=> setRePassword(e.target.value)}></input>
+                        <label htmlFor="rePassword">{t('mainpages_register:re_enter_password')}</label>
+                        <div className="group__password-login">
+                            <input 
+                                type={showRePassword ? 'text' : 'password'} 
+                                id="rePassword" 
+                                name="rePassword"
+                                onChange={(e)=> setRePassword(e.target.value)}></input>
+                            <span className="form__password-label" onClick={toggleShowRePassword}>
+                                <i className={clsx('fas fa-fw mr-1', showRePassword ? 'fa-eye-slash' : 'fa-eye')} />
+                            </span>
+                        </div>
+                        
                     </li>
                     <li>
                         <button type="submit" className="button primary">

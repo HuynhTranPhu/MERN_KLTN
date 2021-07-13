@@ -1,5 +1,8 @@
 {
 	"user_profile":"User Profile",
 	"name":"Name",
-	"update":"Update"
+	"update":"Update",
+	"name_email_null":"Name or email are not valid",
+	"name_error":"Name is error",
+	"update_success":"Update success"
 }

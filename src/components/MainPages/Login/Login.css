@@ -73,6 +73,16 @@
     margin-bottom: .5rem;
     margin-top: .5rem;
 }
+.form-container li .group__password-login{
+    position: relative;
+    display: flex;
+    border-bottom: .1rem solid dodgerblue;
+    margin: .5rem 1rem auto;
+}
+.form-container li .group__password-login input{
+    border-bottom: none;
+    margin: 0 0 auto;
+}
 .form-container input{
     background-color: #f3f6ff;
     display: block;

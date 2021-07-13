@@ -13,3 +13,19 @@
     background-color: yellow;
     margin-left: 130px;
 }
+
+.empty-cart2{
+    margin: auto;
+}
+.empty-cart2 .empty-cart-img{
+    width: 190px;
+    height: 190px;
+    margin-left: 60px;
+}
+.empty-cart2 .empty-cart-note{
+    margin-top: 10px;
+}
+.empty-cart2 .empty-cart-shopping{
+    background-color: yellow;
+    margin-left: 110px;
+}

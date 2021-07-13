@@ -7,7 +7,6 @@ import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import TopBar from '../../Common/TopBar/TopBar';
 import NavBar from '../../Common/NavBar/index';
 import BottomBar from '../../Common/BottomBar/index';
-//import LoadingBox from '../../Config/LoadingBox';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import MessageBox from '../../Config/MessageBox';
 import { toast } from 'react-toastify';
@@ -24,7 +23,7 @@ export default function ProfileScreen(props){
     const {loading, error, user} = userDetails;
     //console.log(user);
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-    const { error: errorUpdate }= userUpdateProfile;
+    const { error: errorUpdate, success }= userUpdateProfile;
     const dispatch = useDispatch();
    
     useEffect(() =>{
@@ -41,11 +40,14 @@ export default function ProfileScreen(props){
 
     const submitHandler = (e) =>{
         e.preventDefault();
+        const nameRegex = "^[a-zA-Z\\s]*$";
         //dispatch update 
         if(email==="" || name===""){
-            toast.error('Email or name are not valid');
-        }else{
-            toast.success("Profile updated success")
+            toast.error(t('mainpages_profile_user:name_email_null'));
+        }else if(name.match(nameRegex)===null){
+            toast.error(t('mainpages_profile_user:name_error'))
+        }
+        else{
             dispatch(updateUserProfile(  email, name, userInfo.newUser._id));
         }
            
@@ -75,13 +77,16 @@ export default function ProfileScreen(props){
                             </h1>
                         </div>
                             <>
-                            {errorUpdate && toast.error(errorUpdate)}
+                            {errorUpdate &&<MessageBox variant="danger">{errorUpdate}</MessageBox>}
+                            {success &&<MessageBox variant="success">{t('mainpages_profile_user:update_success')}</MessageBox>}
                                 <div>
                                     <label htmlFor="name">{t('mainpages_profile_user:name')}</label>
                                     <input
                                         id="name"
                                         type="text"
                                         placeholder="Enter name"
+                                        minLength="4"
+                                        maxLength="15"
                                         value ={name}
                                         onChange={(e) =>setName(e.target.value)}
                                     ></input>

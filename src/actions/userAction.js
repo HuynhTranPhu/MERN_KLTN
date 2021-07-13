@@ -30,7 +30,8 @@ import {
     FORGOT_PASSWORD_FAIL,
     USER_SIGNIN_GG_SUCCESS,
     USER_SIGNIN_GG_FAIL,
-    USER_SIGNIN_GG_REQUEST} 
+    USER_SIGNIN_GG_REQUEST,
+    USER_UPDATE_PASSWORD_RESET} 
 from  '../constants/userConstant';
 
 require ('dotenv').config();
@@ -152,6 +153,7 @@ const updateUserProfile =(email,name, id) =>async (dispatch,getState) =>{
         dispatch({type:USER_UPDATE_PROFILE_SUCCESS, payload:data});
         dispatch({type:USER_SIGNIN_SUCCESS, payload:data})
         Cookie.set('userInfo', JSON.stringify(data));
+        
 
     }catch(error){
         const message=
@@ -172,7 +174,8 @@ const updateUserPassword =(oldpassword, newpassword, id) =>async (dispatch,getSt
         );
         //console.log(data);
         dispatch({type:USER_UPDATE_PASSWORD_SUCCESS, payload:data});
-        //dispatch({type:USER_SIGNIN_SUCCESS, payload:data})
+        dispatch({type: USER_SIGNOUT});
+        dispatch({type:USER_UPDATE_PASSWORD_RESET});
         //Cookie.set('userInfo', JSON.stringify(data));
 
     }catch(error){

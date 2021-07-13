@@ -73,7 +73,7 @@ function ProductScreen(props){
                             <div className="col-md-12">
                                 <div className="product-view-top">
                                     <div className="row">
-                                        <div className="col-md-3">
+                                        <div className="col-md-3 product-view-top__count-page ">
                                             {`${filteredItems.length} ${t('mainpages_product:count_in_page')} ${pageNumber>numberOfPages? 1 : pageNumber}`}
                                         </div>
                                         <div className="col-md-3"></div>
@@ -130,7 +130,7 @@ function ProductScreen(props){
                             </div>
                             {
                                 filteredItems.length===0?(                                                 
-                                    <div className="empty-cart1 ">
+                                    <div className="empty-cart2 ">
                                         <img className="empty-cart-img" src="/images/emptyCart.png" alt="Product" />
                                         <p className="empty-cart-note">{t('mainpages_product:search_products')}</p>
                                         <Link className="empty-cart-shopping" to="/">{t('mainpages_product:go_to_shopping')}</Link>
@@ -169,7 +169,7 @@ function ProductScreen(props){
                                 {pageIndex }
                                 </button>
                             ))}
-                            <button onClick={gotoNext}>{t('mainpages_product:next')}</button>
+                            <button disabled={pageNumber===1}  onClick={gotoNext}>{t('mainpages_product:next')}</button>
                         </div>
                        
                        }
