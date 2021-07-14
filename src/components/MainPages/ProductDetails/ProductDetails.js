@@ -390,7 +390,7 @@ function ProductDetailScreen(props){
                                                         <h4>{t('mainpages_pdetal_detail:share')}</h4>
                                                         <div className="p-share__icon">
                                                             <FacebookShareButton
-                                                                url="https://estore-kltn.herokuapp.com/"
+                                                                url={`https://estore-kltn.herokuapp.com/product-detail/${product?._id}`}
                                                                 role={"The best shop online you chose"}
                                                                 hashtag="#EStore"
                                                             >
@@ -399,7 +399,7 @@ function ProductDetailScreen(props){
                                                             </FacebookShareButton>
                                                             <p >
                                                                 <TwitterShareButton
-                                                                    url="https://estore-kltn.herokuapp.com/"
+                                                                    url={`https://estore-kltn.herokuapp.com/product-detail/${product?._id}`}
                                                                     title="The best shop online you chose"
                                                                     hashtag="#EStore"
                                                                 >
@@ -409,7 +409,7 @@ function ProductDetailScreen(props){
                                                             </p>
                                                             <p>
                                                                 <WhatsappShareButton
-                                                                    url="https://estore-kltn.herokuapp.com/"
+                                                                    url={`https://estore-kltn.herokuapp.com/product-detail/${product?._id}`}
                                                                     title="The best shop online you chose"
                                                                 >
                                                                     <WhatsappIcon size={30} round={true} ></WhatsappIcon>
@@ -443,7 +443,7 @@ function ProductDetailScreen(props){
                                                 <a className="nav-link active" data-toggle="pill" href="#description">{t('mainpages_pdetal_detail:description')}</a>
                                             </li>
                                             <li className="nav-item" onClick={checkCommentHandle}>
-                                                <a className="nav-link" data-toggle="pill" href="#reviews">{product?.rating > 0?product.rating:0} {t('mainpages_pdetal_detail:review')}</a>
+                                                <a className="nav-link" data-toggle="pill" href="#reviews">{comments?.length >0 > 0?comments?.length:0} {t('mainpages_pdetal_detail:review')}</a>
                                             </li>
                                         </ul>
                                         <div className="tab-content">

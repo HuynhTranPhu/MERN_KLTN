@@ -40,7 +40,7 @@ export default function ProfileScreen(props){
 
     const submitHandler = (e) =>{
         e.preventDefault();
-        const nameRegex = "^[a-zA-Z\\s]*$";
+        const nameRegex = "^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]*$";
         //dispatch update 
         if(email==="" || name===""){
             toast.error(t('mainpages_profile_user:name_email_null'));

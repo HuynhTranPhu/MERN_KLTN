@@ -66,10 +66,10 @@ const History = () => {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        //console.log(newValue)
-        dispatch(getOrderByType(userInfo.newUser._id, newValue, ''));
         if(newValue===5){
             dispatch(getOrderByType(userInfo.newUser._id, '', 'cancelled'));
+        }else{
+            dispatch(getOrderByType(userInfo.newUser._id, newValue, ''));
         }
     };
 
@@ -101,7 +101,6 @@ const History = () => {
                             onChange={handleChange}
                             indicatorColor="primary"
                             textColor="primary"
-                            //variant="fullWidth"
                             variant="scrollable"
                             scrollButtons="auto"
                             aria-label="full width tabs example"
@@ -119,8 +118,6 @@ const History = () => {
                             indicatorColor="primary"
                             textColor="primary"
                             variant="fullWidth"
-                            //variant="scrollable"
-                            //scrollButtons="auto"
                             aria-label="full width tabs example"
                         >
                         <Tab label={t('mainpages_history:all')} {...a11yProps(0)} />

@@ -82,7 +82,7 @@ function ViewHistory(props){
                         </h3>
                         <div>
                         {t('mainpages_viewhistory:payment_method')} {viewHistory.payment},
-                        {t('mainpages_viewhistory:payment_status')} {t(`mainpages_viewhistory:${viewHistory.paymentStatus}`)}
+                        {t('mainpages_viewhistory:payment_status')} <b>{t(`mainpages_viewhistory:${viewHistory.paymentStatus}`)}</b> 
                         </div>
                     </div>
                         <div className="cart-page">
