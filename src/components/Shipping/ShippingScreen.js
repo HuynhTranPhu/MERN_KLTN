@@ -72,7 +72,7 @@ function ShippingScreen(props){
         const viPhoneNumberRegex = /(09|03|07|08|05)([0-9]{8})/;
         if(name===''|| infoDetail===''|| city===''|| district===''|| ward==='' || phone===''){
             toast.error(t('shipping:add_error'))
-        }else if (phone.match(viPhoneNumberRegex)===null) {
+        }else if (phone.trim().match(viPhoneNumberRegex)===null) {
             toast.error(t('shipping:phone_error'))
         } 
         else{

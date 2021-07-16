@@ -14,8 +14,9 @@ class EnterNewPassword extends Component {
     }
   }
   handleSubmit() {
-    if(this.state.newpassword.length < 6) {
-        this.setState({noti:'Password must contain at least 6 characters'})
+    const passWordRegex =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,16}$/;
+    if(this.state.newpassword.trim().match(passWordRegex)===null) {
+        this.setState({noti:'Passwords with a length of 8-16 characters must contain numbers, lowercase letters and uppercase letters'})
         return
     } else {
         this.setState({noti: ''})

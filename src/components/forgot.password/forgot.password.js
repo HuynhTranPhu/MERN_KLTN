@@ -27,7 +27,7 @@ const ForgotPassword = ({ setEmail, submit, notification }) => {
 						onClick={() => submit()}>
 						{t('password_forgot:submit')}
 					</button>
-					<div  style={{height:"80px"}}></div>
+					<div  style={{height:"100px"}}></div>
 				</div>
 			</div>
 			<FooterPage/>

@@ -15,7 +15,7 @@ const Success = () =>{
 				<div className="content-404">
 					<h1><b>{t('status_success:congratulations')}!</b></h1>
 					<p></p>
-					<div  style={{height:"80px"}}></div>
+					<div  style={{height:"180px"}}></div>
 				</div>
 			</div>
 			<Footer/>

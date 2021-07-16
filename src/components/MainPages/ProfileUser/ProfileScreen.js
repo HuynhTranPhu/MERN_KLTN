@@ -44,7 +44,7 @@ export default function ProfileScreen(props){
         //dispatch update 
         if(email==="" || name===""){
             toast.error(t('mainpages_profile_user:name_email_null'));
-        }else if(name.match(nameRegex)===null){
+        }else if(name.trim().match(nameRegex)===null){
             toast.error(t('mainpages_profile_user:name_error'))
         }
         else{
