@@ -271,11 +271,11 @@
 .product-item .product-price h3 {
   font-size: 20px;
 }
-.product-item .product-price span {
+/* .product-item .product-price span {
   color: #999999;
   text-decoration: line-through;
   margin-left: 12px;
-}
+} */
 
 .product-item .product-price .ratting {
   float: right;
@@ -295,7 +295,7 @@
     height: 110px;
   }
 }
-@media (min-width: 767.98px) and (max-width: 900px) {
+@media (min-width: 767.98px) and (max-width: 1024px) {
   .product-item .product-price .ratting {
     display: none;
   }

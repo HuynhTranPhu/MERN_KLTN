@@ -15,6 +15,7 @@ import PromoCodes from './Apply-Promotion-Code/PromoCodes';
 import {  getPromoCode } from '../../actions/promotionAction';
 import LoadingBackdrop from '../Config/LoadingBackdrop';
 import { toast } from 'react-toastify';
+import PriceText from '../Config/PriceText';
 
 function PlaceOrderScreen(props){
 
@@ -63,7 +64,7 @@ function PlaceOrderScreen(props){
     } 
     
     
-    const shippingPrice = itemsPrice > 100||itemsPrice===0 ? toPrice(0) : toPrice(10);
+    const shippingPrice = itemsPrice > 100000||itemsPrice===0 ? toPrice(0) : toPrice(10);
     const PromotionPrice = discount===0 ? toPrice(0) : toPrice(discount);
     const totalPrice = itemsPrice + shippingPrice - PromotionPrice ;
     
@@ -171,7 +172,7 @@ function PlaceOrderScreen(props){
                                                                     <p><Link to ={"/product-detail/" +item.id}> {item.name}</Link></p>
                                                                 </div>
                                                             </td>
-                                                            <td>${item.price}</td>
+                                                            <td><PriceText price={item.price}/></td>
                                                             <td>{item.color.name}</td>
                                                             <td>{item.size.name}</td>
                                                             <td>
@@ -182,7 +183,7 @@ function PlaceOrderScreen(props){
                                                                     
                                                                 </div>
                                                             </td>
-                                                            <td>${item.price * item.quantity}</td>
+                                                            <td><PriceText price={item.price * item.quantity}/></td>
                                                            
                                                         </tr>)
                                                     }    
@@ -206,7 +207,7 @@ function PlaceOrderScreen(props){
                             {t('place_order:sub_total')}
                             </div>
                             <div>
-                                ${itemsPrice.toFixed(2)}
+                            <PriceText price={itemsPrice}/>
                             </div>
                         
                         
@@ -217,7 +218,7 @@ function PlaceOrderScreen(props){
                             {t('place_order:shipping')}
                             </div>
                             <div>
-                                ${shippingPrice.toFixed(2)}
+                            <PriceText price={shippingPrice}/>
                             </div>
                         
                         
@@ -235,7 +236,7 @@ function PlaceOrderScreen(props){
                             {t('place_order:promotion')}
                             </div>
                             <div>
-                               - ${discount.toFixed(2)}
+                             <PriceText negative price={discount}/>
                             </div>
                     </li>
                     <li>
@@ -244,7 +245,7 @@ function PlaceOrderScreen(props){
                         {t('place_order:total_price')}
                         </div>
                         <div>
-                            ${totalPrice.toFixed(2)}
+                        <PriceText price={totalPrice}/>
                         </div>
                     </li>
                    
@@ -252,7 +253,7 @@ function PlaceOrderScreen(props){
                        payment?.paymentMethod==="Paypal"?
                         <li className="payPal">
                                 <PayPalButton   
-                                total={totalPrice.toFixed(2)}
+                                total={totalPrice}
                                 tranSuccess={tranSuccess}/>
                         </li>:
                          <li>

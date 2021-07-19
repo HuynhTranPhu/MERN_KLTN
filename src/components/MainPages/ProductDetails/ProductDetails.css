@@ -151,7 +151,7 @@ transform: scale(1.2);
     margin: 0;
 }
 
-.product-detail .product-content .price span {
+.product-detail .product-content .price .price__decrease {
     color: #999999;
     text-decoration: line-through;
     margin-left: 12px;

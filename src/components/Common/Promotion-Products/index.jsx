@@ -10,8 +10,8 @@ import { getBanner } from '../../../actions/promotionAction';
 import { listProducts } from '../../../actions/productActions';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import { Link } from 'react-router-dom';
-import Rating from '../../MainPages/ProductDetails/rating'
 import './index.css';
+import PriceText from '../../Config/PriceText';
 function PromotionProducts() {
     const { t } = useTranslation(['common_promotion_product']);
 
@@ -66,11 +66,8 @@ function PromotionProducts() {
                                                     <div className="product-title__promotion">
                                                         <Link to={'/product-detail/' + product._id}>{product.name}</Link>
                                                     </div>
-                                                    <div className="product-price">
-                                                        <h3>${product.sellPrice?product.sellPrice:0} <span>${product.price}</span></h3>
-                                                        <div className="ratting">
-                                                            <Rating props={product}/>
-                                                        </div>
+                                                    <div className="product-price product__sell">
+                                                        <h3>{product.sellPrice?<PriceText price={product?.sellPrice} />:0} <span className="product-price__decrease"><PriceText price={product?.price} /></span></h3>
                                                     </div>
                                                 </div>
                                             </div>:null

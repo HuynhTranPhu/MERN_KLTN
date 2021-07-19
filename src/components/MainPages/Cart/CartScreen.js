@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 //import LoadingBox from '../../Config/LoadingBox';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import Brand from '../../Brand/Brand';
+import PriceText from '../../Config/PriceText';
 
 function CartScreen(props){
     const { t } = useTranslation(['mainpages_cart']);
@@ -102,21 +103,19 @@ function CartScreen(props){
                                                                     <p><Link to ={"/product-detail/" +item.id}> {item.name}</Link></p>
                                                                 </div>
                                                             </td>
-                                                            <td>${item.price}</td>
+                                                            <td><PriceText price={item.price}/></td>
                                                             <td>{item.color.name}</td>
                                                             <td>{item.size.name}</td>
                                                             <td>
                                                                 <div className="qty">
                                                                     <button className="btn-minus" disabled={item.quantity===1} onClick={()=> decreaseHandler(item.id,item.color._id, item.size._id)}><i className="fa fa-minus" /></button>
                                                                     <input type="text"
-                                                                    value={item.quantity} 
-                                                                    //onChange={(e)=> 
-                                                                    // dispatch(addToCart(item._id,Number(e.target.value))) } 
+                                                                    value={item.quantity}
                                                                     />
                                                                     <button className="btn-plus" disabled={item.quantity===detailProduct.quantity} onClick={()=> increaseHandler(item.id,item.color._id,item.size._id)}><i className="fa fa-plus" /></button>
                                                                 </div>
                                                             </td>
-                                                            <td>${item.price * item.quantity}</td>
+                                                            <td><PriceText price ={item.price * item.quantity}/></td>
                                                             <td>
                                                                 <button onClick ={() =>removeFromCartHandler(item.id, item.color._id, item.size._id)}>
                                                                     <i className="fa fa-trash" />
@@ -140,11 +139,11 @@ function CartScreen(props){
                                                         <h1>{t('mainpages_cart:cart_summary')}</h1>
                                                         <p>{t('mainpages_cart:sub_total')}
                                                             <span>
-                                                            ${cartItems?.reduce((a,c) => a+c.price * c.quantity,0)||0}
+                                                                    <PriceText price =  {cartItems?.reduce((a,c) => a+c.price * c.quantity,0)||0}/>      
                                                             </span>
                                                         </p>
-                                                        <p>{t('mainpages_cart:shipping_cost')}<span>$0</span></p>
-                                                        <h2>{t('mainpages_cart:grand_total')}<span>${ cartItems?.reduce((a,c) => a+c.price * c.quantity,0)||0}</span></h2>
+                                                        <p>{t('mainpages_cart:shipping_cost')}<span><PriceText price='0'/></span></p>
+                                                        <h2>{t('mainpages_cart:grand_total')}<span><PriceText price =  {cartItems?.reduce((a,c) => a+c.price * c.quantity,0)||0}/></span></h2>
                                                     </div>
                                                     <div className="cart-btn">
                                                         <Link to="/product-list"><button>{t('mainpages_cart:update_cart')}</button></Link>

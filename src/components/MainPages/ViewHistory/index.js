@@ -13,6 +13,7 @@ import OrderStatus from '../../OrderStatus/index';
 import { useTranslation } from 'react-i18next';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
 import { toast } from 'react-toastify';
+import PriceText from '../../Config/PriceText';
 
 function ViewHistory(props){
 
@@ -117,7 +118,7 @@ function ViewHistory(props){
                                                                                     <p><Link to ={"/product-detail/" +item.id}>  {item.name}</Link></p>     
                                                                                 </div>
                                                                             </td>
-                                                                            <td>${item.price}</td>
+                                                                            <td><PriceText price={item.price}/></td>
                                                                             <td>{item.color.name}</td>
                                                                             <td>{item.size.name}</td>
                                                                             <td>
@@ -128,7 +129,7 @@ function ViewHistory(props){
                                                                                     
                                                                                 </div>
                                                                             </td>
-                                                                            <td>${item.price * item.quantity}</td>
+                                                                            <td><PriceText price={item.price * item.quantity}/></td>
 
                                                                         </tr>
                                                                         
@@ -155,7 +156,7 @@ function ViewHistory(props){
                                 {t('mainpages_viewhistory:sub_total')}
                                 </div>
                                 <div>
-                                    ${viewHistory?.order_subtotal?.toFixed(2)}
+                                   <PriceText price={viewHistory?.order_subtotal}/>
                                 </div>
                             
                             
@@ -166,7 +167,7 @@ function ViewHistory(props){
                                 {t('mainpages_viewhistory:shipping')}
                                 </div>
                                 <div>
-                                    ${viewHistory?.shiping?.toFixed(2)}
+                                   <PriceText price={viewHistory?.shiping}/>
                                 </div>
                             
                             
@@ -177,7 +178,7 @@ function ViewHistory(props){
                             {t('mainpages_viewhistory:order_total')}
                             </div>
                             <div>
-                                ${viewHistory?.order_subtotal?.toFixed(2) }
+                               <PriceText price={viewHistory?.order_subtotal }/>
                             </div>
                         </li>
                         <li>

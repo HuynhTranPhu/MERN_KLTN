@@ -31,6 +31,7 @@ import { FacebookIcon, TwitterIcon,WhatsappIcon } from 'react-share';
 import Loading from '../../../assets/images/loading.gif';
 import { useTranslation } from 'react-i18next';
 import LoadingBackdrop from '../../Config/LoadingBackdrop'
+import PriceText from '../../Config/PriceText';
 
 require ('dotenv').config();
 
@@ -327,8 +328,9 @@ function ProductDetailScreen(props){
                                                 </div>
                                                 <div className="price">
                                                     <h4>{t('mainpages_pdetal_detail:price')}</h4>
-                                                    {product?.sellPrice!== undefined?(<p> ${product?.sellPrice} <span>${product?.price}</span></p>):(
-                                                        <p> ${product?.price}</p>
+                                                    {product?.sellPrice!== undefined?(<p>  <PriceText price={product?.sellPrice} />           
+                                                    <span className="price__decrease"><PriceText price={product?.price} /></span></p>):(
+                                                        <p> <PriceText price={product?.price} /></p>
                                                     ) }
                                                 </div>
                                                 <div className="quantity">
@@ -544,7 +546,7 @@ function ProductDetailScreen(props){
                                                         </div>
                                                     </div>
                                                     <div className="product-price">
-                                                    <h3>${pr.price}</h3>
+                                                    <h3><PriceText price={pr.price} /></h3>
                                                     <div className="ratting">
                                                         <Rating props={pr}/>
                                                     </div>

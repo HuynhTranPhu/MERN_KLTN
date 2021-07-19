@@ -20,6 +20,7 @@ import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import { useTranslation } from 'react-i18next';
 import Rating from '../ProductDetails/rating';
 import LoadingBackdrop from '../../Config/LoadingBackdrop';
+import PriceText from '../../Config/PriceText';
 
 
 function HomeScreen(props){
@@ -254,7 +255,7 @@ function HomeScreen(props){
                                                 </div>
                                             </div>
                                             <div className="product-price">
-                                                <h3>${product?.price}</h3> 
+                                                <h3><PriceText price={product?.price} /></h3> 
                                                 <div className="ratting">
                                                     <Rating props={product}/>
                                                 </div>

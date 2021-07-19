@@ -12,6 +12,7 @@ import FooterPage from '../../Common/Footer/Footer';
 import ScrollToTopBtn from '../../Common/ScrollToTop/ScrollToTop';
 import { useTranslation } from 'react-i18next';
 import Rating from '../ProductDetails/rating';
+import PriceText from '../../Config/PriceText';
 
 
 
@@ -150,7 +151,7 @@ function ProductScreen(props){
                                                         </div>
                                                 </div>
                                                 <div className="product-price">
-                                                    <h3>${product.price}</h3>
+                                                    <h3><PriceText price={product.price}/></h3>
                                                     <div className="ratting">
                                                         <Rating props={product}/>
                                                     </div>

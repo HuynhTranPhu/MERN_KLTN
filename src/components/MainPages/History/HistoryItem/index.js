@@ -6,6 +6,7 @@ import { viewHistoryGet } from '../../../../actions/orderActions';
 //import LoadingBox from '../../../Config/LoadingBox';
 import LoadingBackdrop from '../../../Config/LoadingBackdrop';
 import MessageBox from '../../../Config/MessageBox';
+import PriceText from '../../../Config/PriceText';
 function HistoryItem({history, loading, error}) {
     const { t } = useTranslation(['mainpages_history']);
     const dispatch = useDispatch();
@@ -61,10 +62,10 @@ function HistoryItem({history, loading, error}) {
                                                             {
                                                                 history.map(item=>
                                                                 <tr key={item._id}>
-                                                                    <td><Link to= {"/view-history/"+ item._id} onClick={()=>HandelViewDetails(item._id)}>{item._id}</Link></td>
+                                                                    <td><Link to= {"/view-history/"+ item._id} onClick={()=>HandelViewDetails(item._id)}>{item._id.substring(0, 14)}</Link></td>
                                                                     <td>{item.order_date.substring(0, 10)}</td>  
                                                                     <td><Link to= {"/view-history/"+ item._id} onClick={()=>HandelViewDetails(item._id)}>{t('mainpages_history:view_details')}</Link></td>
-                                                                    <td>${item.order_subtotal }</td>
+                                                                    <td><PriceText price={item.order_subtotal }/></td>
                                                                     <td>{item.paymentStatus}</td>
                                                                 </tr>)
                                                             }
