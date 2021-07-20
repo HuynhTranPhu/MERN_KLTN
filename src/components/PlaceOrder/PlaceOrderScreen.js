@@ -138,8 +138,7 @@ function PlaceOrderScreen(props){
                      <b> {t('place_order:payment')}</b>
                     </h4>
                     <div>
-                    {t('place_order:payment_method')} 
-                    {payment?.paymentMethod}
+                        {t('place_order:payment_method')} {t(`place_order:${payment?.paymentMethod}`)}
                     </div>
                 </div>
                     <div className="cart-page">

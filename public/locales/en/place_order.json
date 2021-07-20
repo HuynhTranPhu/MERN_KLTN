@@ -23,5 +23,6 @@
 	"success": "Add promotion code success",
 	"error": "Promotion code is null",
 	"no_coupon": "You have no available coupons.", 
-	"error_code": "Coupon code can only be used for 1 order"
+	"error_code": "Coupon code can only be used for 1 order",
+	"Cash On Delivery": "Cash On Delivery"
 }
