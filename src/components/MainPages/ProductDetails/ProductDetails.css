@@ -335,6 +335,7 @@ transform: scale(1.2);
 }
 .app_title{
     color: #FF6F61;
+    font-family:  Helvetica, sans-serif;
 }
 .reviews{
     width: 115px;

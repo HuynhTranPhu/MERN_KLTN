@@ -17,6 +17,8 @@ function PromotionProducts() {
 
     const getBanners = useSelector(state => state.getBanners);
     const {banners } = getBanners;
+    console.log(banners);
+    console.log(banners?.map(banner=>banner.id_category));
 
     const productList = useSelector(state => state.productList);
     const {products,loading} = productList;
@@ -49,12 +51,13 @@ function PromotionProducts() {
                             <div className="row">
                                 
                                 {
-                                        products?.map((product) =>{
-                                            return product.id_category === banners?.map((banner)=>banner.id_category)[0]?
-                                            <div className="col-md-3" key={product._id}>
+                                        products?.map((product) =>
+                                            banners?.map(b =>
+                                                product.id_category === b.id_category?
+                                                <div className="col-md-3" key={product._id}>
                                                 <div className="product-item">
                                                     <div className="style_ribbon__25ikq style_price_down__1Hhvc">
-                                                        <div className="style_ribbon_percent__4fm_G">{banners?.map((banner)=>banner.disCount)[0]}%</div>
+                                                        <div className="style_ribbon_percent__4fm_G">{b.disCount}%</div>
                                                         <div className="style_ribbon_status__3DLch">{t('common_promotion_product:decrease_price')}</div>
                                                     </div>
                                                     <div className="product-image">
@@ -71,7 +74,12 @@ function PromotionProducts() {
                                                     </div>
                                                 </div>
                                             </div>:null
-                                        } )
+                                                
+                                            )
+                                           
+                                            
+                                         )
+                                        
                                        
                                 }
                                 {

@@ -492,8 +492,8 @@ function ProductDetailScreen(props){
                                                             </>
                                                             
                                                         )
-                                                        :
-                                                        <Link to="/product-list"className="danger">{t('mainpages_pdetal_detail:see_more')}</Link>
+                                                        :null
+                                                       
                                                     }
                                                     <div className="comments_list">
                                                         <h2 className="app_title">
