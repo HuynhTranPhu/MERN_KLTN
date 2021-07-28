@@ -73,7 +73,27 @@ function PromotionProducts() {
                                                         <h3>{product.sellPrice?<PriceText price={product?.sellPrice} />:0} <span className="product-price__decrease"><PriceText price={product?.price} /></span></h3>
                                                     </div>
                                                 </div>
-                                            </div>:null
+                                            </div>: b.id_category==='610160f38771a50017395976'?
+                                            <div className="col-md-3" key={product._id}>
+                                            <div className="product-item">
+                                                <div className="style_ribbon__25ikq style_price_down__1Hhvc">
+                                                    <div className="style_ribbon_percent__4fm_G">{b.disCount}%</div>
+                                                    <div className="style_ribbon_status__3DLch">{t('common_promotion_product:decrease_price')}</div>
+                                                </div>
+                                                <div className="product-image">
+                                                        <img className="image-product" src={product.images[0]|| '/img/no-image.png'} alt="Product" />
+                                                        <div className="product-action">
+                                                            <Link to={'/product-detail/' + product._id}><i className="fas fa-eye" /></Link>             
+                                                        </div>
+                                                </div>
+                                                <div className="product-title__promotion">
+                                                    <Link to={'/product-detail/' + product._id}>{product.name}</Link>
+                                                </div>
+                                                <div className="product-price product__sell">
+                                                    <h3>{product.sellPrice?<PriceText price={product?.sellPrice} />:0} <span className="product-price__decrease"><PriceText price={product?.price} /></span></h3>
+                                                </div>
+                                            </div>
+                                            </div>  :null
                                                 
                                             )
                                            
