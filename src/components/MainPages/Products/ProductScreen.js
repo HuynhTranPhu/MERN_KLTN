@@ -34,7 +34,7 @@ function ProductScreen(props){
 
     const pages = new Array(numberOfPages).fill(null).map((v, i) => i+1);
     // console.log(pageNumber);
-    // console.log(numberOfPages);
+    // console.log(pages.length);
    
     const dispatch = useDispatch();
 
@@ -170,7 +170,7 @@ function ProductScreen(props){
                                 {pageIndex }
                                 </button>
                             ))}
-                            <button disabled={pageNumber===1}  onClick={gotoNext}>{t('mainpages_product:next')}</button>
+                            <button disabled={pageNumber===1||pageNumber=== pages.length}  onClick={gotoNext}>{t('mainpages_product:next')}</button>
                         </div>
                        
                        }
